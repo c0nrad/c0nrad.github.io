@@ -1,0 +1,13 @@
+{
+	"challenge": {
+		"title": "Crypto Challenge",
+		"slug": "challenge",
+		"file": "challenge.md"
+	},
+
+	"project-tango": {
+		"title": "Project Tango Idea: Super Sense",
+		"slug": "project-tango",
+		"file": "project-tango.md"
+	}
+}
