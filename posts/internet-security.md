@@ -27,3 +27,4 @@ Amazon gives out a lock (Public-Key), and we can encrypt our credit card informa
 
 But what if some malicious person was only masqurading as amazon.com. They sat between you and amazon, and gave you their own box and unlocked lock. Is it possible to prove that this unlocked lock belongs to amazon, or some evil interceptor?
 
+### Hash / Signature
