@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on c0nrad&#39;s blog</title>
-    <link>https://c0nrad.github.io/posts/</link>
+    <link>https://blog.c0nrad.io/posts/</link>
     <description>c0nrad&#39;s blog (Posts)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0000</lastBuildDate>
     
-    <atom:link href="https://c0nrad.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Calculating Collisions</title>
-      <link>https://c0nrad.github.io/posts/calculating-collisions/</link>
+      <link>https://blog.c0nrad.io/posts/calculating-collisions/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://c0nrad.github.io/posts/calculating-collisions/</guid>
+      <guid>https://blog.c0nrad.io/posts/calculating-collisions/</guid>
       <description>&lt;p&gt;My attempt at calculating the resulting velocity vectors from an elastic collision of two spheres in 3D.&lt;/p&gt;
 &lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
 &lt;p&gt;I&amp;rsquo;m currently working on a physics simulator (called &lt;code&gt;simp&lt;/code&gt;). While build the simulator I&amp;rsquo;m learning that calculating the physics is easy, but detecting and handling collisions is hard!&lt;/p&gt;
@@ -98,7 +98,7 @@ $$ \frac{K_{i} - \frac{1}{2} m_{1} v_{1f}^2}{\frac{1}{2} m_{2}} = v_{2f}^2 $$&lt
 &lt;p&gt;$$  v_{1f}^2  + v_{1f} \frac{(- 2 p_{i} m_{1} m_{2})}{m_{2} m_{1}^2 + m^2_2 m_{1}}  + \frac{p_{i}^2 m_{2} - 2 m^2_2 K_{i}}{m_{2} m_{1}^2 + m^2_2 m_{1}} =  0  $$&lt;/p&gt;
 &lt;p&gt;What does that mean? Not sure yet. Let&amp;rsquo;s solve a couple of examples and see what happens.&lt;/p&gt;
 &lt;h4 id=&#34;two-equal-balls-colliding-at-equal-speed&#34;&gt;Two equal balls colliding at equal speed&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&#34;https://c0nrad.github.io/equalmass_equalv.png&#34; alt=&#34;equal speed, equal mass&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.c0nrad.io/equalmass_equalv.png&#34; alt=&#34;equal speed, equal mass&#34;&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -130,7 +130,7 @@ $$ \frac{K_{i} - \frac{1}{2} m_{1} v_{1f}^2}{\frac{1}{2} m_{2}} = v_{2f}^2 $$&lt
 &lt;p&gt;$$ v_{1f} = \pm 5 $$&lt;/p&gt;
 &lt;p&gt;Which makes sense, two objects at equal speed and mass bounce off each other equally.&lt;/p&gt;
 &lt;h4 id=&#34;two-equal-mass-balls-colliding-at-unequal-speeds&#34;&gt;Two equal mass balls colliding at unequal speeds&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&#34;https://c0nrad.github.io/ball2_fast.png&#34; alt=&#34;equal speed, equal mass&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.c0nrad.io/ball2_fast.png&#34; alt=&#34;equal speed, equal mass&#34;&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -167,7 +167,7 @@ $$ \frac{K_{i} - \frac{1}{2} m_{1} v_{1f}^2}{\frac{1}{2} m_{2}} = v_{2f}^2 $$&lt
 &lt;h5 id=&#34;why-two-solutions&#34;&gt;Why Two Solutions?&lt;/h5&gt;
 &lt;p&gt;At first I was very confused about why there were two solutions, and then I realized, we started this exercise with just two conservation laws, we never &amp;ldquo;said&amp;rdquo; they collided. So they could just continue along their current paths and that would satisfy the equations! (But obviously in the real world they collide).&lt;/p&gt;
 &lt;h4 id=&#34;two-unequal-balls-colliding-at-equal-speed&#34;&gt;Two unequal balls colliding at equal speed&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&#34;https://c0nrad.github.io/goliath.png&#34; alt=&#34;equal speed, equal mass&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.c0nrad.io/goliath.png&#34; alt=&#34;equal speed, equal mass&#34;&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -229,7 +229,7 @@ $$ \frac{K_{i} - \frac{1}{2} m_{1} v_{1f}^2}{\frac{1}{2} m_{2}} = v_{2f}^2 $$&lt
 &lt;li&gt;When \( m_1 = 10, m_2 ==15\), \(m_1 \) and \(m_2 \) will bounce back in opposite directions.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;a-bigger-ball-gives-the-smaller-ball-a-gentle-love-tap&#34;&gt;A bigger ball gives the smaller ball a gentle love tap&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&#34;https://c0nrad.github.io/love_tap.png&#34; alt=&#34;equal speed, equal mass&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.c0nrad.io/love_tap.png&#34; alt=&#34;equal speed, equal mass&#34;&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
