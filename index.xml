@@ -6,10 +6,52 @@
     <description>c0nrad&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 May 2020 12:30:26 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Calculating Collisions Pt. 2</title>
+      <link>https://blog.c0nrad.io/posts/calculating-collisions-2/</link>
+      <pubDate>Mon, 18 May 2020 12:30:26 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/calculating-collisions-2/</guid>
+      <description>&lt;p&gt;Programming the equation we derived in the &lt;a href=&#34;https://blog.c0nrad.io/posts/calculating-collisions/&#34;&gt;last post&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+&lt;p&gt;So in the last post we were able to generate the following equation. It can be used to determine the resulting velocities of a collision of two spheres:&lt;/p&gt;
+&lt;p&gt;$$ v_{1f}^2  + v_{1f} \frac{(- 2 p_{i} m_{1} m_{2})}{m_{2} m_{1}^2 + m^2_2 m_{1}}  + \frac{p_{i}^2 m_{2} - 2 m^2_2 K_{i}}{m_{2} m_{1}^2 + m^2_2 m_{1}} =  0  $$&lt;/p&gt;
+&lt;h2 id=&#34;results&#34;&gt;Results&lt;/h2&gt;
+&lt;p&gt;This morning I codified the equations into &lt;code&gt;simp&lt;/code&gt;, and they turned out pretty nicely!&lt;/p&gt;
+&lt;div style=&#34;text-align: center&#34;&gt;
+&lt;video controls src=&#34;https://blog.c0nrad.io/sphere_collisions.mp4&#34; style=&#34;width: 75%;&#34; autoplay loop &gt;&lt;/video&gt;
+&lt;/div&gt;
+&lt;p&gt;They line up to the math we worked out in the last blog post.&lt;/p&gt;
+&lt;h3 id=&#34;vector-fun&#34;&gt;Vector Fun&lt;/h3&gt;
+&lt;p&gt;In the last post I assumed that the vector math would just work out. Which ended up mostly being true.&lt;/p&gt;
+&lt;p&gt;But, it took me some time to figure out what I was supposed to do with the vectors when multiplying them together.&lt;/p&gt;
+&lt;p&gt;For Kinetic Energy, it almost seemed to make sense to take the dot product of the velocity vectors. Do we really want the &amp;ldquo;kinetic energy&amp;rdquo; for all the individual components? It feels weird to directly multiply two velocity vectors together.&lt;/p&gt;
+&lt;p&gt;$$ K_{i} =  \frac{1}{2} m v^2  $$&lt;/p&gt;
+&lt;p&gt;$$
+\begin{bmatrix} v_x \\ v_y \\ v_z \\ \end{bmatrix}^2 = v_x^2 + v_y^2 + v_z^2
+$$&lt;/p&gt;
+&lt;p&gt;But this didn&amp;rsquo;t work. When I treat kinetic energy like a scalar instead of a vector, I had to add/subtract scalars from a vector (during the quadratic equation step) which was also weird (and the results I got were less than ideal&amp;hellip;):&lt;/p&gt;
+&lt;div style=&#34;text-align: center&#34;&gt;
+&lt;video controls src=&#34;https://blog.c0nrad.io/bad_collision.mp4&#34; style=&#34;width: 75%;&#34; autoplay loop &gt;&lt;/video&gt;
+&lt;/div&gt;
+&lt;p&gt;So instead I just multiply the vectors across:&lt;/p&gt;
+&lt;p&gt;$$
+\begin{bmatrix} v_x \\ v_y \\ v_z \\ \end{bmatrix}^2 = \begin{bmatrix} v_x^2 \\ v_y^2 \\ v_z^2 \\ \end{bmatrix}
+$$&lt;/p&gt;
+&lt;p&gt;And it seems to work. /shrug&lt;/p&gt;
+&lt;h2 id=&#34;next-up&#34;&gt;Next up&lt;/h2&gt;
+&lt;p&gt;Turns out there&amp;rsquo;s another big problem!&lt;/p&gt;
+&lt;p&gt;The equations don&amp;rsquo;t take into account how the spheres are collide!&lt;/p&gt;
+&lt;div style=&#34;text-align: center&#34;&gt;
+&lt;video controls src=&#34;https://blog.c0nrad.io/bad_sphere_angle.mp4&#34; style=&#34;width: 75%;&#34; autoplay loop &gt;&lt;/video&gt;
+&lt;/div&gt;
+&lt;p&gt;Back to the drawing board. It has something to do with the normal forces, but I&amp;rsquo;m not 100% sure how the math will look yet. Stay tuned!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Calculating Collisions</title>
