@@ -14,9 +14,9 @@
 <link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
 <link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
 
-<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1589757504" />
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1589823088" />
 
-<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1589757504">
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1589823088">
 
 <meta property="og:title" content="Calculating Collisions" />
 <meta property="og:description" content="Calculating the resulting velocities from an elastic collision" />
@@ -68,7 +68,20 @@
         <h1>Calculating Collisions</h1>
     </header>
     <div class="content">
-        <p>My attempt at calculating the resulting velocity vectors from an elastic collision of two spheres in 3D.</p>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#background">Background</a>
+      <ul>
+        <li><a href="#todays-problem">Today&rsquo;s Problem</a></li>
+        <li><a href="#my-solution">My Solution</a></li>
+        <li><a href="#open-questions">Open Questions</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+
+        <p>My attempt at calculating the resulting velocities of two spheres colliding in 3D.</p>
 <h2 id="background">Background</h2>
 <p>I&rsquo;m currently working on a physics simulator (called <code>simp</code>). While build the simulator I&rsquo;m learning that calculating the physics is easy, but detecting and handling collisions is hard!</p>
 <p>As an example, the following is code I wrote last week for determining if a sphere and box are touching in 3D (and then attempting to handle the collision if they are). It&rsquo;s complex and not even fully correct! It doesn&rsquo;t handle the case of a sphere touching the corner of the box. And it still took me the better part of an entire day (I spent many hours trying to be clever instead of just handling all 6 faces of the box).</p>
@@ -124,7 +137,8 @@
 <p>This weekend I&rsquo;ve been tackling a different but similar problem.</p>
 <p>I&rsquo;m trying to calculate the resulting velocity vectors of two colliding sphere&rsquo;s.</p>
 <p>It seems like this should be something pretty simple? But I can&rsquo;t figure out a general rule that accounts for all cases. (If there is one PLEASE comment it down below).</p>
-<p>Instead this was my attempt to solve it.</p>
+<p>It seems like there&rsquo;d be an infinite number of solutions? (I know that&rsquo;s not the case), but if two spheres bounce into each other, it seems reasonable that they could bounce off each other with a number of different velocities. Maybe one ball stops and all the momentum is transfered? Maybe they swap velocities? Maybe they swap velicities proportional to their mass?</p>
+<p>This was my attempt to use some math and figure it out.</p>
 <h3 id="my-solution">My Solution</h3>
 <p>First I started with the conservation of momentum and conservation of energy equations. We know they must be equal at the beginning and end of the collision. (We&rsquo;re only using kinetic energy since there shouldn&rsquo;t any change in potential at the point of collision.)</p>
 <p>$$
@@ -143,8 +157,11 @@ $$ \frac{K_{i} - \frac{1}{2} m_{1} v_{1f}^2}{\frac{1}{2} m_{2}} = v_{2f}^2 $$</p
 <p>$$ \frac{ (p_{i} - m_{1} v_{1f}) ^2}{m^2_2} =  \frac{K_{i} - \frac{1}{2} m_{1} v_{1f}^2}{\frac{1}{2} m_{2}} $$</p>
 <p>The only unknown left is \( v_{1f} \). Bingo! We have both \( v_{1f} \) and \( v_{1f}^2 \), so there will be multiple solutions(?). Let&rsquo;s simplify:</p>
 <p>$$ \frac{ p_{i}^2 - 2 p_{i} m_{1} v_{1f} + m_{1}^2 v_{1f}^2 }{m^2_2} =  \frac{ 2K_{i} -  m_{1} v_{1f}^2}{ m_{2}} $$</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!-- $$  m_{2} (p_{i}^2 - 2 p_{i} m_{1} v_{1f} + m_{1}^2 v_{1f}^2)  =   m^2_2 (2K_{i} -  m_{1} v_{1f}^2) $$
+
+$$  p_{i}^2 m_{2} - 2 p_{i} m_{1} m_{2} v_{1f} + m_{2} m_{1}^2 v_{1f}^2  =    m^2_2 2K_{i} -    m^2_2 m_{1} v_{1f}^2 $$
+
+$$  v_{1f}^2 m_{2} m_{1}^2 + v_{1f}^2 m^2_2 m_{1} - 2 p_{i} m_{1} m_{2} v_{1f} + p_{i}^2 m_{2} - m^2_2 2K_{i}  =  0  $$ -->
 <p>$$  v_{1f}^2 ( m_{2} m_{1}^2 + m^2_2 m_{1}) + v_{1f} (- 2 p_{i} m_{1} m_{2})  + (p_{i}^2 m_{2} - 2 m^2_2 K_{i}) =  0  $$</p>
 <p>$$  v_{1f}^2  + v_{1f} \frac{(- 2 p_{i} m_{1} m_{2})}{m_{2} m_{1}^2 + m^2_2 m_{1}}  + \frac{p_{i}^2 m_{2} - 2 m^2_2 K_{i}}{m_{2} m_{1}^2 + m^2_2 m_{1}} =  0  $$</p>
 <p>What does that mean? Not sure yet. Let&rsquo;s solve a couple of examples and see what happens.</p>
@@ -350,6 +367,8 @@ $$ v_{2f} = 12.5 $$</p>
     onload="renderMathInElement(document.body);"></script>
 
 </article>
+
+
 
 
 
