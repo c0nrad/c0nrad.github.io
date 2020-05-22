@@ -67,7 +67,7 @@ m a^2 ) t} $$&lt;/p&gt;
 &lt;h2 id=&#34;imaginary-component&#34;&gt;Imaginary Component&lt;/h2&gt;
 &lt;p&gt;In the above chart there&amp;rsquo;s two lines for every state, one for both the real and imaginary components.&lt;/p&gt;
 &lt;p&gt;The imaginary component comes from the trailing \( e^i \) in the solution. The book I&amp;rsquo;m reading calls this the &amp;ldquo;time independent wiggle room&amp;rdquo;.&lt;/p&gt;
-&lt;p&gt;What&amp;rsquo;s interesting though is that the time component doesn&amp;rsquo;t actually change the expectation values for the wave. (If we&amp;rsquo;re being 100% honest, I&amp;rsquo;m not actually sure what the time component does. It&amp;rsquo;s what I&amp;rsquo;m going to look into next.)&lt;/p&gt;
+&lt;p&gt;What&amp;rsquo;s interesting though is that the time component doesn&amp;rsquo;t actually change the expectation values for the wave. (If we&amp;rsquo;re being 100% honest, I&amp;rsquo;m not actually sure what the time component does. It&amp;rsquo;s what I&amp;rsquo;m going to look into next. I have a feeling it&amp;rsquo;ll play a bigger role when we look at multi-particle systems that interfere with each other).&lt;/p&gt;
 &lt;h2 id=&#34;expectation-values&#34;&gt;Expectation Values&lt;/h2&gt;
 &lt;p&gt;Even more fun, t&amp;rsquo;s not possible to know everything about the particle in the well. We believe this to be a limitation of the universe, not our understanding of the universe.&lt;/p&gt;
 &lt;p&gt;But we can still calculate &amp;ldquo;expectation&amp;rdquo; values for different properties. These properties are the result if you were to measure a bunch of particles in similar configurations and average them out.&lt;/p&gt;
