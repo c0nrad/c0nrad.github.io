@@ -6,10 +6,87 @@
     <description>c0nrad&#39;s blog (simulation)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 18 May 2020 12:30:26 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 22 May 2020 12:30:26 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/tags/simulation/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Quantum Infinite Well</title>
+      <link>https://blog.c0nrad.io/posts/quantum-infinite-well/</link>
+      <pubDate>Fri, 22 May 2020 12:30:26 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/quantum-infinite-well/</guid>
+      <description>&lt;p&gt;Calculating the stationary states of an electron in a quantum infinite well.&lt;/p&gt;
+&lt;iframe class=&#34;full-width&#34; src=&#34;https://qsimp.github.io/qsimp/examples/infinite_well/&#34; style=&#34;border: 1px solid; height: 800px&#34; &gt;&lt;/iframe&gt;
+&lt;br&gt;
+(Or visit URL: &lt;a href=&#34;https://qsimp.github.io/qsimp/examples/infinite_well/&#34;&gt;https://qsimp.github.io/qsimp/examples/infinite_well/&lt;/a&gt;)
+&lt;h2 id=&#34;particle-in-a-well&#34;&gt;Particle in a well&lt;/h2&gt;
+&lt;p&gt;The above charts are calculations for a hypothetical electron stuck in a well.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s a 1-dimensional well, and sides of the well are infinite in height.&lt;/p&gt;
+&lt;p&gt;This model is kind of similar to a standard bouncy ball being placed into a hole, and we watch it slide back and fourth, unable to ever escape the hole. (And the hole has no friction).&lt;/p&gt;
+&lt;p&gt;But there&amp;rsquo;s a couple of startling differences between the bouncy ball and particle in the well.&lt;/p&gt;
+&lt;p&gt;If we imagine the bouncy ball in the well, it can have pretty much any velocity as it bounces back and forth between the sides of the walls. It could be moving at 1m/s, 10m/s, .00001 m/s. Anything works.&lt;/p&gt;
+&lt;p&gt;But for our hypothetical particle, this is not possible. Not all &amp;ldquo;velocities&amp;rdquo; (or more correctly, energies) are allowed. The particle must be in a particular state, or a linear combination of states (more on linear combinations later).&lt;/p&gt;
+&lt;p&gt;The hypothetical particle also can&amp;rsquo;t &amp;ldquo;sit still&amp;rdquo;. It must be at one of the energy states (or a linear combination of those states).&lt;/p&gt;
+&lt;h2 id=&#34;schrödinger-equation&#34;&gt;Schrödinger Equation&lt;/h2&gt;
+&lt;p&gt;In classical mechanics, we can calculate the position of the ball by using Newton&amp;rsquo;s \( F=ma \) and the equations of motion.&lt;/p&gt;
+&lt;p&gt;Quantum mechanics has a similar function called the Schrödinger Equation. Using it we can learn about the particle as we go forward/backwards in time.&lt;/p&gt;
+&lt;p&gt;$$ i \hbar \frac{\partial \Psi}{\partial t} = - \frac{\hbar^2}{2m} \frac{\partial^2 \Psi}{\partial x^2} + V \Psi $$&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt; \( \Psi \) is the wavefunction &lt;/li&gt;
+    &lt;li&gt; \( \hbar \) is plank&#39;s constant (over 2pi) &lt;/li&gt;
+    &lt;li&gt; \( m \) is the mass of the particle &lt;/li&gt;
+    &lt;li&gt; \( i \) is an imaginary i (complex number) &lt;/li&gt;
+    &lt;li&gt; \( V \) is the potential function  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;potential-function&#34;&gt;Potential Function&lt;/h3&gt;
+&lt;p&gt;To &amp;ldquo;solve&amp;rdquo; the Schrödinger for a particular system, you need the Potential Energy function. The easiest Potential function to get started with is the Infinite Well.&lt;/p&gt;
+&lt;p&gt;$$ V(x) = \begin{cases} 0, &amp;amp; 0 &amp;lt;= x &amp;lt;= a \\
+\infty, &amp;amp; \text{otherwise} \end{cases}  $$&lt;/p&gt;
+&lt;p&gt;It just says that the particle must stay in the well. There&amp;rsquo;s no escaping the well.&lt;/p&gt;
+&lt;p&gt;Then, with that potential function, we can plug it into the Schrödinger and determine a function that &amp;ldquo;fits&amp;rdquo;. We eventually get:&lt;/p&gt;
+&lt;p&gt;$$ \Psi_n (x, t) = \sqrt{ \frac{2}{a}} \sin{(\frac{n \pi}{a} x )} e^{-i (n^2 \pi^2 \hbar) / (2
+m a^2 ) t} $$&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt; \( \Psi \) is the wavefunction &lt;/li&gt;
+    &lt;li&gt; \( n \) is the specific stationary states &lt;/li&gt;
+    &lt;li&gt; \( a \) is the width of the well &lt;/li&gt;
+    &lt;li&gt; \( x \) is the &#34;position&#34; of the wave within the well &lt;/li&gt;
+    &lt;li&gt; \( i \) is an imaginary i (complex number) &lt;/li&gt;
+    &lt;li&gt; \( \hbar \) is plank&#39;s constant (over 2pi) &lt;/li&gt;
+    &lt;li&gt; \( m \) is the mass of the electron &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;stationary-states&#34;&gt;Stationary States&lt;/h4&gt;
+&lt;p&gt;Each one of the \( n \) states is an energy level that the particle can be in. But oddly in the quantum mechanics world, the particle will usually occupy a mix of different energy levels at the same time!&lt;/p&gt;
+&lt;p&gt;But, when we try to figure out what energy state the particle is in, it will collapse to only one of the states.&lt;/p&gt;
+&lt;p&gt;The probability of finding a particle in a particular state is ( |c_n|^2 ):&lt;/p&gt;
+&lt;p&gt;$$ \Psi (x, t) = \sum_{n=1}^{\infty} c_n \sqrt{ \frac{2}{a}} \sin{(\frac{n \pi}{a} x )} e^{-i (n^2 \pi^2 \hbar) / (2 m a^2 ) t} $$&lt;/p&gt;
+&lt;p&gt;Each of the states has a particular energy (as shown by the table above).&lt;/p&gt;
+&lt;p&gt;The coefficients are determined by &amp;ldquo;initial wave function&amp;rdquo; such as \( \Psi (x, 0) = A x (a-x) \).  Using some Fourier series magic you can fit the equation by properly setting the \( c_n \)&amp;lsquo;s.&lt;/p&gt;
+&lt;h2 id=&#34;imaginary-component&#34;&gt;Imaginary Component&lt;/h2&gt;
+&lt;p&gt;In the above chart there&amp;rsquo;s two lines for every state, one for both the real and imaginary components.&lt;/p&gt;
+&lt;p&gt;The imaginary component comes from the trailing \( e^i \) in the solution. The book I&amp;rsquo;m reading calls this the &amp;ldquo;time independent wiggle room&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;What&amp;rsquo;s interesting though is that the time component doesn&amp;rsquo;t actually change the expectation values for the wave. (If we&amp;rsquo;re being 100% honest, I&amp;rsquo;m not actually sure what the time component does. It&amp;rsquo;s what I&amp;rsquo;m going to look into next.)&lt;/p&gt;
+&lt;h2 id=&#34;expectation-values&#34;&gt;Expectation Values&lt;/h2&gt;
+&lt;p&gt;Even more fun, t&amp;rsquo;s not possible to know everything about the particle in the well. We believe this to be a limitation of the universe, not our understanding of the universe.&lt;/p&gt;
+&lt;p&gt;But we can still calculate &amp;ldquo;expectation&amp;rdquo; values for different properties. These properties are the result if you were to measure a bunch of particles in similar configurations and average them out.&lt;/p&gt;
+&lt;p&gt;To calculate some of the expectation values we can use the following formulas:&lt;/p&gt;
+&lt;h3 id=&#34;position&#34;&gt;Position&lt;/h3&gt;
+&lt;p&gt;$$ \langle x \rangle = \int_{-\infty}^{\infty} \Psi^{*} [x] \Psi dx $$&lt;/p&gt;
+&lt;h3 id=&#34;momentum&#34;&gt;Momentum&lt;/h3&gt;
+&lt;p&gt;$$ \langle p \rangle = \int_{-\infty}^{\infty} \Psi^{*} [-i \hbar \frac{\partial}{\partial x}] \Psi dx $$&lt;/p&gt;
+&lt;h3 id=&#34;uncertainty&#34;&gt;Uncertainty&lt;/h3&gt;
+&lt;p&gt;We can also verify that all states adhere to the uncertainty principle:&lt;/p&gt;
+&lt;p&gt;$$ \sigma_x \sigma_p \geq \frac{\hbar}{2} $$&lt;/p&gt;
+&lt;p&gt;Where:&lt;/p&gt;
+&lt;p&gt;$$ \sigma_x = \langle x^2 \rangle - \langle x \rangle^2 $$&lt;/p&gt;
+&lt;p&gt;$$ \langle x^2 \rangle = \int_{-\infty}^{\infty} \Psi^{*} [x]^2 \Psi dx $$&lt;/p&gt;
+&lt;p&gt;Thankfully from the above table we can see that our calculated uncertainty is  \( \geq  \frac{\hbar}{2} \) for all states.&lt;/p&gt;
+&lt;h2 id=&#34;up-next&#34;&gt;Up Next&lt;/h2&gt;
+&lt;p&gt;Next up will be the quantum harmonic oscillator. I also want to learn more about how the equation evolves with time.&lt;/p&gt;
+&lt;p&gt;If anything is confusing, please let me know! &lt;a href=&#34;mailto:c0nrad@c0nrad.io&#34;&gt;c0nrad@c0nrad.io&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Calculating Collisions Pt. 2</title>
@@ -56,7 +133,7 @@ $$&lt;/p&gt;
     <item>
       <title>Calculating Collisions</title>
       <link>https://blog.c0nrad.io/posts/calculating-collisions/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 17 May 2019 00:00:00 +0000</pubDate>
       
       <guid>https://blog.c0nrad.io/posts/calculating-collisions/</guid>
       <description>&lt;p&gt;My attempt at calculating the resulting velocities of two spheres colliding in 3D.&lt;/p&gt;

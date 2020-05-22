@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Quantum Infinite Well  - c0nrad&#39;s blog</title>
+<meta name="description" content="Learning about physics">
+
+<link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1590179292" />
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1590179292">
+
+<meta property="og:title" content="Quantum Infinite Well" />
+<meta property="og:description" content="Calculating the stationary states of an electron in a quantum infinite well" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.c0nrad.io/posts/quantum-infinite-well/" />
+<meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+<meta property="article:published_time" content="2020-05-22T12:30:26-04:00" />
+<meta property="article:modified_time" content="2020-05-22T12:30:26-04:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+
+<meta name="twitter:title" content="Quantum Infinite Well"/>
+<meta name="twitter:description" content="Calculating the stationary states of an electron in a quantum infinite well"/>
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header> 
+            
+                <h1 class="site-header">
+    <a href="https://blog.c0nrad.io/">c0nrad&#39;s blog</a>
+</h1>
+<nav>
+    
+    
+    <a class="" href="https://c0nrad.io" title="">About</a>
+    
+    <a class="" href="https://github.com/c0nrad/" title="">Github</a>
+    
+    <a class="" href="https://twitter.com/xc0nradx" title="">Twitter</a>
+    
+</nav>
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+
+<article class="post">
+    <header>
+        <h1>Quantum Infinite Well</h1>
+    </header>
+    <div class="content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#particle-in-a-well">Particle in a well</a></li>
+    <li><a href="#schrödinger-equation">Schrödinger Equation</a>
+      <ul>
+        <li><a href="#potential-function">Potential Function</a></li>
+      </ul>
+    </li>
+    <li><a href="#imaginary-component">Imaginary Component</a></li>
+    <li><a href="#expectation-values">Expectation Values</a>
+      <ul>
+        <li><a href="#position">Position</a></li>
+        <li><a href="#momentum">Momentum</a></li>
+        <li><a href="#uncertainty">Uncertainty</a></li>
+      </ul>
+    </li>
+    <li><a href="#up-next">Up Next</a></li>
+  </ul>
+</nav>
+
+        <p>Calculating the stationary states of an electron in a quantum infinite well.</p>
+<iframe class="full-width" src="https://qsimp.github.io/qsimp/examples/infinite_well/" style="border: 1px solid; height: 800px" ></iframe>
+<br>
+(Or visit URL: <a href="https://qsimp.github.io/qsimp/examples/infinite_well/">https://qsimp.github.io/qsimp/examples/infinite_well/</a>)
+<h2 id="particle-in-a-well">Particle in a well</h2>
+<p>The above charts are calculations for a hypothetical electron stuck in a well.</p>
+<p>It&rsquo;s a 1-dimensional well, and sides of the well are infinite in height.</p>
+<p>This model is kind of similar to a standard bouncy ball being placed into a hole, and we watch it slide back and fourth, unable to ever escape the hole. (And the hole has no friction).</p>
+<p>But there&rsquo;s a couple of startling differences between the bouncy ball and particle in the well.</p>
+<p>If we imagine the bouncy ball in the well, it can have pretty much any velocity as it bounces back and forth between the sides of the walls. It could be moving at 1m/s, 10m/s, .00001 m/s. Anything works.</p>
+<p>But for our hypothetical particle, this is not possible. Not all &ldquo;velocities&rdquo; (or more correctly, energies) are allowed. The particle must be in a particular state, or a linear combination of states (more on linear combinations later).</p>
+<p>The hypothetical particle also can&rsquo;t &ldquo;sit still&rdquo;. It must be at one of the energy states (or a linear combination of those states).</p>
+<h2 id="schrödinger-equation">Schrödinger Equation</h2>
+<p>In classical mechanics, we can calculate the position of the ball by using Newton&rsquo;s \( F=ma \) and the equations of motion.</p>
+<p>Quantum mechanics has a similar function called the Schrödinger Equation. Using it we can learn about the particle as we go forward/backwards in time.</p>
+<p>$$ i \hbar \frac{\partial \Psi}{\partial t} = - \frac{\hbar^2}{2m} \frac{\partial^2 \Psi}{\partial x^2} + V \Psi $$</p>
+<ul>
+    <li> \( \Psi \) is the wavefunction </li>
+    <li> \( \hbar \) is plank's constant (over 2pi) </li>
+    <li> \( m \) is the mass of the particle </li>
+    <li> \( i \) is an imaginary i (complex number) </li>
+    <li> \( V \) is the potential function  </li>
+</ul>
+<h3 id="potential-function">Potential Function</h3>
+<p>To &ldquo;solve&rdquo; the Schrödinger for a particular system, you need the Potential Energy function. The easiest Potential function to get started with is the Infinite Well.</p>
+<p>$$ V(x) = \begin{cases} 0, &amp; 0 &lt;= x &lt;= a \\
+\infty, &amp; \text{otherwise} \end{cases}  $$</p>
+<p>It just says that the particle must stay in the well. There&rsquo;s no escaping the well.</p>
+<p>Then, with that potential function, we can plug it into the Schrödinger and determine a function that &ldquo;fits&rdquo;. We eventually get:</p>
+<p>$$ \Psi_n (x, t) = \sqrt{ \frac{2}{a}} \sin{(\frac{n \pi}{a} x )} e^{-i (n^2 \pi^2 \hbar) / (2
+m a^2 ) t} $$</p>
+<ul>
+    <li> \( \Psi \) is the wavefunction </li>
+    <li> \( n \) is the specific stationary states </li>
+    <li> \( a \) is the width of the well </li>
+    <li> \( x \) is the "position" of the wave within the well </li>
+    <li> \( i \) is an imaginary i (complex number) </li>
+    <li> \( \hbar \) is plank's constant (over 2pi) </li>
+    <li> \( m \) is the mass of the electron </li>
+</ul>
+<h4 id="stationary-states">Stationary States</h4>
+<p>Each one of the \( n \) states is an energy level that the particle can be in. But oddly in the quantum mechanics world, the particle will usually occupy a mix of different energy levels at the same time!</p>
+<p>But, when we try to figure out what energy state the particle is in, it will collapse to only one of the states.</p>
+<p>The probability of finding a particle in a particular state is ( |c_n|^2 ):</p>
+<p>$$ \Psi (x, t) = \sum_{n=1}^{\infty} c_n \sqrt{ \frac{2}{a}} \sin{(\frac{n \pi}{a} x )} e^{-i (n^2 \pi^2 \hbar) / (2 m a^2 ) t} $$</p>
+<p>Each of the states has a particular energy (as shown by the table above).</p>
+<p>The coefficients are determined by &ldquo;initial wave function&rdquo; such as \( \Psi (x, 0) = A x (a-x) \).  Using some Fourier series magic you can fit the equation by properly setting the \( c_n \)&lsquo;s.</p>
+<h2 id="imaginary-component">Imaginary Component</h2>
+<p>In the above chart there&rsquo;s two lines for every state, one for both the real and imaginary components.</p>
+<p>The imaginary component comes from the trailing \( e^i \) in the solution. The book I&rsquo;m reading calls this the &ldquo;time independent wiggle room&rdquo;.</p>
+<p>What&rsquo;s interesting though is that the time component doesn&rsquo;t actually change the expectation values for the wave. (If we&rsquo;re being 100% honest, I&rsquo;m not actually sure what the time component does. It&rsquo;s what I&rsquo;m going to look into next.)</p>
+<h2 id="expectation-values">Expectation Values</h2>
+<p>Even more fun, t&rsquo;s not possible to know everything about the particle in the well. We believe this to be a limitation of the universe, not our understanding of the universe.</p>
+<p>But we can still calculate &ldquo;expectation&rdquo; values for different properties. These properties are the result if you were to measure a bunch of particles in similar configurations and average them out.</p>
+<p>To calculate some of the expectation values we can use the following formulas:</p>
+<h3 id="position">Position</h3>
+<p>$$ \langle x \rangle = \int_{-\infty}^{\infty} \Psi^{*} [x] \Psi dx $$</p>
+<h3 id="momentum">Momentum</h3>
+<p>$$ \langle p \rangle = \int_{-\infty}^{\infty} \Psi^{*} [-i \hbar \frac{\partial}{\partial x}] \Psi dx $$</p>
+<h3 id="uncertainty">Uncertainty</h3>
+<p>We can also verify that all states adhere to the uncertainty principle:</p>
+<p>$$ \sigma_x \sigma_p \geq \frac{\hbar}{2} $$</p>
+<p>Where:</p>
+<p>$$ \sigma_x = \langle x^2 \rangle - \langle x \rangle^2 $$</p>
+<p>$$ \langle x^2 \rangle = \int_{-\infty}^{\infty} \Psi^{*} [x]^2 \Psi dx $$</p>
+<p>Thankfully from the above table we can see that our calculated uncertainty is  \( \geq  \frac{\hbar}{2} \) for all states.</p>
+<h2 id="up-next">Up Next</h2>
+<p>Next up will be the quantum harmonic oscillator. I also want to learn more about how the equation evolves with time.</p>
+<p>If anything is confusing, please let me know! <a href="mailto:c0nrad@c0nrad.io">c0nrad@c0nrad.io</a>.</p>
+    </div>
+
+    <div class="article-info">
+    
+        <div class="article-date">2020-05-22</div>
+    
+    <div class="article-taxonomies">
+        
+            
+                <ul class="article-tags">
+                    
+                        <li><a href="https://blog.c0nrad.io/tags/quantum-mechanics">#quantum mechanics</a></li>
+                    
+                        <li><a href="https://blog.c0nrad.io/tags/simulation">#simulation</a></li>
+                    
+                </ul>
+        
+    </div>
+</div>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+</article>
+
+
+
+
+
+        </main>
+        <footer>
+            
+                <p>© Stuart Larsen, 2020<br>
+</p>
+
+
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup {
+        background: #fff;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+        border: 1px solid;
+        margin-top: 20px;
+    }
+
+
+
+
+     
+</style>
+<div id="mc_embed_signup">
+    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
+        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+        novalidate>
+        <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Learn Physics With Me</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                    class="button"></div>
+        </div>
+    </form>
+</div>
+
+
+            
+        </footer>
+    </div>
+</body>
+</html>
