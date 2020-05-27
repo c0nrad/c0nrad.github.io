@@ -6,10 +6,73 @@
     <description>c0nrad&#39;s blog (Posts)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 May 2020 12:30:26 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 27 May 2020 18:43:40 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GiNaC on Macos</title>
+      <link>https://blog.c0nrad.io/posts/ginac-on-macos/</link>
+      <pubDate>Wed, 27 May 2020 18:43:40 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/ginac-on-macos/</guid>
+      <description>&lt;p&gt;A quick guide on getting started with GiNaC on macos.&lt;/p&gt;
+&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+&lt;p&gt;I decided to start my next project which will be calculating the &amp;ldquo;orbitals&amp;rdquo; of electrons in Hydrogen.&lt;/p&gt;
+&lt;p&gt;I was going to write it in Go, but calculating the Rodrigues formula and the associated Legendre Functions require performing an arbitrary polynomial derivative, and I couldn&amp;rsquo;t find a good symbolic differentiator in GoLang. (And I&amp;rsquo;d like to see the results, not use a numerical differentiator).&lt;/p&gt;
+&lt;p&gt;Turns out there&amp;rsquo;s a good library in C/C++ that some particle physicists use called &lt;a href=&#34;https://www.ginac.de/tutorial/#Introduction&#34;&gt;GiNaCs&lt;/a&gt;. It has nice clean docs, and one of the starter examples was generating the &lt;a href=&#34;https://en.wikipedia.org/wiki/Hermite_polynomials&#34;&gt;hermite polynomials&lt;/a&gt;! (Which is similar to what I needed to do! (In that it&amp;rsquo;s built off of differentiating \( e^{-x} \) some amount of times.)&lt;/p&gt;
+&lt;h2 id=&#34;installing-ginacs&#34;&gt;Installing GiNaCs&lt;/h2&gt;
+&lt;p&gt;On Macos it&amp;rsquo;s extremely easy! First you need to install &lt;a href=&#34;https://www.ginac.de/CLN/&#34;&gt;CLN&lt;/a&gt; (Class Library for Numbers), and then GiNaC. But they&amp;rsquo;re both in homebrew!&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;brew install cln ginac
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It&amp;rsquo;s possible you&amp;rsquo;ll need to install xcode if you haven&amp;rsquo;t already. This is so gcc(clang) is setup. To install it you just run &lt;code&gt;xcode-select --install&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;setting-up-vscode&#34;&gt;Setting up VSCode&lt;/h2&gt;
+&lt;p&gt;Then I setup my IDE (I use Visual Code):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Set the C++ Standard to gnu++17. The commit messages within GiNaCs made it look like they&amp;rsquo;re working on c++20 so I assume they&amp;rsquo;re already on 17.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.c0nrad.io/c-standard.png&#34; alt=&#34;c-standard&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Set the include paths&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.c0nrad.io/c-include-path.png&#34; alt=&#34;c-include-path&#34;&gt;&lt;/p&gt;
+&lt;p&gt;To find the exact version for your include paths, open up terminal, and &lt;code&gt;cd&lt;/code&gt; into the package directories (/usr/local/Cellar) to find the correct version numbers.&lt;/p&gt;
+&lt;p&gt;After this intelitype should work.&lt;/p&gt;
+&lt;h2 id=&#34;build-the-example&#34;&gt;Build the example&lt;/h2&gt;
+&lt;p&gt;I had to modify the default example a little bit. It was complaining about not knowing which version of &lt;code&gt;pow&lt;/code&gt; to use. So I just removed the namespaces (which I wanted to do anyways as I&amp;rsquo;m getting back into C++ and remember what belongs to what package)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;ginac/ginac.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;ex HermitePoly(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;symbol &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;x, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; n)
+{
+    GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;ex HKer &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; exp(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;pow(x, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;));
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;normal(GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;pow(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, n) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;diff(HKer, x, n) &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; HKer);
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;()
+{
+    GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;symbol z(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;z&amp;#34;&lt;/span&gt;);
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;; &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;i)
+        std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;H_&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;(z) == &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; HermitePoly(z, i) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;endl;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To build I ran:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;g++ -std&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;gnu++17 hermitePoly.cpp -o hermitePoly -L/usr/local/Cellar/ginac/1.7.9/lib -lginac -L/usr/local/Cellar/cln/1.3.6/lib -lcln
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Again, you&amp;rsquo;ll need to know your exact package versions. For me it was ginac=1.7.9 and cln=1.3.6 on May 27th, 2020.&lt;/p&gt;
+&lt;p&gt;And then to execute your hard work:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;./hermitePoly
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I keep everything in a Makefile, so really I just type &amp;ldquo;make&amp;rdquo;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Makefile&#34; data-lang=&#34;Makefile&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;run&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; build 
+	./hermitePoly
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;build&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; 
+	g++ -std&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;gnu++17 hermitePoly.cpp -o hermitePoly -L/usr/local/Cellar/ginac/1.7.9/lib -lginac -L/usr/local/Cellar/cln/1.3.6/lib -lcln
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I can&amp;rsquo;t believe how easy it was, I&amp;rsquo;m excited to start calculating the orbitals!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Quantum Infinite Well</title>

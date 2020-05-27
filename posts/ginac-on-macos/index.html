@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>GiNaC on Macos  - c0nrad&#39;s blog</title>
+<meta name="description" content="Learning about physics">
+
+<link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1590620859" />
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1590620859">
+
+<meta property="og:title" content="GiNaC on Macos" />
+<meta property="og:description" content="A quick guide on getting started with GiNaC on macos.
+Background I decided to start my next project which will be calculating the &ldquo;orbitals&rdquo; of electrons in Hydrogen.
+I was going to write it in Go, but calculating the Rodrigues formula and the associated Legendre Functions require performing an arbitrary polynomial derivative, and I couldn&rsquo;t find a good symbolic differentiator in GoLang. (And I&rsquo;d like to see the results, not use a numerical differentiator)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.c0nrad.io/posts/ginac-on-macos/" />
+<meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+<meta property="article:published_time" content="2020-05-27T18:43:40-04:00" />
+<meta property="article:modified_time" content="2020-05-27T18:43:40-04:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+
+<meta name="twitter:title" content="GiNaC on Macos"/>
+<meta name="twitter:description" content="A quick guide on getting started with GiNaC on macos.
+Background I decided to start my next project which will be calculating the &ldquo;orbitals&rdquo; of electrons in Hydrogen.
+I was going to write it in Go, but calculating the Rodrigues formula and the associated Legendre Functions require performing an arbitrary polynomial derivative, and I couldn&rsquo;t find a good symbolic differentiator in GoLang. (And I&rsquo;d like to see the results, not use a numerical differentiator)."/>
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header> 
+            
+                <h1 class="site-header">
+    <a href="https://blog.c0nrad.io/">c0nrad&#39;s blog</a>
+</h1>
+<nav>
+    
+    
+    <a class="" href="https://c0nrad.io" title="">About</a>
+    
+    <a class="" href="https://github.com/c0nrad/" title="">Github</a>
+    
+    <a class="" href="https://twitter.com/xc0nradx" title="">Twitter</a>
+    
+</nav>
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+
+<article class="post">
+    <header>
+        <h1>GiNaC on Macos</h1>
+    </header>
+    <div class="content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#background">Background</a></li>
+    <li><a href="#installing-ginacs">Installing GiNaCs</a></li>
+    <li><a href="#setting-up-vscode">Setting up VSCode</a></li>
+    <li><a href="#build-the-example">Build the example</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+
+        <p>A quick guide on getting started with GiNaC on macos.</p>
+<h2 id="background">Background</h2>
+<p>I decided to start my next project which will be calculating the &ldquo;orbitals&rdquo; of electrons in Hydrogen.</p>
+<p>I was going to write it in Go, but calculating the Rodrigues formula and the associated Legendre Functions require performing an arbitrary polynomial derivative, and I couldn&rsquo;t find a good symbolic differentiator in GoLang. (And I&rsquo;d like to see the results, not use a numerical differentiator).</p>
+<p>Turns out there&rsquo;s a good library in C/C++ that some particle physicists use called <a href="https://www.ginac.de/tutorial/#Introduction">GiNaCs</a>. It has nice clean docs, and one of the starter examples was generating the <a href="https://en.wikipedia.org/wiki/Hermite_polynomials">hermite polynomials</a>! (Which is similar to what I needed to do! (In that it&rsquo;s built off of differentiating \( e^{-x} \) some amount of times.)</p>
+<h2 id="installing-ginacs">Installing GiNaCs</h2>
+<p>On Macos it&rsquo;s extremely easy! First you need to install <a href="https://www.ginac.de/CLN/">CLN</a> (Class Library for Numbers), and then GiNaC. But they&rsquo;re both in homebrew!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">brew install cln ginac
+</code></pre></div><p>It&rsquo;s possible you&rsquo;ll need to install xcode if you haven&rsquo;t already. This is so gcc(clang) is setup. To install it you just run <code>xcode-select --install</code>.</p>
+<h2 id="setting-up-vscode">Setting up VSCode</h2>
+<p>Then I setup my IDE (I use Visual Code):</p>
+<ol>
+<li>Set the C++ Standard to gnu++17. The commit messages within GiNaCs made it look like they&rsquo;re working on c++20 so I assume they&rsquo;re already on 17.</li>
+</ol>
+<p><img src="/c-standard.png" alt="c-standard"></p>
+<ol start="2">
+<li>Set the include paths</li>
+</ol>
+<p><img src="/c-include-path.png" alt="c-include-path"></p>
+<p>To find the exact version for your include paths, open up terminal, and <code>cd</code> into the package directories (/usr/local/Cellar) to find the correct version numbers.</p>
+<p>After this intelitype should work.</p>
+<h2 id="build-the-example">Build the example</h2>
+<p>I had to modify the default example a little bit. It was complaining about not knowing which version of <code>pow</code> to use. So I just removed the namespaces (which I wanted to do anyways as I&rsquo;m getting back into C++ and remember what belongs to what package)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;ginac/ginac.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+GiNaC<span style="color:#f92672">::</span>ex HermitePoly(<span style="color:#66d9ef">const</span> GiNaC<span style="color:#f92672">::</span>symbol <span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">int</span> n)
+{
+    GiNaC<span style="color:#f92672">::</span>ex HKer <span style="color:#f92672">=</span> exp(<span style="color:#f92672">-</span>pow(x, <span style="color:#ae81ff">2</span>));
+    <span style="color:#66d9ef">return</span> GiNaC<span style="color:#f92672">::</span>normal(GiNaC<span style="color:#f92672">::</span>pow(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, n) <span style="color:#f92672">*</span> GiNaC<span style="color:#f92672">::</span>diff(HKer, x, n) <span style="color:#f92672">/</span> HKer);
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    GiNaC<span style="color:#f92672">::</span>symbol z(<span style="color:#e6db74">&#34;z&#34;</span>);
+
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">6</span>; <span style="color:#f92672">++</span>i)
+        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;H_&#34;</span> <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;(z) == &#34;</span> <span style="color:#f92672">&lt;&lt;</span> HermitePoly(z, i) <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>To build I ran:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">g++ -std<span style="color:#f92672">=</span>gnu++17 hermitePoly.cpp -o hermitePoly -L/usr/local/Cellar/ginac/1.7.9/lib -lginac -L/usr/local/Cellar/cln/1.3.6/lib -lcln
+</code></pre></div><p>Again, you&rsquo;ll need to know your exact package versions. For me it was ginac=1.7.9 and cln=1.3.6 on May 27th, 2020.</p>
+<p>And then to execute your hard work:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./hermitePoly
+</code></pre></div><p>I keep everything in a Makefile, so really I just type &ldquo;make&rdquo;:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Makefile" data-lang="Makefile"><span style="color:#a6e22e">run</span><span style="color:#f92672">:</span> build 
+	./hermitePoly
+
+<span style="color:#a6e22e">build</span><span style="color:#f92672">:</span> 
+	g++ -std<span style="color:#f92672">=</span>gnu++17 hermitePoly.cpp -o hermitePoly -L/usr/local/Cellar/ginac/1.7.9/lib -lginac -L/usr/local/Cellar/cln/1.3.6/lib -lcln
+</code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>I can&rsquo;t believe how easy it was, I&rsquo;m excited to start calculating the orbitals!</p>
+
+    </div>
+
+    <div class="article-info">
+    
+        <div class="article-date">2020-05-27</div>
+    
+    <div class="article-taxonomies">
+        
+            
+    </div>
+</div>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+</article>
+
+
+
+
+
+        </main>
+        <footer>
+            
+                <p>© Stuart Larsen, 2020<br>
+</p>
+
+
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup {
+        background: #fff;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+        border: 1px solid;
+        margin-top: 20px;
+    }
+
+
+
+
+     
+</style>
+<div id="mc_embed_signup">
+    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
+        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+        novalidate>
+        <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Learn Physics With Me</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                    class="button"></div>
+        </div>
+    </form>
+</div>
+
+
+            
+        </footer>
+    </div>
+</body>
+</html>
