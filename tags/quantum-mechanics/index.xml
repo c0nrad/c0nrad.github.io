@@ -85,7 +85,7 @@
     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;normal(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; (GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;pow(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, l) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;factorial(l)) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;diff(diffed, x, l));
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;legendre-polynomials&#34;&gt;Legendre Polynomials&lt;/h3&gt;
-&lt;p&gt;The &lt;a href=&#34;https://en.wikipedia.org/wiki/Legendre_polynomials&#34;&gt;Legendre polynomials&lt;/a&gt; are cool because they are orthogonal.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&#34;https://en.wikipedia.org/wiki/Legendre_polynomials&#34;&gt;Legendre polynomials&lt;/a&gt; (and everything built up from it) are cool because they are orthogonal.&lt;/p&gt;
 &lt;p&gt;This means they can be used to form a basis, and when combining these functions together, they don&amp;rsquo;t interfere with each other.&lt;/p&gt;
 &lt;p&gt;This is particularly useful when constructing fourier series, since you can use a set of orthogonal vectors to describe any function. (Commonly Cos / Sin are used, which are also orthogonal. If you look at a chart of Cos/Sin from -pi to pi, and multiply them together and add up the areas, you can convince yourself they equal zero).&lt;/p&gt;
 &lt;h3 id=&#34;what-are-n-l-and-m&#34;&gt;What are n, l, and m?&lt;/h3&gt;

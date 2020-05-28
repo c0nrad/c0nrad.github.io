@@ -14,9 +14,9 @@
 <link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
 <link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
 
-<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1590686746" />
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1590686910" />
 
-<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1590686746">
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1590686910">
 
 <meta property="og:title" content="Electron Wavefunctions for Hydrogen Part 1" />
 <meta property="og:description" content="Calculating the stationary states of an electron in a hydrogen atom" />
@@ -153,7 +153,7 @@
     <span style="color:#66d9ef">return</span> GiNaC<span style="color:#f92672">::</span>normal(<span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> (GiNaC<span style="color:#f92672">::</span>pow(<span style="color:#ae81ff">2</span>, l) <span style="color:#f92672">*</span> GiNaC<span style="color:#f92672">::</span>factorial(l)) <span style="color:#f92672">*</span> GiNaC<span style="color:#f92672">::</span>diff(diffed, x, l));
 }
 </code></pre></div><h3 id="legendre-polynomials">Legendre Polynomials</h3>
-<p>The <a href="https://en.wikipedia.org/wiki/Legendre_polynomials">Legendre polynomials</a> are cool because they are orthogonal.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Legendre_polynomials">Legendre polynomials</a> (and everything built up from it) are cool because they are orthogonal.</p>
 <p>This means they can be used to form a basis, and when combining these functions together, they don&rsquo;t interfere with each other.</p>
 <p>This is particularly useful when constructing fourier series, since you can use a set of orthogonal vectors to describe any function. (Commonly Cos / Sin are used, which are also orthogonal. If you look at a chart of Cos/Sin from -pi to pi, and multiply them together and add up the areas, you can convince yourself they equal zero).</p>
 <h3 id="what-are-n-l-and-m">What are n, l, and m?</h3>
