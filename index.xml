@@ -6,10 +6,85 @@
     <description>c0nrad&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 May 2020 18:43:40 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 28 May 2020 10:22:30 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Electron Wavefunctions for Hydrogen Part 1</title>
+      <link>https://blog.c0nrad.io/posts/hydrogen-pt1/</link>
+      <pubDate>Thu, 28 May 2020 10:22:30 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/hydrogen-pt1/</guid>
+      <description>&lt;p&gt;The code/math behind calculating the electron wavefunctions for hydrogen.&lt;/p&gt;
+&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+&lt;p&gt;I never thought I would have so much fun programming in C+++ again. I can&amp;rsquo;t believe how much I miss operator overloading and templates.&lt;/p&gt;
+&lt;p&gt;Being able to write &lt;code&gt;ex c = a + b;&lt;/code&gt; where a and b are custom types is so nice.&lt;/p&gt;
+&lt;p&gt;The goal of my next project is creating an interactive display for the electron wavefunctions of hydrogen.&lt;/p&gt;
+&lt;p&gt;I decided to do this project using &lt;a href=&#34;https://blog.c0nrad.io/posts/ginac-on-macos&#34;&gt;GiNaC&lt;/a&gt;, and the visualizations will be in three.js (webGL).&lt;/p&gt;
+&lt;h2 id=&#34;code&#34;&gt;Code&lt;/h2&gt;
+&lt;p&gt;So far I think I have most of the math done:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/3f4287907ba50e661e1f77d419c4a6da0c77fb96/hydrogen.cpp&#34;&gt;Hydrogen Wave Function Code&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not 100% sure on the correctness of the final step (HydrogrenWaveFunction), I probably won&amp;rsquo;t know till I plot them.&lt;/p&gt;
+&lt;p&gt;But, holy crap GiNaC is cool. I love that I can symbolically create expressions. It makes verifying them much easier. And I can take the derivative of expressions!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.c0nrad.io/hydrogen-output.png&#34; alt=&#34;hydrogen&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;math&#34;&gt;Math&lt;/h2&gt;
+&lt;h3 id=&#34;schrödinger-equation-in-spherical-coordinates&#34;&gt;Schrödinger Equation in Spherical Coordinates&lt;/h3&gt;
+&lt;p&gt;To find the wavefunctions of hydrogen, you start at the same place you always start at&amp;hellip; the Schrödinger Equation!&lt;/p&gt;
+&lt;p&gt;$$ i \hbar \frac{\partial \Psi}{\partial t} = - \frac{\hbar^2}{2m} \Delta^{2} \Psi + V \Psi $$&lt;/p&gt;
+&lt;p&gt;For all the examples I&amp;rsquo;ve been learning about so far, we&amp;rsquo;ve been using X,Y,Z as the coordinate system. But for hydrogen (and other realistic systems), it makes sense to move to a &lt;a href=&#34;https://en.wikipedia.org/wiki/Spherical_coordinate_system&#34;&gt;spherical coordinate system&lt;/a&gt;. This is because most real world potentials are proportional to a radius around some origin.&lt;/p&gt;
+&lt;p&gt;Unfortunately the equation (time-independent Schrödinger Equation in spherical coordinates) gets a bit more complex:&lt;/p&gt;
+&lt;p&gt;$$ - \frac{\hbar^2}{2m} [ \frac{1}{r^2}  \frac{ \partial }{\partial r} ( r^2 \frac{\partial \psi}{\partial r}) +   \frac{1}{r^2 \sin{\theta}} \frac{\partial}{\partial \theta} ( \sin{\theta} \frac{\partial \psi}{\partial \theta})    +     \frac{1}{r^2 \sin^2{\theta}} ( \frac{\partial^2 \psi}{\partial \phi^2}) ] + V \psi = E \psi $$&lt;/p&gt;
+&lt;h3 id=&#34;hydrogen-solution&#34;&gt;Hydrogen Solution&lt;/h3&gt;
+&lt;p&gt;In Hydrogen there&amp;rsquo;s one proton and one electron. The proton is significantly more massive than the electron. We just pin the proton at the middle and assume the electron floats around. Using Coulomb&amp;rsquo;s law, we can state that the potential energy of our system will be:&lt;/p&gt;
+&lt;p&gt;$$ V(r) = -4 \frac{e^2}{4 \pi \epsilon_0 } \frac{1}{r} $$&lt;/p&gt;
+&lt;p&gt;If you do all the math (and by &amp;lsquo;do the math&amp;rsquo;, I mean nod along in your text book while crying softly to yourself since you don&amp;rsquo;t really understand what&amp;rsquo;s going on), you&amp;rsquo;ll eventually find that the solutions for a bound electron to hydrogen to be:&lt;/p&gt;
+&lt;p&gt;$$ \psi_{nlm}(r, \theta, \phi) = \sqrt{ \left(\frac{2}{na}\right)^3  \frac{(n-l-1)!}{2n (n+l)!}} e^{-r/na} \left( \frac{2r}{na}\right)^{l} \left[L_{n-l-1}^{2l+1}(2r/na)\right] Y_l^m(\theta, \phi) $$&lt;/p&gt;
+&lt;p&gt;Where:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;\( L_{q}^{p} \) is the &lt;a href=&#34;https://en.wikipedia.org/wiki/Laguerre_polynomials&#34;&gt;Associated Laguerre Polynomial&lt;/a&gt;, defined by:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;$$ L_q^p(x) = \frac{x^{-p} e^x}{q!}\left(\frac{d}{dx}\right)^d (e^{-x}x^{p+q}) $$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;\( a \) is the &lt;a href=&#34;https://en.wikipedia.org/wiki/Bohr_radius&#34;&gt;Bohr Radius&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;\( Y_l^m(\theta, \phi) \) is the &lt;a href=&#34;https://en.wikipedia.org/wiki/Spherical_harmonics&#34;&gt;spherical harmonics&lt;/a&gt;, defined by:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;$$ Y_l^m(\theta, \phi) = \sqrt{ \frac{(2l+1)}{4 \pi} \frac{(l-m)!}{(l+m)!}} e^{i m \phi} * P^m_l(\cos{\theta}) $$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;\( P^m_l(x) \) is the &lt;a href=&#34;https://en.wikipedia.org/wiki/Associated_Legendre_polynomials&#34;&gt;associated Legendre Polynomials&lt;/a&gt;, defined by:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;$$ P^m_l(x) = (-1)^m (1-x^2)^{m/2} \left( \frac{d}{dx} \right)^m P_l(x) $$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;\( P_l(x) \) is the Legendre Polynomial, generated by the Rodrigues Formula:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;$$ P_l(x) = \frac{1}{2^l l!} \left(\frac{d}{dx}\right)^l (x^2 - 1)^l $$&lt;/p&gt;
+&lt;h3 id=&#34;building-functions-by-differentiation&#34;&gt;Building Functions by Differentiation&lt;/h3&gt;
+&lt;p&gt;What&amp;rsquo;s super cool about a number of those functions is that they&amp;rsquo;re built using an arbitrary differentiation. \( \left(\frac{d}{dx}\right)^l \).&lt;/p&gt;
+&lt;p&gt;This is the real reason I chose to use GiNaCs, so I could perform these derivatives symbolically.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;ex RodriguesFormula(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;symbol &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;x, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; l)
+{
+    GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;ex diffed &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;pow(GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;pow(x, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, l);
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;normal(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; (GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;pow(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, l) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;factorial(l)) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; GiNaC&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;diff(diffed, x, l));
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;legendre-polynomials&#34;&gt;Legendre Polynomials&lt;/h3&gt;
+&lt;p&gt;The &lt;a href=&#34;https://en.wikipedia.org/wiki/Legendre_polynomials&#34;&gt;Legendre polynomials&lt;/a&gt; are cool because they are orthogonal.&lt;/p&gt;
+&lt;p&gt;This means they can be used to form a basis, and when combining these functions together, they don&amp;rsquo;t interfere with each other.&lt;/p&gt;
+&lt;p&gt;This is particularly useful when constructing fourier series, since you can use a set of orthogonal vectors to describe any function. (Commonly Cos / Sin are used, which are also orthogonal. If you look at a chart of Cos/Sin from -pi to pi, and multiply them together and add up the areas, you can convince yourself they equal zero).&lt;/p&gt;
+&lt;h3 id=&#34;what-are-n-l-and-m&#34;&gt;What are n, l, and m?&lt;/h3&gt;
+&lt;p&gt;The easiest one to describe is &amp;ldquo;n&amp;rdquo;, the &lt;code&gt;principal quantum number&lt;/code&gt;. This is the energy state of the wave function. Any wave function with a similar n has the same energy.&lt;/p&gt;
+&lt;p&gt;The higher the n, the further away the electron is from the nucleus (the proton).&lt;/p&gt;
+&lt;p&gt;The energy is given by the Bohr formula (which is impressively simple given the wavefunctions we were looking at)&lt;/p&gt;
+&lt;p&gt;$$ E_n = \frac{E_1}{n^2} $$&lt;/p&gt;
+&lt;p&gt;\( E_1 = -13.6 eV\), which means that it requires -13.6eV to push an electron completely away from a proton.&lt;/p&gt;
+&lt;p&gt;l is the &lt;code&gt;Azimuthal Quantum Number&lt;/code&gt;, and m is the &lt;code&gt;Magnetic Quantum Number&lt;/code&gt;, they both related to the angular momentum of the electron. I might talk more about them in a future blog post.&lt;/p&gt;
+&lt;h2 id=&#34;up-next&#34;&gt;Up Next&lt;/h2&gt;
+&lt;p&gt;Up next is to start plotting the results of these functions. I&amp;rsquo;m not sure how exactly I want to tackle it, but I think I&amp;rsquo;ll sample a number of points based off their probability, and then just plot those points.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>GiNaC on Macos</title>
