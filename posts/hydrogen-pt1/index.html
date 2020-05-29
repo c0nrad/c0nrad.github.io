@@ -14,9 +14,9 @@
 <link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
 <link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
 
-<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1590686910" />
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1590767346" />
 
-<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1590686910">
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1590767346">
 
 <meta property="og:title" content="Electron Wavefunctions for Hydrogen Part 1" />
 <meta property="og:description" content="Calculating the stationary states of an electron in a hydrogen atom" />
@@ -87,7 +87,7 @@
 
         <p>The code/math behind calculating the electron wavefunctions for hydrogen.</p>
 <h2 id="background">Background</h2>
-<p>I never thought I would have so much fun programming in C+++ again. I can&rsquo;t believe how much I miss operator overloading and templates.</p>
+<p>I never thought I would have so much fun programming in C++ again. I can&rsquo;t believe how much I miss operator overloading and templates.</p>
 <p>Being able to write <code>ex c = a + b;</code> where a and b are custom types is so nice.</p>
 <p>The goal of my next project is creating an interactive display for the electron wavefunctions of hydrogen.</p>
 <p>I decided to do this project using <a href="/posts/ginac-on-macos">GiNaC</a>, and the visualizations will be in three.js (webGL).</p>
@@ -164,7 +164,7 @@
 <p>\( E_1 = -13.6 eV\), which means that it requires -13.6eV to push an electron completely away from a proton.</p>
 <p>l is the <code>Azimuthal Quantum Number</code>, and m is the <code>Magnetic Quantum Number</code>, they both related to the angular momentum of the electron. I might talk more about them in a future blog post.</p>
 <h2 id="up-next">Up Next</h2>
-<p>Up next is to start plotting the results of these functions. I&rsquo;m not sure how exactly I want to tackle it, but I think I&rsquo;ll sample a number of points based off their probability, and then just plot those points.</p>
+<p>Now that all the math is in <a href="https://github.com/c0nrad/hydrogen/blob/3f4287907ba50e661e1f77d419c4a6da0c77fb96/hydrogen.cpp">code</a> up next is to start plotting the results of these functions. I&rsquo;m not sure how exactly I want to tackle it, but I think I&rsquo;ll just random sample a number of points, decide to keep them based off their probability, wait till I get a few hundred each and then just plot those points in three.js.</p>
     </div>
 
     <div class="article-info">

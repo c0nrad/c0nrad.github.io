@@ -19,7 +19,7 @@
       <guid>https://blog.c0nrad.io/posts/hydrogen-pt1/</guid>
       <description>&lt;p&gt;The code/math behind calculating the electron wavefunctions for hydrogen.&lt;/p&gt;
 &lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
-&lt;p&gt;I never thought I would have so much fun programming in C+++ again. I can&amp;rsquo;t believe how much I miss operator overloading and templates.&lt;/p&gt;
+&lt;p&gt;I never thought I would have so much fun programming in C++ again. I can&amp;rsquo;t believe how much I miss operator overloading and templates.&lt;/p&gt;
 &lt;p&gt;Being able to write &lt;code&gt;ex c = a + b;&lt;/code&gt; where a and b are custom types is so nice.&lt;/p&gt;
 &lt;p&gt;The goal of my next project is creating an interactive display for the electron wavefunctions of hydrogen.&lt;/p&gt;
 &lt;p&gt;I decided to do this project using &lt;a href=&#34;https://blog.c0nrad.io/posts/ginac-on-macos&#34;&gt;GiNaC&lt;/a&gt;, and the visualizations will be in three.js (webGL).&lt;/p&gt;
@@ -96,7 +96,7 @@
 &lt;p&gt;\( E_1 = -13.6 eV\), which means that it requires -13.6eV to push an electron completely away from a proton.&lt;/p&gt;
 &lt;p&gt;l is the &lt;code&gt;Azimuthal Quantum Number&lt;/code&gt;, and m is the &lt;code&gt;Magnetic Quantum Number&lt;/code&gt;, they both related to the angular momentum of the electron. I might talk more about them in a future blog post.&lt;/p&gt;
 &lt;h2 id=&#34;up-next&#34;&gt;Up Next&lt;/h2&gt;
-&lt;p&gt;Up next is to start plotting the results of these functions. I&amp;rsquo;m not sure how exactly I want to tackle it, but I think I&amp;rsquo;ll sample a number of points based off their probability, and then just plot those points.&lt;/p&gt;</description>
+&lt;p&gt;Now that all the math is in &lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/3f4287907ba50e661e1f77d419c4a6da0c77fb96/hydrogen.cpp&#34;&gt;code&lt;/a&gt; up next is to start plotting the results of these functions. I&amp;rsquo;m not sure how exactly I want to tackle it, but I think I&amp;rsquo;ll just random sample a number of points, decide to keep them based off their probability, wait till I get a few hundred each and then just plot those points in three.js.&lt;/p&gt;</description>
     </item>
     
     <item>
