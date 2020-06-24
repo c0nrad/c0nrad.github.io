@@ -6,10 +6,113 @@
     <description>c0nrad&#39;s blog (Posts)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 May 2020 10:22:30 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jun 2020 14:37:31 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Electron Wavefunctions for Hydrogen Part 2</title>
+      <link>https://blog.c0nrad.io/posts/hydrogen-pt2/</link>
+      <pubDate>Sat, 20 Jun 2020 14:37:31 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/hydrogen-pt2/</guid>
+      <description>&lt;p&gt;Part 2 of calculating the electron wavefunctions for hydrogen.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.c0nrad.io/hydrogen/&#34;&gt;View Visualization&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;background&#34;&gt;Background&lt;/h1&gt;
+&lt;p&gt;It&amp;rsquo;s done! (Technically it was done a month ago, I just never wrote about it).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.reddit.com/r/Physics/comments/gt1set/interactive_electron_orbitals_of_hydrogen/&#34;&gt;https://www.reddit.com/r/Physics/comments/gt1set/interactive_electron_orbitals_of_hydrogen/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Source code can be found here:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/c0nrad/hydrogen&#34;&gt;https://github.com/c0nrad/hydrogen&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;technical-implementation-notes&#34;&gt;Technical Implementation Notes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;I ended up just sampling the wave functions, and saving it to a JSON file for the web component to read.
+** &lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/master/hydrogen.cpp#L199&#34;&gt;https://github.com/c0nrad/hydrogen/blob/master/hydrogen.cpp#L199&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Originally each point was a three.js sphere, but that ran way to slow, so I got to try vertex/fragement shaders for the first time! (using a THREE.cloud)
+** &lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/master/docs/index.html#L44&#34;&gt;https://github.com/c0nrad/hydrogen/blob/master/docs/index.html#L44&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;The little control panel is actually pretty neat. Just a few lines of code
+** &lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/master/docs/app.ts#L24&#34;&gt;https://github.com/c0nrad/hydrogen/blob/master/docs/app.ts#L24&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Overall super happy with it!&lt;/p&gt;
+&lt;h2 id=&#34;future&#34;&gt;Future&lt;/h2&gt;
+&lt;p&gt;Done with this project, but already onto the next! Stay tuned!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Reflections on 6 months solo SaaS startup</title>
+      <link>https://blog.c0nrad.io/posts/reflections-6months/</link>
+      <pubDate>Tue, 16 Jun 2020 07:59:02 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/reflections-6months/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s crazy to think my startup is already over 6 months old. This post is some informal reflections on that period.&lt;/p&gt;
+&lt;p&gt;To set the context for people who are not me, this was my first foray into startups. The startup is pretty lean (it&amp;rsquo;s a saas security startup), only on the verge of profitability. Single digit customers.&lt;/p&gt;
+&lt;p&gt;A lot of this may sound complain-y, they&amp;rsquo;re definitely first world problems. But they are things I wish I had fully internalized.&lt;/p&gt;
+&lt;h2 id=&#34;nobody-cares&#34;&gt;Nobody cares&lt;/h2&gt;
+&lt;p&gt;It sounds very negative, and I don&amp;rsquo;t mean it in a bad way. But I think it applies to many aspects of building the startup.&lt;/p&gt;
+&lt;p&gt;People want a tool that solves the problem. No one cares about the effort involved in creating little features. No one cares about the story, no one cares how it works. They just want to be re-assured it will work, so they can focus on their 1000 other problems.&lt;/p&gt;
+&lt;p&gt;There&amp;rsquo;s nothing wrong with that, it&amp;rsquo;s just important to remember.&lt;/p&gt;
+&lt;p&gt;The fact that no one cares also has positive aspects! I was worried about my two hours of planned downtime when I was doing a large migration. Literally no one cared. I think my startup could have been down for a few days, and no one would of cared that much. Unfortunately or fortunately I focused a lot on reliability (which was kind of wasted effort now that I realize it).&lt;/p&gt;
+&lt;h2 id=&#34;careful-with-free-trials&#34;&gt;Careful with free trials&lt;/h2&gt;
+&lt;p&gt;I thought it would be cool if I had a free sandbox plan. Let people kick the tires. When they see the amazing value they&amp;rsquo;ll upgrade!&lt;/p&gt;
+&lt;p&gt;Not so much.&lt;/p&gt;
+&lt;p&gt;The free sandbox offering attracted over 1000 businesses. Super neat! The only problem was&amp;hellip; no one upgraded to paying plans. So I&amp;rsquo;m supporting 1000 customers on my platform. Goodbye life savings (kidding, but it does cost non-trivial money).&lt;/p&gt;
+&lt;p&gt;I don&amp;rsquo;t want to dive into the specifics of content-security-policy report-uri, but having a sandbox account created weird dynamics/incentives. My startup focuses on making this specific security tool easier. And I charge based on &amp;ldquo;usage&amp;rdquo; of the feature. But by making this security tool easier, there was less need for usage. So every feature I included made the Sandbox account a better solution, no need to upgrade for more usage.&lt;/p&gt;
+&lt;p&gt;So I had 1000+ people using the platform, and they had no incentive to upgrade. And every feature I released solidified that SANDBOX was all your need. I could of limited key features, but I hate it when other companies do that, and it wasn&amp;rsquo;t obvious to me what features to limit. It also feels dis-honest. Instead I&amp;rsquo;d rather focus on making the best product. So instead I went with a free trial period and made the choice to discontinue SANDBOX accounts. (If you were a sandbox user of Csper, against I apologize, but it had to be done).&lt;/p&gt;
+&lt;p&gt;There&amp;rsquo;s way less usage, but now people pay for the service. And I&amp;rsquo;m not fronting the bill for &amp;gt;1000 customers (which I can not do for long since i&amp;rsquo;m self bootstrapped).&lt;/p&gt;
+&lt;h2 id=&#34;seo--pipeline--ads&#34;&gt;SEO / Pipeline / Ads&lt;/h2&gt;
+&lt;p&gt;It sounds so obvious now, but wasn&amp;rsquo;t fully fully internalized when I started.&lt;/p&gt;
+&lt;p&gt;People aren&amp;rsquo;t just going to &amp;ldquo;stumble&amp;rdquo; onto your product.&lt;/p&gt;
+&lt;p&gt;When Csper was released, I made sure it could handle a lot of load. I was worried that it would spread like wildfire. So I made sure everything could scale. Autoscaling k8s, autoscaling database. I setup observability on everything to debug issues, tracing, logging, monitoring dashboards, etc.&lt;/p&gt;
+&lt;p&gt;Long story short, almost no one showed up.&lt;/p&gt;
+&lt;p&gt;SEO / Marketing are the name of the game. (not an endorsement), but getting setup with SEM rush to track my SEO (specifically content marketing).&lt;/p&gt;
+&lt;h2 id=&#34;people-like-open-source-a-lot&#34;&gt;People like &amp;ldquo;open source&amp;rdquo;&amp;hellip; a lot&lt;/h2&gt;
+&lt;p&gt;I built a similar open source product about 5-6 years ago. It&amp;rsquo;s crazy how fast people will refer an open source product compared to a paid product.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s a huge marketing advantage I never really considered. The product today is SIGNIFICANTLY better than the 5-6 year old product, yet people still share links to my old defunct product.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;open source&amp;rdquo; seems to trump reliability. I&amp;rsquo;m probably the same way, so I can&amp;rsquo;t complain too much. Just interesting to watch it happen.&lt;/p&gt;
+&lt;p&gt;I was very tempted to shift to &amp;ldquo;open source&amp;rdquo; and then have a paid plan. But, never did.&lt;/p&gt;
+&lt;h2 id=&#34;on-the-plus-working-for-yourself-is-amazing&#34;&gt;On the plus, working for yourself is&amp;hellip; amazing&lt;/h2&gt;
+&lt;p&gt;I loved all my previous jobs. For better or worse, work is usually the center of my life.&lt;/p&gt;
+&lt;p&gt;But, there&amp;rsquo;s something about waking up in the morning, making yourself some coffee, and pouring your heart into something you own. For awhile I would shoot out of bed at 6am (without an alarm) because I was so excited to get to work. I&amp;rsquo;d work for 12 hours, and then do it all again, and I was excited about it.&lt;/p&gt;
+&lt;p&gt;And it&amp;rsquo;s so nice knowing where everything is. At some point I had to do a decent sized migration across 125 files. Knowing how everything works and where it is makes every project nice and fun. No hidden side effects.&lt;/p&gt;
+&lt;h2 id=&#34;delayed-reward&#34;&gt;Delayed reward&lt;/h2&gt;
+&lt;p&gt;More of a psychological thing. But it&amp;rsquo;s hard to remove the feeling of working hard and getting a reward.&lt;/p&gt;
+&lt;p&gt;I did two large migrations on Csper. One was a re-write of &amp;ldquo;projects&amp;rdquo; and &amp;ldquo;organizations&amp;rdquo; to consolidate billing and other stuff. It was like 4500 lines of code over 125 files. Then doing all the data base migrations and testing&amp;hellip; It was a lot of work to make sure it all worked correctly. And it was a bit stressful.&lt;/p&gt;
+&lt;p&gt;After the release went smoothly, it was a hurah! But, it&amp;rsquo;s not like I would instantly get any new customers.&lt;/p&gt;
+&lt;p&gt;After the migration is done, I&amp;rsquo;m still just staring at my computer, nothing has changed.&lt;/p&gt;
+&lt;p&gt;Being generous, let&amp;rsquo;s say the different of consolidated billings increased conversions by 5%, I&amp;rsquo;d have to wait awhile to see that impact. I don&amp;rsquo;t think I even got a new customer that week.&lt;/p&gt;
+&lt;p&gt;It can be dis-heartening when you work super hard, but then nothing happens. It was a mental barrier to separate that.&lt;/p&gt;
+&lt;h2 id=&#34;its-a-bit-of-a-rollercoaster&#34;&gt;It&amp;rsquo;s a bit of a rollercoaster&lt;/h2&gt;
+&lt;p&gt;It seems like when things go bad, a lot of things go bad at once. A customer will leave, the firefox extension store will remove my addon, some feature will be acting up, and your competitors just signed a big deal.&lt;/p&gt;
+&lt;p&gt;That emotional buffer is important. I should have remembered to leave some room in my emotional tank to take hits. Wearing thin and then taking a couple of hits is not fun.&lt;/p&gt;
+&lt;p&gt;In the movies/books/interwebs every startup is successful. When you see people working hard, it&amp;rsquo;s like &amp;ldquo;no duh, the payoff and reward will be huge!&amp;rdquo; But in real life you have to face that most likely it will fail. When do you cut your losses? When you take a number of hits at once, those questions go to the front of your mind.&lt;/p&gt;
+&lt;h2 id=&#34;lonely&#34;&gt;Lonely&lt;/h2&gt;
+&lt;p&gt;Probably the biggest downside to this adventure so far is not working on a team. I miss is celebrating wins. Giving yourself a high five when a customer signs up is cool, but experiences are better shared with someone.&lt;/p&gt;
+&lt;p&gt;My girlfriend and I recently worked out a system where I get a twinkie when I get a new customer. Which is very nice. We celebrate the wins, but there&amp;rsquo;s something about a group working towards a goal and achieving that goal.&lt;/p&gt;
+&lt;h2 id=&#34;bug-fixes-are-meh&#34;&gt;Bug Fixes are&amp;hellip; meh&lt;/h2&gt;
+&lt;p&gt;Previously as an engineer I would hate publishing bugs in my code. Where&amp;rsquo;s the attention to craft!&lt;/p&gt;
+&lt;p&gt;But now being honest about my todo list, most bugs don&amp;rsquo;t matter &lt;em&gt;that&lt;/em&gt; much. The chance of defering a customer from paying because of a bug here and there is pretty small. (I mean, it depends on the bug, and you should try super hard not to have bugs. It&amp;rsquo;s no excuse for being sloppy).&lt;/p&gt;
+&lt;p&gt;But, I have a bug tracker pretty full of little bugs here and there. But when I assign dollar values to them, SEO/marketing is almost always more important than fixing a bug.&lt;/p&gt;
+&lt;p&gt;If an article attracts two new customers, and a weird edge case defers one customer, by the numbers it&amp;rsquo;s better to focus on the article. When you&amp;rsquo;re a non-bootstrapped solo startup, you have to run towards the money. You also can&amp;rsquo;t make everyone happy.&lt;/p&gt;
+&lt;h2 id=&#34;others&#34;&gt;Others&lt;/h2&gt;
+&lt;p&gt;Some things that I already knew, and thankful that I did:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Staging/prod. Staging saved my butt a number of times. And made things way less stressful when doing big changes. Worth every penny.&lt;/li&gt;
+&lt;li&gt;k8s on gke was pretty nice. it took a day or two to get my infra setup, and then I never really thought about it. it just scales here and there.&lt;/li&gt;
+&lt;li&gt;Single command deploys, and lots of makefiles. Any command that could be useful later I store in a makefile. i never want to think about things.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Things that were surprisingly frustrating:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Browser extension review processes!
+** Chrome takes weeks and weeks to review extensions
+** Firefox is super picky about making sure that they can compile your code and it exactly matches what&amp;rsquo;s in the app store&lt;/li&gt;
+&lt;li&gt;SaaS trails/charges. You rely on a number of services for your startup, and they start to add up. Some companies are also very sneaky about not emailing you before they charge your credit card. There was one company that charged me for 6 months without sending a single email.
+** I should of been reviewing my credit card statements, but when you&amp;rsquo;re already working long days, it&amp;rsquo;s near the bottom of the chopping block. At the end of the day, writing another article for SEO is more important than checking a hypothetical&lt;/li&gt;
+&lt;li&gt;Kind of weird point, but I tried advertising on linkedin/google/facebook/twitter. I left with a very negative view of all the platforms and try very hard not to read from them anymore. Everyone knows that those platforms are about advertising, but it wasn&amp;rsquo;t until I was trying to shove my agenda down other peoples throats did I realize how disgusting it was. Now I see all the other businesses doing what I was doing, pushing their own agenda. I want no part of anyone else&amp;rsquo;s agenda. I was probably doing ads wrong, but I saw no drop in signups after I stopped them. I&amp;rsquo;m going to fully focus on SEO instead. I feel good about that, when people have a problem, they&amp;rsquo;ll google for it, and my company will be there.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Overall, building Csper has been a interesting experience. Maybe less interesting than I would have hoped. At the end of the day I&amp;rsquo;m just shuffling bits and trying to make people happy. But definitely no regrets so far.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Electron Wavefunctions for Hydrogen Part 1</title>

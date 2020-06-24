@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Reflections on 6 months solo SaaS startup  - c0nrad&#39;s blog</title>
+<meta name="description" content="Learning about physics">
+
+<link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1593007070" />
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1593007070">
+
+<meta property="og:title" content="Reflections on 6 months solo SaaS startup" />
+<meta property="og:description" content="Reflections on 6 months solo SaaS startup" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.c0nrad.io/posts/reflections-6months/" />
+<meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+<meta property="article:published_time" content="2020-06-16T07:59:02-04:00" />
+<meta property="article:modified_time" content="2020-06-16T07:59:02-04:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+
+<meta name="twitter:title" content="Reflections on 6 months solo SaaS startup"/>
+<meta name="twitter:description" content="Reflections on 6 months solo SaaS startup"/>
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header> 
+            
+                <h1 class="site-header">
+    <a href="https://blog.c0nrad.io/">c0nrad&#39;s blog</a>
+</h1>
+<nav>
+    
+    
+    <a class="" href="https://c0nrad.io" title="">About</a>
+    
+    <a class="" href="https://github.com/c0nrad/" title="">Github</a>
+    
+    <a class="" href="https://twitter.com/xc0nradx" title="">Twitter</a>
+    
+</nav>
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+
+<article class="post">
+    <header>
+        <h1>Reflections on 6 months solo SaaS startup</h1>
+    </header>
+    <div class="content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#nobody-cares">Nobody cares</a></li>
+    <li><a href="#careful-with-free-trials">Careful with free trials</a></li>
+    <li><a href="#seo--pipeline--ads">SEO / Pipeline / Ads</a></li>
+    <li><a href="#people-like-open-source-a-lot">People like &ldquo;open source&rdquo;&hellip; a lot</a></li>
+    <li><a href="#on-the-plus-working-for-yourself-is-amazing">On the plus, working for yourself is&hellip; amazing</a></li>
+    <li><a href="#delayed-reward">Delayed reward</a></li>
+    <li><a href="#its-a-bit-of-a-rollercoaster">It&rsquo;s a bit of a rollercoaster</a></li>
+    <li><a href="#lonely">Lonely</a></li>
+    <li><a href="#bug-fixes-are-meh">Bug Fixes are&hellip; meh</a></li>
+    <li><a href="#others">Others</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+
+        <p>It&rsquo;s crazy to think my startup is already over 6 months old. This post is some informal reflections on that period.</p>
+<p>To set the context for people who are not me, this was my first foray into startups. The startup is pretty lean (it&rsquo;s a saas security startup), only on the verge of profitability. Single digit customers.</p>
+<p>A lot of this may sound complain-y, they&rsquo;re definitely first world problems. But they are things I wish I had fully internalized.</p>
+<h2 id="nobody-cares">Nobody cares</h2>
+<p>It sounds very negative, and I don&rsquo;t mean it in a bad way. But I think it applies to many aspects of building the startup.</p>
+<p>People want a tool that solves the problem. No one cares about the effort involved in creating little features. No one cares about the story, no one cares how it works. They just want to be re-assured it will work, so they can focus on their 1000 other problems.</p>
+<p>There&rsquo;s nothing wrong with that, it&rsquo;s just important to remember.</p>
+<p>The fact that no one cares also has positive aspects! I was worried about my two hours of planned downtime when I was doing a large migration. Literally no one cared. I think my startup could have been down for a few days, and no one would of cared that much. Unfortunately or fortunately I focused a lot on reliability (which was kind of wasted effort now that I realize it).</p>
+<h2 id="careful-with-free-trials">Careful with free trials</h2>
+<p>I thought it would be cool if I had a free sandbox plan. Let people kick the tires. When they see the amazing value they&rsquo;ll upgrade!</p>
+<p>Not so much.</p>
+<p>The free sandbox offering attracted over 1000 businesses. Super neat! The only problem was&hellip; no one upgraded to paying plans. So I&rsquo;m supporting 1000 customers on my platform. Goodbye life savings (kidding, but it does cost non-trivial money).</p>
+<p>I don&rsquo;t want to dive into the specifics of content-security-policy report-uri, but having a sandbox account created weird dynamics/incentives. My startup focuses on making this specific security tool easier. And I charge based on &ldquo;usage&rdquo; of the feature. But by making this security tool easier, there was less need for usage. So every feature I included made the Sandbox account a better solution, no need to upgrade for more usage.</p>
+<p>So I had 1000+ people using the platform, and they had no incentive to upgrade. And every feature I released solidified that SANDBOX was all your need. I could of limited key features, but I hate it when other companies do that, and it wasn&rsquo;t obvious to me what features to limit. It also feels dis-honest. Instead I&rsquo;d rather focus on making the best product. So instead I went with a free trial period and made the choice to discontinue SANDBOX accounts. (If you were a sandbox user of Csper, against I apologize, but it had to be done).</p>
+<p>There&rsquo;s way less usage, but now people pay for the service. And I&rsquo;m not fronting the bill for &gt;1000 customers (which I can not do for long since i&rsquo;m self bootstrapped).</p>
+<h2 id="seo--pipeline--ads">SEO / Pipeline / Ads</h2>
+<p>It sounds so obvious now, but wasn&rsquo;t fully fully internalized when I started.</p>
+<p>People aren&rsquo;t just going to &ldquo;stumble&rdquo; onto your product.</p>
+<p>When Csper was released, I made sure it could handle a lot of load. I was worried that it would spread like wildfire. So I made sure everything could scale. Autoscaling k8s, autoscaling database. I setup observability on everything to debug issues, tracing, logging, monitoring dashboards, etc.</p>
+<p>Long story short, almost no one showed up.</p>
+<p>SEO / Marketing are the name of the game. (not an endorsement), but getting setup with SEM rush to track my SEO (specifically content marketing).</p>
+<h2 id="people-like-open-source-a-lot">People like &ldquo;open source&rdquo;&hellip; a lot</h2>
+<p>I built a similar open source product about 5-6 years ago. It&rsquo;s crazy how fast people will refer an open source product compared to a paid product.</p>
+<p>It&rsquo;s a huge marketing advantage I never really considered. The product today is SIGNIFICANTLY better than the 5-6 year old product, yet people still share links to my old defunct product.</p>
+<p>&ldquo;open source&rdquo; seems to trump reliability. I&rsquo;m probably the same way, so I can&rsquo;t complain too much. Just interesting to watch it happen.</p>
+<p>I was very tempted to shift to &ldquo;open source&rdquo; and then have a paid plan. But, never did.</p>
+<h2 id="on-the-plus-working-for-yourself-is-amazing">On the plus, working for yourself is&hellip; amazing</h2>
+<p>I loved all my previous jobs. For better or worse, work is usually the center of my life.</p>
+<p>But, there&rsquo;s something about waking up in the morning, making yourself some coffee, and pouring your heart into something you own. For awhile I would shoot out of bed at 6am (without an alarm) because I was so excited to get to work. I&rsquo;d work for 12 hours, and then do it all again, and I was excited about it.</p>
+<p>And it&rsquo;s so nice knowing where everything is. At some point I had to do a decent sized migration across 125 files. Knowing how everything works and where it is makes every project nice and fun. No hidden side effects.</p>
+<h2 id="delayed-reward">Delayed reward</h2>
+<p>More of a psychological thing. But it&rsquo;s hard to remove the feeling of working hard and getting a reward.</p>
+<p>I did two large migrations on Csper. One was a re-write of &ldquo;projects&rdquo; and &ldquo;organizations&rdquo; to consolidate billing and other stuff. It was like 4500 lines of code over 125 files. Then doing all the data base migrations and testing&hellip; It was a lot of work to make sure it all worked correctly. And it was a bit stressful.</p>
+<p>After the release went smoothly, it was a hurah! But, it&rsquo;s not like I would instantly get any new customers.</p>
+<p>After the migration is done, I&rsquo;m still just staring at my computer, nothing has changed.</p>
+<p>Being generous, let&rsquo;s say the different of consolidated billings increased conversions by 5%, I&rsquo;d have to wait awhile to see that impact. I don&rsquo;t think I even got a new customer that week.</p>
+<p>It can be dis-heartening when you work super hard, but then nothing happens. It was a mental barrier to separate that.</p>
+<h2 id="its-a-bit-of-a-rollercoaster">It&rsquo;s a bit of a rollercoaster</h2>
+<p>It seems like when things go bad, a lot of things go bad at once. A customer will leave, the firefox extension store will remove my addon, some feature will be acting up, and your competitors just signed a big deal.</p>
+<p>That emotional buffer is important. I should have remembered to leave some room in my emotional tank to take hits. Wearing thin and then taking a couple of hits is not fun.</p>
+<p>In the movies/books/interwebs every startup is successful. When you see people working hard, it&rsquo;s like &ldquo;no duh, the payoff and reward will be huge!&rdquo; But in real life you have to face that most likely it will fail. When do you cut your losses? When you take a number of hits at once, those questions go to the front of your mind.</p>
+<h2 id="lonely">Lonely</h2>
+<p>Probably the biggest downside to this adventure so far is not working on a team. I miss is celebrating wins. Giving yourself a high five when a customer signs up is cool, but experiences are better shared with someone.</p>
+<p>My girlfriend and I recently worked out a system where I get a twinkie when I get a new customer. Which is very nice. We celebrate the wins, but there&rsquo;s something about a group working towards a goal and achieving that goal.</p>
+<h2 id="bug-fixes-are-meh">Bug Fixes are&hellip; meh</h2>
+<p>Previously as an engineer I would hate publishing bugs in my code. Where&rsquo;s the attention to craft!</p>
+<p>But now being honest about my todo list, most bugs don&rsquo;t matter <em>that</em> much. The chance of defering a customer from paying because of a bug here and there is pretty small. (I mean, it depends on the bug, and you should try super hard not to have bugs. It&rsquo;s no excuse for being sloppy).</p>
+<p>But, I have a bug tracker pretty full of little bugs here and there. But when I assign dollar values to them, SEO/marketing is almost always more important than fixing a bug.</p>
+<p>If an article attracts two new customers, and a weird edge case defers one customer, by the numbers it&rsquo;s better to focus on the article. When you&rsquo;re a non-bootstrapped solo startup, you have to run towards the money. You also can&rsquo;t make everyone happy.</p>
+<h2 id="others">Others</h2>
+<p>Some things that I already knew, and thankful that I did:</p>
+<ul>
+<li>Staging/prod. Staging saved my butt a number of times. And made things way less stressful when doing big changes. Worth every penny.</li>
+<li>k8s on gke was pretty nice. it took a day or two to get my infra setup, and then I never really thought about it. it just scales here and there.</li>
+<li>Single command deploys, and lots of makefiles. Any command that could be useful later I store in a makefile. i never want to think about things.</li>
+</ul>
+<p>Things that were surprisingly frustrating:</p>
+<ul>
+<li>Browser extension review processes!
+** Chrome takes weeks and weeks to review extensions
+** Firefox is super picky about making sure that they can compile your code and it exactly matches what&rsquo;s in the app store</li>
+<li>SaaS trails/charges. You rely on a number of services for your startup, and they start to add up. Some companies are also very sneaky about not emailing you before they charge your credit card. There was one company that charged me for 6 months without sending a single email.
+** I should of been reviewing my credit card statements, but when you&rsquo;re already working long days, it&rsquo;s near the bottom of the chopping block. At the end of the day, writing another article for SEO is more important than checking a hypothetical</li>
+<li>Kind of weird point, but I tried advertising on linkedin/google/facebook/twitter. I left with a very negative view of all the platforms and try very hard not to read from them anymore. Everyone knows that those platforms are about advertising, but it wasn&rsquo;t until I was trying to shove my agenda down other peoples throats did I realize how disgusting it was. Now I see all the other businesses doing what I was doing, pushing their own agenda. I want no part of anyone else&rsquo;s agenda. I was probably doing ads wrong, but I saw no drop in signups after I stopped them. I&rsquo;m going to fully focus on SEO instead. I feel good about that, when people have a problem, they&rsquo;ll google for it, and my company will be there.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Overall, building Csper has been a interesting experience. Maybe less interesting than I would have hoped. At the end of the day I&rsquo;m just shuffling bits and trying to make people happy. But definitely no regrets so far.</p>
+
+    </div>
+
+    <div class="article-info">
+    
+        <div class="article-date">2020-06-16</div>
+    
+    <div class="article-taxonomies">
+        
+            
+                <ul class="article-tags">
+                    
+                        <li><a href="https://blog.c0nrad.io/tags/startup">#startup</a></li>
+                    
+                </ul>
+        
+    </div>
+</div>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+</article>
+
+
+
+
+
+        </main>
+        <footer>
+            
+                <p>© Stuart Larsen, 2020<br>
+</p>
+
+
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup {
+        background: #fff;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+        border: 1px solid;
+        margin-top: 20px;
+    }
+
+
+
+
+     
+</style>
+<div id="mc_embed_signup">
+    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
+        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+        novalidate>
+        <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Stay up to date with my physics exploration / simulations:</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                    class="button"></div>
+        </div>
+    </form>
+</div>
+
+
+            
+        </footer>
+    </div>
+</body>
+</html>
