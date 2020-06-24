@@ -26,12 +26,21 @@
 &lt;p&gt;&lt;a href=&#34;https://github.com/c0nrad/hydrogen&#34;&gt;https://github.com/c0nrad/hydrogen&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;technical-implementation-notes&#34;&gt;Technical Implementation Notes&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;I ended up just sampling the wave functions, and saving it to a JSON file for the web component to read.
-** &lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/master/hydrogen.cpp#L199&#34;&gt;https://github.com/c0nrad/hydrogen/blob/master/hydrogen.cpp#L199&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;I ended up just sampling the wave functions, and saving it to a JSON file for the web component to read
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/master/hydrogen.cpp#L199&#34;&gt;https://github.com/c0nrad/hydrogen/blob/master/hydrogen.cpp#L199&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;Originally each point was a three.js sphere, but that ran way to slow, so I got to try vertex/fragement shaders for the first time! (using a THREE.cloud)
-** &lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/master/docs/index.html#L44&#34;&gt;https://github.com/c0nrad/hydrogen/blob/master/docs/index.html#L44&lt;/a&gt;&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/master/docs/index.html#L44&#34;&gt;https://github.com/c0nrad/hydrogen/blob/master/docs/index.html#L44&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;The little control panel is actually pretty neat. Just a few lines of code
-** &lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/master/docs/app.ts#L24&#34;&gt;https://github.com/c0nrad/hydrogen/blob/master/docs/app.ts#L24&lt;/a&gt;&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/master/docs/app.ts#L24&#34;&gt;https://github.com/c0nrad/hydrogen/blob/master/docs/app.ts#L24&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Overall super happy with it!&lt;/p&gt;
 &lt;h2 id=&#34;future&#34;&gt;Future&lt;/h2&gt;
@@ -103,10 +112,16 @@
 &lt;p&gt;Things that were surprisingly frustrating:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Browser extension review processes!
-** Chrome takes weeks and weeks to review extensions
-** Firefox is super picky about making sure that they can compile your code and it exactly matches what&amp;rsquo;s in the app store&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;Chrome takes weeks and weeks to review extensions&lt;/li&gt;
+&lt;li&gt;Firefox is super picky about making sure that they can compile your code and it exactly matches what&amp;rsquo;s in the app store&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;SaaS trails/charges. You rely on a number of services for your startup, and they start to add up. Some companies are also very sneaky about not emailing you before they charge your credit card. There was one company that charged me for 6 months without sending a single email.
-** I should of been reviewing my credit card statements, but when you&amp;rsquo;re already working long days, it&amp;rsquo;s near the bottom of the chopping block. At the end of the day, writing another article for SEO is more important than checking a hypothetical&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;I should of been reviewing my credit card statements, but when you&amp;rsquo;re already working long days, it&amp;rsquo;s near the bottom of the chopping block. At the end of the day, writing another article for SEO is more important than checking a hypothetical&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;Kind of weird point, but I tried advertising on linkedin/google/facebook/twitter. I left with a very negative view of all the platforms and try very hard not to read from them anymore. Everyone knows that those platforms are about advertising, but it wasn&amp;rsquo;t until I was trying to shove my agenda down other peoples throats did I realize how disgusting it was. Now I see all the other businesses doing what I was doing, pushing their own agenda. I want no part of anyone else&amp;rsquo;s agenda. I was probably doing ads wrong, but I saw no drop in signups after I stopped them. I&amp;rsquo;m going to fully focus on SEO instead. I feel good about that, when people have a problem, they&amp;rsquo;ll google for it, and my company will be there.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;

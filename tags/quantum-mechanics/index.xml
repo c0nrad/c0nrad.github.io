@@ -26,12 +26,21 @@
 &lt;p&gt;&lt;a href=&#34;https://github.com/c0nrad/hydrogen&#34;&gt;https://github.com/c0nrad/hydrogen&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;technical-implementation-notes&#34;&gt;Technical Implementation Notes&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;I ended up just sampling the wave functions, and saving it to a JSON file for the web component to read.
-** &lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/master/hydrogen.cpp#L199&#34;&gt;https://github.com/c0nrad/hydrogen/blob/master/hydrogen.cpp#L199&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;I ended up just sampling the wave functions, and saving it to a JSON file for the web component to read
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/master/hydrogen.cpp#L199&#34;&gt;https://github.com/c0nrad/hydrogen/blob/master/hydrogen.cpp#L199&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;Originally each point was a three.js sphere, but that ran way to slow, so I got to try vertex/fragement shaders for the first time! (using a THREE.cloud)
-** &lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/master/docs/index.html#L44&#34;&gt;https://github.com/c0nrad/hydrogen/blob/master/docs/index.html#L44&lt;/a&gt;&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/master/docs/index.html#L44&#34;&gt;https://github.com/c0nrad/hydrogen/blob/master/docs/index.html#L44&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;The little control panel is actually pretty neat. Just a few lines of code
-** &lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/master/docs/app.ts#L24&#34;&gt;https://github.com/c0nrad/hydrogen/blob/master/docs/app.ts#L24&lt;/a&gt;&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/c0nrad/hydrogen/blob/master/docs/app.ts#L24&#34;&gt;https://github.com/c0nrad/hydrogen/blob/master/docs/app.ts#L24&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Overall super happy with it!&lt;/p&gt;
 &lt;h2 id=&#34;future&#34;&gt;Future&lt;/h2&gt;
