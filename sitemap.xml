@@ -13,7 +13,17 @@
   </url>
   
   <url>
+    <loc>https://blog.c0nrad.io/tags/personal/</loc>
+    <lastmod>2020-06-29T12:06:58-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.c0nrad.io/posts/</loc>
+    <lastmod>2020-06-29T12:06:58-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.c0nrad.io/tags/</loc>
     <lastmod>2020-06-29T12:06:58-04:00</lastmod>
   </url>
   
@@ -29,11 +39,6 @@
   
   <url>
     <loc>https://blog.c0nrad.io/tags/simulation/</loc>
-    <lastmod>2020-06-20T14:37:31-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/tags/</loc>
     <lastmod>2020-06-20T14:37:31-04:00</lastmod>
   </url>
   
