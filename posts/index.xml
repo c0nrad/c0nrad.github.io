@@ -6,10 +6,22 @@
     <description>c0nrad&#39;s blog (Posts)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Jun 2020 14:37:31 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jun 2020 12:06:58 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Florida</title>
+      <link>https://blog.c0nrad.io/posts/florida/</link>
+      <pubDate>Mon, 29 Jun 2020 12:06:58 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/florida/</guid>
+      <description>&lt;p&gt;We moved to Florida! Made a little video.&lt;/p&gt;
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/oQp7shFk2p8&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Electron Wavefunctions for Hydrogen Part 2</title>
