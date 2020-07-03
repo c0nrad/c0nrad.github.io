@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Quantum Teleportation Algorithm  - c0nrad&#39;s blog</title>
+<meta name="description" content="Learning about physics">
+
+<link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1593806842" />
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1593806842">
+
+<meta property="og:title" content="Quantum Teleportation Algorithm" />
+<meta property="og:description" content="Quantum Teleportation Algorithm and improvements to qrad" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.c0nrad.io/posts/quantum-teleportation/" />
+<meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+<meta property="article:published_time" content="2020-07-03T13:24:22-04:00" />
+<meta property="article:modified_time" content="2020-07-03T13:24:22-04:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+
+<meta name="twitter:title" content="Quantum Teleportation Algorithm"/>
+<meta name="twitter:description" content="Quantum Teleportation Algorithm and improvements to qrad"/>
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header> 
+            
+                <h1 class="site-header">
+    <a href="https://blog.c0nrad.io/">c0nrad&#39;s blog</a>
+</h1>
+<nav>
+    
+    
+    <a class="" href="https://c0nrad.io" title="">About</a>
+    
+    <a class="" href="https://github.com/c0nrad/" title="">Github</a>
+    
+    <a class="" href="https://twitter.com/xc0nradx" title="">Twitter</a>
+    
+</nav>
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+
+<article class="post">
+    <header>
+        <h1>Quantum Teleportation Algorithm</h1>
+    </header>
+    <div class="content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#motivation">Motivation</a></li>
+    <li><a href="#upgrades-to-qrad">Upgrades to QRAD</a></li>
+    <li><a href="#implementing-quantum-teleportation">Implementing Quantum Teleportation</a>
+      <ul>
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="#the-circuits">The circuits</a></li>
+        <li><a href="#the-maths">The maths</a></li>
+        <li><a href="#difficulties">Difficulties</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+
+        <p>This post is split into two parts. The first section is my motivation, and some background on the upgrades I made to my quantum simulator. The second part is implementing the Quantum Teleportation algorithm.</p>
+<!-- more -->
+<h2 id="motivation">Motivation</h2>
+<p>Recently I&rsquo;m been playing more with Quantum Computing.</p>
+<p>Quantum Computing fits nicely into my current goals of:</p>
+<ol>
+<li>learning more about the universe</li>
+<li>learning something practical</li>
+</ol>
+<p>A long time ago I built a <a href="https://github.com/c0nrad/qrad">little Quantum Computer Simulator</a> for a internal company &ldquo;hackathon&rdquo;. At the time I worked at a database company, so I implemented <a href="https://en.wikipedia.org/wiki/Grover%27s_algorithm">Grover&rsquo;s algorithm</a>. (Grover&rsquo;s Algorithm can be used to find an element in an unsorted array. Normally you&rsquo;d have to search every element in the array until you get a match, but using a quantum computer, you can do it significantly faster (supposedly O(Sqrt(N)), but for smaller data sets I was able to do it in one pass. I&rsquo;ll be talking about Grover&rsquo;s algorithm at some point in the near future :), see next paragraph).</p>
+<p>I decided my next &ldquo;long term&rdquo; project will be to build a Quantum Hash Cracking algorithm. After thinking more about it, I&rsquo;m pretty sure I can do it with Grover&rsquo;s algorithm. But since it&rsquo;s a simulated quantum computer, I can only simulate a couple of qubits, I so think I&rsquo;ll actually be &ldquo;cracking&rdquo; CRC4. We&rsquo;ll see. Maybe if I can get it working I can finagle IBM/GOOG into letting me verify CRC-16 or something on one of their quantum computers.</p>
+<h2 id="upgrades-to-qrad">Upgrades to QRAD</h2>
+<p>But the quantum hash-cracker is a little ways off. First I want to dust off the <a href="https://github.com/c0nrad/qrad">old simulator</a>. The old simulator was heavily based on the book <a href="https://www.amazon.com/Quantum-Computing-Computer-Scientists-Yanofsky/dp/0521879965?tag=techblast0f-20">Quantum Computing for Computer Scientist</a>. A great book if you have a CS background and want to get your hands dirty.</p>
+<p>But, after playing with IBM&rsquo;s Qiskit, Google&rsquo;s Cirq and Algassert&rsquo;s Quirk, and I love how they do certain things. Specifically how they approach circuit building, so I rebuilt part of my simulator. Specifically:</p>
+<ol>
+<li>Added &ldquo;Moments&rdquo;, a better way to organize gates</li>
+<li>Circuit Diagrams, so I can see what the circuits look like</li>
+<li>Arbitrary number of Control gates, CCCCCCCCNOT gates</li>
+<li>Measure/collapse independent Qubits, previously I could only collapse the entire state</li>
+<li>Treat circuit more like a state machine, append a bunch of moments, and then later execute the circuit, or resume execution</li>
+</ol>
+<h2 id="implementing-quantum-teleportation">Implementing Quantum Teleportation</h2>
+<p>That algorithm I chose to implement first was Quantum Teleportation. Quantum Teleportation sounds super badass (and it is decently cool), but maybe not &ldquo;super badass&rdquo;. The math is pretty cool, and I&rsquo;m guessing there&rsquo;s some practical usage that I&rsquo;m not aware of.</p>
+<p>Quantum Teleportation allows you to transfer the state of one qubit, to another qubit. In the classical world, this sounds super lame. But there&rsquo;s some hurdles in the quantum world that make this difficult, hence why it&rsquo;s a neat algorithm.</p>
+<p>There&rsquo;s something called No-Cloning Theorem, which states you can&rsquo;t copy the state of a qubit to another qubit (due to limits on Quantum Information). You also can&rsquo;t &ldquo;peek&rdquo; inside the state of a qubit. The qubit could be in any number of an infinite set of positions, but we can only ask it one single &ldquo;yes or no&rdquo; question.</p>
+<h3 id="how-it-works">How it works</h3>
+<p>Alice wants to send Bob the state of one of her qubits. Why? No idea.</p>
+<p>And for some reason she can&rsquo;t just send Bob the Qubit. But they are able to share an Entangled Qubit. (Maybe Eve is able to generate a set of entangled Qubits and send one to Bob and one to Alice).</p>
+<p>Alice must then perform some actions both her original qubit and her entangled qubit. After performing the actions she will measure the state of her two qubits (destroying the qubit she wants to transfer).</p>
+<p>Alice then sends Bob the results of her measurements. (two classical bits). Using those two classical bits, Bob can construct the original state of Alice&rsquo;s first Qubit.</p>
+<h3 id="the-circuits">The circuits</h3>
+<p>If you want to see a very neat demo of the algorithm, check out Algassert&rsquo;s online quantum editor for <a href="https://algassert.com/quirk#circuit=%7B%22cols%22:%5B%5B1,%22H%22%5D,%5B1,%22%E2%80%A2%22,1,1,%22X%22%5D,%5B%22%E2%80%A6%22,%22%E2%80%A6%22,1,1,%22%E2%80%A6%22%5D,%5B%22%E2%80%A6%22,%22%E2%80%A6%22,1,1,%22%E2%80%A6%22%5D,%5B%22~87lj%22%5D,%5B%22Bloch%22%5D,%5B%22%E2%80%A2%22,%22X%22%5D,%5B%22H%22%5D,%5B%22Measure%22,%22Measure%22%5D,%5B1,%22%E2%80%A2%22,1,1,%22X%22%5D,%5B%22%E2%80%A2%22,1,1,1,%22Z%22%5D,%5B1,1,1,1,%22Bloch%22%5D,%5B1,1,1,1,%22~f7c0%22%5D%5D,%22gates%22:%5B%7B%22id%22:%22~87lj%22,%22name%22:%22message%22,%22circuit%22:%7B%22cols%22:%5B%5B%22e%5E-iYt%22%5D,%5B%22X%5Et%22%5D%5D%7D%7D,%7B%22id%22:%22~f7c0%22,%22name%22:%22received%22,%22matrix%22:%22%7B%7B1,0%7D,%7B0,1%7D%7D%22%7D%5D%7D">quantum teleportation</a>.</p>
+<p>Here&rsquo;s my significantly less sexy circuit diagram:</p>
+<p><img src="/teleportation.png" alt="equal speed, equal mass"></p>
+<p>Code:
+<a href="https://github.com/c0nrad/qrad/blob/master/circuits/teleportation/teleportation.go">https://github.com/c0nrad/qrad/blob/master/circuits/teleportation/teleportation.go</a></p>
+<h3 id="the-maths">The maths</h3>
+<p>The coolest part of the whole thing (in my opinion) is the maths. Following along in <a href="https://www.amazon.com/Quantum-Computation-Information-10th-Anniversary/dp/1107002176/ref=sr_1_3?dchild=1&amp;keywords=quantum+information&amp;qid=1593801365&amp;sr=8-3&amp;tag=techblast0f-20">Quantum Computation and Information Theory</a> (supposedly the bible in the field, haven&rsquo;t finished it yet though, so no opinion yet), there&rsquo;s a single line that pretty much describes the entire algorithm:</p>
+<p>$$ |\psi\rangle = \frac{1}{2} [ |00 \rangle (\alpha|0\rangle + \beta|1\rangle) + |01 \rangle(\alpha|1\rangle + \beta |0\rangle) + |10\rangle (\alpha|0\rangle - \beta|1\rangle) + |11\rangle(\alpha|1\rangle - \beta|0\rangle) ]$$</p>
+<p>It can be a little tricky to read. Here&rsquo;s a cheat sheet.</p>
+<ul>
+<li>There&rsquo;s three qubits in this system. The first two belong to Alice, the last to Bob</li>
+<li>The qubits can be identified by the weird \( |00\rangle, |1\rangle \) symbols.
+<ul>
+<li>These are called &ldquo;bra&rsquo;s&rdquo; (After Dirac&rsquo;s Bra-Ket notation, used a lot in quantum mechanics)</li>
+<li>So the qubits belonging to Alice look like \( |00\rangle,  |01\rangle,  |10\rangle,  |11\rangle \) and the Qubit belonging to Bob look like \( |0\rangle, |1\rangle \)</li>
+</ul>
+</li>
+<li>Alice&rsquo;s qubit that she wanted to transmit started in the state \( \alpha|0\rangle + \beta |1\rangle \), but in this equation the \( \alpha \) and \( \beta \) are on the final qubit (Bob&rsquo;s qubit), and in four different configurations.
+<ul>
+<li>Each of the four configurations has an equal probability</li>
+</ul>
+</li>
+<li>\( |00\rangle,  |01\rangle,  |10\rangle,  |11\rangle \) are the four states that alice can measure. So, if she measures 0, 1, if means that Bob&rsquo;s qubit must be in the state \( \alpha|1\rangle + \beta|0\rangle \)
+<ul>
+<li>This means that Bob needs to invert the \( |1\rangle \) and \(|0\rangle \) to get back Alice&rsquo;s original state (to invert Bob just needs to apply an X gate to his qubit)</li>
+</ul>
+</li>
+</ul>
+<p>Getting the qubits into the form of that equation isn&rsquo;t too hard either. It just takes some carefully placed Hadamard and CNOT gates.</p>
+<p>After all of that, Alice can transfer a Qubit to Bob! And Bob should have an exact match of the original Qubit alice had.</p>
+<h3 id="difficulties">Difficulties</h3>
+<p>Things that were more difficult to implement than planned:</p>
+<ul>
+<li>I can&rsquo;t tell if I&rsquo;m being dumb, or thinking about it the wrong way. But constructing the unitary matrixies for each moment is surpsiginly complex when there&rsquo;s &ldquo;gaps&rdquo; and multiple CONTROLs.
+<ul>
+<li>My solution is extremely janky, and I do not trust it. Almost all the time I spent over the last few days was writing an algorithm to generate arbitrary matrixies with an arbitrary number of gaps and control gates. I asked on reddit if anyone knew how to do this, and they said I could Tensor Product the control gates, but I don&rsquo;t believe that to be true. But something I need to look into, because that would be super nice if I could.</li>
+</ul>
+</li>
+<li>Collapsing a single qubit. First you have to measure if the qubit should be &ldquo;1&rsquo; or &ldquo;0&rdquo;, and then collapsing all the states that depend on that qubit, and then re-normalizing. I also had the Qubits reversed in my diagram which led to some very confusing bugs.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Anyways just some fun stuff I&rsquo;ve been up to. Being 100% honest, I&rsquo;m not always the best at responding (sorry), but if you have any questions or comments feel free to reach out! <a href="mailto:c0nrad@c0nrad.io">c0nrad@c0nrad.io</a></p>
+<p>I&rsquo;m hoping I&rsquo;ll have the Quantum Hash Cracking algorithm out soon. But in the meantime I still need to learn some other stuff first, so probably a few more algorithms first.</p>
+
+    </div>
+
+    <div class="article-info">
+    
+        <div class="article-date">2020-07-03</div>
+    
+    <div class="article-taxonomies">
+        
+            
+                <ul class="article-tags">
+                    
+                        <li><a href="https://blog.c0nrad.io/tags/quantum-computation">#quantum computation</a></li>
+                    
+                </ul>
+        
+    </div>
+</div>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+</article>
+
+
+
+
+
+        </main>
+        <footer>
+            
+                <p>© Stuart Larsen, 2020<br>
+</p>
+
+
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup {
+        background: #fff;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+        border: 1px solid;
+        margin-top: 20px;
+    }
+
+
+
+
+     
+</style>
+<div id="mc_embed_signup">
+    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
+        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+        novalidate>
+        <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Stay up to date with my physics exploration / simulations:</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                    class="button"></div>
+        </div>
+    </form>
+</div>
+
+
+            
+        </footer>
+    </div>
+</body>
+</html>

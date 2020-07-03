@@ -6,10 +6,93 @@
     <description>c0nrad&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Jun 2020 12:06:58 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 03 Jul 2020 13:24:22 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Quantum Teleportation Algorithm</title>
+      <link>https://blog.c0nrad.io/posts/quantum-teleportation/</link>
+      <pubDate>Fri, 03 Jul 2020 13:24:22 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/quantum-teleportation/</guid>
+      <description>&lt;p&gt;This post is split into two parts. The first section is my motivation, and some background on the upgrades I made to my quantum simulator. The second part is implementing the Quantum Teleportation algorithm.&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;
+&lt;p&gt;Recently I&amp;rsquo;m been playing more with Quantum Computing.&lt;/p&gt;
+&lt;p&gt;Quantum Computing fits nicely into my current goals of:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;learning more about the universe&lt;/li&gt;
+&lt;li&gt;learning something practical&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A long time ago I built a &lt;a href=&#34;https://github.com/c0nrad/qrad&#34;&gt;little Quantum Computer Simulator&lt;/a&gt; for a internal company &amp;ldquo;hackathon&amp;rdquo;. At the time I worked at a database company, so I implemented &lt;a href=&#34;https://en.wikipedia.org/wiki/Grover%27s_algorithm&#34;&gt;Grover&amp;rsquo;s algorithm&lt;/a&gt;. (Grover&amp;rsquo;s Algorithm can be used to find an element in an unsorted array. Normally you&amp;rsquo;d have to search every element in the array until you get a match, but using a quantum computer, you can do it significantly faster (supposedly O(Sqrt(N)), but for smaller data sets I was able to do it in one pass. I&amp;rsquo;ll be talking about Grover&amp;rsquo;s algorithm at some point in the near future :), see next paragraph).&lt;/p&gt;
+&lt;p&gt;I decided my next &amp;ldquo;long term&amp;rdquo; project will be to build a Quantum Hash Cracking algorithm. After thinking more about it, I&amp;rsquo;m pretty sure I can do it with Grover&amp;rsquo;s algorithm. But since it&amp;rsquo;s a simulated quantum computer, I can only simulate a couple of qubits, I so think I&amp;rsquo;ll actually be &amp;ldquo;cracking&amp;rdquo; CRC4. We&amp;rsquo;ll see. Maybe if I can get it working I can finagle IBM/GOOG into letting me verify CRC-16 or something on one of their quantum computers.&lt;/p&gt;
+&lt;h2 id=&#34;upgrades-to-qrad&#34;&gt;Upgrades to QRAD&lt;/h2&gt;
+&lt;p&gt;But the quantum hash-cracker is a little ways off. First I want to dust off the &lt;a href=&#34;https://github.com/c0nrad/qrad&#34;&gt;old simulator&lt;/a&gt;. The old simulator was heavily based on the book &lt;a href=&#34;https://www.amazon.com/Quantum-Computing-Computer-Scientists-Yanofsky/dp/0521879965?tag=techblast0f-20&#34;&gt;Quantum Computing for Computer Scientist&lt;/a&gt;. A great book if you have a CS background and want to get your hands dirty.&lt;/p&gt;
+&lt;p&gt;But, after playing with IBM&amp;rsquo;s Qiskit, Google&amp;rsquo;s Cirq and Algassert&amp;rsquo;s Quirk, and I love how they do certain things. Specifically how they approach circuit building, so I rebuilt part of my simulator. Specifically:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Added &amp;ldquo;Moments&amp;rdquo;, a better way to organize gates&lt;/li&gt;
+&lt;li&gt;Circuit Diagrams, so I can see what the circuits look like&lt;/li&gt;
+&lt;li&gt;Arbitrary number of Control gates, CCCCCCCCNOT gates&lt;/li&gt;
+&lt;li&gt;Measure/collapse independent Qubits, previously I could only collapse the entire state&lt;/li&gt;
+&lt;li&gt;Treat circuit more like a state machine, append a bunch of moments, and then later execute the circuit, or resume execution&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;implementing-quantum-teleportation&#34;&gt;Implementing Quantum Teleportation&lt;/h2&gt;
+&lt;p&gt;That algorithm I chose to implement first was Quantum Teleportation. Quantum Teleportation sounds super badass (and it is decently cool), but maybe not &amp;ldquo;super badass&amp;rdquo;. The math is pretty cool, and I&amp;rsquo;m guessing there&amp;rsquo;s some practical usage that I&amp;rsquo;m not aware of.&lt;/p&gt;
+&lt;p&gt;Quantum Teleportation allows you to transfer the state of one qubit, to another qubit. In the classical world, this sounds super lame. But there&amp;rsquo;s some hurdles in the quantum world that make this difficult, hence why it&amp;rsquo;s a neat algorithm.&lt;/p&gt;
+&lt;p&gt;There&amp;rsquo;s something called No-Cloning Theorem, which states you can&amp;rsquo;t copy the state of a qubit to another qubit (due to limits on Quantum Information). You also can&amp;rsquo;t &amp;ldquo;peek&amp;rdquo; inside the state of a qubit. The qubit could be in any number of an infinite set of positions, but we can only ask it one single &amp;ldquo;yes or no&amp;rdquo; question.&lt;/p&gt;
+&lt;h3 id=&#34;how-it-works&#34;&gt;How it works&lt;/h3&gt;
+&lt;p&gt;Alice wants to send Bob the state of one of her qubits. Why? No idea.&lt;/p&gt;
+&lt;p&gt;And for some reason she can&amp;rsquo;t just send Bob the Qubit. But they are able to share an Entangled Qubit. (Maybe Eve is able to generate a set of entangled Qubits and send one to Bob and one to Alice).&lt;/p&gt;
+&lt;p&gt;Alice must then perform some actions both her original qubit and her entangled qubit. After performing the actions she will measure the state of her two qubits (destroying the qubit she wants to transfer).&lt;/p&gt;
+&lt;p&gt;Alice then sends Bob the results of her measurements. (two classical bits). Using those two classical bits, Bob can construct the original state of Alice&amp;rsquo;s first Qubit.&lt;/p&gt;
+&lt;h3 id=&#34;the-circuits&#34;&gt;The circuits&lt;/h3&gt;
+&lt;p&gt;If you want to see a very neat demo of the algorithm, check out Algassert&amp;rsquo;s online quantum editor for &lt;a href=&#34;https://algassert.com/quirk#circuit=%7B%22cols%22:%5B%5B1,%22H%22%5D,%5B1,%22%E2%80%A2%22,1,1,%22X%22%5D,%5B%22%E2%80%A6%22,%22%E2%80%A6%22,1,1,%22%E2%80%A6%22%5D,%5B%22%E2%80%A6%22,%22%E2%80%A6%22,1,1,%22%E2%80%A6%22%5D,%5B%22~87lj%22%5D,%5B%22Bloch%22%5D,%5B%22%E2%80%A2%22,%22X%22%5D,%5B%22H%22%5D,%5B%22Measure%22,%22Measure%22%5D,%5B1,%22%E2%80%A2%22,1,1,%22X%22%5D,%5B%22%E2%80%A2%22,1,1,1,%22Z%22%5D,%5B1,1,1,1,%22Bloch%22%5D,%5B1,1,1,1,%22~f7c0%22%5D%5D,%22gates%22:%5B%7B%22id%22:%22~87lj%22,%22name%22:%22message%22,%22circuit%22:%7B%22cols%22:%5B%5B%22e%5E-iYt%22%5D,%5B%22X%5Et%22%5D%5D%7D%7D,%7B%22id%22:%22~f7c0%22,%22name%22:%22received%22,%22matrix%22:%22%7B%7B1,0%7D,%7B0,1%7D%7D%22%7D%5D%7D&#34;&gt;quantum teleportation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s my significantly less sexy circuit diagram:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.c0nrad.io/teleportation.png&#34; alt=&#34;equal speed, equal mass&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Code:
+&lt;a href=&#34;https://github.com/c0nrad/qrad/blob/master/circuits/teleportation/teleportation.go&#34;&gt;https://github.com/c0nrad/qrad/blob/master/circuits/teleportation/teleportation.go&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;the-maths&#34;&gt;The maths&lt;/h3&gt;
+&lt;p&gt;The coolest part of the whole thing (in my opinion) is the maths. Following along in &lt;a href=&#34;https://www.amazon.com/Quantum-Computation-Information-10th-Anniversary/dp/1107002176/ref=sr_1_3?dchild=1&amp;amp;keywords=quantum+information&amp;amp;qid=1593801365&amp;amp;sr=8-3&amp;amp;tag=techblast0f-20&#34;&gt;Quantum Computation and Information Theory&lt;/a&gt; (supposedly the bible in the field, haven&amp;rsquo;t finished it yet though, so no opinion yet), there&amp;rsquo;s a single line that pretty much describes the entire algorithm:&lt;/p&gt;
+&lt;p&gt;$$ |\psi\rangle = \frac{1}{2} [ |00 \rangle (\alpha|0\rangle + \beta|1\rangle) + |01 \rangle(\alpha|1\rangle + \beta |0\rangle) + |10\rangle (\alpha|0\rangle - \beta|1\rangle) + |11\rangle(\alpha|1\rangle - \beta|0\rangle) ]$$&lt;/p&gt;
+&lt;p&gt;It can be a little tricky to read. Here&amp;rsquo;s a cheat sheet.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;There&amp;rsquo;s three qubits in this system. The first two belong to Alice, the last to Bob&lt;/li&gt;
+&lt;li&gt;The qubits can be identified by the weird \( |00\rangle, |1\rangle \) symbols.
+&lt;ul&gt;
+&lt;li&gt;These are called &amp;ldquo;bra&amp;rsquo;s&amp;rdquo; (After Dirac&amp;rsquo;s Bra-Ket notation, used a lot in quantum mechanics)&lt;/li&gt;
+&lt;li&gt;So the qubits belonging to Alice look like \( |00\rangle,  |01\rangle,  |10\rangle,  |11\rangle \) and the Qubit belonging to Bob look like \( |0\rangle, |1\rangle \)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Alice&amp;rsquo;s qubit that she wanted to transmit started in the state \( \alpha|0\rangle + \beta |1\rangle \), but in this equation the \( \alpha \) and \( \beta \) are on the final qubit (Bob&amp;rsquo;s qubit), and in four different configurations.
+&lt;ul&gt;
+&lt;li&gt;Each of the four configurations has an equal probability&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;\( |00\rangle,  |01\rangle,  |10\rangle,  |11\rangle \) are the four states that alice can measure. So, if she measures 0, 1, if means that Bob&amp;rsquo;s qubit must be in the state \( \alpha|1\rangle + \beta|0\rangle \)
+&lt;ul&gt;
+&lt;li&gt;This means that Bob needs to invert the \( |1\rangle \) and \(|0\rangle \) to get back Alice&amp;rsquo;s original state (to invert Bob just needs to apply an X gate to his qubit)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Getting the qubits into the form of that equation isn&amp;rsquo;t too hard either. It just takes some carefully placed Hadamard and CNOT gates.&lt;/p&gt;
+&lt;p&gt;After all of that, Alice can transfer a Qubit to Bob! And Bob should have an exact match of the original Qubit alice had.&lt;/p&gt;
+&lt;h3 id=&#34;difficulties&#34;&gt;Difficulties&lt;/h3&gt;
+&lt;p&gt;Things that were more difficult to implement than planned:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I can&amp;rsquo;t tell if I&amp;rsquo;m being dumb, or thinking about it the wrong way. But constructing the unitary matrixies for each moment is surpsiginly complex when there&amp;rsquo;s &amp;ldquo;gaps&amp;rdquo; and multiple CONTROLs.
+&lt;ul&gt;
+&lt;li&gt;My solution is extremely janky, and I do not trust it. Almost all the time I spent over the last few days was writing an algorithm to generate arbitrary matrixies with an arbitrary number of gaps and control gates. I asked on reddit if anyone knew how to do this, and they said I could Tensor Product the control gates, but I don&amp;rsquo;t believe that to be true. But something I need to look into, because that would be super nice if I could.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Collapsing a single qubit. First you have to measure if the qubit should be &amp;ldquo;1&amp;rsquo; or &amp;ldquo;0&amp;rdquo;, and then collapsing all the states that depend on that qubit, and then re-normalizing. I also had the Qubits reversed in my diagram which led to some very confusing bugs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Anyways just some fun stuff I&amp;rsquo;ve been up to. Being 100% honest, I&amp;rsquo;m not always the best at responding (sorry), but if you have any questions or comments feel free to reach out! &lt;a href=&#34;mailto:c0nrad@c0nrad.io&#34;&gt;c0nrad@c0nrad.io&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m hoping I&amp;rsquo;ll have the Quantum Hash Cracking algorithm out soon. But in the meantime I still need to learn some other stuff first, so probably a few more algorithms first.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Florida</title>
