@@ -14,9 +14,9 @@
 <link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
 <link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
 
-<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1593868271" />
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1593877842" />
 
-<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1593868271">
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1593877842">
 
 <meta property="og:title" content="Quantum Teleportation Algorithm" />
 <meta property="og:description" content="Quantum Teleportation Algorithm and improvements to qrad" />
@@ -148,9 +148,10 @@
 <h3 id="difficulties">Difficulties</h3>
 <p>Things that were more difficult to implement than planned:</p>
 <ul>
-<li>I can&rsquo;t tell if I&rsquo;m being dumb, or thinking about it the wrong way. But constructing the unitary matrixies for each moment is surpsiginly complex when there&rsquo;s &ldquo;gaps&rdquo; and multiple CONTROLs.
+<li>I can&rsquo;t tell if I&rsquo;m being dumb, or thinking about it the wrong way. But constructing the unitary matrixies for each moment is surprisingly complex when there&rsquo;s &ldquo;gaps&rdquo; and multiple CONTROLs.
 <ul>
 <li>My solution is extremely janky, and I do not trust it. Almost all the time I spent over the last few days was writing an algorithm to generate arbitrary matrixies with an arbitrary number of gaps and control gates. I asked on reddit if anyone knew how to do this, and they said I could Tensor Product the control gates, but I don&rsquo;t believe that to be true. But something I need to look into, because that would be super nice if I could.</li>
+<li>(Edit, some more people responded, I can&rsquo;t use Tensor products. Not going crazy)</li>
 </ul>
 </li>
 <li>Collapsing a single qubit. First you have to measure if the qubit should be &ldquo;1&rsquo; or &ldquo;0&rdquo;, and then collapsing all the states that depend on that qubit, and then re-normalizing. I also had the Qubits reversed in my diagram which led to some very confusing bugs.</li>

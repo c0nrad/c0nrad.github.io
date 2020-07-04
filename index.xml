@@ -81,9 +81,10 @@
 &lt;h3 id=&#34;difficulties&#34;&gt;Difficulties&lt;/h3&gt;
 &lt;p&gt;Things that were more difficult to implement than planned:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;I can&amp;rsquo;t tell if I&amp;rsquo;m being dumb, or thinking about it the wrong way. But constructing the unitary matrixies for each moment is surpsiginly complex when there&amp;rsquo;s &amp;ldquo;gaps&amp;rdquo; and multiple CONTROLs.
+&lt;li&gt;I can&amp;rsquo;t tell if I&amp;rsquo;m being dumb, or thinking about it the wrong way. But constructing the unitary matrixies for each moment is surprisingly complex when there&amp;rsquo;s &amp;ldquo;gaps&amp;rdquo; and multiple CONTROLs.
 &lt;ul&gt;
 &lt;li&gt;My solution is extremely janky, and I do not trust it. Almost all the time I spent over the last few days was writing an algorithm to generate arbitrary matrixies with an arbitrary number of gaps and control gates. I asked on reddit if anyone knew how to do this, and they said I could Tensor Product the control gates, but I don&amp;rsquo;t believe that to be true. But something I need to look into, because that would be super nice if I could.&lt;/li&gt;
+&lt;li&gt;(Edit, some more people responded, I can&amp;rsquo;t use Tensor products. Not going crazy)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;Collapsing a single qubit. First you have to measure if the qubit should be &amp;ldquo;1&amp;rsquo; or &amp;ldquo;0&amp;rdquo;, and then collapsing all the states that depend on that qubit, and then re-normalizing. I also had the Qubits reversed in my diagram which led to some very confusing bugs.&lt;/li&gt;
