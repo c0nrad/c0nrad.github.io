@@ -61,7 +61,7 @@
 &lt;li&gt;There&amp;rsquo;s three qubits in this system. The first two belong to Alice, the last to Bob&lt;/li&gt;
 &lt;li&gt;The qubits can be identified by the weird \( |00\rangle, |1\rangle \) symbols.
 &lt;ul&gt;
-&lt;li&gt;These are called &amp;ldquo;bra&amp;rsquo;s&amp;rdquo; (After Dirac&amp;rsquo;s Bra-Ket notation, used a lot in quantum mechanics)&lt;/li&gt;
+&lt;li&gt;These are called &amp;ldquo;ket&amp;rsquo;s&amp;rdquo; (After Dirac&amp;rsquo;s Bra-Ket notation, used a lot in quantum mechanics)&lt;/li&gt;
 &lt;li&gt;So the qubits belonging to Alice look like \( |00\rangle,  |01\rangle,  |10\rangle,  |11\rangle \) and the Qubit belonging to Bob look like \( |0\rangle, |1\rangle \)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
