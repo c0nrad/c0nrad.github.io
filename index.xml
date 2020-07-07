@@ -6,10 +6,83 @@
     <description>c0nrad&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 03 Jul 2020 13:24:22 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jul 2020 11:01:25 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Simulating Quantum Fourier Transform</title>
+      <link>https://blog.c0nrad.io/posts/qft/</link>
+      <pubDate>Tue, 07 Jul 2020 11:01:25 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/qft/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m pretty excited. I&amp;rsquo;m somewhat in disbelief that it even works. But I was able to implement Quantum Fourier Transform on my little quantum computation simulator.&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h2 id=&#34;demo&#34;&gt;Demo&lt;/h2&gt;
+&lt;div style=&#34;text-align: center&#34;&gt;
+&lt;video controls src=&#34;https://blog.c0nrad.io/iqft.mp4&#34; style=&#34;width: 100%;&#34; autoplay loop &gt;&lt;/video&gt;
+&lt;/div&gt;
+&lt;p&gt;In the above simulation, the simulator is stepping through the circuit step by step.&lt;/p&gt;
+&lt;p&gt;Each step is called a &amp;ldquo;moment&amp;rdquo;. The wires are the little qubits, and the boxes are the quantum gates.&lt;/p&gt;
+&lt;p&gt;Each step in the circuit is represented by a 2**4 matrix (4 because there are 4 qubits). Most of the work involved in this simulator is constructing those matrixes corresponding to each step. For each step you multiply that matrix against the systems overall state. Just like that you&amp;rsquo;re simulating quantum systems.&lt;/p&gt;
+&lt;p&gt;The bottom left is the amplitude and phases of the different states. Normally the phases are displayed a little differently, but it&amp;rsquo;s on a terminal so I just used a bar chart to represent them. (They&amp;rsquo;re complex numbers).&lt;/p&gt;
+&lt;h2 id=&#34;fourier-transform&#34;&gt;Fourier Transform&lt;/h2&gt;
+&lt;p&gt;I went to school for electrical engineering, and a big part of those four years was learning about the applications of fourier transforms. I never thought I&amp;rsquo;d be using it again, and I definitely did not expect to be using it for quantum computation. But it turns out it&amp;rsquo;s incredibly useful and fundamental to many quantum algorithms.&lt;/p&gt;
+&lt;p&gt;The math for fourier transforms looks scary, but the concept is pretty simple.&lt;/p&gt;
+&lt;p&gt;It turns out that in some cases, knowing the frequencies of a signal greatly simplifies a system.&lt;/p&gt;
+&lt;p&gt;For example, if you had a sound signal made up of the combination of two sin waves, and you wanted to represent it by some function like f(t), it&amp;rsquo;d be a pretty &amp;ldquo;verbose&amp;rdquo; function. If you wanted to recreate the wave, you&amp;rsquo;d need to sample a lot of points to make any sense of it.&lt;/p&gt;
+&lt;img src=&#34;https://blog.c0nrad.io/fourier.png&#34;&gt;
+&lt;p&gt;But if I told you the function was just a combination of two sin waves at frequency 150 and 350, you only need those two frequencies to recreate the function.&lt;/p&gt;
+&lt;p&gt;Using the fourier transform, you can get the frequencies of some signal.&lt;/p&gt;
+&lt;h2 id=&#34;usage-of-quantum-fourier-transform&#34;&gt;Usage of Quantum Fourier Transform&lt;/h2&gt;
+&lt;p&gt;In Quantum Computation you can&amp;rsquo;t just &amp;ldquo;ask&amp;rdquo; the quantum system what state it is in. You can only ask a few yes or no questions. (This is due to fundamental limits of nature, not limits of engineering).&lt;/p&gt;
+&lt;p&gt;So a lot of the effort in creating quantum algorithms is &amp;ldquo;massaging&amp;rdquo; the problem in a way that allows us to ask a few specific questions.&lt;/p&gt;
+&lt;p&gt;One trick that quantum algorithm designers like to use is to pose the question in a way that the answer repeats at some frequency, then take the fourier transform of those answers, and then just pluck out the frequency (solution).&lt;/p&gt;
+&lt;p&gt;One example of this is Shor&amp;rsquo;s algorithm, an algorithm for factoring large numbers. Normally factoring large numbers is extremely difficult (believed near impossible), but can massage that problem into a similar problem that has a cyclic solution, implement it on a quantum computer, then use QFT to pluck out that frequency (solution).&lt;/p&gt;
+&lt;p&gt;(I&amp;rsquo;m currently trying to implement Shor&amp;rsquo;s algorithm, but the cyclic algorithm (a**x mod N) is a little difficult on a quantum computer, but slowly getting there)&lt;/p&gt;
+&lt;h2 id=&#34;simulator&#34;&gt;Simulator&lt;/h2&gt;
+&lt;p&gt;The simulator was written using &lt;a href=&#34;https://github.com/mum4k/termdash&#34;&gt;https://github.com/mum4k/termdash&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s a neat little library for displaying charts in terminal.&lt;/p&gt;
+&lt;p&gt;A little overkill, but it&amp;rsquo;s nice to step through and see the phase and amplitudes evolve with time.&lt;/p&gt;
+&lt;h2 id=&#34;crack-pot-idea&#34;&gt;Crack Pot Idea&lt;/h2&gt;
+&lt;p&gt;Implementing a**x mod N on a quantum circuit has been surprisingly difficult. Also implementing CRC4. I don&amp;rsquo;t like having to think.&lt;/p&gt;
+&lt;p&gt;One crack pot idea i&amp;rsquo;d like to test out is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What if I wrote some algorithm to sample the functions (a**xmodN / CRC4) and create a truth table for those functions.&lt;/li&gt;
+&lt;li&gt;Using that I can create some matrix that represents the function&lt;/li&gt;
+&lt;li&gt;Then maybe I can take the &amp;ldquo;Reverse Kronocker product&amp;rdquo;(?) or brute force I, X, and CNOTs gates together until I find the circuit that makes up that matrix&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;No more thinking when I have a function I want on a quantum computer. We&amp;rsquo;ll see.&lt;/p&gt;
+&lt;p&gt;(My double-down crack pot idea: maybe I could use grover&amp;rsquo;s algorithm to generate them for me. quantum algorithms building quantum algorithms). We&amp;rsquo;ll see.&lt;/p&gt;
+&lt;h2 id=&#34;improvements-to-qrad&#34;&gt;Improvements to QRAD&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;QFT/iQFT&lt;/li&gt;
+&lt;li&gt;Basic arithmetic&lt;/li&gt;
+&lt;li&gt;The simulator using &lt;a href=&#34;https://github.com/mum4k/termdash&#34;&gt;https://github.com/mum4k/termdash&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;things-that-were-frustratingtook-longer-than-planned&#34;&gt;Things that were frustrating/took longer than planned&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Kind of silly, but I get my endianness mixed up a bit. Should the MSB (most significant bit), but on the top or the bottom of the circuit?
+&lt;ul&gt;
+&lt;li&gt;Eventually I need to pick a convention and stick with it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;I thought that QFT would be the hard part of shor&amp;rsquo;s, but turns out it&amp;rsquo;s that a**xmodN. There&amp;rsquo;s some resources online, but it&amp;rsquo;s going to require some time understanding the solutions, they don&amp;rsquo;t look trivial.
+&lt;ul&gt;
+&lt;li&gt;There&amp;rsquo;s plenty of solutions that work for specific cases, but I want to be able to just say Factor(33) and have the circuit pop out&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;future&#34;&gt;Future&lt;/h2&gt;
+&lt;p&gt;Next up I&amp;rsquo;m working on a couple of things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Implement Shor&amp;rsquo;s algorithm&lt;/li&gt;
+&lt;li&gt;Implement the quantum hash cracker using grover&amp;rsquo;s algorithm&lt;/li&gt;
+&lt;li&gt;Quantum Registers&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Quantum Teleportation Algorithm</title>

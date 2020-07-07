@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Simulating Quantum Fourier Transform  - c0nrad&#39;s blog</title>
+<meta name="description" content="Learning about physics">
+
+<link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1594141888" />
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1594141888">
+
+<meta property="og:title" content="Simulating Quantum Fourier Transform" />
+<meta property="og:description" content="I&rsquo;m pretty excited. I&rsquo;m somewhat in disbelief that it even works. But I was able to implement Quantum Fourier Transform on my little quantum computation simulator.
+Demo   In the above simulation, the simulator is stepping through the circuit step by step.
+Each step is called a &ldquo;moment&rdquo;. The wires are the little qubits, and the boxes are the quantum gates.
+Each step in the circuit is represented by a 2**4 matrix (4 because there are 4 qubits)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.c0nrad.io/posts/qft/" />
+<meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+<meta property="article:published_time" content="2020-07-07T11:01:25-04:00" />
+<meta property="article:modified_time" content="2020-07-07T11:01:25-04:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+
+<meta name="twitter:title" content="Simulating Quantum Fourier Transform"/>
+<meta name="twitter:description" content="I&rsquo;m pretty excited. I&rsquo;m somewhat in disbelief that it even works. But I was able to implement Quantum Fourier Transform on my little quantum computation simulator.
+Demo   In the above simulation, the simulator is stepping through the circuit step by step.
+Each step is called a &ldquo;moment&rdquo;. The wires are the little qubits, and the boxes are the quantum gates.
+Each step in the circuit is represented by a 2**4 matrix (4 because there are 4 qubits)."/>
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header> 
+            
+                <h1 class="site-header">
+    <a href="https://blog.c0nrad.io/">c0nrad&#39;s blog</a>
+</h1>
+<nav>
+    
+    
+    <a class="" href="https://c0nrad.io" title="">About</a>
+    
+    <a class="" href="https://github.com/c0nrad/" title="">Github</a>
+    
+    <a class="" href="https://twitter.com/xc0nradx" title="">Twitter</a>
+    
+</nav>
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+
+<article class="post">
+    <header>
+        <h1>Simulating Quantum Fourier Transform</h1>
+    </header>
+    <div class="content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#demo">Demo</a></li>
+    <li><a href="#fourier-transform">Fourier Transform</a></li>
+    <li><a href="#usage-of-quantum-fourier-transform">Usage of Quantum Fourier Transform</a></li>
+    <li><a href="#simulator">Simulator</a></li>
+    <li><a href="#crack-pot-idea">Crack Pot Idea</a></li>
+    <li><a href="#improvements-to-qrad">Improvements to QRAD</a></li>
+    <li><a href="#things-that-were-frustratingtook-longer-than-planned">Things that were frustrating/took longer than planned</a></li>
+    <li><a href="#future">Future</a></li>
+  </ul>
+</nav>
+
+        <p>I&rsquo;m pretty excited. I&rsquo;m somewhat in disbelief that it even works. But I was able to implement Quantum Fourier Transform on my little quantum computation simulator.</p>
+<!-- more -->
+<h2 id="demo">Demo</h2>
+<div style="text-align: center">
+<video controls src="/iqft.mp4" style="width: 100%;" autoplay loop ></video>
+</div>
+<p>In the above simulation, the simulator is stepping through the circuit step by step.</p>
+<p>Each step is called a &ldquo;moment&rdquo;. The wires are the little qubits, and the boxes are the quantum gates.</p>
+<p>Each step in the circuit is represented by a 2**4 matrix (4 because there are 4 qubits). Most of the work involved in this simulator is constructing those matrixes corresponding to each step. For each step you multiply that matrix against the systems overall state. Just like that you&rsquo;re simulating quantum systems.</p>
+<p>The bottom left is the amplitude and phases of the different states. Normally the phases are displayed a little differently, but it&rsquo;s on a terminal so I just used a bar chart to represent them. (They&rsquo;re complex numbers).</p>
+<h2 id="fourier-transform">Fourier Transform</h2>
+<p>I went to school for electrical engineering, and a big part of those four years was learning about the applications of fourier transforms. I never thought I&rsquo;d be using it again, and I definitely did not expect to be using it for quantum computation. But it turns out it&rsquo;s incredibly useful and fundamental to many quantum algorithms.</p>
+<p>The math for fourier transforms looks scary, but the concept is pretty simple.</p>
+<p>It turns out that in some cases, knowing the frequencies of a signal greatly simplifies a system.</p>
+<p>For example, if you had a sound signal made up of the combination of two sin waves, and you wanted to represent it by some function like f(t), it&rsquo;d be a pretty &ldquo;verbose&rdquo; function. If you wanted to recreate the wave, you&rsquo;d need to sample a lot of points to make any sense of it.</p>
+<img src="/fourier.png">
+<p>But if I told you the function was just a combination of two sin waves at frequency 150 and 350, you only need those two frequencies to recreate the function.</p>
+<p>Using the fourier transform, you can get the frequencies of some signal.</p>
+<h2 id="usage-of-quantum-fourier-transform">Usage of Quantum Fourier Transform</h2>
+<p>In Quantum Computation you can&rsquo;t just &ldquo;ask&rdquo; the quantum system what state it is in. You can only ask a few yes or no questions. (This is due to fundamental limits of nature, not limits of engineering).</p>
+<p>So a lot of the effort in creating quantum algorithms is &ldquo;massaging&rdquo; the problem in a way that allows us to ask a few specific questions.</p>
+<p>One trick that quantum algorithm designers like to use is to pose the question in a way that the answer repeats at some frequency, then take the fourier transform of those answers, and then just pluck out the frequency (solution).</p>
+<p>One example of this is Shor&rsquo;s algorithm, an algorithm for factoring large numbers. Normally factoring large numbers is extremely difficult (believed near impossible), but can massage that problem into a similar problem that has a cyclic solution, implement it on a quantum computer, then use QFT to pluck out that frequency (solution).</p>
+<p>(I&rsquo;m currently trying to implement Shor&rsquo;s algorithm, but the cyclic algorithm (a**x mod N) is a little difficult on a quantum computer, but slowly getting there)</p>
+<h2 id="simulator">Simulator</h2>
+<p>The simulator was written using <a href="https://github.com/mum4k/termdash">https://github.com/mum4k/termdash</a>.</p>
+<p>It&rsquo;s a neat little library for displaying charts in terminal.</p>
+<p>A little overkill, but it&rsquo;s nice to step through and see the phase and amplitudes evolve with time.</p>
+<h2 id="crack-pot-idea">Crack Pot Idea</h2>
+<p>Implementing a**x mod N on a quantum circuit has been surprisingly difficult. Also implementing CRC4. I don&rsquo;t like having to think.</p>
+<p>One crack pot idea i&rsquo;d like to test out is:</p>
+<ul>
+<li>What if I wrote some algorithm to sample the functions (a**xmodN / CRC4) and create a truth table for those functions.</li>
+<li>Using that I can create some matrix that represents the function</li>
+<li>Then maybe I can take the &ldquo;Reverse Kronocker product&rdquo;(?) or brute force I, X, and CNOTs gates together until I find the circuit that makes up that matrix</li>
+</ul>
+<p>No more thinking when I have a function I want on a quantum computer. We&rsquo;ll see.</p>
+<p>(My double-down crack pot idea: maybe I could use grover&rsquo;s algorithm to generate them for me. quantum algorithms building quantum algorithms). We&rsquo;ll see.</p>
+<h2 id="improvements-to-qrad">Improvements to QRAD</h2>
+<ul>
+<li>QFT/iQFT</li>
+<li>Basic arithmetic</li>
+<li>The simulator using <a href="https://github.com/mum4k/termdash">https://github.com/mum4k/termdash</a></li>
+</ul>
+<h2 id="things-that-were-frustratingtook-longer-than-planned">Things that were frustrating/took longer than planned</h2>
+<ul>
+<li>Kind of silly, but I get my endianness mixed up a bit. Should the MSB (most significant bit), but on the top or the bottom of the circuit?
+<ul>
+<li>Eventually I need to pick a convention and stick with it.</li>
+</ul>
+</li>
+<li>I thought that QFT would be the hard part of shor&rsquo;s, but turns out it&rsquo;s that a**xmodN. There&rsquo;s some resources online, but it&rsquo;s going to require some time understanding the solutions, they don&rsquo;t look trivial.
+<ul>
+<li>There&rsquo;s plenty of solutions that work for specific cases, but I want to be able to just say Factor(33) and have the circuit pop out</li>
+</ul>
+</li>
+</ul>
+<h2 id="future">Future</h2>
+<p>Next up I&rsquo;m working on a couple of things:</p>
+<ul>
+<li>Implement Shor&rsquo;s algorithm</li>
+<li>Implement the quantum hash cracker using grover&rsquo;s algorithm</li>
+<li>Quantum Registers</li>
+</ul>
+
+    </div>
+
+    <div class="article-info">
+    
+        <div class="article-date">2020-07-07</div>
+    
+    <div class="article-taxonomies">
+        
+            
+    </div>
+</div>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+</article>
+
+
+
+
+
+        </main>
+        <footer>
+            
+                <p>© Stuart Larsen, 2020<br>
+</p>
+
+<p>July 2020: I'm looking for a job related to physics/programming. If you have an open role, I'd love to
+    apply/chat! c0nrad@c0nrad.io</p>
+
+
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup {
+        background: #fff;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+        border: 1px solid;
+        margin-top: 20px;
+    }
+
+
+
+
+     
+</style>
+<div id="mc_embed_signup">
+    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
+        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+        novalidate>
+        <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Subscribe for new posts:</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                    class="button"></div>
+        </div>
+    </form>
+</div>
+
+
+            
+        </footer>
+    </div>
+</body>
+</html>
