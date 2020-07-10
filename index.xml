@@ -18,7 +18,6 @@
       
       <guid>https://blog.c0nrad.io/posts/shors/</guid>
       <description>&lt;p&gt;Shor&amp;rsquo;s algorithm is probably the most well known quantum algorithm. But it turns out I didn&amp;rsquo;t understand it as well as I thought.&lt;/p&gt;
-&lt;!-- more --&gt;
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;I&amp;rsquo;m somewhat giving up on this problem. I got a working version, but I&amp;rsquo;m not happy with it.&lt;/p&gt;
 &lt;p&gt;Spoiler, I thought the hard part of Shor&amp;rsquo;s algorithm would be the Quantum Fourier Transform. It turns out the hard problem is multiplying two numbers!&lt;/p&gt;
@@ -82,8 +81,7 @@ $$ f2 = GCD(N, a^{period/2} - 1) $$&lt;/p&gt;
 &lt;p&gt;But it seems reasonable that if there was an efficient multiplication, I could just create a quantum circuit with two registers A and B, and my oracle function would be &lt;i&gt;return A*B == N&lt;/i&gt;. Then it would only require PI * Sqrt(N)/4 iterations.&lt;/p&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;Overall the last few days were frustrating. But progress was made. I&amp;rsquo;m super happy that my little quantum computer can even solve a specific case of shor&amp;rsquo;s, but disappointed I couldn&amp;rsquo;t go further at this time.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;ll be taking a quick break from Quantum Computing to learn more of the basics. I just picked up a book on numerical methods, I think I&amp;rsquo;ll have some fun with that.&lt;/p&gt;
-</description>
+&lt;p&gt;I&amp;rsquo;ll be taking a quick break from Quantum Computing to learn more of the basics. I just picked up a book on numerical methods, I think I&amp;rsquo;ll have some fun with that.&lt;/p&gt;</description>
     </item>
     
     <item>
