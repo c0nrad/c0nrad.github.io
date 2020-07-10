@@ -91,7 +91,6 @@ $$ f2 = GCD(N, a^{period/2} - 1) $$&lt;/p&gt;
       
       <guid>https://blog.c0nrad.io/posts/qft/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m pretty excited. I&amp;rsquo;m somewhat in disbelief that it even works. But I was able to implement Quantum Fourier Transform on my little &lt;a href=&#34;https://github.com/c0nrad/qrad&#34;&gt;quantum computation simulator&lt;/a&gt;.&lt;/p&gt;
-&lt;!-- more --&gt;
 &lt;h2 id=&#34;demo&#34;&gt;Demo&lt;/h2&gt;
 &lt;div style=&#34;text-align: center&#34;&gt;
 &lt;video controls src=&#34;https://blog.c0nrad.io/iqft.mp4&#34; style=&#34;width: 100%;&#34; autoplay loop &gt;&lt;/video&gt;
@@ -153,8 +152,7 @@ $$ f2 = GCD(N, a^{period/2} - 1) $$&lt;/p&gt;
 &lt;li&gt;Implement Shor&amp;rsquo;s algorithm&lt;/li&gt;
 &lt;li&gt;Implement the quantum hash cracker using grover&amp;rsquo;s algorithm&lt;/li&gt;
 &lt;li&gt;Quantum Registers&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -164,7 +162,6 @@ $$ f2 = GCD(N, a^{period/2} - 1) $$&lt;/p&gt;
       
       <guid>https://blog.c0nrad.io/posts/quantum-teleportation/</guid>
       <description>&lt;p&gt;This post is split into two parts. The first section is my motivation, and some background on the upgrades I made to my quantum simulator. The second part is implementing the Quantum Teleportation algorithm.&lt;/p&gt;
-&lt;!-- more --&gt;
 &lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;
 &lt;p&gt;Recently I&amp;rsquo;m been playing more with Quantum Computing.&lt;/p&gt;
 &lt;p&gt;Quantum Computing fits nicely into my current goals of:&lt;/p&gt;
@@ -237,8 +234,7 @@ $$ f2 = GCD(N, a^{period/2} - 1) $$&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;Anyways just some fun stuff I&amp;rsquo;ve been up to. Being 100% honest, I&amp;rsquo;m not always the best at responding (sorry), but if you have any questions or comments feel free to reach out! &lt;a href=&#34;mailto:c0nrad@c0nrad.io&#34;&gt;c0nrad@c0nrad.io&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m hoping I&amp;rsquo;ll have the Quantum Hash Cracking algorithm out soon. But in the meantime I still need to learn some other stuff first, so probably a few more algorithms first.&lt;/p&gt;
-</description>
+&lt;p&gt;I&amp;rsquo;m hoping I&amp;rsquo;ll have the Quantum Hash Cracking algorithm out soon. But in the meantime I still need to learn some other stuff first, so probably a few more algorithms first.&lt;/p&gt;</description>
     </item>
     
     <item>
