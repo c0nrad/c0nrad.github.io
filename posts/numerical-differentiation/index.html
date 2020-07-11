@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Numerical Differentiation  - c0nrad&#39;s blog</title>
+<meta name="description" content="Learning about physics">
+
+<link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1594432882" />
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1594432882">
+
+<meta property="og:title" content="Numerical Differentiation" />
+<meta property="og:description" content="Some exploration into numerical differentiation." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.c0nrad.io/posts/numerical-differentiation/" />
+<meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+<meta property="article:published_time" content="2020-07-10T20:01:46-04:00" />
+<meta property="article:modified_time" content="2020-07-10T20:01:46-04:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+
+<meta name="twitter:title" content="Numerical Differentiation"/>
+<meta name="twitter:description" content="Some exploration into numerical differentiation."/>
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header> 
+            
+                <h1 class="site-header">
+    <a href="https://blog.c0nrad.io/">c0nrad&#39;s blog</a>
+</h1>
+<nav>
+    
+    
+    <a class="" href="https://c0nrad.io" title="">About</a>
+    
+    <a class="" href="https://github.com/c0nrad/" title="">Github</a>
+    
+    <a class="" href="https://twitter.com/xc0nradx" title="">Twitter</a>
+    
+</nav>
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+
+<article class="post">
+    <header>
+        <h1>Numerical Differentiation</h1>
+    </header>
+    <div class="content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#differentiation">Differentiation</a>
+      <ul>
+        <li><a href="#forward-backward-center-numerical-differentiation">Forward, Backward, Center Numerical Differentiation</a></li>
+        <li><a href="#forward-backward-center-using-different-h-sizes">Forward Backward Center using different H sizes</a></li>
+      </ul>
+    </li>
+    <li><a href="#random-derivative-examples">Random Derivative Examples</a></li>
+    <li><a href="#legendre-polynomials">Legendre Polynomials</a>
+      <ul>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+        <p>Some exploration into numerical differentiation.</p>
+<h2 id="introduction">Introduction</h2>
+<p>I just picked up a new book: <a href="https://www.amazon.com/Concepts-Computational-Physics-Benjamin-Stickler/dp/3319272632/">Basic Concepts in Computational Physics</a>. I&rsquo;ve been planning on building simulators for EM and Relativity. But after doing some research on how other people built them, I realized I should probably learn some of the basics of computational physics first. Other people seem to use FDTD (Finite-Difference Time-Domain) for simulations, and I have no idea what that is.</p>
+<p>To the <s>drawing</s> learning board!</p>
+<p>The first chapter was on Numerical Differentiation. Here&rsquo;s some fancy charts and explanations I made after implementing the chapter in code.</p>
+<h2 id="differentiation">Differentiation</h2>
+<p>Differentiation is about finding the slope of some function. In middle/high school we learned that we could find the slope of a linear line by:</p>
+<p>$$ m = \frac{y_2 - y_1}{x_2 - x_1} $$</p>
+<p>But not all functions are that easy to differentiate. And sometimes you&rsquo;re lazy and don&rsquo;t want to figure it out. Or sometimes you only have some data and not the underlying function. Turns out you can use computers to get pretty good estimations!</p>
+<h3 id="forward-backward-center-numerical-differentiation">Forward, Backward, Center Numerical Differentiation</h3>
+<p>In high school calculus we learned that:</p>
+<p>$$ f&rsquo;(x) = \lim_{h\to\infty} \frac{f(x+h) - f(x)}{h} $$</p>
+<p>And the idea behind numerical differentiation isn&rsquo;t that different. But instead of taking the limit, we just make h very small. When h is very small, we just assume the line is liner and use the equation for finding the slope of a linear line.</p>
+<p>But, we need to make a choice. Let&rsquo;s say we want to find the slope at \( x_i \) should we use \( x_{i-1}, x_{i} \) as the two points? Or \( x_{i}, x_{i+1} \) or maybe \( x_{i-1}, x_{i+1} \)?</p>
+<p>$$ f^\prime_{forward}(x_i) = \frac{ f(x_{i+1}) - f(x_i) }{h} $$
+$$ f^\prime_{backward}(x_i) = \frac{ f(x_{x}) - f(x_{i-1}) }{h} $$
+$$ f^\prime_{center}(x_i) = \frac{ f(x_{i+1}) - f(x_{i-1}) }{2h} $$</p>
+<p>It turns out the answer is the last one (called Center), but we can go one step further and prove is using Taylor series!</p>
+<h4 id="determining-the-error-using-forward-backward-center-numerical-differentiation">Determining the error using Forward, Backward, Center Numerical Differentiation</h4>
+<p>We can actually prove that the center method has the least amount of error.</p>
+<p>Let&rsquo;s Taylor expand \( x_{i-1} \) and \(x_{i+1} \). So we&rsquo;re using f(x) as our base point and estimating \( x_{i-1} \) and \(x_{i+1} \).</p>
+<p>$$ f(x_{i-1}) = f(x_{i}) - h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) - \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip; $$
+$$ f(x_{i+1}) = f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip; $$</p>
+<p>With</p>
+<p>$$ h = x_{i+1} - x_i = x_i - x_{x-1} $$</p>
+<p>Now we can re-arrange some stuff from the \( f(x_{x-1}) \) equation to determine the error using for the Forward Differentiation method:</p>
+<p>$$ \begin{array}{llll} f^\prime_{forward}(x_i)
+&amp; = \frac{ f(x_{i+1}) - f(x_i) }{h} \\
+&amp; = \frac{ (f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip;) - f(x_i)}{h} \\
+&amp; = f^\prime(x_i) + \frac{h}{2}f^{\prime\prime}(x_i) + \frac{h^2}{6}f^{\prime\prime\prime}(x_i) + &hellip; \\
+&amp; \sim  f^\prime(x_i) + \mathcal{O}(h) \end{array} $$</p>
+<p>Doing the same for Center we get:</p>
+<p>$$ \begin{array}{llll} f^\prime_{center}(x_i)
+&amp; = \frac{ f(x_{i+1}) - f(x_{i-1}) }{2h} \\
+&amp; = \frac{ (f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip;) - (f(x_{i}) - h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) - \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip;) }{2h} \\
+&amp; = f^\prime(x_i) - \frac{h^2}{6}f^{\prime\prime\prime}(x_i) + &hellip; \\
+&amp; \sim  f^\prime(x_i) + \mathcal{O}(h^2) \end{array} $$</p>
+<table>
+    <tr>
+        <td>
+            Forward Difference
+        </td>
+        <td>
+    $$ f^\prime_{forward}(x_i) = \frac{ f(x_{i+1}) - f(x_i) }{h} $$
+        </td>
+        <td>
+            $$ \mathcal{O}(h) $$
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Backward Difference
+        </td>
+        <td>
+    $$ f^\prime_{backward}(x_i) = \frac{ f(x_{x}) - f(x_{i-1}) }{h} $$
+        </td>
+        <td>
+            $$ \mathcal{O}(h) $$
+        </td>
+    </tr>
+     <tr>
+        <td>
+            Center Difference
+        </td>
+        <td>
+    $$ f^\prime_{center}(x_i) = \frac{ f(x_{i+1}) - f(x_{i-1}) }{2h} $$
+        </td>
+        <td>
+            $$ \mathcal{O}(h^2) $$
+        </td>
+    </tr>
+</table>
+<p>The error can be a little confusing to understand, but it&rsquo;s saying that if we want 100x better resolution on forward or backward methods, we&rsquo;d need to split our \( h \) into 100x smaller buckets.</p>
+<p>Whereas for the center method, if we want a 100x improvement, we only need to split our \( h \) buckets by 10. 10*10 = 100.</p>
+<p>Let&rsquo;s see this in practice!</p>
+<h3 id="forward-backward-center-using-different-h-sizes">Forward Backward Center using different H sizes</h3>
+<p><a href="https://github.com/c0nrad/csim/blob/master/examples/diff_modes/multiple_h.png?raw=true"><img src="/multiple_h.png" alt="diff_modes"></a>
+(<a href="https://github.com/c0nrad/csim/blob/master/examples/diff_modes/multiple_h.png">Image</a> | <a href="https://github.com/c0nrad/csim/blob/master/examples/diff_modes/diff_modes.go">Code</a>)</p>
+<p>Here I take the derivative of \( sin(x) \) using the forward, backward and center methods using different buckets of h. You can see that the Center method is significantly better.</p>
+<h2 id="random-derivative-examples">Random Derivative Examples</h2>
+<p>The numeric differentiator is just plain cool how simple it is!</p>
+<p>Here I use Numerical Differentiation to plot the derivatives of the following equations:</p>
+<p>$$ f_1(x) = sin(x) $$
+$$ f_2(x) = 5x -3 $$
+$$ f_3(x) = e^x $$
+$$ f_4(x) = cos(2x) + e^{-\frac{x^2}{2}} sin(10x) $$</p>
+<p><a href="https://github.com/c0nrad/csim/blob/master/examples/diff_examples/diff_examples.png?raw=true"><img src="https://raw.githubusercontent.com/c0nrad/csim/master/examples/diff_examples/diff_examples.png" alt="diff_examples"></a>
+(<a href="https://github.com/c0nrad/csim/blob/master/examples/diff_modes/multiple_h.png">Image</a> | <a href="https://github.com/c0nrad/csim/blob/master/examples/diff_examples/diff_examples.go">Code</a>)</p>
+<h2 id="legendre-polynomials">Legendre Polynomials</h2>
+<p>In my <a href="https://blog.c0nrad.io/posts/hydrogen-pt1/">electron orbitals simulator</a> I had to calculate the Legendre Polynomials (using Rodrigues&rsquo; Formula):</p>
+<p>$$ P_l(x) = \frac{1}{2^l l!} \left(\frac{d}{dx}\right)^l (x^2 - 1)^l $$</p>
+<p>Knowing that I&rsquo;d have to calculate the derivative of this function was one of the reasons I decided to <a href="https://blog.c0nrad.io/posts/ginac-on-macos/">check out GiNaCs</a> in the first place. (GiNaCs has a symbolic differentiator).</p>
+<p>But now with a Numeric Differentiator, I have no need for the symbolic executioner! (Obviously not fully true, it&rsquo;s still <em>extremely</em> nice to have the symbols).</p>
+<p>But, damn, it is so satisfying generating the polynomials like this in Go. I&rsquo;m in shock that it even works to be honest. I heavily abuse function closure&rsquo;s to store state. (It&rsquo;s function closure&rsquo;s all the way down):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Go" data-lang="Go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">LegendrePoly</span>(<span style="color:#a6e22e">l</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">Func</span> {
+	<span style="color:#a6e22e">prefix</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> (<span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Pow</span>(<span style="color:#ae81ff">2</span>, float64(<span style="color:#a6e22e">l</span>)) <span style="color:#f92672">*</span> <span style="color:#a6e22e">Factorial</span>(<span style="color:#a6e22e">l</span>))
+
+	<span style="color:#a6e22e">inner</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">float64</span> {
+		<span style="color:#a6e22e">out</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1.0</span>
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">l</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+			<span style="color:#a6e22e">out</span> <span style="color:#f92672">*=</span> <span style="color:#a6e22e">x</span><span style="color:#f92672">*</span><span style="color:#a6e22e">x</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+		}
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>
+	}
+
+	<span style="color:#a6e22e">out</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">inner</span>
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">l</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+		<span style="color:#a6e22e">out</span> = <span style="color:#a6e22e">D</span>(<span style="color:#a6e22e">out</span>)
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">float64</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">prefix</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">out</span>(<span style="color:#a6e22e">x</span>)
+	}
+}
+</code></pre></div><p>But with some plotting, we can verify it works!</p>
+<p><a href="https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.png?raw=true"><img src="https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.png?raw=true" alt="Legendre"></a>
+( <a href="https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.png?raw=true">Image</a> | <a href="https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.go">Code</a> )</p>
+<p>How cool is that!</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Numeric differentiation ended up being way cooler than I thought it would be.</p>
+<p>Up next is numeric integration! I had to build a numeric integrator for a previous game engine, I&rsquo;m excited to see how wrong I was.</p>
+    </div>
+
+    <div class="article-info">
+    
+        <div class="article-date">2020-07-10</div>
+    
+    <div class="article-taxonomies">
+        
+            
+    </div>
+</div>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+</article>
+
+
+
+
+
+        </main>
+        <footer>
+            
+                <p>© Stuart Larsen, 2020<br>
+</p>
+
+<p>July 2020: I'm looking for a job related to physics/programming. If you have an open role, I'd love to
+    apply/chat! c0nrad@c0nrad.io</p>
+
+
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup {
+        background: #fff;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+        border: 1px solid;
+        margin-top: 20px;
+    }
+
+
+
+
+     
+</style>
+<div id="mc_embed_signup">
+    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
+        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+        novalidate>
+        <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Subscribe for new posts:</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                    class="button"></div>
+        </div>
+    </form>
+</div>
+
+
+            
+        </footer>
+    </div>
+</body>
+</html>

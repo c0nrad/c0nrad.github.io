@@ -6,10 +6,138 @@
     <description>c0nrad&#39;s blog (Posts)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Jul 2020 09:26:38 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 10 Jul 2020 20:01:46 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Numerical Differentiation</title>
+      <link>https://blog.c0nrad.io/posts/numerical-differentiation/</link>
+      <pubDate>Fri, 10 Jul 2020 20:01:46 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/numerical-differentiation/</guid>
+      <description>&lt;p&gt;Some exploration into numerical differentiation.&lt;/p&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;I just picked up a new book: &lt;a href=&#34;https://www.amazon.com/Concepts-Computational-Physics-Benjamin-Stickler/dp/3319272632/&#34;&gt;Basic Concepts in Computational Physics&lt;/a&gt;. I&amp;rsquo;ve been planning on building simulators for EM and Relativity. But after doing some research on how other people built them, I realized I should probably learn some of the basics of computational physics first. Other people seem to use FDTD (Finite-Difference Time-Domain) for simulations, and I have no idea what that is.&lt;/p&gt;
+&lt;p&gt;To the &lt;s&gt;drawing&lt;/s&gt; learning board!&lt;/p&gt;
+&lt;p&gt;The first chapter was on Numerical Differentiation. Here&amp;rsquo;s some fancy charts and explanations I made after implementing the chapter in code.&lt;/p&gt;
+&lt;h2 id=&#34;differentiation&#34;&gt;Differentiation&lt;/h2&gt;
+&lt;p&gt;Differentiation is about finding the slope of some function. In middle/high school we learned that we could find the slope of a linear line by:&lt;/p&gt;
+&lt;p&gt;$$ m = \frac{y_2 - y_1}{x_2 - x_1} $$&lt;/p&gt;
+&lt;p&gt;But not all functions are that easy to differentiate. And sometimes you&amp;rsquo;re lazy and don&amp;rsquo;t want to figure it out. Or sometimes you only have some data and not the underlying function. Turns out you can use computers to get pretty good estimations!&lt;/p&gt;
+&lt;h3 id=&#34;forward-backward-center-numerical-differentiation&#34;&gt;Forward, Backward, Center Numerical Differentiation&lt;/h3&gt;
+&lt;p&gt;In high school calculus we learned that:&lt;/p&gt;
+&lt;p&gt;$$ f&amp;rsquo;(x) = \lim_{h\to\infty} \frac{f(x+h) - f(x)}{h} $$&lt;/p&gt;
+&lt;p&gt;And the idea behind numerical differentiation isn&amp;rsquo;t that different. But instead of taking the limit, we just make h very small. When h is very small, we just assume the line is liner and use the equation for finding the slope of a linear line.&lt;/p&gt;
+&lt;p&gt;But, we need to make a choice. Let&amp;rsquo;s say we want to find the slope at \( x_i \) should we use \( x_{i-1}, x_{i} \) as the two points? Or \( x_{i}, x_{i+1} \) or maybe \( x_{i-1}, x_{i+1} \)?&lt;/p&gt;
+&lt;p&gt;$$ f^\prime_{forward}(x_i) = \frac{ f(x_{i+1}) - f(x_i) }{h} $$
+$$ f^\prime_{backward}(x_i) = \frac{ f(x_{x}) - f(x_{i-1}) }{h} $$
+$$ f^\prime_{center}(x_i) = \frac{ f(x_{i+1}) - f(x_{i-1}) }{2h} $$&lt;/p&gt;
+&lt;p&gt;It turns out the answer is the last one (called Center), but we can go one step further and prove is using Taylor series!&lt;/p&gt;
+&lt;h4 id=&#34;determining-the-error-using-forward-backward-center-numerical-differentiation&#34;&gt;Determining the error using Forward, Backward, Center Numerical Differentiation&lt;/h4&gt;
+&lt;p&gt;We can actually prove that the center method has the least amount of error.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s Taylor expand \( x_{i-1} \) and \(x_{i+1} \). So we&amp;rsquo;re using f(x) as our base point and estimating \( x_{i-1} \) and \(x_{i+1} \).&lt;/p&gt;
+&lt;p&gt;$$ f(x_{i-1}) = f(x_{i}) - h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) - \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &amp;hellip; $$
+$$ f(x_{i+1}) = f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &amp;hellip; $$&lt;/p&gt;
+&lt;p&gt;With&lt;/p&gt;
+&lt;p&gt;$$ h = x_{i+1} - x_i = x_i - x_{x-1} $$&lt;/p&gt;
+&lt;p&gt;Now we can re-arrange some stuff from the \( f(x_{x-1}) \) equation to determine the error using for the Forward Differentiation method:&lt;/p&gt;
+&lt;p&gt;$$ \begin{array}{llll} f^\prime_{forward}(x_i)
+&amp;amp; = \frac{ f(x_{i+1}) - f(x_i) }{h} \\
+&amp;amp; = \frac{ (f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &amp;hellip;) - f(x_i)}{h} \\
+&amp;amp; = f^\prime(x_i) + \frac{h}{2}f^{\prime\prime}(x_i) + \frac{h^2}{6}f^{\prime\prime\prime}(x_i) + &amp;hellip; \\
+&amp;amp; \sim  f^\prime(x_i) + \mathcal{O}(h) \end{array} $$&lt;/p&gt;
+&lt;p&gt;Doing the same for Center we get:&lt;/p&gt;
+&lt;p&gt;$$ \begin{array}{llll} f^\prime_{center}(x_i)
+&amp;amp; = \frac{ f(x_{i+1}) - f(x_{i-1}) }{2h} \\
+&amp;amp; = \frac{ (f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &amp;hellip;) - (f(x_{i}) - h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) - \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &amp;hellip;) }{2h} \\
+&amp;amp; = f^\prime(x_i) - \frac{h^2}{6}f^{\prime\prime\prime}(x_i) + &amp;hellip; \\
+&amp;amp; \sim  f^\prime(x_i) + \mathcal{O}(h^2) \end{array} $$&lt;/p&gt;
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            Forward Difference
+        &lt;/td&gt;
+        &lt;td&gt;
+    $$ f^\prime_{forward}(x_i) = \frac{ f(x_{i+1}) - f(x_i) }{h} $$
+        &lt;/td&gt;
+        &lt;td&gt;
+            $$ \mathcal{O}(h) $$
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            Backward Difference
+        &lt;/td&gt;
+        &lt;td&gt;
+    $$ f^\prime_{backward}(x_i) = \frac{ f(x_{x}) - f(x_{i-1}) }{h} $$
+        &lt;/td&gt;
+        &lt;td&gt;
+            $$ \mathcal{O}(h) $$
+        &lt;/td&gt;
+    &lt;/tr&gt;
+     &lt;tr&gt;
+        &lt;td&gt;
+            Center Difference
+        &lt;/td&gt;
+        &lt;td&gt;
+    $$ f^\prime_{center}(x_i) = \frac{ f(x_{i+1}) - f(x_{i-1}) }{2h} $$
+        &lt;/td&gt;
+        &lt;td&gt;
+            $$ \mathcal{O}(h^2) $$
+        &lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;The error can be a little confusing to understand, but it&amp;rsquo;s saying that if we want 100x better resolution on forward or backward methods, we&amp;rsquo;d need to split our \( h \) into 100x smaller buckets.&lt;/p&gt;
+&lt;p&gt;Whereas for the center method, if we want a 100x improvement, we only need to split our \( h \) buckets by 10. 10*10 = 100.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s see this in practice!&lt;/p&gt;
+&lt;h3 id=&#34;forward-backward-center-using-different-h-sizes&#34;&gt;Forward Backward Center using different H sizes&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/c0nrad/csim/blob/master/examples/diff_modes/multiple_h.png?raw=true&#34;&gt;&lt;img src=&#34;https://blog.c0nrad.io/multiple_h.png&#34; alt=&#34;diff_modes&#34;&gt;&lt;/a&gt;
+(&lt;a href=&#34;https://github.com/c0nrad/csim/blob/master/examples/diff_modes/multiple_h.png&#34;&gt;Image&lt;/a&gt; | &lt;a href=&#34;https://github.com/c0nrad/csim/blob/master/examples/diff_modes/diff_modes.go&#34;&gt;Code&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;Here I take the derivative of \( sin(x) \) using the forward, backward and center methods using different buckets of h. You can see that the Center method is significantly better.&lt;/p&gt;
+&lt;h2 id=&#34;random-derivative-examples&#34;&gt;Random Derivative Examples&lt;/h2&gt;
+&lt;p&gt;The numeric differentiator is just plain cool how simple it is!&lt;/p&gt;
+&lt;p&gt;Here I use Numerical Differentiation to plot the derivatives of the following equations:&lt;/p&gt;
+&lt;p&gt;$$ f_1(x) = sin(x) $$
+$$ f_2(x) = 5x -3 $$
+$$ f_3(x) = e^x $$
+$$ f_4(x) = cos(2x) + e^{-\frac{x^2}{2}} sin(10x) $$&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/c0nrad/csim/blob/master/examples/diff_examples/diff_examples.png?raw=true&#34;&gt;&lt;img src=&#34;https://raw.githubusercontent.com/c0nrad/csim/master/examples/diff_examples/diff_examples.png&#34; alt=&#34;diff_examples&#34;&gt;&lt;/a&gt;
+(&lt;a href=&#34;https://github.com/c0nrad/csim/blob/master/examples/diff_modes/multiple_h.png&#34;&gt;Image&lt;/a&gt; | &lt;a href=&#34;https://github.com/c0nrad/csim/blob/master/examples/diff_examples/diff_examples.go&#34;&gt;Code&lt;/a&gt;)&lt;/p&gt;
+&lt;h2 id=&#34;legendre-polynomials&#34;&gt;Legendre Polynomials&lt;/h2&gt;
+&lt;p&gt;In my &lt;a href=&#34;https://blog.c0nrad.io/posts/hydrogen-pt1/&#34;&gt;electron orbitals simulator&lt;/a&gt; I had to calculate the Legendre Polynomials (using Rodrigues&amp;rsquo; Formula):&lt;/p&gt;
+&lt;p&gt;$$ P_l(x) = \frac{1}{2^l l!} \left(\frac{d}{dx}\right)^l (x^2 - 1)^l $$&lt;/p&gt;
+&lt;p&gt;Knowing that I&amp;rsquo;d have to calculate the derivative of this function was one of the reasons I decided to &lt;a href=&#34;https://blog.c0nrad.io/posts/ginac-on-macos/&#34;&gt;check out GiNaCs&lt;/a&gt; in the first place. (GiNaCs has a symbolic differentiator).&lt;/p&gt;
+&lt;p&gt;But now with a Numeric Differentiator, I have no need for the symbolic executioner! (Obviously not fully true, it&amp;rsquo;s still &lt;em&gt;extremely&lt;/em&gt; nice to have the symbols).&lt;/p&gt;
+&lt;p&gt;But, damn, it is so satisfying generating the polynomials like this in Go. I&amp;rsquo;m in shock that it even works to be honest. I heavily abuse function closure&amp;rsquo;s to store state. (It&amp;rsquo;s function closure&amp;rsquo;s all the way down):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-Go&#34; data-lang=&#34;Go&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;LegendrePoly&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;l&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;) &lt;span style=&#34;color:#a6e22e&#34;&gt;Func&lt;/span&gt; {
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;prefix&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;math&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Pow&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, float64(&lt;span style=&#34;color:#a6e22e&#34;&gt;l&lt;/span&gt;)) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Factorial&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;l&lt;/span&gt;))
+
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;inner&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;float64&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;float64&lt;/span&gt; {
+		&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1.0&lt;/span&gt;
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &amp;lt; &lt;span style=&#34;color:#a6e22e&#34;&gt;l&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; {
+			&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+		}
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;
+	}
+
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;inner&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &amp;lt; &lt;span style=&#34;color:#a6e22e&#34;&gt;l&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; {
+		&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt; = &lt;span style=&#34;color:#a6e22e&#34;&gt;D&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;)
+	}
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;float64&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;float64&lt;/span&gt; {
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;prefix&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;x&lt;/span&gt;)
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;But with some plotting, we can verify it works!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.png?raw=true&#34;&gt;&lt;img src=&#34;https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.png?raw=true&#34; alt=&#34;Legendre&#34;&gt;&lt;/a&gt;
+( &lt;a href=&#34;https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.png?raw=true&#34;&gt;Image&lt;/a&gt; | &lt;a href=&#34;https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.go&#34;&gt;Code&lt;/a&gt; )&lt;/p&gt;
+&lt;p&gt;How cool is that!&lt;/p&gt;
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;Numeric differentiation ended up being way cooler than I thought it would be.&lt;/p&gt;
+&lt;p&gt;Up next is numeric integration! I had to build a numeric integrator for a previous game engine, I&amp;rsquo;m excited to see how wrong I was.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Shor&#39;s Algorithm</title>
