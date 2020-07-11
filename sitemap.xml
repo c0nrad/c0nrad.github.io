@@ -8,12 +8,27 @@
   </url>
   
   <url>
+    <loc>https://blog.c0nrad.io/tags/computational-physics/</loc>
+    <lastmod>2020-07-10T20:01:46-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.c0nrad.io/posts/numerical-differentiation/</loc>
     <lastmod>2020-07-10T20:01:46-04:00</lastmod>
   </url>
   
   <url>
+    <loc>https://blog.c0nrad.io/tags/physics/</loc>
+    <lastmod>2020-07-10T20:01:46-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.c0nrad.io/posts/</loc>
+    <lastmod>2020-07-10T20:01:46-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.c0nrad.io/tags/</loc>
     <lastmod>2020-07-10T20:01:46-04:00</lastmod>
   </url>
   
@@ -34,11 +49,6 @@
   
   <url>
     <loc>https://blog.c0nrad.io/posts/quantum-teleportation/</loc>
-    <lastmod>2020-07-03T13:24:22-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/tags/</loc>
     <lastmod>2020-07-03T13:24:22-04:00</lastmod>
   </url>
   
