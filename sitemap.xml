@@ -4,12 +4,32 @@
   
   <url>
     <loc>https://blog.c0nrad.io/</loc>
-    <lastmod>2020-07-10T20:01:46-04:00</lastmod>
+    <lastmod>2020-07-11T23:12:13-04:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.c0nrad.io/tags/computational-physics/</loc>
-    <lastmod>2020-07-10T20:01:46-04:00</lastmod>
+    <lastmod>2020-07-11T23:12:13-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.c0nrad.io/posts/numerical-integration/</loc>
+    <lastmod>2020-07-11T23:12:13-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.c0nrad.io/tags/physics/</loc>
+    <lastmod>2020-07-11T23:12:13-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.c0nrad.io/posts/</loc>
+    <lastmod>2020-07-11T23:12:13-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.c0nrad.io/tags/</loc>
+    <lastmod>2020-07-11T23:12:13-04:00</lastmod>
   </url>
   
   <url>
@@ -18,18 +38,8 @@
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/physics/</loc>
-    <lastmod>2020-07-10T20:01:46-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/posts/</loc>
-    <lastmod>2020-07-10T20:01:46-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/tags/</loc>
-    <lastmod>2020-07-10T20:01:46-04:00</lastmod>
+    <loc>https://blog.c0nrad.io/tags/quantum-computation/</loc>
+    <lastmod>2020-07-10T09:26:38-04:00</lastmod>
   </url>
   
   <url>
@@ -40,11 +50,6 @@
   <url>
     <loc>https://blog.c0nrad.io/posts/qft/</loc>
     <lastmod>2020-07-07T11:01:25-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/tags/quantum-computation/</loc>
-    <lastmod>2020-07-03T13:24:22-04:00</lastmod>
   </url>
   
   <url>

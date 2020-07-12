@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Numerical Integration P1  - c0nrad&#39;s blog</title>
+<meta name="description" content="Learning about physics">
+
+<link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1594525390" />
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1594525390">
+
+<meta property="og:title" content="Numerical Integration P1" />
+<meta property="og:description" content="Some exploration into numerical integration." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.c0nrad.io/posts/numerical-integration/" />
+<meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+<meta property="article:published_time" content="2020-07-11T23:12:13-04:00" />
+<meta property="article:modified_time" content="2020-07-11T23:12:13-04:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+
+<meta name="twitter:title" content="Numerical Integration P1"/>
+<meta name="twitter:description" content="Some exploration into numerical integration."/>
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header> 
+            
+                <h1 class="site-header">
+    <a href="https://blog.c0nrad.io/">c0nrad&#39;s blog</a>
+</h1>
+<nav>
+    
+    
+    <a class="" href="https://c0nrad.io" title="">About</a>
+    
+    <a class="" href="https://github.com/c0nrad/" title="">Github</a>
+    
+    <a class="" href="https://twitter.com/xc0nradx" title="">Twitter</a>
+    
+</nav>
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+
+<article class="post">
+    <header>
+        <h1>Numerical Integration P1</h1>
+    </header>
+    <div class="content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a>
+      <ul>
+        <li><a href="#comparison-of-integrators">Comparison of Integrators</a></li>
+        <li><a href="#integrators">Integrators</a></li>
+      </ul>
+    </li>
+    <li><a href="#offtopic-function-interceptor">Offtopic: Function Interceptor</a>
+      <ul>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+        <p>Some exploration into numerical integration.</p>
+<h2 id="introduction">Introduction</h2>
+<p>It&rsquo;s insane how good Gauss-Legendre quadrature is at integrating functions numerically. With just a few points from a dataset it calculates the integral to an absurd amount of precision.</p>
+<p>I&rsquo;m legit having a good time implementing all these computational physics algorithms. When building out some of my previous physics simulators I just wrote some naive algorithms to perform these tasks (such as a rectangle integrator). It&rsquo;s cool to see just how much better a tool like Gauss-Legendre is comparatively.</p>
+<p>In this post we&rsquo;ll compare the most popular numerical integrators</p>
+<h3 id="comparison-of-integrators">Comparison of Integrators</h3>
+<p><a href="https://github.com/c0nrad/csim/blob/master/examples/integrate/integrate_example.png?raw=true"><img src="https://github.com/c0nrad/csim/blob/master/examples/integrate/integrate_example.png?raw=true" alt="Integrator Comparison"></a></p>
+<p>(<a href="https://github.com/c0nrad/csim/blob/master/examples/integrate/integrate_example.png?raw=true">Image</a> | <a href="https://github.com/c0nrad/csim/blob/master/examples/integrate/integrate_example.go">Source</a>)</p>
+<p>The above chart shows the error for four different functions, using four different integrators, across a number of sample points (N) from the original functions. It took me most of the day to make this image.</p>
+<p>The four functions are:</p>
+<p>$$ f_{topleft} = \int_{-1}^{1} \frac{1}{1+x} dx $$</p>
+<p>$$ f_{topright} = \int_{-10}^{10} 2 x^4 + 3 x^3 + 4 x^2 + 5 x + 6 dx $$</p>
+<p>$$ f_{bottemleft} = \int_{0}^{1} sin(x^2) dx $$</p>
+<p>$$ f_{bottomright} = \int_{0}^{2} e^{-2x} dx $$</p>
+<h3 id="integrators">Integrators</h3>
+<p>Four different integrators were compared, rectangle, trapezoidal, simpson, gauss-legendre.</p>
+<h4 id="rectangle">Rectangle</h4>
+<p>The simplest and most logical. Taken directly from the definition of the Integral. It just splits a function into a number of very small rectangles and adds them up.</p>
+<h4 id="trapezoidal">Trapezoidal</h4>
+<p>A logical extension to the rectangle method. Sometimes the top of the rectangle&rsquo;s isn&rsquo;t flat, so instead treat the top linearly, and use trapezes to model the chunks instead of rectangles.</p>
+<h4 id="simpsons-rule">Simpson&rsquo;s Rule</h4>
+<p>The next logical extension, instead of treating the top of the rectangles as linear, treat them as cubic.</p>
+<h4 id="gauss-legendre">Gauss-Legendre</h4>
+<p>I am honestly blown away by how accurate this function is.</p>
+<p>I&rsquo;m going to dedicate part two to just this algorithm.</p>
+<p>This model is different than the rest. The algorithm is used to determine the spacing of the different chunks along with weights for the sample points.</p>
+<h2 id="offtopic-function-interceptor">Offtopic: Function Interceptor</h2>
+<p>I also wanted to prove that none of the integrators were cheating by calling the base function more than the other integrators. (It turns out this was a little tricky with edge conditions, but the details are boring).</p>
+<p>So I needed a way to determine how many times a function was called. I wrote this little funcintercept class that was pretty neat. It intercepts every call the function and records the argument it receives by wrapping the original function in a closure.</p>
+<p>I imagine I&rsquo;ll probably use a similar construct for caching/memoization.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>A short post, I need to go to bed. But I&rsquo;m excited to learn more of the theory of how gauss-legendre performs so well.</p>
+<p>(I also need to implement a root&rsquo;s finding algorithm, I&rsquo;m hard coding some of the legendre roots :nervous-face:. But excited to get that working too)</p>
+<p>Cheers</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FuncIntercept</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">In</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">float64</span>]<span style="color:#66d9ef">int</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewIntercept</span>() <span style="color:#a6e22e">FuncIntercept</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">FuncIntercept</span>{<span style="color:#a6e22e">In</span>: make(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">float64</span>]<span style="color:#66d9ef">int</span>)}
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">FuncIntercept</span>) <span style="color:#a6e22e">F</span>(<span style="color:#a6e22e">f</span> <span style="color:#a6e22e">csim</span>.<span style="color:#a6e22e">Func</span>) <span style="color:#a6e22e">csim</span>.<span style="color:#a6e22e">Func</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">float64</span> {
+		<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">In</span>[<span style="color:#a6e22e">x</span>]<span style="color:#f92672">++</span>
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">x</span>)
+	}
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">FuncIntercept</span>) <span style="color:#a6e22e">Unique</span>() <span style="color:#66d9ef">int</span> {
+	<span style="color:#66d9ef">return</span> len(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">In</span>)
+}
+
+<span style="color:#f92672">...</span>
+
+<span style="color:#75715e">// example usage
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewIntercept</span>()
+<span style="color:#a6e22e">f</span> = <span style="color:#a6e22e">i</span>.<span style="color:#a6e22e">F</span>(<span style="color:#a6e22e">oldFunc</span>)
+<span style="color:#a6e22e">f</span>(<span style="color:#ae81ff">1</span>); <span style="color:#a6e22e">f</span>(<span style="color:#ae81ff">2</span>); <span style="color:#a6e22e">f</span>(<span style="color:#ae81ff">3</span>);
+<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">i</span>.<span style="color:#a6e22e">Unique</span>() <span style="color:#f92672">!=</span> <span style="color:#ae81ff">3</span> {
+    panic(<span style="color:#e6db74">&#34;Missed a call!&#34;</span>)
+}
+</code></pre></div>
+    </div>
+
+    <div class="article-info">
+    
+        <div class="article-date">2020-07-11</div>
+    
+    <div class="article-taxonomies">
+        
+            
+                <ul class="article-tags">
+                    
+                        <li><a href="https://blog.c0nrad.io/tags/physics">#physics</a></li>
+                    
+                        <li><a href="https://blog.c0nrad.io/tags/computational-physics">#computational physics</a></li>
+                    
+                </ul>
+        
+    </div>
+</div>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+</article>
+
+
+
+
+
+        </main>
+        <footer>
+            
+                <p>© Stuart Larsen, 2020<br>
+</p>
+
+<p>July 2020: I'm looking for a job related to physics/programming. If you have an open role, I'd love to
+    apply/chat! c0nrad@c0nrad.io</p>
+
+
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup {
+        background: #fff;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+        border: 1px solid;
+        margin-top: 20px;
+    }
+
+
+
+
+     
+</style>
+<div id="mc_embed_signup">
+    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
+        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+        novalidate>
+        <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Subscribe for new posts:</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                    class="button"></div>
+        </div>
+    </form>
+</div>
+
+
+            
+        </footer>
+    </div>
+</body>
+</html>

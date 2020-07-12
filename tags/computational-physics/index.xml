@@ -6,10 +6,81 @@
     <description>c0nrad&#39;s blog (computational physics)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Jul 2020 20:01:46 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 11 Jul 2020 23:12:13 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/tags/computational-physics/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Numerical Integration P1</title>
+      <link>https://blog.c0nrad.io/posts/numerical-integration/</link>
+      <pubDate>Sat, 11 Jul 2020 23:12:13 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/numerical-integration/</guid>
+      <description>&lt;p&gt;Some exploration into numerical integration.&lt;/p&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;It&amp;rsquo;s insane how good Gauss-Legendre quadrature is at integrating functions numerically. With just a few points from a dataset it calculates the integral to an absurd amount of precision.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m legit having a good time implementing all these computational physics algorithms. When building out some of my previous physics simulators I just wrote some naive algorithms to perform these tasks (such as a rectangle integrator). It&amp;rsquo;s cool to see just how much better a tool like Gauss-Legendre is comparatively.&lt;/p&gt;
+&lt;p&gt;In this post we&amp;rsquo;ll compare the most popular numerical integrators&lt;/p&gt;
+&lt;h3 id=&#34;comparison-of-integrators&#34;&gt;Comparison of Integrators&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/c0nrad/csim/blob/master/examples/integrate/integrate_example.png?raw=true&#34;&gt;&lt;img src=&#34;https://github.com/c0nrad/csim/blob/master/examples/integrate/integrate_example.png?raw=true&#34; alt=&#34;Integrator Comparison&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;(&lt;a href=&#34;https://github.com/c0nrad/csim/blob/master/examples/integrate/integrate_example.png?raw=true&#34;&gt;Image&lt;/a&gt; | &lt;a href=&#34;https://github.com/c0nrad/csim/blob/master/examples/integrate/integrate_example.go&#34;&gt;Source&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;The above chart shows the error for four different functions, using four different integrators, across a number of sample points (N) from the original functions. It took me most of the day to make this image.&lt;/p&gt;
+&lt;p&gt;The four functions are:&lt;/p&gt;
+&lt;p&gt;$$ f_{topleft} = \int_{-1}^{1} \frac{1}{1+x} dx $$&lt;/p&gt;
+&lt;p&gt;$$ f_{topright} = \int_{-10}^{10} 2 x^4 + 3 x^3 + 4 x^2 + 5 x + 6 dx $$&lt;/p&gt;
+&lt;p&gt;$$ f_{bottemleft} = \int_{0}^{1} sin(x^2) dx $$&lt;/p&gt;
+&lt;p&gt;$$ f_{bottomright} = \int_{0}^{2} e^{-2x} dx $$&lt;/p&gt;
+&lt;h3 id=&#34;integrators&#34;&gt;Integrators&lt;/h3&gt;
+&lt;p&gt;Four different integrators were compared, rectangle, trapezoidal, simpson, gauss-legendre.&lt;/p&gt;
+&lt;h4 id=&#34;rectangle&#34;&gt;Rectangle&lt;/h4&gt;
+&lt;p&gt;The simplest and most logical. Taken directly from the definition of the Integral. It just splits a function into a number of very small rectangles and adds them up.&lt;/p&gt;
+&lt;h4 id=&#34;trapezoidal&#34;&gt;Trapezoidal&lt;/h4&gt;
+&lt;p&gt;A logical extension to the rectangle method. Sometimes the top of the rectangle&amp;rsquo;s isn&amp;rsquo;t flat, so instead treat the top linearly, and use trapezes to model the chunks instead of rectangles.&lt;/p&gt;
+&lt;h4 id=&#34;simpsons-rule&#34;&gt;Simpson&amp;rsquo;s Rule&lt;/h4&gt;
+&lt;p&gt;The next logical extension, instead of treating the top of the rectangles as linear, treat them as cubic.&lt;/p&gt;
+&lt;h4 id=&#34;gauss-legendre&#34;&gt;Gauss-Legendre&lt;/h4&gt;
+&lt;p&gt;I am honestly blown away by how accurate this function is.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m going to dedicate part two to just this algorithm.&lt;/p&gt;
+&lt;p&gt;This model is different than the rest. The algorithm is used to determine the spacing of the different chunks along with weights for the sample points.&lt;/p&gt;
+&lt;h2 id=&#34;offtopic-function-interceptor&#34;&gt;Offtopic: Function Interceptor&lt;/h2&gt;
+&lt;p&gt;I also wanted to prove that none of the integrators were cheating by calling the base function more than the other integrators. (It turns out this was a little tricky with edge conditions, but the details are boring).&lt;/p&gt;
+&lt;p&gt;So I needed a way to determine how many times a function was called. I wrote this little funcintercept class that was pretty neat. It intercepts every call the function and records the argument it receives by wrapping the original function in a closure.&lt;/p&gt;
+&lt;p&gt;I imagine I&amp;rsquo;ll probably use a similar construct for caching/memoization.&lt;/p&gt;
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;A short post, I need to go to bed. But I&amp;rsquo;m excited to learn more of the theory of how gauss-legendre performs so well.&lt;/p&gt;
+&lt;p&gt;(I also need to implement a root&amp;rsquo;s finding algorithm, I&amp;rsquo;m hard coding some of the legendre roots :nervous-face:. But excited to get that working too)&lt;/p&gt;
+&lt;p&gt;Cheers&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;FuncIntercept&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; {
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;In&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;map&lt;/span&gt;[&lt;span style=&#34;color:#66d9ef&#34;&gt;float64&lt;/span&gt;]&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;NewIntercept&lt;/span&gt;() &lt;span style=&#34;color:#a6e22e&#34;&gt;FuncIntercept&lt;/span&gt; {
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;FuncIntercept&lt;/span&gt;{&lt;span style=&#34;color:#a6e22e&#34;&gt;In&lt;/span&gt;: make(&lt;span style=&#34;color:#66d9ef&#34;&gt;map&lt;/span&gt;[&lt;span style=&#34;color:#66d9ef&#34;&gt;float64&lt;/span&gt;]&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;)}
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;FuncIntercept&lt;/span&gt;) &lt;span style=&#34;color:#a6e22e&#34;&gt;F&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;f&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;csim&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Func&lt;/span&gt;) &lt;span style=&#34;color:#a6e22e&#34;&gt;csim&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Func&lt;/span&gt; {
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;float64&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;float64&lt;/span&gt; {
+		&lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;In&lt;/span&gt;[&lt;span style=&#34;color:#a6e22e&#34;&gt;x&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;f&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;x&lt;/span&gt;)
+	}
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;FuncIntercept&lt;/span&gt;) &lt;span style=&#34;color:#a6e22e&#34;&gt;Unique&lt;/span&gt;() &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; {
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; len(&lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;In&lt;/span&gt;)
+}
+
+&lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;// example usage
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;NewIntercept&lt;/span&gt;()
+&lt;span style=&#34;color:#a6e22e&#34;&gt;f&lt;/span&gt; = &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;F&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;oldFunc&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;f&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;); &lt;span style=&#34;color:#a6e22e&#34;&gt;f&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;); &lt;span style=&#34;color:#a6e22e&#34;&gt;f&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;);
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Unique&lt;/span&gt;() &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; {
+    panic(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Missed a call!&amp;#34;&lt;/span&gt;)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Numerical Differentiation</title>
@@ -28,21 +99,21 @@
 &lt;p&gt;But not all functions are that easy to differentiate. And sometimes you&amp;rsquo;re lazy and don&amp;rsquo;t want to figure it out. Or sometimes you only have some data and not the underlying function. Turns out you can use computers to get pretty good estimations!&lt;/p&gt;
 &lt;h3 id=&#34;forward-backward-center-numerical-differentiation&#34;&gt;Forward, Backward, Center Numerical Differentiation&lt;/h3&gt;
 &lt;p&gt;In high school calculus we learned that:&lt;/p&gt;
-&lt;p&gt;$$ f&amp;rsquo;(x) = \lim_{h\to\infty} \frac{f(x+h) - f(x)}{h} $$&lt;/p&gt;
-&lt;p&gt;And the idea behind numerical differentiation isn&amp;rsquo;t that different. But instead of taking the limit, we just make h very small. When h is very small, we just assume the line is liner and use the equation for finding the slope of a linear line.&lt;/p&gt;
+&lt;p&gt;$$ f^\prime(x) = \lim_{h\to\infty} \frac{f(x+h) - f(x)}{h} $$&lt;/p&gt;
+&lt;p&gt;And the idea behind numerical differentiation isn&amp;rsquo;t that different. But instead of taking the limit, we just make h very small. When h is very small, we just assume the line is linear and use the equation for finding the slope of a linear line.&lt;/p&gt;
 &lt;p&gt;But, we need to make a choice. Let&amp;rsquo;s say we want to find the slope at \( x_i \) should we use \( x_{i-1}, x_{i} \) as the two points? Or \( x_{i}, x_{i+1} \) or maybe \( x_{i-1}, x_{i+1} \)?&lt;/p&gt;
 &lt;p&gt;$$ f^\prime_{forward}(x_i) = \frac{ f(x_{i+1}) - f(x_i) }{h} $$
 $$ f^\prime_{backward}(x_i) = \frac{ f(x_{x}) - f(x_{i-1}) }{h} $$
 $$ f^\prime_{center}(x_i) = \frac{ f(x_{i+1}) - f(x_{i-1}) }{2h} $$&lt;/p&gt;
-&lt;p&gt;It turns out the answer is the last one (called Center), but we can go one step further and prove is using Taylor series!&lt;/p&gt;
+&lt;p&gt;It turns out the answer is the last one (called Center), but we can go one step further and prove that using the point before and after is the best using Taylor series!&lt;/p&gt;
 &lt;h4 id=&#34;determining-the-error-using-forward-backward-center-numerical-differentiation&#34;&gt;Determining the error using Forward, Backward, Center Numerical Differentiation&lt;/h4&gt;
 &lt;p&gt;We can actually prove that the center method has the least amount of error.&lt;/p&gt;
-&lt;p&gt;Let&amp;rsquo;s Taylor expand \( x_{i-1} \) and \(x_{i+1} \). So we&amp;rsquo;re using f(x) as our base point and estimating \( x_{i-1} \) and \(x_{i+1} \).&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s Taylor expand \( x_{i-1} \) and \(x_{i+1} \). So we&amp;rsquo;re using f(x_i) as our base point and estimating \( x_{i-1} \) and \(x_{i+1} \).&lt;/p&gt;
 &lt;p&gt;$$ f(x_{i-1}) = f(x_{i}) - h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) - \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &amp;hellip; $$
 $$ f(x_{i+1}) = f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &amp;hellip; $$&lt;/p&gt;
 &lt;p&gt;With&lt;/p&gt;
 &lt;p&gt;$$ h = x_{i+1} - x_i = x_i - x_{x-1} $$&lt;/p&gt;
-&lt;p&gt;Now we can re-arrange some stuff from the \( f(x_{x-1}) \) equation to determine the error using for the Forward Differentiation method:&lt;/p&gt;
+&lt;p&gt;Now we can re-arrange some stuff from the \( f(x_{x-1}) \) equation to determine the error for the Forward Differentiation method:&lt;/p&gt;
 &lt;p&gt;$$ \begin{array}{llll} f^\prime_{forward}(x_i)
 &amp;amp; = \frac{ f(x_{i+1}) - f(x_i) }{h} \\
 &amp;amp; = \frac{ (f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &amp;hellip;) - f(x_i)}{h} \\

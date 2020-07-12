@@ -14,9 +14,9 @@
 <link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
 <link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
 
-<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1594432946" />
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1594525390" />
 
-<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1594432946">
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1594525390">
 
 <meta property="og:title" content="Numerical Differentiation" />
 <meta property="og:description" content="Some exploration into numerical differentiation." />
@@ -97,21 +97,21 @@
 <p>But not all functions are that easy to differentiate. And sometimes you&rsquo;re lazy and don&rsquo;t want to figure it out. Or sometimes you only have some data and not the underlying function. Turns out you can use computers to get pretty good estimations!</p>
 <h3 id="forward-backward-center-numerical-differentiation">Forward, Backward, Center Numerical Differentiation</h3>
 <p>In high school calculus we learned that:</p>
-<p>$$ f&rsquo;(x) = \lim_{h\to\infty} \frac{f(x+h) - f(x)}{h} $$</p>
-<p>And the idea behind numerical differentiation isn&rsquo;t that different. But instead of taking the limit, we just make h very small. When h is very small, we just assume the line is liner and use the equation for finding the slope of a linear line.</p>
+<p>$$ f^\prime(x) = \lim_{h\to\infty} \frac{f(x+h) - f(x)}{h} $$</p>
+<p>And the idea behind numerical differentiation isn&rsquo;t that different. But instead of taking the limit, we just make h very small. When h is very small, we just assume the line is linear and use the equation for finding the slope of a linear line.</p>
 <p>But, we need to make a choice. Let&rsquo;s say we want to find the slope at \( x_i \) should we use \( x_{i-1}, x_{i} \) as the two points? Or \( x_{i}, x_{i+1} \) or maybe \( x_{i-1}, x_{i+1} \)?</p>
 <p>$$ f^\prime_{forward}(x_i) = \frac{ f(x_{i+1}) - f(x_i) }{h} $$
 $$ f^\prime_{backward}(x_i) = \frac{ f(x_{x}) - f(x_{i-1}) }{h} $$
 $$ f^\prime_{center}(x_i) = \frac{ f(x_{i+1}) - f(x_{i-1}) }{2h} $$</p>
-<p>It turns out the answer is the last one (called Center), but we can go one step further and prove is using Taylor series!</p>
+<p>It turns out the answer is the last one (called Center), but we can go one step further and prove that using the point before and after is the best using Taylor series!</p>
 <h4 id="determining-the-error-using-forward-backward-center-numerical-differentiation">Determining the error using Forward, Backward, Center Numerical Differentiation</h4>
 <p>We can actually prove that the center method has the least amount of error.</p>
-<p>Let&rsquo;s Taylor expand \( x_{i-1} \) and \(x_{i+1} \). So we&rsquo;re using f(x) as our base point and estimating \( x_{i-1} \) and \(x_{i+1} \).</p>
+<p>Let&rsquo;s Taylor expand \( x_{i-1} \) and \(x_{i+1} \). So we&rsquo;re using f(x_i) as our base point and estimating \( x_{i-1} \) and \(x_{i+1} \).</p>
 <p>$$ f(x_{i-1}) = f(x_{i}) - h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) - \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip; $$
 $$ f(x_{i+1}) = f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip; $$</p>
 <p>With</p>
 <p>$$ h = x_{i+1} - x_i = x_i - x_{x-1} $$</p>
-<p>Now we can re-arrange some stuff from the \( f(x_{x-1}) \) equation to determine the error using for the Forward Differentiation method:</p>
+<p>Now we can re-arrange some stuff from the \( f(x_{x-1}) \) equation to determine the error for the Forward Differentiation method:</p>
 <p>$$ \begin{array}{llll} f^\prime_{forward}(x_i)
 &amp; = \frac{ f(x_{i+1}) - f(x_i) }{h} \\
 &amp; = \frac{ (f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip;) - f(x_i)}{h} \\
