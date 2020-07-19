@@ -6,10 +6,133 @@
     <description>c0nrad&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jul 2020 23:12:13 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 19 Jul 2020 10:10:01 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vector Calculus</title>
+      <link>https://blog.c0nrad.io/posts/vector-calculus/</link>
+      <pubDate>Sun, 19 Jul 2020 10:10:01 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/vector-calculus/</guid>
+      <description>&lt;p&gt;Progress on a vector calculus library in javascript.&lt;/p&gt;
+&lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;
+&lt;p&gt;I took a break from the numerical calculations book to try and apply some of the techniques I learned so far.&lt;/p&gt;
+&lt;p&gt;(Also I applied to a few Ph.D. programs in computational physics, and I need to review some of the basics I&amp;rsquo;ve forgotten, so I figured this would be a good opportunity.)&lt;/p&gt;
+&lt;p&gt;And I&amp;rsquo;ve wanted to build an Electromagnetism simulation for awhile, so I&amp;rsquo;ve been reading &lt;a href=&#34;https://www.amazon.com/Introduction-Electrodynamics-David-J-Griffiths/dp/1108420419/ref=sr_1_2?dchild=1&amp;amp;keywords=electromagnetism+griffiths&amp;amp;qid=1595167901&amp;amp;sr=8-2&amp;amp;tag=techblast0f-20&#34;&gt;Griffith&amp;rsquo;s E&amp;amp;M book&lt;/a&gt;. I think I actually bought this book for college 8 years ago, but I never read it. Unfortunately all my books are in storage.&lt;/p&gt;
+&lt;p&gt;Reading it page by page and doing the examples has been pretty fun. I&amp;rsquo;m even learning that I didn&amp;rsquo;t understand a few concepts as well as I thought (line integrals are the dot product of the line vector, not the magnitude vector!). Which is always (frustrating at first), but exciting afterwards.&lt;/p&gt;
+&lt;p&gt;(Rant: I really wish there was a &amp;ldquo;Project Euler&amp;rdquo; but for physics. I don&amp;rsquo;t really enjoy doing physics problems on paper. Every time I solve a problem on paper it seems like a waste. Had I instead codified the solution at least I&amp;rsquo;d have something when I was done. Now I just have notebooks of messy handwriting. Not to mention I don&amp;rsquo;t really trust my math when the equations get long, it&amp;rsquo;s too easy for me to mess up and accidentally cross of a term. I wish more math was done on a computer, but the ph.d. won&amp;rsquo;t be that way, so I need to practice by hand.)&lt;/p&gt;
+&lt;p&gt;But afterwards I codified some of the stuff I had learned:&lt;/p&gt;
+&lt;h2 id=&#34;vectorjs&#34;&gt;vector.js&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/c0nrad/vector&#34;&gt;https://github.com/c0nrad/vector&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Chapter 1 is all about vectors and some calculus (and coordinate systems). A perfect thing to put into code.&lt;/p&gt;
+&lt;p&gt;I ended up implementing:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;vectors
+&lt;ul&gt;
+&lt;li&gt;basic operations, dot and cross product, etc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;vector fields
+&lt;ul&gt;
+&lt;li&gt;basic operations, &amp;ldquo;evaluate&amp;rdquo; at a point, etc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;vector operators
+&lt;ul&gt;
+&lt;li&gt;Gradient&lt;/li&gt;
+&lt;li&gt;Divergence&lt;/li&gt;
+&lt;li&gt;Curl&lt;/li&gt;
+&lt;li&gt;LaPlacian&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Integrals (numerical)
+&lt;ul&gt;
+&lt;li&gt;integrate (standard, simpsons)&lt;/li&gt;
+&lt;li&gt;integrate vector-field along line/path (simpsons)&lt;/li&gt;
+&lt;li&gt;integrate vector-field surface (flux) (center)&lt;/li&gt;
+&lt;li&gt;integrate volume (center)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Examples
+&lt;ul&gt;
+&lt;li&gt;Divergence Theorem&lt;/li&gt;
+&lt;li&gt;Stokes&amp;rsquo; Theorem&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All in all it was pretty fun, and super neat that divergence/stokes actually worked.&lt;/p&gt;
+&lt;h3 id=&#34;vector-calculus-operators&#34;&gt;Vector Calculus Operators&lt;/h3&gt;
+&lt;h4 id=&#34;gradient&#34;&gt;Gradient&lt;/h4&gt;
+&lt;p&gt;The gradient is a nify little operator that is somewhat similar to a &amp;ldquo;3D slope&amp;rdquo;. After taking the operator of a function, it&amp;rsquo;ll return a vector that points &amp;ldquo;uphill&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;$$ \nabla T = \frac{\partial T}{\partial x}  \hat{\bm{x}} + \frac{\partial T}{\partial y}  \hat{\bm{y}} + \frac{\partial T}{\partial z}  \hat{\bm{z}} $$&lt;/p&gt;
+&lt;p&gt;So if you had something like:&lt;/p&gt;
+&lt;p&gt;$$ A = 3x^2 + 5yz $$&lt;/p&gt;
+&lt;p&gt;And you took the gradient you&amp;rsquo;d get:&lt;/p&gt;
+&lt;p&gt;$$ \nabla A = 6x \hat{\bm{x}} + 5z \hat{\bm{y}} + 5y \hat{\bm{z}} $$&lt;/p&gt;
+&lt;h4 id=&#34;divergence&#34;&gt;Divergence&lt;/h4&gt;
+&lt;p&gt;The divergence is a measure of the &amp;ldquo;inward&amp;rdquo; or &amp;ldquo;outward&amp;rdquo; flow of a vector field at a point. You can think of it like a measure of a facet or a drain in a body of water.&lt;/p&gt;
+&lt;p&gt;$$ \nabla \cdot \bm{v} = \frac{\partial \bm{v_x}}{\partial x} + \frac{\partial \bm{v_y}}{\partial y} + \frac{\partial \bm{v_z}}{\partial z} $$&lt;/p&gt;
+&lt;p&gt;Notice that it takes a vector field, and output a scalar function.&lt;/p&gt;
+&lt;p&gt;An example:&lt;/p&gt;
+&lt;p&gt;$$ \bm{v} = 6x^2 \hat{\bm{x}} + 5zy \hat{\bm{y}} + 5yz \hat{\bm{z}} $$&lt;/p&gt;
+&lt;p&gt;$$ \nabla \cdot \bm{v} = \frac{\partial (6x^2)}{\partial x} + \frac{\partial (5zy)}{\partial y} + \frac{\partial (5zy)}{\partial z} =12x + 5z + 5y $$&lt;/p&gt;
+&lt;h4 id=&#34;curl&#34;&gt;Curl&lt;/h4&gt;
+&lt;p&gt;The curl has a pretty apt name, it&amp;rsquo;s the measure of how much a vector field &amp;ldquo;curls&amp;rdquo; or &amp;ldquo;swirls&amp;rdquo; around a point.&lt;/p&gt;
+&lt;p&gt;The curl can be calculated by:&lt;/p&gt;
+&lt;p&gt;$$ \nabla \times \bm{v} = \det \begin{vmatrix}
+\hat{\bm{x}} &amp;amp; \hat{\bm{y}} &amp;amp; \hat{\bm{z}} \\
+\partial / \partial x  &amp;amp; \partial / \partial y &amp;amp; \partial / \partial z \\
+v_x &amp;amp; v_y &amp;amp; v_z
+\end{vmatrix}  = \hat{\bm{x}} \left(\frac{\partial v_z}{\partial y}-\frac{\partial v_y}{\partial z} \right) + \hat{\bm{y}} \left(\frac{\partial v_x}{\partial z}-\frac{\partial v_z}{\partial x} \right) + \hat{\bm{z}} \left(\frac{\partial v_y}{\partial x}-\frac{\partial v_x}{\partial y} \right) $$&lt;/p&gt;
+&lt;p&gt;A little bit messier. Thank you computers for never making me have to calculate these by hand.&lt;/p&gt;
+&lt;h3 id=&#34;divergence-theorem&#34;&gt;Divergence Theorem&lt;/h3&gt;
+&lt;p&gt;The divergence theorem (also known as Green&amp;rsquo;s/Gauss&amp;rsquo;s theorem), is a nifty little vector calculus theorem that states the following:&lt;/p&gt;
+&lt;p&gt;$$ \int_{\nu} ( \nabla \cdot \bm{v}) d \tau = \oint_S \bm{v} \cdot d\bm{a} $$&lt;/p&gt;
+&lt;p&gt;The math looks harder than the concept it&amp;rsquo;s trying to explain.&lt;/p&gt;
+&lt;p&gt;On the left, it&amp;rsquo;s taking the volume integral of the divergence of a vector field. In english, it&amp;rsquo;s is a measure of how much the vector field is flowing in or out of the volume.&lt;/p&gt;
+&lt;p&gt;On the right, it&amp;rsquo;s the surface integral of the flux in/out of the border. In english, it&amp;rsquo;s measuring how much of the vector field is flowing in or out of the border.&lt;/p&gt;
+&lt;p&gt;The equation is saying something so obvious that it&amp;rsquo;s almost non-sensical. If there&amp;rsquo;s a change of volume of stuff on the inside, it must either have came from through the surface border.&lt;/p&gt;
+&lt;p&gt;You can imagine if you cut out a cube in the ocean and measured how much &amp;ldquo;ocean&amp;rdquo; was in the cube at any point. If there&amp;rsquo;s more &amp;ldquo;ocean&amp;rdquo; in the cube, you know that it must have come into our imaginary cube from one of the cube sides.&lt;/p&gt;
+&lt;p&gt;To implement this with my new nifty library:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;A&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;VectorField&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Func&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;y^2&amp;#34;&lt;/span&gt;), &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Func&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2*x*y + z^2&amp;#34;&lt;/span&gt;), &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Func&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2 * y * z&amp;#34;&lt;/span&gt;))
+&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Vector&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;b&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Vector&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;integrate_volume_cube&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;divergence&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;A&lt;/span&gt;), &lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;b&lt;/span&gt;)).&lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;closeTo&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;.0001&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;integrate_surface_cube&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;A&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;b&lt;/span&gt;)).&lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;closeTo&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;.1&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/c0nrad/vector/blob/master/src/integrals.test.ts#L51&#34;&gt;code&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;stokes-theorem&#34;&gt;Stoke&amp;rsquo;s Theorem&lt;/h3&gt;
+&lt;p&gt;The second nifty vector calculus theorem, stoke&amp;rsquo;s theorem has to do with the curl of a vector field.&lt;/p&gt;
+&lt;p&gt;$$ \int_{S} ( \nabla \times \bm{v}) \cdot d \bm{a} = \oint_P \bm{v} \cdot d\bm{l} $$&lt;/p&gt;
+&lt;p&gt;(Quick note, those dots in the equation are not for &amp;ldquo;funz&amp;rdquo; the specifically mean dot-product.)&lt;/p&gt;
+&lt;p&gt;Again, the equation looks more complex that it really is.&lt;/p&gt;
+&lt;p&gt;On the left, we take the surface integral of the curl of some vector field. This is a measure of the overall swirling along some surface.&lt;/p&gt;
+&lt;p&gt;On the right we have the line integral along a path of the vector field. The \( P \) means that we are following the perimeter of the surface. Since it&amp;rsquo;s the dot product, it&amp;rsquo;s measuring how much the vector field is &amp;ldquo;aligned&amp;rdquo; with our perimeter path through the vector field.&lt;/p&gt;
+&lt;p&gt;So, the right is almost a shortcut to the left side. (It kind of reminds me of the fundamental theorem of calculus (or fundamental theorem of gradients)).&lt;/p&gt;
+&lt;p&gt;Basically instead of measuring the &amp;ldquo;curl&amp;rdquo; at every point, you can just trace the outside perimeter and call it good enough.&lt;/p&gt;
+&lt;p&gt;In code:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;A&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;VectorField&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Func&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;), &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Func&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2*x*z + 3 * y^2&amp;#34;&lt;/span&gt;), &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Func&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4 y z^2&amp;#34;&lt;/span&gt;))
+&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Vector&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;b&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Vector&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;integrate_surface&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;curl&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;A&lt;/span&gt;), &lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Vector&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;), &lt;span style=&#34;color:#a6e22e&#34;&gt;b&lt;/span&gt;)).&lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;closeTo&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;.1&lt;/span&gt;)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Vector&lt;/span&gt;[] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Vector&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;),
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Vector&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;),
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Vector&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;),
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Vector&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;),
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Vector&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+]
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;integrate_path&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;A&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;path&lt;/span&gt;)).&lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;closeTo&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;.00001&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/c0nrad/vector/blob/master/src/integrals.test.ts#L60&#34;&gt;code&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;That&amp;rsquo;s all, but next up I think I might work on a library with three.js to do some quick visualizations of the above. We&amp;rsquo;ll see.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Numerical Integration Pt. 1</title>

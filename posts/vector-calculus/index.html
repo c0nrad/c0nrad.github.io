@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Vector Calculus  - c0nrad&#39;s blog</title>
+<meta name="description" content="Learning about physics">
+
+<link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1595172608" />
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1595172608">
+
+<meta property="og:title" content="Vector Calculus" />
+<meta property="og:description" content="Progress on a vector calculus library in javascript." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.c0nrad.io/posts/vector-calculus/" />
+<meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+<meta property="article:published_time" content="2020-07-19T10:10:01-04:00" />
+<meta property="article:modified_time" content="2020-07-19T10:10:01-04:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+
+<meta name="twitter:title" content="Vector Calculus"/>
+<meta name="twitter:description" content="Progress on a vector calculus library in javascript."/>
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header> 
+            
+                <h1 class="site-header">
+    <a href="https://blog.c0nrad.io/">c0nrad&#39;s blog</a>
+</h1>
+<nav>
+    
+    
+    <a class="" href="https://c0nrad.io" title="">About</a>
+    
+    <a class="" href="https://github.com/c0nrad/" title="">Github</a>
+    
+    <a class="" href="https://twitter.com/xc0nradx" title="">Twitter</a>
+    
+</nav>
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+
+<article class="post">
+    <header>
+        <h1>Vector Calculus</h1>
+    </header>
+    <div class="content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#motivation">Motivation</a></li>
+    <li><a href="#vectorjs">vector.js</a>
+      <ul>
+        <li><a href="#vector-calculus-operators">Vector Calculus Operators</a></li>
+        <li><a href="#divergence-theorem">Divergence Theorem</a></li>
+        <li><a href="#stokes-theorem">Stoke&rsquo;s Theorem</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+        <p>Progress on a vector calculus library in javascript.</p>
+<h2 id="motivation">Motivation</h2>
+<p>I took a break from the numerical calculations book to try and apply some of the techniques I learned so far.</p>
+<p>(Also I applied to a few Ph.D. programs in computational physics, and I need to review some of the basics I&rsquo;ve forgotten, so I figured this would be a good opportunity.)</p>
+<p>And I&rsquo;ve wanted to build an Electromagnetism simulation for awhile, so I&rsquo;ve been reading <a href="https://www.amazon.com/Introduction-Electrodynamics-David-J-Griffiths/dp/1108420419/ref=sr_1_2?dchild=1&amp;keywords=electromagnetism+griffiths&amp;qid=1595167901&amp;sr=8-2&amp;tag=techblast0f-20">Griffith&rsquo;s E&amp;M book</a>. I think I actually bought this book for college 8 years ago, but I never read it. Unfortunately all my books are in storage.</p>
+<p>Reading it page by page and doing the examples has been pretty fun. I&rsquo;m even learning that I didn&rsquo;t understand a few concepts as well as I thought (line integrals are the dot product of the line vector, not the magnitude vector!). Which is always (frustrating at first), but exciting afterwards.</p>
+<p>(Rant: I really wish there was a &ldquo;Project Euler&rdquo; but for physics. I don&rsquo;t really enjoy doing physics problems on paper. Every time I solve a problem on paper it seems like a waste. Had I instead codified the solution at least I&rsquo;d have something when I was done. Now I just have notebooks of messy handwriting. Not to mention I don&rsquo;t really trust my math when the equations get long, it&rsquo;s too easy for me to mess up and accidentally cross of a term. I wish more math was done on a computer, but the ph.d. won&rsquo;t be that way, so I need to practice by hand.)</p>
+<p>But afterwards I codified some of the stuff I had learned:</p>
+<h2 id="vectorjs">vector.js</h2>
+<p><a href="https://github.com/c0nrad/vector">https://github.com/c0nrad/vector</a></p>
+<p>Chapter 1 is all about vectors and some calculus (and coordinate systems). A perfect thing to put into code.</p>
+<p>I ended up implementing:</p>
+<ul>
+<li>vectors
+<ul>
+<li>basic operations, dot and cross product, etc</li>
+</ul>
+</li>
+<li>vector fields
+<ul>
+<li>basic operations, &ldquo;evaluate&rdquo; at a point, etc</li>
+</ul>
+</li>
+<li>vector operators
+<ul>
+<li>Gradient</li>
+<li>Divergence</li>
+<li>Curl</li>
+<li>LaPlacian</li>
+</ul>
+</li>
+<li>Integrals (numerical)
+<ul>
+<li>integrate (standard, simpsons)</li>
+<li>integrate vector-field along line/path (simpsons)</li>
+<li>integrate vector-field surface (flux) (center)</li>
+<li>integrate volume (center)</li>
+</ul>
+</li>
+<li>Examples
+<ul>
+<li>Divergence Theorem</li>
+<li>Stokes&rsquo; Theorem</li>
+</ul>
+</li>
+</ul>
+<p>All in all it was pretty fun, and super neat that divergence/stokes actually worked.</p>
+<h3 id="vector-calculus-operators">Vector Calculus Operators</h3>
+<h4 id="gradient">Gradient</h4>
+<p>The gradient is a nify little operator that is somewhat similar to a &ldquo;3D slope&rdquo;. After taking the operator of a function, it&rsquo;ll return a vector that points &ldquo;uphill&rdquo;.</p>
+<p>$$ \nabla T = \frac{\partial T}{\partial x}  \hat{\bm{x}} + \frac{\partial T}{\partial y}  \hat{\bm{y}} + \frac{\partial T}{\partial z}  \hat{\bm{z}} $$</p>
+<p>So if you had something like:</p>
+<p>$$ A = 3x^2 + 5yz $$</p>
+<p>And you took the gradient you&rsquo;d get:</p>
+<p>$$ \nabla A = 6x \hat{\bm{x}} + 5z \hat{\bm{y}} + 5y \hat{\bm{z}} $$</p>
+<h4 id="divergence">Divergence</h4>
+<p>The divergence is a measure of the &ldquo;inward&rdquo; or &ldquo;outward&rdquo; flow of a vector field at a point. You can think of it like a measure of a facet or a drain in a body of water.</p>
+<p>$$ \nabla \cdot \bm{v} = \frac{\partial \bm{v_x}}{\partial x} + \frac{\partial \bm{v_y}}{\partial y} + \frac{\partial \bm{v_z}}{\partial z} $$</p>
+<p>Notice that it takes a vector field, and output a scalar function.</p>
+<p>An example:</p>
+<p>$$ \bm{v} = 6x^2 \hat{\bm{x}} + 5zy \hat{\bm{y}} + 5yz \hat{\bm{z}} $$</p>
+<p>$$ \nabla \cdot \bm{v} = \frac{\partial (6x^2)}{\partial x} + \frac{\partial (5zy)}{\partial y} + \frac{\partial (5zy)}{\partial z} =12x + 5z + 5y $$</p>
+<h4 id="curl">Curl</h4>
+<p>The curl has a pretty apt name, it&rsquo;s the measure of how much a vector field &ldquo;curls&rdquo; or &ldquo;swirls&rdquo; around a point.</p>
+<p>The curl can be calculated by:</p>
+<p>$$ \nabla \times \bm{v} = \det \begin{vmatrix}
+\hat{\bm{x}} &amp; \hat{\bm{y}} &amp; \hat{\bm{z}} \\
+\partial / \partial x  &amp; \partial / \partial y &amp; \partial / \partial z \\
+v_x &amp; v_y &amp; v_z
+\end{vmatrix}  = \hat{\bm{x}} \left(\frac{\partial v_z}{\partial y}-\frac{\partial v_y}{\partial z} \right) + \hat{\bm{y}} \left(\frac{\partial v_x}{\partial z}-\frac{\partial v_z}{\partial x} \right) + \hat{\bm{z}} \left(\frac{\partial v_y}{\partial x}-\frac{\partial v_x}{\partial y} \right) $$</p>
+<p>A little bit messier. Thank you computers for never making me have to calculate these by hand.</p>
+<h3 id="divergence-theorem">Divergence Theorem</h3>
+<p>The divergence theorem (also known as Green&rsquo;s/Gauss&rsquo;s theorem), is a nifty little vector calculus theorem that states the following:</p>
+<p>$$ \int_{\nu} ( \nabla \cdot \bm{v}) d \tau = \oint_S \bm{v} \cdot d\bm{a} $$</p>
+<p>The math looks harder than the concept it&rsquo;s trying to explain.</p>
+<p>On the left, it&rsquo;s taking the volume integral of the divergence of a vector field. In english, it&rsquo;s is a measure of how much the vector field is flowing in or out of the volume.</p>
+<p>On the right, it&rsquo;s the surface integral of the flux in/out of the border. In english, it&rsquo;s measuring how much of the vector field is flowing in or out of the border.</p>
+<p>The equation is saying something so obvious that it&rsquo;s almost non-sensical. If there&rsquo;s a change of volume of stuff on the inside, it must either have came from through the surface border.</p>
+<p>You can imagine if you cut out a cube in the ocean and measured how much &ldquo;ocean&rdquo; was in the cube at any point. If there&rsquo;s more &ldquo;ocean&rdquo; in the cube, you know that it must have come into our imaginary cube from one of the cube sides.</p>
+<p>To implement this with my new nifty library:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">A</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">VectorField</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Func</span>(<span style="color:#e6db74">&#34;y^2&#34;</span>), <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Func</span>(<span style="color:#e6db74">&#34;2*x*y + z^2&#34;</span>), <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Func</span>(<span style="color:#e6db74">&#34;2 * y * z&#34;</span>))
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
+
+<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">integrate_volume_cube</span>(<span style="color:#a6e22e">divergence</span>(<span style="color:#a6e22e">A</span>), <span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">closeTo</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">.0001</span>)
+<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">integrate_surface_cube</span>(<span style="color:#a6e22e">A</span>, <span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">closeTo</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">.1</span>)
+</code></pre></div><p><a href="https://github.com/c0nrad/vector/blob/master/src/integrals.test.ts#L51">code</a></p>
+<h3 id="stokes-theorem">Stoke&rsquo;s Theorem</h3>
+<p>The second nifty vector calculus theorem, stoke&rsquo;s theorem has to do with the curl of a vector field.</p>
+<p>$$ \int_{S} ( \nabla \times \bm{v}) \cdot d \bm{a} = \oint_P \bm{v} \cdot d\bm{l} $$</p>
+<p>(Quick note, those dots in the equation are not for &ldquo;funz&rdquo; the specifically mean dot-product.)</p>
+<p>Again, the equation looks more complex that it really is.</p>
+<p>On the left, we take the surface integral of the curl of some vector field. This is a measure of the overall swirling along some surface.</p>
+<p>On the right we have the line integral along a path of the vector field. The \( P \) means that we are following the perimeter of the surface. Since it&rsquo;s the dot product, it&rsquo;s measuring how much the vector field is &ldquo;aligned&rdquo; with our perimeter path through the vector field.</p>
+<p>So, the right is almost a shortcut to the left side. (It kind of reminds me of the fundamental theorem of calculus (or fundamental theorem of gradients)).</p>
+<p>Basically instead of measuring the &ldquo;curl&rdquo; at every point, you can just trace the outside perimeter and call it good enough.</p>
+<p>In code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">A</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">VectorField</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Func</span>(<span style="color:#e6db74">&#34;0&#34;</span>), <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Func</span>(<span style="color:#e6db74">&#34;2*x*z + 3 * y^2&#34;</span>), <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Func</span>(<span style="color:#e6db74">&#34;4 y z^2&#34;</span>))
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
+
+<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">integrate_surface</span>(<span style="color:#a6e22e">curl</span>(<span style="color:#a6e22e">A</span>), <span style="color:#a6e22e">a</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>), <span style="color:#a6e22e">b</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">closeTo</span>(<span style="color:#ae81ff">4</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">.1</span>)
+
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Vector</span>[] <span style="color:#f92672">=</span> [
+    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>),
+    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>),
+    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>),
+    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>),
+    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vector</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+]
+
+<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">integrate_path</span>(<span style="color:#a6e22e">A</span>, <span style="color:#a6e22e">path</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">closeTo</span>(<span style="color:#ae81ff">4</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">.00001</span>)
+</code></pre></div><p><a href="https://github.com/c0nrad/vector/blob/master/src/integrals.test.ts#L60">code</a></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>That&rsquo;s all, but next up I think I might work on a library with three.js to do some quick visualizations of the above. We&rsquo;ll see.</p>
+    </div>
+
+    <div class="article-info">
+    
+        <div class="article-date">2020-07-19</div>
+    
+    <div class="article-taxonomies">
+        
+            
+                <ul class="article-tags">
+                    
+                        <li><a href="https://blog.c0nrad.io/tags/programming">#programming</a></li>
+                    
+                        <li><a href="https://blog.c0nrad.io/tags/numerical">#numerical</a></li>
+                    
+                        <li><a href="https://blog.c0nrad.io/tags/vector">#vector</a></li>
+                    
+                        <li><a href="https://blog.c0nrad.io/tags/em">#EM</a></li>
+                    
+                </ul>
+        
+    </div>
+</div>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+</article>
+
+
+
+
+
+        </main>
+        <footer>
+            
+                <p>© Stuart Larsen, 2020<br>
+</p>
+
+<p>July 2020: I'm looking for a job related to physics/programming. If you have an open role, I'd love to
+    apply/chat! c0nrad@c0nrad.io</p>
+
+
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup {
+        background: #fff;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+        border: 1px solid;
+        margin-top: 20px;
+    }
+
+
+
+
+     
+</style>
+<div id="mc_embed_signup">
+    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
+        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+        novalidate>
+        <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Subscribe for new posts:</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                    class="button"></div>
+        </div>
+    </form>
+</div>
+
+
+            
+        </footer>
+    </div>
+</body>
+</html>
