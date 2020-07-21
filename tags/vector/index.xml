@@ -6,10 +6,83 @@
     <description>c0nrad&#39;s blog (vector)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Jul 2020 10:10:01 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 20 Jul 2020 21:04:09 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/tags/vector/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vector Calculus Part 2: Visualization</title>
+      <link>https://blog.c0nrad.io/posts/vector-2-viz/</link>
+      <pubDate>Mon, 20 Jul 2020 21:04:09 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/vector-2-viz/</guid>
+      <description>&lt;p&gt;Playing with three.js to do some vector visualizations.&lt;/p&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;So I started building out a toolkit for visualizing the vector library.&lt;/p&gt;
+&lt;p&gt;Eventually I&amp;rsquo;d like to create a little playpen where you can add different types of electrostatic objects (points, lines, surfaces, volumes), and you can see their effect on the E vector field.&lt;/p&gt;
+&lt;p&gt;Until then, I&amp;rsquo;m trying to figure out how to best display stuff!&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m happy with the progress, but not particularly happy with the results.&lt;/p&gt;
+&lt;h3 id=&#34;vector-addition&#34;&gt;Vector Addition&lt;/h3&gt;
+&lt;div style=&#34;text-align: center&#34; &gt;
+&lt;canvas id=&#34;canvas_add&#34; width=&#34;600&#34; height=&#34;400&#34;&gt;&lt;/canvas&gt;
+&lt;/div&gt;
+&lt;p&gt;Here&amp;rsquo;s two vectors being added together. Blue + Green = Red.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;canvas_add&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; document.&lt;span style=&#34;color:#a6e22e&#34;&gt;getElementById&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;canvas_add&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#a6e22e&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;HTMLCanvasElement&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;viz&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Viz&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;canvas_add&lt;/span&gt;);
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;origin&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Vector&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Vector&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;);
+&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;b&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Vector&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;);
+&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;b&lt;/span&gt;)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;a_color&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0x0000ff&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;b_color&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0x00ff00&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;c_color&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0xff0000&lt;/span&gt;
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;drawVector&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;origin&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;a_color&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;drawVector&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;origin&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;b&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;b_color&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;drawVector&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;origin&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;c_color&lt;/span&gt;)
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;drawVector&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;b&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;b_color&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;drawVector&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;b&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;a_color&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;dot-product&#34;&gt;Dot Product&lt;/h2&gt;
+&lt;div style=&#34;text-align: center&#34; &gt;
+&lt;canvas id=&#34;canvas_dotproduct&#34; width=&#34;600&#34; height=&#34;400&#34;&gt;&lt;/canvas&gt;
+&lt;/div&gt;
+&lt;p&gt;I do not like any type of visualization I could find for dot product. I&amp;rsquo;m going to think more about this, but I think the best way to understand dot product is to just look at the math:&lt;/p&gt;
+&lt;p&gt;$$ \bm{a} \cdot \bm{b} = | \bm{a}| |\bm{b}| cos(\theta) $$&lt;/p&gt;
+&lt;p&gt;The length of the two vectors multiplied, times the cos of the angle between the two. So the closer aligned the two vectors are, the bigger the dot product.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s important to note that the dot product results a scalar, not a vector.&lt;/p&gt;
+&lt;h2 id=&#34;cross-product&#34;&gt;Cross Product&lt;/h2&gt;
+&lt;div style=&#34;text-align: center&#34; &gt;
+    &lt;canvas id=&#34;canvas_crossproduct&#34; width=&#34;600&#34; height=&#34;400&#34;&gt;&lt;/canvas&gt;
+&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;canvas_dotproduct&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; document.&lt;span style=&#34;color:#a6e22e&#34;&gt;getElementById&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;canvas_dotproduct&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#a6e22e&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;HTMLCanvasElement&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;v_dotproduct&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;viz&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Viz&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;canvas_dotproduct&lt;/span&gt;)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;dotproduct&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;dotProduct&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;b&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;v_dotproduct&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;drawVector&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;origin&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;a_color&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;v_dotproduct&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;drawVector&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;origin&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;b_color&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The cross product is pretty similar to the dot product, but it returns a vector that is orthogonal to the two original vectors.&lt;/p&gt;
+&lt;p&gt;$$ \bm{a} \times \bm{b} = | \bm{a}| |\bm{b}| sin(\theta) \hat{\bm{n}} $$&lt;/p&gt;
+&lt;p&gt;I think you can say that the magnitude of the vector is equivalent to the area of the parallelogram of two vectors? Which makes sense, because you can determine the area of a triangle using a similar formula:&lt;/p&gt;
+&lt;p&gt;$$ Area_{triangle} = \frac{1}{2} * a * b * sin(C) $$&lt;/p&gt;
+&lt;h2 id=&#34;vector-field&#34;&gt;Vector Field&lt;/h2&gt;
+&lt;div style=&#34;text-align: center&#34; &gt;
+&lt;canvas id=&#34;canvas_vf1&#34; width=&#34;600&#34; height=&#34;400&#34;&gt;&lt;/canvas&gt;
+&lt;/div&gt;
+&lt;p&gt;My first attempt at plotting a vector field, I &lt;em&gt;really&lt;/em&gt; don&amp;rsquo;t like this one. It&amp;rsquo;s super hard to glean what it&amp;rsquo;s trying to say.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;vf1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;VectorField&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Func&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;x* y&amp;#34;&lt;/span&gt;), &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Func&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;x&amp;#34;&lt;/span&gt;), &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Func&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;))
+&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;canvas_vf1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; document.&lt;span style=&#34;color:#a6e22e&#34;&gt;getElementById&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;canvas_vf1&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#a6e22e&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;HTMLCanvasElement&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;viz_vf1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;viz&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Viz&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;canvas_vf1&lt;/span&gt;);
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;viz_vf1&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;drawVectorField&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;vf1&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;viz_vf1&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;drawVectorField&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;curl&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;vf1&lt;/span&gt;), &lt;span style=&#34;color:#ae81ff&#34;&gt;0x00ff00&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m happy I have my toolkit all set up to start experimenting, but disappointed at the results so far. The graphs are very messy and hard to understand. I might &lt;del&gt;steal&lt;/del&gt; borrow some visualization techniques from 3blue1brown, I&amp;rsquo;m guessing he&amp;rsquo;s tackled 3D visualizations of vector fields at some point, and his stuff is amazing.&lt;/p&gt;
+&lt;script src=&#34;https://cdn.jsdelivr.net/gh/c0nrad/vector/examples/vector/app.js&#34;&gt;&lt;/script&gt;</description>
+    </item>
     
     <item>
       <title>Vector Calculus</title>
