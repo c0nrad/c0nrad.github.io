@@ -6,10 +6,41 @@
     <description>c0nrad&#39;s blog (numerical)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Jul 2020 21:04:09 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2020 18:37:01 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/tags/numerical/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vector 3 Dipole</title>
+      <link>https://blog.c0nrad.io/posts/vector-3-dipole/</link>
+      <pubDate>Tue, 21 Jul 2020 18:37:01 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/vector-3-dipole/</guid>
+      <description>&lt;p&gt;More fun with vector calc/electromagnetism.&lt;/p&gt;
+&lt;h2 id=&#34;electric-dipole&#34;&gt;Electric Dipole&lt;/h2&gt;
+&lt;div style=&#34;width: 100%; text-align: center&#34;&gt;
+&lt;canvas width=&#34;700&#34; height=&#34;600&#34; id=&#34;canvas_dipole&#34;&gt;&lt;/canvas&gt;
+&lt;/div&gt;
+&lt;p&gt;So in the above diagram there&amp;rsquo;s a positive and negative charge, and the little floaty red dots are &amp;ldquo;test charges&amp;rdquo;. (You may need to zoom in with mouse scroll)&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m trying to figure out the best way to visualize electric fields. I think this is better than the &lt;a href=&#34;https://blog.c0nrad.io/posts/vector-2-viz/#vector-field&#34;&gt;previous attempt&lt;/a&gt;, but still not great.&lt;/p&gt;
+&lt;p&gt;I worry that it will give the impression that there are things moving in the electric field.&lt;/p&gt;
+&lt;p&gt;Some other ideas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Have it like a gif, where every second it resets&lt;/li&gt;
+&lt;li&gt;Have the test points leave a &amp;ldquo;path&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Keep it simple, only show 2D slices&lt;/li&gt;
+&lt;li&gt;Go back to vectors, and keep them all the same size, but change alpha based on magnitude&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some inspiration:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/LB8Rhcb4eQM?t=200&#34;&gt;https://youtu.be/LB8Rhcb4eQM?t=200&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/rB83DpBJQsE?t=154&#34;&gt;https://youtu.be/rB83DpBJQsE?t=154&lt;/a&gt; (I like how the length is based on the magnitude)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I thought about using a density, but E is a vector field, and so needs to display direction.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ll see. But progress is being made!&lt;/p&gt;
+&lt;script src=&#34;https://cdn.jsdelivr.net/gh/c0nrad/vector/examples/dipole/app_v1.js&#34;&gt;&lt;/script&gt;</description>
+    </item>
     
     <item>
       <title>Vector Calculus Part 2: Visualization</title>
