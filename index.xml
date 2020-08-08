@@ -6,10 +6,58 @@
     <description>c0nrad&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Jul 2020 18:37:01 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 07 Aug 2020 18:37:01 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Matrix Inversion</title>
+      <link>https://blog.c0nrad.io/posts/mat-inv/</link>
+      <pubDate>Fri, 07 Aug 2020 18:37:01 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/mat-inv/</guid>
+      <description>&lt;p&gt;Some fun inverting matrixes.&lt;/p&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m currently reading through Griffiths&amp;rsquo; Particle Physics book, and problem 3.7 ask you to find the inverse of this matrix:&lt;/p&gt;
+&lt;p&gt;$$ \Lambda = \begin{vmatrix}
+\gamma &amp;amp; -\gamma\beta &amp;amp; 0 &amp;amp; 0 \\
+-\gamma\beta &amp;amp; \gamma &amp;amp; 0 &amp;amp; 0 \\
+0 &amp;amp; 0 &amp;amp; 1 &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{vmatrix} $$&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s been awhile since I took Linear Algebra, I wasn&amp;rsquo;t sure if it was even possible to easily invert a matrix. Something about \( det(A) \)?.&lt;/p&gt;
+&lt;p&gt;I figured it&amp;rsquo;d be a fun problem to solve pragmatically. So I jumped to wiki and found this boss equation:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.c0nrad.io/cayley.png&#34; alt=&#34;cayley&#34;&gt;
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Invertible_matrix#Cayley%E2%80%93Hamilton_method&#34;&gt;link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not even going to try and replicated that in LaTeX. But it looks cool.&lt;/p&gt;
+&lt;p&gt;Off to coding!&lt;/p&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
+&lt;p&gt;Well the code is done:
+&lt;a href=&#34;https://github.com/c0nrad/matInv/blob/master/matrix.ts&#34;&gt;https://github.com/c0nrad/matInv/blob/master/matrix.ts&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I ended up not using Cayley-Hamilton equation.&lt;/p&gt;
+&lt;p&gt;Turns out instead you can take the &amp;ldquo;adjugate&amp;rdquo; of the matrix and multiply it by the inverse of the determinate. This is related to &lt;a href=&#34;https://en.wikipedia.org/wiki/Cramer%27s_rule#Finding_inverse_matrix&#34;&gt;Cramer&amp;rsquo;s Rule&lt;/a&gt;. (No idea what that is.)&lt;/p&gt;
+&lt;p&gt;The adjugate is the co-factor of the matrix (again, don&amp;rsquo;t really know what that is), but you can calculate it by taking a bunch of little determinates of the matrix. The determinate is sort of the area &amp;ldquo;scaling&amp;rdquo; factor of a matrix. Highly recommend the &lt;a href=&#34;https://www.youtube.com/watch?v=Ip3X9LOh2dk&amp;amp;vl=en&#34;&gt;3Blue1Brown&lt;/a&gt; video on the subject.&lt;/p&gt;
+&lt;p&gt;The code is kind of cool, it uses a &lt;a href=&#34;https://github.com/c0nrad/matInv/blob/master/matrix.ts#L143&#34;&gt;recursive solution&lt;/a&gt; to find the determinate, and should work fine on larger matrixes (&amp;lsquo;fine&amp;rsquo; as in correct, not fast, it&amp;rsquo;s a slow algorithm). To do the recursive det&amp;rsquo;s I made up this matrix operator &amp;lsquo;splice&amp;rsquo; that&amp;rsquo;ll return a new matrix without the specified row and col. No idea if it&amp;rsquo;s original, but it worked super well.&lt;/p&gt;
+&lt;h2 id=&#34;solving-the-problem&#34;&gt;Solving the problem&lt;/h2&gt;
+&lt;p&gt;Sadly, I should have spent 1 extra second thinking before I rushed to programming a solution. Programming won&amp;rsquo;t help me here (unless I was to use a symbolic system).&lt;/p&gt;
+&lt;p&gt;The solution to this problem plays on the relation of \( \gamma \beta \) in a pretty clever way.&lt;/p&gt;
+&lt;p&gt;(I tried to be clever with the numerical solver and substitute in primes and try to deduce the relation, but I quickly gave up.)&lt;/p&gt;
+&lt;p&gt;To invert between position vectors, you just switch the sign! It&amp;rsquo;s actually pretty neat that it works.&lt;/p&gt;
+&lt;p&gt;$$ x\prime = \gamma (x - vt) $$
+$$ t\prime = \gamma(t-\frac{v}{c^2}x) $$&lt;/p&gt;
+&lt;p&gt;With:&lt;/p&gt;
+&lt;p&gt;$$ \gamma = \frac{1}{\sqrt{1-\frac{v^2}{c^2}}} $$&lt;/p&gt;
+&lt;p&gt;Then to switch back:&lt;/p&gt;
+&lt;p&gt;$$ x = \gamma (x\prime + v t\prime) $$
+$$ t = \gamma (t\prime + \frac{v}{c^2} x\prime) $$&lt;/p&gt;
+&lt;p&gt;So the actual matrix of inversion is:&lt;/p&gt;
+&lt;p&gt;$$ \Lambda^{-1} = \begin{vmatrix}
+\gamma &amp;amp; \gamma\beta &amp;amp; 0 &amp;amp; 0 \\
+\gamma\beta &amp;amp; \gamma &amp;amp; 0 &amp;amp; 0 \\
+0 &amp;amp; 0 &amp;amp; 1 &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{vmatrix} $$&lt;/p&gt;
+&lt;p&gt;And if you multiple them together, you get \( \bm{I} \)&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Two seconds of thinking could have saved me 2hrs of programming. But it was a fun exercise. &lt;a href=&#34;https://i.imgflip.com/1ubz5z.jpg&#34;&gt;No ragrets&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Vector Calculus Part 3: Electric Dipole</title>
