@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer-when-downgrade">
 
-<title>Electron Wavefunctions for Hydrogen Part 2  - c0nrad&#39;s blog</title>
+<title>Interference  - c0nrad&#39;s blog</title>
 <meta name="description" content="Learning about physics">
 
 <link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
@@ -18,19 +18,19 @@
 
 <link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1597792499">
 
-<meta property="og:title" content="Electron Wavefunctions for Hydrogen Part 2" />
-<meta property="og:description" content="Calculating the stationary states of an electron in a hydrogen atom" />
+<meta property="og:title" content="Interference" />
+<meta property="og:description" content="Double Slit Interference Pattern demo." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.c0nrad.io/posts/hydrogen-pt2/" />
+<meta property="og:url" content="https://blog.c0nrad.io/posts/interference/" />
 <meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
-<meta property="article:published_time" content="2020-06-20T14:37:31-04:00" />
-<meta property="article:modified_time" content="2020-06-20T14:37:31-04:00" />
+<meta property="article:published_time" content="2020-08-18T18:53:54-04:00" />
+<meta property="article:modified_time" content="2020-08-18T18:53:54-04:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
 
-<meta name="twitter:title" content="Electron Wavefunctions for Hydrogen Part 2"/>
-<meta name="twitter:description" content="Calculating the stationary states of an electron in a hydrogen atom"/>
+<meta name="twitter:title" content="Interference"/>
+<meta name="twitter:description" content="Double Slit Interference Pattern demo."/>
 
 
 
@@ -65,62 +65,65 @@
 
 <article class="post">
     <header>
-        <h1>Electron Wavefunctions for Hydrogen Part 2</h1>
+        <h1>Interference</h1>
     </header>
     <div class="content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#technical-implementation-notes">Technical Implementation Notes</a></li>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#double-slit-interference">Double Slit Interference</a></li>
+    <li><a href="#setup">Setup</a></li>
+    <li><a href="#simulation">Simulation</a></li>
+    <li><a href="#things-that-went-well">Things that went well</a></li>
+    <li><a href="#open-questions">Open questions</a></li>
     <li><a href="#future">Future</a></li>
   </ul>
 </nav>
 
-        <p>Part 2 of calculating the electron wavefunctions for hydrogen.</p>
-<p><a href="https://blog.c0nrad.io/hydrogen/">View Visualization</a></p>
-<h1 id="background">Background</h1>
-<p>It&rsquo;s done! (Technically it was done a month ago, I just never wrote about it).</p>
-<p><a href="https://blog.c0nrad.io/hydrogen/">View Visualization</a></p>
-<p><a href="https://www.reddit.com/r/Physics/comments/gt1set/interactive_electron_orbitals_of_hydrogen/">https://www.reddit.com/r/Physics/comments/gt1set/interactive_electron_orbitals_of_hydrogen/</a></p>
-<p>Source code can be found here:</p>
-<p><a href="https://github.com/c0nrad/hydrogen">https://github.com/c0nrad/hydrogen</a></p>
-<h2 id="technical-implementation-notes">Technical Implementation Notes</h2>
+        <p>Double Slit Interference Pattern demo.</p>
+<h2 id="overview">Overview</h2>
+<p>Some fun news, I&rsquo;m officially going back to college for Physics!</p>
+<p>I got my first homework assignment, and one of the questions was on double slit interference. I figured I&rsquo;d make a little demo.</p>
+<h2 id="double-slit-interference">Double Slit Interference</h2>
+<p>The double slit experiment was one of the most famous experiments in history. I don&rsquo;t want to cover it here since it&rsquo;s been covered a million times.</p>
+<p>But it blows my mind that scientist have done the experiment by firing single electrons and it still worked. Nature is crazy.</p>
+<h2 id="setup">Setup</h2>
+<p>So I made a little tool to play with some values of the experiment.</p>
+<p>Here&rsquo;s a diagram of the setup:</p>
+<img style="border: 1px solid" src="/inter.png">
+<p>I assume there&rsquo;s two point light sources, and instead of using the standard \( d sin(\theta) = m \lambda \) equation for finding the maxima, I calculated the wavelength of each source independently, and then just add the phase to calculate intensity.</p>
+<p>Source:
+<a href="https://github.com/c0nrad/interference">https://github.com/c0nrad/interference</a></p>
+<h2 id="simulation">Simulation</h2>
+<iframe src="https://blog.c0nrad.io/interference" style="border: 1px solid; width: 100%; height: 300px">
+</iframe>
+<p><a href="https://blog.c0nrad.io/interference">Raw Link</a></p>
+<p>Some fun things to note:</p>
 <ul>
-<li>I ended up just sampling the wave functions, and saving it to a JSON file for the web component to read
+<li>The chart color changes based on wavelength.</li>
+<li>It kind of blows my mind that the interference pattern appears in the [mm] scale, but the wavelengths are in the nm scale.</li>
+</ul>
+<h2 id="things-that-went-well">Things that went well</h2>
 <ul>
-<li><a href="https://github.com/c0nrad/hydrogen/blob/master/hydrogen.cpp#L199">https://github.com/c0nrad/hydrogen/blob/master/hydrogen.cpp#L199</a></li>
+<li>Javascript&rsquo;s precision wasn&rsquo;t high enough at first, specially since the wall is 4m away and the wavelength is in the nanometer scale. So the nanometer components were being truncated. I ended up using some library called decimal.js that worked well.</li>
 </ul>
-</li>
-<li>Originally each point was a three.js sphere, but that ran way to slow, so I got to try vertex/fragement shaders for the first time! (using a THREE.cloud)
+<h2 id="open-questions">Open questions</h2>
 <ul>
-<li><a href="https://github.com/c0nrad/hydrogen/blob/master/docs/index.html#L44">https://github.com/c0nrad/hydrogen/blob/master/docs/index.html#L44</a></li>
+<li>How does the intensity drop off as the fringes get further away from the middle? It looks like a \( sinc \) function, but not sure.</li>
 </ul>
-</li>
-<li>The little control panel is actually pretty neat. Just a few lines of code
-<ul>
-<li><a href="https://github.com/c0nrad/hydrogen/blob/master/docs/app.ts#L24">https://github.com/c0nrad/hydrogen/blob/master/docs/app.ts#L24</a></li>
-</ul>
-</li>
-</ul>
-<p>Overall super happy with it!</p>
 <h2 id="future">Future</h2>
-<p>Done with this project, but already onto the next! Stay tuned!</p>
+<p>Probably nothing. It was a fun little exercise. Although it ended up taking the better part of a day to complete. (I was playing with Preact for a bit, but I love angular&rsquo;s two-way data-binding. So I switched back.)</p>
+<p>I&rsquo;ve also been working on a computer algebra system (called <a href="https://github.com/c0nrad">Meth.js</a>). I&rsquo;m hoping it soon gets to the point where I can just feed it a couple of equations and some input with units, and it&rsquo;ll figure out any other value I&rsquo;d be interested in calculating.</p>
+<p>Toodles.</p>
     </div>
 
     <div class="article-info">
     
-        <div class="article-date">2020-06-20</div>
+        <div class="article-date">2020-08-18</div>
     
     <div class="article-taxonomies">
         
             
-                <ul class="article-tags">
-                    
-                        <li><a href="https://blog.c0nrad.io/tags/quantum-mechanics">#quantum mechanics</a></li>
-                    
-                        <li><a href="https://blog.c0nrad.io/tags/simulation">#simulation</a></li>
-                    
-                </ul>
-        
     </div>
 </div>
 
