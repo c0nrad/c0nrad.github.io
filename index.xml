@@ -6,10 +6,50 @@
     <description>c0nrad&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Aug 2020 18:53:54 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 29 Aug 2020 10:59:09 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Spectral</title>
+      <link>https://blog.c0nrad.io/posts/spectral/</link>
+      <pubDate>Sat, 29 Aug 2020 10:59:09 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/spectral/</guid>
+      <description>&lt;p&gt;Terminal application showing the spectral lines for electron transitions in hydrogen.&lt;/p&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I thought it would be fun to create a little colorful application showing the spectral lines of hydrogen.&lt;/p&gt;
+&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+&lt;p&gt;Electrons in hydrogen can be at different energy levels. The energy levels are designated by \( n \), and have the energy:&lt;/p&gt;
+&lt;p&gt;$$ E_n = -\left[ \frac{m_e}{2\hbar^2} \left( \frac{e^2}{4 \pi \epsilon_0} \right)^2 \right] \frac{1}{n^2} $$&lt;/p&gt;
+&lt;p&gt;When an electron jumps from one level to another (such as n=3 to n=1), a photon is emitted with the energy equal to the change in energy states.&lt;/p&gt;
+&lt;p&gt;We also know that the energy of the photon is related to it&amp;rsquo;s frequency (and therefor wavelength).&lt;/p&gt;
+&lt;p&gt;$$ E = h f $$&lt;/p&gt;
+&lt;p&gt;$$ c = \lambda f $$&lt;/p&gt;
+&lt;p&gt;$$ \therefore \lambda = \frac{h c}{E} $$&lt;/p&gt;
+&lt;p&gt;So, we can iterate through each of the energy levels for an electron in hydrogen and see what types of photons they will let out. Some of those photons will be in the visible light spectrum!&lt;/p&gt;
+&lt;h2 id=&#34;code&#34;&gt;Code&lt;/h2&gt;
+&lt;p&gt;I built a little Go app to build the spectral diagram. &lt;a href=&#34;https://github.com/c0nrad/spectral&#34;&gt;https://github.com/c0nrad/spectral&lt;/a&gt;. Here&amp;rsquo;s the output of the program:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.c0nrad.io/spectral.png&#34; alt=&#34;Spectral Diagram&#34;&gt;&lt;/p&gt;
+&lt;p&gt;For the transitions, if the resulting wavelength was in the visible wavelength I printed it with it&amp;rsquo;s corresponding color.&lt;/p&gt;
+&lt;p&gt;I thought that there would be more color! I didn&amp;rsquo;t realize that only the Balmer series (n=2) had color!&lt;/p&gt;
+&lt;h2 id=&#34;what-went-well&#34;&gt;What went well?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;GoLang&amp;rsquo;s big.Float was useful for high precision floats.&lt;/li&gt;
+&lt;li&gt;For the display I used the ANSI escape characters for cursor position and color. Works super smoothly.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;other-thoughts&#34;&gt;Other thoughts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;I need a better way to store the &amp;ldquo;units&amp;rdquo; along with my variables. I name the variables based on their units, but that&amp;rsquo;s dumb, I wish the unit type information was stored with the value, but it&amp;rsquo;s kind of overkill to build some struct for a small project like this.
+&lt;ul&gt;
+&lt;li&gt;But it&amp;rsquo;d be super nice to be able to just convert types without having to hardcode JoulesToEV and such.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;closing-remarks&#34;&gt;Closing Remarks&lt;/h1&gt;
+&lt;p&gt;None really, it was a fun project. I wish the hydrogen spectrum had more colors! Next up I&amp;rsquo;m thinking of calculating Clebsh-Gordan coefficients. My quantum angular momentum/spin addition is not as good as it should be.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Interference</title>
