@@ -6,10 +6,43 @@
     <description>c0nrad&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 30 Aug 2020 12:14:51 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 09 Sep 2020 09:16:42 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Spherical Bug</title>
+      <link>https://blog.c0nrad.io/posts/spherical-bug/</link>
+      <pubDate>Wed, 09 Sep 2020 09:16:42 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/spherical-bug/</guid>
+      <description>&lt;p&gt;Discussion of one of my longest living software bugs.&lt;/p&gt;
+&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
+&lt;p&gt;Many moons ago I built a little tool to visualize the electron orbitals of hydrogen:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.c0nrad.io/posts/hydrogen-pt1/&#34;&gt;https://blog.c0nrad.io/posts/hydrogen-pt1/&lt;/a&gt;
+&lt;a href=&#34;https://blog.c0nrad.io/hydrogenjs&#34;&gt;https://blog.c0nrad.io/hydrogenjs&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;At the time I thought it was correct, but on reddit and HN a few people mentioned that it didn&amp;rsquo;t look correct. People quoted &amp;ldquo;rotational symmetry&amp;rdquo; but someone else (who had a degree in physics) said it looked fine. From my experience in computer security, normally there&amp;rsquo;s a lot of people who don&amp;rsquo;t know what they&amp;rsquo;re talking about, so I wasn&amp;rsquo;t really sure what&amp;rsquo;s right or wrong.&lt;/p&gt;
+&lt;p&gt;Well, thankfully someone who did know what they were talking about opened a github issue on the code and explained the issue a little more clearly, (and pointed out a separate issue!).&lt;/p&gt;
+&lt;p&gt;The issue made a little more sense, and after downloading some mobile app that also showed the states, I could see that my diagrams were indeed a little bit different.&lt;/p&gt;
+&lt;p&gt;So I messed around quite a bit, it looked wrong, but I had no idea why. I tried different integration strategies, different ranges, different strategies for normalizing the probabilities. Nothing seemed to work.&lt;/p&gt;
+&lt;p&gt;So then last weekend I re-wrote the whole thing in Javascript (&lt;a href=&#34;https://github.com/c0nrad/hydrogenjs)&#34;&gt;https://github.com/c0nrad/hydrogenjs)&lt;/a&gt;. It still didn&amp;rsquo;t work.&lt;/p&gt;
+&lt;p&gt;I verified all the equations:&lt;/p&gt;
+&lt;p&gt;(This page is very slow, it calculates all the equations dynamically):
+&lt;a href=&#34;https://blog.c0nrad.io/hydrogenjs#formulas&#34;&gt;https://blog.c0nrad.io/hydrogenjs#formulas&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;And they all looked fine.&lt;/p&gt;
+&lt;p&gt;Eventually I reached out to one of my professors here at college (I went back to college!), and he suggested that maybe something to do with complex wavefunctions?&lt;/p&gt;
+&lt;h1 id=&#34;the-problem--solution&#34;&gt;The problem / solution&lt;/h1&gt;
+&lt;p&gt;It ended up being something very dumb. It turns out that not everyone uses phi/theta the same way for spherical coordinates. I was using phi/theta the way Griffiths uses it in his Quantum Mechanics book uses them, but my 3D library threats phi/theta in reverse. (phi=theta, theta=phi).&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s frustrating that the charts looked relativity okay, had there been giant gaps or something it would have been obvious something was wrong, but only on some of the states did it look obviously wrong.&lt;/p&gt;
+&lt;p&gt;Anyways, once I made the one line change, it worked fine.&lt;/p&gt;
+&lt;p&gt;A little frustrating, but also exciting. This had been bugging me for almost 4 months now.&lt;/p&gt;
+&lt;p&gt;But now it&amp;rsquo;s live, and a full dynamic javascript version:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.c0nrad.io/hydrogenjs&#34;&gt;https://blog.c0nrad.io/hydrogenjs&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;next&#34;&gt;Next&lt;/h1&gt;
+&lt;p&gt;It&amp;rsquo;s possible i&amp;rsquo;ll be doing some research with one my professors here at MTU. So many one of my models will have &amp;ldquo;practical&amp;rdquo; use! We&amp;rsquo;ll see.&lt;/p&gt;
+&lt;p&gt;Until then, I have a huge list of things I want to program, I plan on doing one this weekend, see ya then!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Scattering Angles</title>
