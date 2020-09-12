@@ -6,10 +6,122 @@
     <description>c0nrad&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Sep 2020 09:16:42 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 12 Sep 2020 14:35:23 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Klein Gordon Eqn via Connected Springs</title>
+      <link>https://blog.c0nrad.io/posts/connect-springs/</link>
+      <pubDate>Sat, 12 Sep 2020 14:35:23 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/connect-springs/</guid>
+      <description>&lt;p&gt;Simulations Klein Gordon Eqn as a set of connected springs.&lt;/p&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m currently reading &lt;a href=&#34;https://www.amazon.com/No-Nonsense-Quantum-Field-Theory-Student-Friendly/dp/3948763011&#34;&gt;No-Nonsense Quantum Field Theory&lt;/a&gt;. I like it a lot more than the other QFT books I have (purely because it&amp;rsquo;s dumbed down significantly.)&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s a chunky book, and is doing an amazing job of introducing some pretty complex topics, but in a way that makes some intuitive sense.&lt;/p&gt;
+&lt;p&gt;I finally got to one of the free field equations in the book, and I figured it&amp;rsquo;d be fun to codify a dumbed down version of the equation.&lt;/p&gt;
+&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+&lt;p&gt;First some background material before we talk about the equation.&lt;/p&gt;
+&lt;p&gt;This will be pretty hand wavey. (Partly because it takes a decent amount of background knowledge to get to this point, and partly because I don&amp;rsquo;t understand that much).&lt;/p&gt;
+&lt;h3 id=&#34;fields&#34;&gt;Fields&lt;/h3&gt;
+&lt;p&gt;But in QFT, everything is treated as a &amp;ldquo;Field&amp;rdquo;. Fields are super simple to understand if you&amp;rsquo;re a programmer. Basically fields are functions that take in an X, Y, Z, and return a number. You can imagine having a function that gives you the temperature in the room based off the X, Y, Z coordinates.&lt;/p&gt;
+&lt;p&gt;There&amp;rsquo;s two complications to add to fields.&lt;/p&gt;
+&lt;h3 id=&#34;special-relativity&#34;&gt;Special Relativity&lt;/h3&gt;
+&lt;p&gt;First off, in quantum field theory the fields (and emergent particle excitations) will be moving near the speed of light, so we need to take into account special relativity.&lt;/p&gt;
+&lt;p&gt;Special relativity is the idea that all reference frames are equally valid, and the speed of light is a constant for everyone. These two rules create some inconsistencies in the old way of thinking about space and time. If I&amp;rsquo;m moving near the speed of light and hold up a flash light, the light to me will appear to me to be going \( c = 300,000,000\frac{m}{s} \) . But to someone who is watching me go near the speed of light, my flashlight light will also look like it&amp;rsquo;s going \( c \) (not \( 2  c \) as we would have expected). That&amp;rsquo;s pretty weird.&lt;/p&gt;
+&lt;p&gt;They key is that &amp;ldquo;time&amp;rdquo; isn&amp;rsquo;t quite what we thought, and it appears to be intimately related to space (hence spacetime).&lt;/p&gt;
+&lt;p&gt;At any time we are moving through some combination of space or time. (And that sum is equal to a constant). For us humans, we almost exclusively move through &amp;ldquo;time&amp;rdquo;. But if you&amp;rsquo;re moving near the speed of light, you move mostly through space, and less through time. It&amp;rsquo;s said that photons are &amp;ldquo;timeless&amp;rdquo; because they move purely through space, and not through time. (since they are traveling at the speed of light.) I don&amp;rsquo;t think it&amp;rsquo;s too insightful to take that literally though.&lt;/p&gt;
+&lt;p&gt;So, when dealing with things moving near the speed of light, we need to be careful that we respect the sum of space and time such that it&amp;rsquo;s constant with all frames. That constant is:&lt;/p&gt;
+&lt;p&gt;$$ (\Delta s)^2 = (c \Delta t)^2 - (\Delta x)^2 - (\Delta y)^2 - (\Delta z)^2 $$&lt;/p&gt;
+&lt;p&gt;This is known as the spacetime interval.&lt;/p&gt;
+&lt;p&gt;That notation can be cumbersome, so scientist instead created a construct known as a four-vector:&lt;/p&gt;
+&lt;p&gt;$$ x_\mu = \begin{pmatrix} ct \\ x \\ y \\ z \\ \end{pmatrix}
+$$&lt;/p&gt;
+&lt;p&gt;Now space and time are on the same footing. \( x_0, x_1, x_2, x_3 \) are just components of a vector&lt;/p&gt;
+&lt;p&gt;They also define something called the Minkowski metric:&lt;/p&gt;
+&lt;p&gt;$$ \eta = \begin{pmatrix} 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 \\ 0 &amp;amp; -1 &amp;amp; 0 &amp;amp; 0 \\  0 &amp;amp; 0 &amp;amp; -1 &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; -1 \end{pmatrix}
+$$&lt;/p&gt;
+&lt;p&gt;So instead we can say:&lt;/p&gt;
+&lt;p&gt;$$ (\Delta s)^2 = x_\mu \eta^{\mu \nu} x_\nu $$&lt;/p&gt;
+&lt;p&gt;We also need a derivative (velocity) of space time. This can be defined as:&lt;/p&gt;
+&lt;p&gt;$$ \partial_\mu = \frac{\partial}{\partial \eta^{\mu \nu} x_\nu } = \frac{\partial}{\partial x^\mu } = \begin{pmatrix} \frac{\partial}{c \partial t} \\ - \frac{\partial}{\partial x} \\ - \frac{\partial}{\partial y} \\ - \frac{\partial}{\partial z} \\ \end{pmatrix}$$&lt;/p&gt;
+&lt;h3 id=&#34;types-of-fields&#34;&gt;Types of Fields&lt;/h3&gt;
+&lt;p&gt;There can also be different types of Fields! For the programmer, this just means that those functions can return something other than a float!&lt;/p&gt;
+&lt;p&gt;For example we can have a vector field, this means that at each X, Y, Z, we&amp;rsquo;ll get back a Vector{X: 1, Y: 3, Z: 3}. This could be useful for example if you want to model wind at each point in space. We know that window is blowing in some direction, so at each point you put a vector there to represent how fast and in which direction the wind is blowing.&lt;/p&gt;
+&lt;p&gt;There&amp;rsquo;s one last important type of Field (besides scalar (float), and Vector), and that&amp;rsquo;s a spinor field. Spinors are very interesting, and of extreme importance for our current map of reality, but we won&amp;rsquo;t be talking about them in this post. They can be represented by two complex numbers, and they &amp;ldquo;spin&amp;rdquo; onto each other, they&amp;rsquo;re very weird, and not easy to visualize. But all fermions (matter particles), are represented by spinor fields, so I&amp;rsquo;m sure I&amp;rsquo;ll write about them one day.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ll only talk about scalar fields. (The Higgs field is an example of a scalar field, but that doesn&amp;rsquo;t matter).&lt;/p&gt;
+&lt;h3 id=&#34;lagrangian&#34;&gt;Lagrangian&lt;/h3&gt;
+&lt;p&gt;I&amp;rsquo;ll write a full post about this another day, but Lagrangian mechanics is another formulation of physics that can be used to derive equations of motions based off the idea that &amp;ldquo;nature is lazy&amp;rdquo;. If you accept the assumption that nature wants to minimize the &amp;ldquo;Action&amp;rdquo; of a system (usually defined classically as Kinetic (T) - Potential (V) energy), you can figure out the laziest path possible, and that&amp;rsquo;s the correct one!&lt;/p&gt;
+&lt;p&gt;For example when you throw a ball in the air, why doesn&amp;rsquo;t the ball go any higher or lower in it&amp;rsquo;s arc? What&amp;rsquo;s to stop it from going at a slightly higher or lower in it&amp;rsquo;s trajectory if it going to end in the same spot? There&amp;rsquo;s an infinite amount of paths that it could go.&lt;/p&gt;
+&lt;p&gt;You can get the same answers using Newtons formulation. Normally for simple systems newton&amp;rsquo;s methods are easier \( (\bm{F} = m \bm{a}) \), but in other situations, the Lagrangian (or another formulation called Hamiltonian mechanics) are easier to use!&lt;/p&gt;
+&lt;p&gt;Back to the ball, if you assume nature is lazy and wants to minimize the Action (T-V), you&amp;rsquo;ll also get the correct path. It&amp;rsquo;s very similar to Fermat&amp;rsquo;s principle which showed that light takes the path of least time.&lt;/p&gt;
+&lt;p&gt;In everyday usage of Lagrangian, you figure out the Lagrangian \( L \) and then plug it into the Euler-Lagrange Equation:&lt;/p&gt;
+&lt;p&gt;$$ \frac{\partial L}{\partial q} - \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q}} \right) = 0 $$&lt;/p&gt;
+&lt;p&gt;For relativistic fields, a slightly different version of the Euler-Lagrange equation is used:&lt;/p&gt;
+&lt;p&gt;$$ \frac{\partial \mathcal{L}}{\partial \phi} - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) = 0 $$&lt;/p&gt;
+&lt;p&gt;They look pretty similar, except \( \phi \) is used instead of position. And instead of \( \dot{q} \) as velocity, the relativistic derivative is used \( \partial_\mu \phi \).&lt;/p&gt;
+&lt;h2 id=&#34;klein-gordon-equation&#34;&gt;Klein Gordon Equation&lt;/h2&gt;
+&lt;p&gt;The Klein Gordon is the simplest of the free field wave equations. Free field just means &amp;ldquo;non-interacting&amp;rdquo;. The Klein Gordon equation describes how scalar fields evolve over time.&lt;/p&gt;
+&lt;p&gt;For example, you could imagine using the Klein Gordon equation to understand how temperature mixes around in a room over time. Except instead of temperature you use relativistic quantum scalar fields.&lt;/p&gt;
+&lt;h3 id=&#34;the-lagrangian&#34;&gt;The Lagrangian&lt;/h3&gt;
+&lt;p&gt;The Lagrangian for the klein gordon equation is the following. Don&amp;rsquo;t ask how to figure it out (I don&amp;rsquo;t know). If I understand correctly, people in the past figured out the Klein-Gordon equation, and then worked back to get the Lagrangian (normally it&amp;rsquo;s the other way, but the quantum world is weird and non-intuitive).&lt;/p&gt;
+&lt;p&gt;$$ \mathcal{L} = \frac{1}{2} ( \partial_\mu \phi \partial^\mu \phi - m^2 \phi^2 ) $$&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s a weird equation, but it kind of intuitively makes sense if we pull it apart. Remember L is of the form of kinetic - potential. And the first term kind of looks like kinetic energy. It&amp;rsquo;s the velocity of the field squared, similar to \( \frac{1}{2} m v^2 \). And the second term is the potential which is \( - \frac{1}{2} m^2 \phi^2 \). For a spring the potential is \(-\frac{1}{2}kx^2 \). Not that different.&lt;/p&gt;
+&lt;p&gt;You may notice that the \( \mu \) is upstairs on one of the partial derivatives, and downstairs on another partial derivative. That&amp;rsquo;s to satisfy the relativistic spacetime interval we talked about earlier. \( (\Delta s)^2 = x_\mu \eta^{\mu \nu} x_\nu = x_\mu x^\mu \).&lt;/p&gt;
+&lt;h3 id=&#34;klein-gordon-equation-1&#34;&gt;Klein Gordon Equation&lt;/h3&gt;
+&lt;p&gt;So, we plug the Lagrangian into the Euler-Lagrange for fields and get back the &lt;strong&gt;Klein Gordon Equation&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;$$ (\partial_\mu \partial^\mu + m^2) \phi = 0 $$&lt;/p&gt;
+&lt;p&gt;What does it mean? Well it can kind of be thought of as a set of springs where each spring is also attached to the spring next to it.&lt;/p&gt;
+&lt;p&gt;If we expand the Lagrangian (in one direction x) we get:&lt;/p&gt;
+&lt;p&gt;$$ \frac{1}{2} \left( \left(\frac{\partial}{c \partial t} \phi\right)^2  - \left(\frac{\partial \phi}{\partial x} \right)^2 -m^2 \phi^2\right) $$&lt;/p&gt;
+&lt;p&gt;The first term, \( \left(\frac{\partial}{c \partial t} \phi\right)^2 \), is the kinetic energy of the harmonic oscillators. It&amp;rsquo;s related to the &amp;ldquo;change of the field over time&amp;rdquo; similar to the velocity of the field.&lt;/p&gt;
+&lt;p&gt;The second term, \( - \left(\frac{\partial \phi}{\partial x} \right)^2 \), is subtracted, meaning it&amp;rsquo;s a potential, and deals with the change of the field in relation to space. So the parts of the field that are significantly higher than nearby points will be brought down. It&amp;rsquo;s similar to rubber bands connected to neighboring elements of the field.&lt;/p&gt;
+&lt;p&gt;The last term \( -m^2 \phi^2 \) is the potential energy of the individual elements of the field, similar to a spring. If \( \phi \) is high at some point, it will be brought down quickly.&lt;/p&gt;
+&lt;p&gt;So overall the Klein Gordon kind of seems like an array of springs that are connected to each other!&lt;/p&gt;
+&lt;p&gt;We can easily program that!&lt;/p&gt;
+&lt;h3 id=&#34;simulation&#34;&gt;Simulation&lt;/h3&gt;
+&lt;div style=&#34;text-align: center&#34;&gt;
+&lt;video controls src=&#34;https://blog.c0nrad.io/k1j10.mp4&#34; style=&#34;width: 75%;&#34;  loop &gt;&lt;/video&gt;
+&lt;/div&gt;
+&lt;p&gt;So, each of the little &amp;ldquo;*&amp;rdquo; are a mass element attached to a string. I start the simulation by pulling one of the springs up 10 units and then releasing it. You can see all the resulting waves.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s pretty cool to watch all the resulting frequencies of waves that are created by a single pluck. Another day I might perform some Fast Fourier Transforms and watch which frequencies become dominate based off of different parameters and interactions.&lt;/p&gt;
+&lt;p&gt;Also, I connected the left and right side of the springs. So it warps around. It&amp;rsquo;s actually a &amp;ldquo;circle&amp;rdquo; of connected springs.&lt;/p&gt;
+&lt;h4 id=&#34;tunning-k-and-j&#34;&gt;Tunning K and J&lt;/h4&gt;
+&lt;p&gt;There&amp;rsquo;s two main constants to tune. The first K, is the standard spring constant. The second (J) is the strength of the band between the springs.&lt;/p&gt;
+&lt;h5 id=&#34;k10-j1&#34;&gt;K=10, J=1&lt;/h5&gt;
+&lt;p&gt;The individual springs dominate the bands between the springs.&lt;/p&gt;
+&lt;div style=&#34;text-align: center&#34;&gt;
+&lt;video controls src=&#34;https://blog.c0nrad.io/k10j1.mp4&#34; style=&#34;width: 75%;&#34;  loop &gt;&lt;/video&gt;
+&lt;/div&gt;
+&lt;h5 id=&#34;k1-j10&#34;&gt;K=1, J=10&lt;/h5&gt;
+&lt;p&gt;The bands between springs dominates over the spring constant.&lt;/p&gt;
+&lt;div style=&#34;text-align: center&#34;&gt;
+&lt;video controls src=&#34;https://blog.c0nrad.io/k1j10.mp4&#34; style=&#34;width: 75%;&#34;  loop &gt;&lt;/video&gt;
+&lt;/div&gt;
+&lt;h5 id=&#34;k5-j5&#34;&gt;K=5, J=5&lt;/h5&gt;
+&lt;p&gt;The two terms are equal:&lt;/p&gt;
+&lt;div style=&#34;text-align: center&#34;&gt;
+&lt;video controls src=&#34;https://blog.c0nrad.io/k5l5.mp4&#34; style=&#34;width: 75%;&#34;  loop &gt;&lt;/video&gt;
+&lt;/div&gt;
+&lt;h4 id=&#34;two-plucks&#34;&gt;Two Plucks&lt;/h4&gt;
+&lt;p&gt;Two plucks in the field:&lt;/p&gt;
+&lt;div style=&#34;text-align: center&#34;&gt;
+&lt;video controls src=&#34;https://blog.c0nrad.io/2k1j10.mp4&#34; style=&#34;width: 75%;&#34;  loop &gt;&lt;/video&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;what-went-well&#34;&gt;What went well&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Everything went pretty well. I used semi-implicit euler as my integrator, the standard terminal ansi escape codes for drawing the display, the code is pretty small.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;thoughts&#34;&gt;Thoughts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Somewhat unrelated, but the fact that \( cos(kx - wt) \) is what we use to model waves for some many phenomena, and that the minkowski metric can be written as -1,1,1,1 or, (x-t) just seems too beautiful. The fact that waves travel both through time and space was always very weird to me. At any point you can travel either through time or space and get to the same &amp;ldquo;spot&amp;rdquo;. The fact that relativity puts them together like that makes so much sense. I absolutely love it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;future&#34;&gt;Future&lt;/h2&gt;
+&lt;p&gt;I think it&amp;rsquo;d be super cool to extract out the resulting frequencies from each pluck.&lt;/p&gt;
+&lt;p&gt;More importantly, it&amp;rsquo;s time to move to the most important equation&amp;hellip; the Dirac Equation. Time to understand spinors.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Spherical Bug</title>

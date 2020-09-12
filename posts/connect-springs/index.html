@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Klein Gordon Eqn via Connected Springs  - c0nrad&#39;s blog</title>
+<meta name="description" content="Learning about physics">
+
+<link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1599946684" />
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1599946684">
+
+<meta property="og:title" content="Klein Gordon Eqn via Connected Springs" />
+<meta property="og:description" content="Simulations Klein Gordon Eqn as a set of connected springs." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.c0nrad.io/posts/connect-springs/" />
+<meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+<meta property="article:published_time" content="2020-09-12T14:35:23-04:00" />
+<meta property="article:modified_time" content="2020-09-12T14:35:23-04:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+
+<meta name="twitter:title" content="Klein Gordon Eqn via Connected Springs"/>
+<meta name="twitter:description" content="Simulations Klein Gordon Eqn as a set of connected springs."/>
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header> 
+            
+                <h1 class="site-header">
+    <a href="https://blog.c0nrad.io/">c0nrad&#39;s blog</a>
+</h1>
+<nav>
+    
+    
+    <a class="" href="https://c0nrad.io" title="">About</a>
+    
+    <a class="" href="https://github.com/c0nrad/" title="">Github</a>
+    
+    <a class="" href="https://twitter.com/xc0nradx" title="">Twitter</a>
+    
+</nav>
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+
+<article class="post">
+    <header>
+        <h1>Klein Gordon Eqn via Connected Springs</h1>
+    </header>
+    <div class="content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#background">Background</a>
+      <ul>
+        <li><a href="#fields">Fields</a></li>
+        <li><a href="#special-relativity">Special Relativity</a></li>
+        <li><a href="#types-of-fields">Types of Fields</a></li>
+        <li><a href="#lagrangian">Lagrangian</a></li>
+      </ul>
+    </li>
+    <li><a href="#klein-gordon-equation">Klein Gordon Equation</a>
+      <ul>
+        <li><a href="#the-lagrangian">The Lagrangian</a></li>
+        <li><a href="#klein-gordon-equation-1">Klein Gordon Equation</a></li>
+        <li><a href="#simulation">Simulation</a></li>
+      </ul>
+    </li>
+    <li><a href="#what-went-well">What went well</a></li>
+    <li><a href="#thoughts">Thoughts</a></li>
+    <li><a href="#future">Future</a></li>
+  </ul>
+</nav>
+
+        <p>Simulations Klein Gordon Eqn as a set of connected springs.</p>
+<h2 id="introduction">Introduction</h2>
+<p>I&rsquo;m currently reading <a href="https://www.amazon.com/No-Nonsense-Quantum-Field-Theory-Student-Friendly/dp/3948763011">No-Nonsense Quantum Field Theory</a>. I like it a lot more than the other QFT books I have (purely because it&rsquo;s dumbed down significantly.)</p>
+<p>It&rsquo;s a chunky book, and is doing an amazing job of introducing some pretty complex topics, but in a way that makes some intuitive sense.</p>
+<p>I finally got to one of the free field equations in the book, and I figured it&rsquo;d be fun to codify a dumbed down version of the equation.</p>
+<h2 id="background">Background</h2>
+<p>First some background material before we talk about the equation.</p>
+<p>This will be pretty hand wavey. (Partly because it takes a decent amount of background knowledge to get to this point, and partly because I don&rsquo;t understand that much).</p>
+<h3 id="fields">Fields</h3>
+<p>But in QFT, everything is treated as a &ldquo;Field&rdquo;. Fields are super simple to understand if you&rsquo;re a programmer. Basically fields are functions that take in an X, Y, Z, and return a number. You can imagine having a function that gives you the temperature in the room based off the X, Y, Z coordinates.</p>
+<p>There&rsquo;s two complications to add to fields.</p>
+<h3 id="special-relativity">Special Relativity</h3>
+<p>First off, in quantum field theory the fields (and emergent particle excitations) will be moving near the speed of light, so we need to take into account special relativity.</p>
+<p>Special relativity is the idea that all reference frames are equally valid, and the speed of light is a constant for everyone. These two rules create some inconsistencies in the old way of thinking about space and time. If I&rsquo;m moving near the speed of light and hold up a flash light, the light to me will appear to me to be going \( c = 300,000,000\frac{m}{s} \) . But to someone who is watching me go near the speed of light, my flashlight light will also look like it&rsquo;s going \( c \) (not \( 2  c \) as we would have expected). That&rsquo;s pretty weird.</p>
+<p>They key is that &ldquo;time&rdquo; isn&rsquo;t quite what we thought, and it appears to be intimately related to space (hence spacetime).</p>
+<p>At any time we are moving through some combination of space or time. (And that sum is equal to a constant). For us humans, we almost exclusively move through &ldquo;time&rdquo;. But if you&rsquo;re moving near the speed of light, you move mostly through space, and less through time. It&rsquo;s said that photons are &ldquo;timeless&rdquo; because they move purely through space, and not through time. (since they are traveling at the speed of light.) I don&rsquo;t think it&rsquo;s too insightful to take that literally though.</p>
+<p>So, when dealing with things moving near the speed of light, we need to be careful that we respect the sum of space and time such that it&rsquo;s constant with all frames. That constant is:</p>
+<p>$$ (\Delta s)^2 = (c \Delta t)^2 - (\Delta x)^2 - (\Delta y)^2 - (\Delta z)^2 $$</p>
+<p>This is known as the spacetime interval.</p>
+<p>That notation can be cumbersome, so scientist instead created a construct known as a four-vector:</p>
+<p>$$ x_\mu = \begin{pmatrix} ct \\ x \\ y \\ z \\ \end{pmatrix}
+$$</p>
+<p>Now space and time are on the same footing. \( x_0, x_1, x_2, x_3 \) are just components of a vector</p>
+<p>They also define something called the Minkowski metric:</p>
+<p>$$ \eta = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; -1 &amp; 0 &amp; 0 \\  0 &amp; 0 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; -1 \end{pmatrix}
+$$</p>
+<p>So instead we can say:</p>
+<p>$$ (\Delta s)^2 = x_\mu \eta^{\mu \nu} x_\nu $$</p>
+<p>We also need a derivative (velocity) of space time. This can be defined as:</p>
+<p>$$ \partial_\mu = \frac{\partial}{\partial \eta^{\mu \nu} x_\nu } = \frac{\partial}{\partial x^\mu } = \begin{pmatrix} \frac{\partial}{c \partial t} \\ - \frac{\partial}{\partial x} \\ - \frac{\partial}{\partial y} \\ - \frac{\partial}{\partial z} \\ \end{pmatrix}$$</p>
+<h3 id="types-of-fields">Types of Fields</h3>
+<p>There can also be different types of Fields! For the programmer, this just means that those functions can return something other than a float!</p>
+<p>For example we can have a vector field, this means that at each X, Y, Z, we&rsquo;ll get back a Vector{X: 1, Y: 3, Z: 3}. This could be useful for example if you want to model wind at each point in space. We know that window is blowing in some direction, so at each point you put a vector there to represent how fast and in which direction the wind is blowing.</p>
+<p>There&rsquo;s one last important type of Field (besides scalar (float), and Vector), and that&rsquo;s a spinor field. Spinors are very interesting, and of extreme importance for our current map of reality, but we won&rsquo;t be talking about them in this post. They can be represented by two complex numbers, and they &ldquo;spin&rdquo; onto each other, they&rsquo;re very weird, and not easy to visualize. But all fermions (matter particles), are represented by spinor fields, so I&rsquo;m sure I&rsquo;ll write about them one day.</p>
+<p>We&rsquo;ll only talk about scalar fields. (The Higgs field is an example of a scalar field, but that doesn&rsquo;t matter).</p>
+<h3 id="lagrangian">Lagrangian</h3>
+<p>I&rsquo;ll write a full post about this another day, but Lagrangian mechanics is another formulation of physics that can be used to derive equations of motions based off the idea that &ldquo;nature is lazy&rdquo;. If you accept the assumption that nature wants to minimize the &ldquo;Action&rdquo; of a system (usually defined classically as Kinetic (T) - Potential (V) energy), you can figure out the laziest path possible, and that&rsquo;s the correct one!</p>
+<p>For example when you throw a ball in the air, why doesn&rsquo;t the ball go any higher or lower in it&rsquo;s arc? What&rsquo;s to stop it from going at a slightly higher or lower in it&rsquo;s trajectory if it going to end in the same spot? There&rsquo;s an infinite amount of paths that it could go.</p>
+<p>You can get the same answers using Newtons formulation. Normally for simple systems newton&rsquo;s methods are easier \( (\bm{F} = m \bm{a}) \), but in other situations, the Lagrangian (or another formulation called Hamiltonian mechanics) are easier to use!</p>
+<p>Back to the ball, if you assume nature is lazy and wants to minimize the Action (T-V), you&rsquo;ll also get the correct path. It&rsquo;s very similar to Fermat&rsquo;s principle which showed that light takes the path of least time.</p>
+<p>In everyday usage of Lagrangian, you figure out the Lagrangian \( L \) and then plug it into the Euler-Lagrange Equation:</p>
+<p>$$ \frac{\partial L}{\partial q} - \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q}} \right) = 0 $$</p>
+<p>For relativistic fields, a slightly different version of the Euler-Lagrange equation is used:</p>
+<p>$$ \frac{\partial \mathcal{L}}{\partial \phi} - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) = 0 $$</p>
+<p>They look pretty similar, except \( \phi \) is used instead of position. And instead of \( \dot{q} \) as velocity, the relativistic derivative is used \( \partial_\mu \phi \).</p>
+<h2 id="klein-gordon-equation">Klein Gordon Equation</h2>
+<p>The Klein Gordon is the simplest of the free field wave equations. Free field just means &ldquo;non-interacting&rdquo;. The Klein Gordon equation describes how scalar fields evolve over time.</p>
+<p>For example, you could imagine using the Klein Gordon equation to understand how temperature mixes around in a room over time. Except instead of temperature you use relativistic quantum scalar fields.</p>
+<h3 id="the-lagrangian">The Lagrangian</h3>
+<p>The Lagrangian for the klein gordon equation is the following. Don&rsquo;t ask how to figure it out (I don&rsquo;t know). If I understand correctly, people in the past figured out the Klein-Gordon equation, and then worked back to get the Lagrangian (normally it&rsquo;s the other way, but the quantum world is weird and non-intuitive).</p>
+<p>$$ \mathcal{L} = \frac{1}{2} ( \partial_\mu \phi \partial^\mu \phi - m^2 \phi^2 ) $$</p>
+<p>It&rsquo;s a weird equation, but it kind of intuitively makes sense if we pull it apart. Remember L is of the form of kinetic - potential. And the first term kind of looks like kinetic energy. It&rsquo;s the velocity of the field squared, similar to \( \frac{1}{2} m v^2 \). And the second term is the potential which is \( - \frac{1}{2} m^2 \phi^2 \). For a spring the potential is \(-\frac{1}{2}kx^2 \). Not that different.</p>
+<p>You may notice that the \( \mu \) is upstairs on one of the partial derivatives, and downstairs on another partial derivative. That&rsquo;s to satisfy the relativistic spacetime interval we talked about earlier. \( (\Delta s)^2 = x_\mu \eta^{\mu \nu} x_\nu = x_\mu x^\mu \).</p>
+<h3 id="klein-gordon-equation-1">Klein Gordon Equation</h3>
+<p>So, we plug the Lagrangian into the Euler-Lagrange for fields and get back the <strong>Klein Gordon Equation</strong>:</p>
+<p>$$ (\partial_\mu \partial^\mu + m^2) \phi = 0 $$</p>
+<p>What does it mean? Well it can kind of be thought of as a set of springs where each spring is also attached to the spring next to it.</p>
+<p>If we expand the Lagrangian (in one direction x) we get:</p>
+<p>$$ \frac{1}{2} \left( \left(\frac{\partial}{c \partial t} \phi\right)^2  - \left(\frac{\partial \phi}{\partial x} \right)^2 -m^2 \phi^2\right) $$</p>
+<p>The first term, \( \left(\frac{\partial}{c \partial t} \phi\right)^2 \), is the kinetic energy of the harmonic oscillators. It&rsquo;s related to the &ldquo;change of the field over time&rdquo; similar to the velocity of the field.</p>
+<p>The second term, \( - \left(\frac{\partial \phi}{\partial x} \right)^2 \), is subtracted, meaning it&rsquo;s a potential, and deals with the change of the field in relation to space. So the parts of the field that are significantly higher than nearby points will be brought down. It&rsquo;s similar to rubber bands connected to neighboring elements of the field.</p>
+<p>The last term \( -m^2 \phi^2 \) is the potential energy of the individual elements of the field, similar to a spring. If \( \phi \) is high at some point, it will be brought down quickly.</p>
+<p>So overall the Klein Gordon kind of seems like an array of springs that are connected to each other!</p>
+<p>We can easily program that!</p>
+<h3 id="simulation">Simulation</h3>
+<div style="text-align: center">
+<video controls src="/k1j10.mp4" style="width: 75%;"  loop ></video>
+</div>
+<p>So, each of the little &ldquo;*&rdquo; are a mass element attached to a string. I start the simulation by pulling one of the springs up 10 units and then releasing it. You can see all the resulting waves.</p>
+<p>It&rsquo;s pretty cool to watch all the resulting frequencies of waves that are created by a single pluck. Another day I might perform some Fast Fourier Transforms and watch which frequencies become dominate based off of different parameters and interactions.</p>
+<p>Also, I connected the left and right side of the springs. So it warps around. It&rsquo;s actually a &ldquo;circle&rdquo; of connected springs.</p>
+<h4 id="tunning-k-and-j">Tunning K and J</h4>
+<p>There&rsquo;s two main constants to tune. The first K, is the standard spring constant. The second (J) is the strength of the band between the springs.</p>
+<h5 id="k10-j1">K=10, J=1</h5>
+<p>The individual springs dominate the bands between the springs.</p>
+<div style="text-align: center">
+<video controls src="/k10j1.mp4" style="width: 75%;"  loop ></video>
+</div>
+<h5 id="k1-j10">K=1, J=10</h5>
+<p>The bands between springs dominates over the spring constant.</p>
+<div style="text-align: center">
+<video controls src="/k1j10.mp4" style="width: 75%;"  loop ></video>
+</div>
+<h5 id="k5-j5">K=5, J=5</h5>
+<p>The two terms are equal:</p>
+<div style="text-align: center">
+<video controls src="/k5l5.mp4" style="width: 75%;"  loop ></video>
+</div>
+<h4 id="two-plucks">Two Plucks</h4>
+<p>Two plucks in the field:</p>
+<div style="text-align: center">
+<video controls src="/2k1j10.mp4" style="width: 75%;"  loop ></video>
+</div>
+<h2 id="what-went-well">What went well</h2>
+<ul>
+<li>Everything went pretty well. I used semi-implicit euler as my integrator, the standard terminal ansi escape codes for drawing the display, the code is pretty small.</li>
+</ul>
+<h2 id="thoughts">Thoughts</h2>
+<ul>
+<li>Somewhat unrelated, but the fact that \( cos(kx - wt) \) is what we use to model waves for some many phenomena, and that the minkowski metric can be written as -1,1,1,1 or, (x-t) just seems too beautiful. The fact that waves travel both through time and space was always very weird to me. At any point you can travel either through time or space and get to the same &ldquo;spot&rdquo;. The fact that relativity puts them together like that makes so much sense. I absolutely love it.</li>
+</ul>
+<h2 id="future">Future</h2>
+<p>I think it&rsquo;d be super cool to extract out the resulting frequencies from each pluck.</p>
+<p>More importantly, it&rsquo;s time to move to the most important equation&hellip; the Dirac Equation. Time to understand spinors.</p>
+    </div>
+
+    <div class="article-info">
+    
+        <div class="article-date">2020-09-12</div>
+    
+    <div class="article-taxonomies">
+        
+            
+    </div>
+</div>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+</article>
+
+
+
+
+
+        </main>
+        <footer>
+            
+                <p>© Stuart Larsen, 2020<br>
+</p>
+
+<p>July 2020: I'm looking for a job related to physics/programming. If you have an open role, I'd love to
+    apply/chat! c0nrad@c0nrad.io</p>
+
+
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup {
+        background: #fff;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+        border: 1px solid;
+        margin-top: 20px;
+    }
+
+
+
+
+     
+</style>
+<div id="mc_embed_signup">
+    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
+        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+        novalidate>
+        <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Subscribe for new posts:</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                    class="button"></div>
+        </div>
+    </form>
+</div>
+
+
+            
+        </footer>
+    </div>
+</body>
+</html>
