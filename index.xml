@@ -19,8 +19,8 @@
       <guid>https://blog.c0nrad.io/posts/so3-exploration/</guid>
       <description>&lt;p&gt;Brute forcing the generators for SO(3).&lt;/p&gt;
 &lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;m currently reading through Physics from Symmetry by Jakob Schwichtenberg. One of the sections, (&lt;em&gt;4.4.1 The Generators and Lie Algebra of \( SO(3) \)&lt;/em&gt;), talks about generating the SO(3) rotation matrixes by first determining a set of Lie Algebra generators, and then doing some exponential matrix math.&lt;/p&gt;
-&lt;p&gt;The book hands the reader a couple of linearly independent generator matrixes, but I figured it&amp;rsquo;d be fun to figure out if they are a unique solution by brute force.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m currently reading through &lt;a href=&#34;https://www.amazon.com/Physics-Symmetry-Undergraduate-Lecture-Notes/dp/3319666304&#34;&gt;Physics from Symmetry&lt;/a&gt; by Jakob Schwichtenberg. One of the sections, (&lt;em&gt;4.4.1 The Generators and Lie Algebra of \( SO(3) \)&lt;/em&gt;), talks about generating the SO(3) rotation matrixes by first determining a set of Lie Algebra generators, and then doing some exponential matrix math.&lt;/p&gt;
+&lt;p&gt;The book hands the reader a couple of linearly independent generator matrixes that can be used to generate the group elements. But I was curious if they were a unique set of matrices. It seemed like it would be fun to figure out by brute force.&lt;/p&gt;
 &lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
 &lt;p&gt;A brief introduction to the vocabulary of the group theory being used.&lt;/p&gt;
 &lt;h2 id=&#34;so3&#34;&gt;SO(3)&lt;/h2&gt;
@@ -31,7 +31,7 @@
 &lt;li&gt;Special means that its determinate is zero. \( det(O) = 1 \). We require S because O(3) is also a group, but includes transformations via flips, but requiring det(O) = 1, means we only get rotations.&lt;/li&gt;
 &lt;li&gt;Orthogonal means that \( O^T O = 1 \). Being orthogonal means that the matrix is length preserving.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The matrices are:&lt;/p&gt;
+&lt;p&gt;The standard rotation matrices in 3D are:&lt;/p&gt;
 &lt;p&gt;$$ R_x = \begin{pmatrix}
 1 &amp;amp; 0 &amp;amp; 0  \\
 0 &amp;amp; \cos(\theta) &amp;amp; -\sin(\theta)  \\
@@ -46,9 +46,9 @@
 0 &amp;amp; 0 &amp;amp; 0 \end{pmatrix} $$&lt;/p&gt;
 &lt;p&gt;So if you had a vector you wanted to rotate around some axis, you could take one ot those matrixes, plug in \(\theta\), and you&amp;rsquo;d have a length preserving rotation!&lt;/p&gt;
 &lt;h2 id=&#34;lie-group&#34;&gt;Lie Group&lt;/h2&gt;
-&lt;p&gt;Lie Groups deal with groups of continuous symmetry transformation. For example if you&amp;rsquo;re looking at a square, you can only rotate it so many ways such that it&amp;rsquo;ll still look the same (by 0, 90, 180, 270 degrees). But you can rotate a circle by any angle, and it&amp;rsquo;s still the same looking circle. Since the square only allows a set number of rotations it is a discrete group, whereas a circle is a continuous group.&lt;/p&gt;
+&lt;p&gt;Lie Groups deal with groups of continuous symmetry transformation, as opposed to discrete symmetry transformations. For example if you&amp;rsquo;re looking at a square, you can only rotate it so many ways such that it&amp;rsquo;ll still look the same (by 0, 90, 180, 270 degrees). But you can rotate a circle by any angle, and it&amp;rsquo;s still the same looking circle. Since the square only allows a set number of rotations it is a discrete group, whereas a circle is a continuous group.&lt;/p&gt;
 &lt;h2 id=&#34;lie-algebra&#34;&gt;Lie Algebra&lt;/h2&gt;
-&lt;p&gt;Lie Algebras are a way of classifying lie groups, and can be used to generate and classify the lie groups.&lt;/p&gt;
+&lt;p&gt;Lie Algebras are a way of classifying and generating the lie groups. Many lie groups can belong to a lie algebra.&lt;/p&gt;
 &lt;p&gt;I mentioned in the introduction of this blog post that I wanted to generate the SO(3) matrixes. But what&amp;rsquo;s the point if we already have them?&lt;/p&gt;
 &lt;p&gt;Well, we have them in 3-dimensions. But what about higher dimensions? There&amp;rsquo;s also many ways to represent rotations (for example SU(2), special unitary matrixes are also very similar to SO(3) (SU(2) is the double cover of SO(3), meaning there&amp;rsquo;s two different points in SU(2) that map to SO(3)). Which group is more fundamental?&lt;/p&gt;
 &lt;p&gt;Lie Algebra is given by matrices X such that \( e^{tX} \in G\), where G is the lie group, and the Lie Algebra includes a new operator called the Lie bracket \( [,] \) which instructs how to combine the matrices.&lt;/p&gt;
@@ -56,7 +56,7 @@
 &lt;p&gt;One thing that&amp;rsquo;s very fun is that in the Lie Algebra X is a matrix, and we&amp;rsquo;re putting it in an exponential. \( e^{tX} \). What does it even mean to raise a matrix by an exponential?&lt;/p&gt;
 &lt;p&gt;It turns out that Taylor series expansions save us again. The taylor series expansion of \( e^x \) is:&lt;/p&gt;
 &lt;p&gt;$$ e^x = \sum^{\infty}_{n=0} \frac{x^n}{n!} $$&lt;/p&gt;
-&lt;p&gt;Meaning, if you wanted to calculate e^x for some x, you could instead solve the infinite series. Which doesn&amp;rsquo;t sound too useful, but usually what happens is you plug in some value of x, (maybe, \( i \theta \)), and you&amp;rsquo;ll be able to fish out other infinite taylor series (such as \( \cos(\theta) \) and \( i \sin(\theta) \) (you can prove Euler&amp;rsquo;s formula this way).&lt;/p&gt;
+&lt;p&gt;Meaning, if you wanted to calculate e^x for some x, you could instead solve the above infinite series. Which doesn&amp;rsquo;t sound too useful, but usually what happens is you plug in some value of x, (maybe, \( i \theta \)), and you&amp;rsquo;ll be able to fish out other infinite taylor series (such as \( \cos(\theta) \) and \( i \sin(\theta) \) (you can prove Euler&amp;rsquo;s formula this way).&lt;/p&gt;
 &lt;p&gt;So, if we plug in \( e^{tX} \):&lt;/p&gt;
 &lt;p&gt;$$ e^{tX} = I + t X + \frac{t^2 X^2}{2!} + \frac{t^3 X^3}{3!} + &amp;hellip;$$&lt;/p&gt;
 &lt;p&gt;We can solve that!&lt;/p&gt;
@@ -81,7 +81,8 @@ $$ \implies tr(J) = 0 $$&lt;/p&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;transpose&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;equals&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;Zero3&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;trace&lt;/span&gt;() &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) {
     &lt;span style=&#34;color:#75715e&#34;&gt;// do something
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Random3 randomly adds either 1, 0, -1 to each spot in a 3x3 matrix.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;(full code can be found &lt;a href=&#34;https://github.com/c0nrad/group_brute&#34;&gt;here&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;Random3() randomly adds either 1, 0, -1 to each spot in a 3x3 matrix.&lt;/p&gt;
 &lt;p&gt;What&amp;rsquo;s was somewhat interesting is that I get back 27 unique matrixes that fulfil that requirement.&lt;/p&gt;
 &lt;p&gt;Some example matrixes:&lt;/p&gt;
 &lt;p&gt;$$ J_{random1} = \begin{pmatrix}
@@ -99,8 +100,8 @@ $$ \implies tr(J) = 0 $$&lt;/p&gt;
 &lt;p&gt;They all make sense, they&amp;rsquo;re symmetric across the diagonal axis (requirement of \( O^T O = I \)).&lt;/p&gt;
 &lt;p&gt;But, we can also see that \( J_{random1} \) contains similar elements from \( J_{random2} \). We know there&amp;rsquo;s three rotation matrixes, maybe instead we try to find sets of three matrixes that are linear independent in the set of 27 matrxies that fulfil the initial requirements.&lt;/p&gt;
 &lt;h2 id=&#34;linear-independent&#34;&gt;Linear Independent&lt;/h2&gt;
-&lt;p&gt;Well, of our 27 matrixes, maybe there&amp;rsquo;s only a couple that are linearly independent.&lt;/p&gt;
-&lt;p&gt;We can iterate over this too.&lt;/p&gt;
+&lt;p&gt;So maybe of our 27 matrixes, maybe there&amp;rsquo;s only a couple that are linearly independent.&lt;/p&gt;
+&lt;p&gt;We can iterate over this too via code.&lt;/p&gt;
 &lt;p&gt;For three matrixes to be linearly independent we need it such that the only solution to the following below is when \( 0 = k_1 = k_2 = k_3 \) (this means that you can&amp;rsquo;t build one of the matrix from a combination from others):&lt;/p&gt;
 &lt;p&gt;$$ k_1 J_1 + k_2 J_2 + k_3 J_3 = 0 $$&lt;/p&gt;
 &lt;p&gt;To do this we have to solve a system of equations! In our above example:&lt;/p&gt;
@@ -165,8 +166,8 @@ $$ \sin(x) = x - \frac{x^3}{x!} + \frac{x^5}{x!} - \frac{x^7}{7!} &amp;hellip; $
 0 &amp;amp; \sin(\theta) &amp;amp; \cos(\theta) \end{pmatrix} $$&lt;/p&gt;
 &lt;p&gt;Holy guacamole batman! We generated \( R_1 \).&lt;/p&gt;
 &lt;h2 id=&#34;other-choices-of-j&#34;&gt;Other choices of J&lt;/h2&gt;
-&lt;p&gt;But we choose only one of the 27 J matrices, what happens if we pick any of the others?&lt;/p&gt;
-&lt;p&gt;Well, one of the important properties we exploited was that raising the J matrix to a power eventually cycled back to itself ( \( J_1^5 = J_1 \)). Do all the 29 J matrixes have that property?&lt;/p&gt;
+&lt;p&gt;But we used only one of the 27 J matrices, what happens if we pick any of the others?&lt;/p&gt;
+&lt;p&gt;Well, one of the important properties we exploited was that raising the J matrix to a power eventually cycled back to itself ( \( J_1^5 = J_1 \)). Do all the 27 J matrixes have that property?&lt;/p&gt;
 &lt;p&gt;Well, \( -J_1 \) was also a matrix. Its powers also have that cyclic property. Following the math through, we&amp;rsquo;d get \( -R_1 \), which is just a rotation in the opposite direction. (\( R_1^{-1} = -R_1 \)).&lt;/p&gt;
 &lt;p&gt;We also have \( J_2, J_3 \) which will result in our standard \( R_2, R_3 \) matrixes, and their negatives, \( -J_2, -J_3 \implies -R_2, -R_3 \).&lt;/p&gt;
 &lt;p&gt;The zero matrix also fulfils the requirements to be a J matrix, and it results in the I transformation.&lt;/p&gt;
@@ -253,9 +254,9 @@ $$ = \begin{pmatrix}
 \cos(\theta) &amp;amp; -\cos(\theta) &amp;amp; \sin(\theta)  \\
 -\cos(\theta) &amp;amp; \cos(\theta) &amp;amp; -\sin(\theta)  \\
 -\sin(\theta) &amp;amp; \sin(\theta) &amp;amp; 2\cos(\theta) \end{pmatrix} $$&lt;/p&gt;
-&lt;p&gt;What. Well it turns out that looks suspiciously like:&lt;/p&gt;
+&lt;p&gt;Well it turns out that looks suspiciously like:&lt;/p&gt;
 &lt;img src=&#34;https://blog.c0nrad.io/r_xy.png&#34; style=&#34;border: 1px solid&#34;&gt;
-&lt;p&gt;Which is just rotating X and Y by \( \theta \).&lt;/p&gt;
+&lt;p&gt;Which is just rotating around X and Y by \( \theta \).&lt;/p&gt;
 &lt;p&gt;And it turns out if we had been a bit smarter and multiplied the matrix by \( \sqrt{2} \) before doing the expansion, we would have gotten that!&lt;/p&gt;
 &lt;p&gt;$$ J^0 = \begin{pmatrix}
 1 &amp;amp; 0 &amp;amp; 0 \\
@@ -289,8 +290,8 @@ J^5 = \begin{pmatrix}
 \end{pmatrix} $$&lt;/p&gt;
 &lt;h2 id=&#34;linear-combinations-of-generators&#34;&gt;Linear Combinations of Generators&lt;/h2&gt;
 &lt;p&gt;So, the 27 matrxies are all the different combinations of rotations possible!&lt;/p&gt;
-&lt;p&gt;And this answers our original questions, are the matrixes that the book gave us the unique solution. No, but in terms of standard convention yes. We have a standard definition of \( R_x(\theta) \), and \( J_1 \) and only \( J_1 \) maps to that.&lt;/p&gt;
-&lt;p&gt;But, we can then build all the other different rotations!&lt;/p&gt;
+&lt;p&gt;And this answers our original questions, are the matrixes that the book gave us the unique solution. No, they&amp;rsquo;re all valid rotation groups, but in terms of standard convention yes. We have a standard definition of \( R_x(\theta) \), and \( J_1 \) and only \( J_1 \) maps to that.&lt;/p&gt;
+&lt;p&gt;So now, we can build a map of all the other different rotations!&lt;/p&gt;
 &lt;p&gt;$$0 \implies I, \\
 J_1 \implies R_x(\theta), \\
 J_2 \implies R_y(\theta), \\
@@ -318,9 +319,9 @@ J_1 + -J_2 + -J_3 \implies R_x(\theta) R_y(-\theta) R_z(-\theta), \\
 -J_1 + J_2 + -J_3 \implies R_x(-\theta) R_y(\theta) R_z(-\theta), \\
 -J_1 + -J_2 + J_3 \implies R_x(-\theta) R_y(-\theta) R_z(\theta) , \\
 -J_1 + -J_2 + -J_3 \implies R_x(-\theta) R_y(-\theta) R_z(-\theta)$$&lt;/p&gt;
-&lt;p&gt;Wow, well there is all 27 of the original matrices we found.&lt;/p&gt;
+&lt;p&gt;We have now accounted for the 27 matrixes.&lt;/p&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;That was a fun project. Ended up being a little bit longer than planned, but it was very neat to explore.&lt;/p&gt;
+&lt;p&gt;That was a fun project. It ended up being a little bit longer than planned, but it was very neat to explore.&lt;/p&gt;
 &lt;p&gt;The code can be found here:&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/c0nrad/group_brute&#34;&gt;https://github.com/c0nrad/group_brute&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;I actually just covered a number of these topics in class (taking matrix X to an exponential e^X, linear independence definition, orthogonal, determinants), so it was pretty cool to apply them.&lt;/p&gt;
