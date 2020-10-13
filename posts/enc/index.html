@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer-when-downgrade">
 
-<title>Hydrogen Spectral Diagram  - c0nrad&#39;s blog</title>
+<title>Effective Nuclear Charge Calculations  - c0nrad&#39;s blog</title>
 <meta name="description" content="Learning about physics">
 
 <link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
@@ -18,19 +18,19 @@
 
 <link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1602554445">
 
-<meta property="og:title" content="Hydrogen Spectral Diagram" />
-<meta property="og:description" content="Terminal application showing the spectral lines for electron transitions in hydrogen." />
+<meta property="og:title" content="Effective Nuclear Charge Calculations" />
+<meta property="og:description" content="A smaller project involving plotting ionization energy for different effective nuclear charge models." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.c0nrad.io/posts/spectral/" />
+<meta property="og:url" content="https://blog.c0nrad.io/posts/enc/" />
 <meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
-<meta property="article:published_time" content="2020-08-29T10:59:09-04:00" />
-<meta property="article:modified_time" content="2020-08-29T10:59:09-04:00" />
+<meta property="article:published_time" content="2020-10-12T21:43:23-04:00" />
+<meta property="article:modified_time" content="2020-10-12T21:43:23-04:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
 
-<meta name="twitter:title" content="Hydrogen Spectral Diagram"/>
-<meta name="twitter:description" content="Terminal application showing the spectral lines for electron transitions in hydrogen."/>
+<meta name="twitter:title" content="Effective Nuclear Charge Calculations"/>
+<meta name="twitter:description" content="A smaller project involving plotting ionization energy for different effective nuclear charge models."/>
 
 
 
@@ -65,56 +65,55 @@
 
 <article class="post">
     <header>
-        <h1>Hydrogen Spectral Diagram</h1>
+        <h1>Effective Nuclear Charge Calculations</h1>
     </header>
     <div class="content">
         <nav id="TableOfContents">
   <ul>
     <li><a href="#overview">Overview</a></li>
-    <li><a href="#background">Background</a></li>
-    <li><a href="#code">Code</a></li>
-    <li><a href="#what-went-well">What went well?</a></li>
-    <li><a href="#other-thoughts">Other thoughts</a></li>
+    <li><a href="#effective-nuclear-charge">Effective Nuclear Charge</a>
+      <ul>
+        <li><a href="#calculations">Calculations</a></li>
+        <li><a href="#future">Future</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
-        <p>Terminal application showing the spectral lines for electron transitions in hydrogen.</p>
+        <p>A smaller project involving plotting ionization energy for different effective nuclear charge models.</p>
 <h2 id="overview">Overview</h2>
-<p>I thought it would be fun to create a little colorful application showing the spectral lines of hydrogen.</p>
-<h2 id="background">Background</h2>
-<p>Electrons in hydrogen can be at different energy levels. The energy levels are designated by \( n \), and have the energy:</p>
+<p>Tonights project was from a book I&rsquo;m reading called &ldquo;The Oxford Solid State Basics&rdquo;. In the problem you were supposed to calculate and plot the ionization energy for atoms from hydrogen to Manganese.</p>
+<p>The code can be found here:</p>
+<p><a href="https://github.com/c0nrad/atomic">https://github.com/c0nrad/atomic</a></p>
+<p>Results:
+<br>
+<img src="/ionization.png" style="border: 1px solid"></p>
+<p>It turns out the calculated ionization energies had the same shape, but overshot the experimental values by quite a bit.</p>
+<h2 id="effective-nuclear-charge">Effective Nuclear Charge</h2>
+<p>The problem was based around the idea that surprisingly atoms on the left side of the periodic table are larger than the atoms on the right. Even though the atoms on the right have more electrons and protons.</p>
+<p>This can be explained by the fact that the inner electrons sort of &ldquo;shield&rdquo; the external electrons.</p>
+<p>The atoms on the far left have one extra electron in their outer shell. So when the &ldquo;electrons look in&rdquo; they see X protons, and X-1 electrons. But, the atoms on the right will see X protons, and X-7 electrons (in the case of florine) since the extra electrons are in the same orbital.</p>
+<p>So if we wanted to ionize an electron from an atom, it&rsquo;d much simpler to pull one of the electrons off the fat atoms (left) than one of the skinner atoms (right).</p>
+<p>The project involved calculating this ionization energy.</p>
+<h3 id="calculations">Calculations</h3>
+<p>To model the ionization energy, the book recommended using the hydrogen model with effective charge Z.</p>
+<p>This makes sense because we modeled the hydrogen atom using the Coloumb potental. So instead of just one electron and one proton, we can say one electron and &ldquo;effective nuclear charge&rdquo; protons.</p>
+<p>I found this in my trusty Griffiths book:</p>
 <p>$$ E_n = -\left[ \frac{m_e}{2\hbar^2} \left( \frac{e^2}{4 \pi \epsilon_0} \right)^2 \right] \frac{1}{n^2} $$</p>
-<p>When an electron jumps from one level to another (such as n=3 to n=1), a photon is emitted with the energy equal to the change in energy states.</p>
-<p>We also know that the energy of the photon is related to it&rsquo;s frequency (and therefor wavelength).</p>
-<p>$$ E = h f $$</p>
-<p>$$ c = \lambda f $$</p>
-<p>$$ \therefore \lambda = \frac{h c}{E} $$</p>
-<p>So, we can iterate through each of the energy levels for an electron in hydrogen and see what types of photons they will let out. Some of those photons will be in the visible light spectrum!</p>
-<h2 id="code">Code</h2>
-<p>I built a little Go app to build the spectral diagram. <a href="https://github.com/c0nrad/spectral">https://github.com/c0nrad/spectral</a>. Here&rsquo;s the output of the program:</p>
-<p><img src="/spectral.png" alt="Spectral Diagram"></p>
-<p>For the transitions, if the resulting wavelength was in the visible wavelength I printed it with it&rsquo;s corresponding color.</p>
-<p>I thought that there would be more color! I didn&rsquo;t realize that only the Balmer series (n=2) had color!</p>
-<h2 id="what-went-well">What went well?</h2>
-<ul>
-<li>GoLang&rsquo;s big.Float was useful for high precision floats.</li>
-<li>For the display I used the ANSI escape characters for cursor position and color. Works super smoothly.</li>
-</ul>
-<h2 id="other-thoughts">Other thoughts</h2>
-<ul>
-<li>I need a better way to store the &ldquo;units&rdquo; along with my variables. I name the variables based on their units, but that&rsquo;s dumb, I wish the unit type information was stored with the value, but it&rsquo;s kind of overkill to build some struct for a small project like this.
-<ul>
-<li>But it&rsquo;d be super nice to be able to just convert types without having to hardcode JoulesToEV and such.</li>
-</ul>
-</li>
-</ul>
-<h1 id="closing-remarks">Closing Remarks</h1>
-<p>None really, it was a fun project. I wish the hydrogen spectrum had more colors! Next up I&rsquo;m thinking of calculating Clebsh-Gordan coefficients. My quantum angular momentum/spin addition is not as good as it should be.</p>
+<p>So then we just needed to multiply one of the \( e \)&lsquo;s by a Z, and calculate the \( n \) for each atom from 1-25.</p>
+<p>To calculate the Z two different naive approaches were used:</p>
+<ol>
+<li>Consider all inner electrons to shield, ignore the electrons in the same shell</li>
+<li>Consider all inner electrons to shield, and electrons in the same shell to 1/2 shield</li>
+</ol>
+<h3 id="future">Future</h3>
+<p>It was a fun evening project, but I don&rsquo;t see myself continuing the project.</p>
+<p>If I do, I learned while researching that there&rsquo;s a set of rules called &ldquo;Slater&rsquo;s Rules&rdquo; for calculating Effective Nuclear Charge that would probably give better results.</p>
     </div>
 
     <div class="article-info">
     
-        <div class="article-date">2020-08-29</div>
+        <div class="article-date">2020-10-12</div>
     
     <div class="article-taxonomies">
         
