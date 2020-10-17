@@ -6,10 +6,73 @@
     <description>c0nrad&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 15 Oct 2020 10:24:08 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 17 Oct 2020 12:29:59 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Feynman Diagram Editor Pt. 1</title>
+      <link>https://blog.c0nrad.io/posts/feynman-diagrams/</link>
+      <pubDate>Sat, 17 Oct 2020 12:29:59 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/feynman-diagrams/</guid>
+      <description>&lt;p&gt;Starting a new project for validating Feynman diagrams.&lt;/p&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m currently reading &amp;ldquo;Introduction to Elementary Particles&amp;rdquo; by Griffiths. (Yes, the Griffiths, I love his books).&lt;/p&gt;
+&lt;p&gt;One of the projects I&amp;rsquo;ve wanted to do for awhile is build a Feynman diagram editor. But I want it to be more than just a tool for drawing squiggly lines, but something that could validate and provide insight on the digram.&lt;/p&gt;
+&lt;p&gt;The last two days were spent on laying some of the foundation for that application.&lt;/p&gt;
+&lt;h2 id=&#34;feynman-diagrams&#34;&gt;Feynman Diagrams&lt;/h2&gt;
+&lt;p&gt;Feynman diagrams are a nifty little tool for visualizing (and calculating) particle interactions.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.c0nrad.io/muon-decay.png&#34; alt=&#34;/muon decay&#34;&gt;&lt;/p&gt;
+&lt;p&gt;In a typical diagram, time flows from the left to the right, and one dimension of space is on the Y-axis (up and down). But, you may notice there&amp;rsquo;s no labels on the diagram. The diagram isn&amp;rsquo;t concerned with &amp;ldquo;how fast&amp;rdquo; or &amp;ldquo;how far&amp;rdquo; the interaction takes place. It&amp;rsquo;s actually a tool for counting (I&amp;rsquo;ll cover this in a future blog post).&lt;/p&gt;
+&lt;p&gt;Elementary particle collisions follow a number of rules. For example, charge must be conserved. So, if before a collision there&amp;rsquo;s +2 charge, after the collision there must be +2 charge.&lt;/p&gt;
+&lt;p&gt;Other things must be conserved such as &amp;ldquo;Baryon Number&amp;rdquo;, which is simply the number of Baryons (things like protons/neutrons, with 3 quarks). Or Lepton Generation Number (&amp;ldquo;electron-ness&amp;rdquo; must be conserved.)&lt;/p&gt;
+&lt;p&gt;So for stage one, I figured it&amp;rsquo;d be fun to build a program that validates different interactions.&lt;/p&gt;
+&lt;h2 id=&#34;tool&#34;&gt;Tool&lt;/h2&gt;
+&lt;p&gt;Right now it&amp;rsquo;s just a library right here:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/c0nrad/feynman&#34;&gt;https://github.com/c0nrad/feynman&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;But the library supports parsing interactions and then validating them for a few conservation laws. I still need to support spin, but I don&amp;rsquo;t quite understand spin conservation yet, so I need to re-read Ch 4.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ParseInteraction&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PROTON + ANTIPROTON -&amp;gt; PION_PLUS + PION&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;hasError&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;validateInteraction&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i1&lt;/span&gt;), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CHARGE_CONSERVATION&amp;#34;&lt;/span&gt;)).&lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;be&lt;/span&gt;.&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ParseInteraction&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ETA_MESON -&amp;gt; PHOTON + PHOTON&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;hasError&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;validateInteraction&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i2&lt;/span&gt;), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CHARGE_CONSERVATION&amp;#34;&lt;/span&gt;)).&lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;be&lt;/span&gt;.&lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i3&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ParseInteraction&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SIGMA -&amp;gt; LAMBDA + PION&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;hasError&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;validateInteraction&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i3&lt;/span&gt;), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ENERGY_CONSERVATION&amp;#34;&lt;/span&gt;)).&lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;be&lt;/span&gt;.&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i4&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ParseInteraction&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SIGMA_MINUS -&amp;gt; NEUTRON + PION_MINUS&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;hasError&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;validateInteraction&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i4&lt;/span&gt;), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CHARGE_CONSERVATION&amp;#34;&lt;/span&gt;)).&lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;be&lt;/span&gt;.&lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;hasError&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;validateInteraction&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i4&lt;/span&gt;), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;BARYON_CONSERVATION&amp;#34;&lt;/span&gt;)).&lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;be&lt;/span&gt;.&lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;hasError&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;validateInteraction&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i4&lt;/span&gt;), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ENERGY_CONSERVATION&amp;#34;&lt;/span&gt;)).&lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;be&lt;/span&gt;.&lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ParseInteraction&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MUON -&amp;gt; ELECTRON + ELECTRON_ANTINEUTRINO&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;hasError&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;validateInteraction&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i5&lt;/span&gt;), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;LEPTON_MUON_CONSERVATION&amp;#34;&lt;/span&gt;)).&lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;be&lt;/span&gt;.&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i6&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ParseInteraction&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ELECTRON + PROTON -&amp;gt; ELECTRON_NEUTRINO + PION&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;hasError&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;validateInteraction&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i6&lt;/span&gt;), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;BARYON_CONSERVATION&amp;#34;&lt;/span&gt;)).&lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;be&lt;/span&gt;.&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i7&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ParseInteraction&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PION_PLUS + NEUTRON -&amp;gt; PION_MINUS + PROTON&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;hasError&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;validateInteraction&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i7&lt;/span&gt;), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CHARGE_CONSERVATION&amp;#34;&lt;/span&gt;)).&lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;be&lt;/span&gt;.&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i8&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ParseInteraction&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SIGMA_PLUS + NEUTRON -&amp;gt; SIGMA_MINUS + PROTON&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;hasError&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;validateInteraction&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i7&lt;/span&gt;), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CHARGE_CONSERVATION&amp;#34;&lt;/span&gt;)).&lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;be&lt;/span&gt;.&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;diagram&#34;&gt;Diagram&lt;/h2&gt;
+&lt;p&gt;Eventually I&amp;rsquo;m thinking the tool will look something like this:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.c0nrad.io/feynman.png&#34; alt=&#34;/feynman.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;With a couple of features:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Snap-to-grid, no messy diagrams&lt;/li&gt;
+&lt;li&gt;All client-side with URL sharing&lt;/li&gt;
+&lt;li&gt;Interaction names, bunch of examples&lt;/li&gt;
+&lt;li&gt;Validation window, &amp;ldquo;charge not conserved&amp;rdquo;, etc&lt;/li&gt;
+&lt;li&gt;Maybe calculating the interaction terms&lt;/li&gt;
+&lt;li&gt;Maybe calculate different orders of interactions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;future&#34;&gt;Future&lt;/h2&gt;
+&lt;p&gt;Next up is the rest of the conservation laws, better vertex validation, and then I&amp;rsquo;ll start on the graphical editor!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Independent Study</title>

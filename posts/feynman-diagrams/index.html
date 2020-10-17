@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Feynman Diagram Editor Pt. 1  - c0nrad&#39;s blog</title>
+<meta name="description" content="Learning about physics">
+
+<link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1602954062" />
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1602954062">
+
+<meta property="og:title" content="Feynman Diagram Editor Pt. 1" />
+<meta property="og:description" content="Starting a new project for validating Feynman diagrams." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.c0nrad.io/posts/feynman-diagrams/" />
+<meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+<meta property="article:published_time" content="2020-10-17T12:29:59-04:00" />
+<meta property="article:modified_time" content="2020-10-17T12:29:59-04:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+
+<meta name="twitter:title" content="Feynman Diagram Editor Pt. 1"/>
+<meta name="twitter:description" content="Starting a new project for validating Feynman diagrams."/>
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header> 
+            
+                <h1 class="site-header">
+    <a href="https://blog.c0nrad.io/">c0nrad&#39;s blog</a>
+</h1>
+<nav>
+    
+    
+    <a class="" href="https://c0nrad.io" title="">About</a>
+    
+    <a class="" href="https://github.com/c0nrad/" title="">Github</a>
+    
+    <a class="" href="https://twitter.com/xc0nradx" title="">Twitter</a>
+    
+</nav>
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+
+<article class="post">
+    <header>
+        <h1>Feynman Diagram Editor Pt. 1</h1>
+    </header>
+    <div class="content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#feynman-diagrams">Feynman Diagrams</a></li>
+    <li><a href="#tool">Tool</a></li>
+    <li><a href="#diagram">Diagram</a></li>
+    <li><a href="#future">Future</a></li>
+  </ul>
+</nav>
+
+        <p>Starting a new project for validating Feynman diagrams.</p>
+<h2 id="overview">Overview</h2>
+<p>I&rsquo;m currently reading &ldquo;Introduction to Elementary Particles&rdquo; by Griffiths. (Yes, the Griffiths, I love his books).</p>
+<p>One of the projects I&rsquo;ve wanted to do for awhile is build a Feynman diagram editor. But I want it to be more than just a tool for drawing squiggly lines, but something that could validate and provide insight on the digram.</p>
+<p>The last two days were spent on laying some of the foundation for that application.</p>
+<h2 id="feynman-diagrams">Feynman Diagrams</h2>
+<p>Feynman diagrams are a nifty little tool for visualizing (and calculating) particle interactions.</p>
+<p><img src="/muon-decay.png" alt="/muon decay"></p>
+<p>In a typical diagram, time flows from the left to the right, and one dimension of space is on the Y-axis (up and down). But, you may notice there&rsquo;s no labels on the diagram. The diagram isn&rsquo;t concerned with &ldquo;how fast&rdquo; or &ldquo;how far&rdquo; the interaction takes place. It&rsquo;s actually a tool for counting (I&rsquo;ll cover this in a future blog post).</p>
+<p>Elementary particle collisions follow a number of rules. For example, charge must be conserved. So, if before a collision there&rsquo;s +2 charge, after the collision there must be +2 charge.</p>
+<p>Other things must be conserved such as &ldquo;Baryon Number&rdquo;, which is simply the number of Baryons (things like protons/neutrons, with 3 quarks). Or Lepton Generation Number (&ldquo;electron-ness&rdquo; must be conserved.)</p>
+<p>So for stage one, I figured it&rsquo;d be fun to build a program that validates different interactions.</p>
+<h2 id="tool">Tool</h2>
+<p>Right now it&rsquo;s just a library right here:</p>
+<p><a href="https://github.com/c0nrad/feynman">https://github.com/c0nrad/feynman</a></p>
+<p>But the library supports parsing interactions and then validating them for a few conservation laws. I still need to support spin, but I don&rsquo;t quite understand spin conservation yet, so I need to re-read Ch 4.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;PROTON + ANTIPROTON -&gt; PION_PLUS + PION&#34;</span>)
+<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i1</span>), <span style="color:#e6db74">&#34;CHARGE_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">true</span>;
+
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;ETA_MESON -&gt; PHOTON + PHOTON&#34;</span>)
+<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i2</span>), <span style="color:#e6db74">&#34;CHARGE_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">false</span>;
+
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i3</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;SIGMA -&gt; LAMBDA + PION&#34;</span>)
+<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i3</span>), <span style="color:#e6db74">&#34;ENERGY_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">true</span>;
+
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i4</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;SIGMA_MINUS -&gt; NEUTRON + PION_MINUS&#34;</span>)
+<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i4</span>), <span style="color:#e6db74">&#34;CHARGE_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">false</span>;
+<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i4</span>), <span style="color:#e6db74">&#34;BARYON_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">false</span>;
+<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i4</span>), <span style="color:#e6db74">&#34;ENERGY_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">false</span>;
+
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i5</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;MUON -&gt; ELECTRON + ELECTRON_ANTINEUTRINO&#34;</span>)
+<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i5</span>), <span style="color:#e6db74">&#34;LEPTON_MUON_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">true</span>;
+
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i6</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;ELECTRON + PROTON -&gt; ELECTRON_NEUTRINO + PION&#34;</span>)
+<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i6</span>), <span style="color:#e6db74">&#34;BARYON_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">true</span>;
+
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i7</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;PION_PLUS + NEUTRON -&gt; PION_MINUS + PROTON&#34;</span>)
+<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i7</span>), <span style="color:#e6db74">&#34;CHARGE_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">true</span>;
+
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i8</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;SIGMA_PLUS + NEUTRON -&gt; SIGMA_MINUS + PROTON&#34;</span>)
+<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i7</span>), <span style="color:#e6db74">&#34;CHARGE_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">true</span>;
+</code></pre></div><h2 id="diagram">Diagram</h2>
+<p>Eventually I&rsquo;m thinking the tool will look something like this:</p>
+<p><img src="/feynman.png" alt="/feynman.png"></p>
+<p>With a couple of features:</p>
+<ul>
+<li>Snap-to-grid, no messy diagrams</li>
+<li>All client-side with URL sharing</li>
+<li>Interaction names, bunch of examples</li>
+<li>Validation window, &ldquo;charge not conserved&rdquo;, etc</li>
+<li>Maybe calculating the interaction terms</li>
+<li>Maybe calculate different orders of interactions</li>
+</ul>
+<h2 id="future">Future</h2>
+<p>Next up is the rest of the conservation laws, better vertex validation, and then I&rsquo;ll start on the graphical editor!</p>
+    </div>
+
+    <div class="article-info">
+    
+        <div class="article-date">2020-10-17</div>
+    
+    <div class="article-taxonomies">
+        
+            
+    </div>
+</div>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+</article>
+
+
+
+
+
+        </main>
+        <footer>
+            
+                <p>© Stuart Larsen, 2020<br>
+</p>
+
+<p>July 2020: I'm looking for a job related to physics/programming. If you have an open role, I'd love to
+    apply/chat! c0nrad@c0nrad.io</p>
+
+
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup {
+        background: #fff;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+        border: 1px solid;
+        margin-top: 20px;
+    }
+
+
+
+
+     
+</style>
+<div id="mc_embed_signup">
+    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
+        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+        novalidate>
+        <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Subscribe for new posts:</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                    class="button"></div>
+        </div>
+    </form>
+</div>
+
+
+            
+        </footer>
+    </div>
+</body>
+</html>
