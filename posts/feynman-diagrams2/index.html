@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Feynman Diagram Editor Pt 2  - c0nrad&#39;s blog</title>
+<meta name="description" content="Learning about physics">
+
+<link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1603242894" />
+
+<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1603242894">
+
+<meta property="og:title" content="Feynman Diagram Editor Pt 2" />
+<meta property="og:description" content="It&rsquo;s alive! https://blog.c0nrad.io/feynman" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.c0nrad.io/posts/feynman-diagrams2/" />
+<meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+<meta property="article:published_time" content="2020-10-20T20:37:28-04:00" />
+<meta property="article:modified_time" content="2020-10-20T20:37:28-04:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
+
+<meta name="twitter:title" content="Feynman Diagram Editor Pt 2"/>
+<meta name="twitter:description" content="It&rsquo;s alive! https://blog.c0nrad.io/feynman"/>
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header> 
+            
+                <h1 class="site-header">
+    <a href="https://blog.c0nrad.io/">c0nrad&#39;s blog</a>
+</h1>
+<nav>
+    
+    
+    <a class="" href="https://c0nrad.io" title="">About</a>
+    
+    <a class="" href="https://github.com/c0nrad/" title="">Github</a>
+    
+    <a class="" href="https://twitter.com/xc0nradx" title="">Twitter</a>
+    
+</nav>
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+
+<article class="post">
+    <header>
+        <h1>Feynman Diagram Editor Pt 2</h1>
+    </header>
+    <div class="content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-went-well">What went well</a></li>
+    <li><a href="#what-was-more-difficult-than-planned">What was more difficult than planned</a></li>
+    <li><a href="#things-that-were-frustrating">Things that were frustrating</a></li>
+    <li><a href="#future">Future</a></li>
+  </ul>
+</nav>
+
+        <p>It&rsquo;s alive! <a href="https://blog.c0nrad.io/feynman">https://blog.c0nrad.io/feynman</a></p>
+<p>I just pushed out the first &ldquo;version&rdquo; of Feynman. The application is currently incredibly buggy. But I am excited to get this far so soon.</p>
+<p><img src="/feynman_1.png" alt="/feynman_1.png"></p>
+<h2 id="what-went-well">What went well</h2>
+<ul>
+<li>Fabric.JS is decently nice to use</li>
+<li>Programming in typescript is 10x better than programming in javascript for catching those dumb bugs</li>
+<li>VSCode&rsquo;s &ldquo;rename symbol&rdquo; was surprisingly useful this time around</li>
+</ul>
+<h2 id="what-was-more-difficult-than-planned">What was more difficult than planned</h2>
+<ul>
+<li>Loading LateX onto canvas was more difficult than planned. It&rsquo;s some nasty poopoo. But I need latex so I cna use the correct particle names. And I don&rsquo;t want to have SVGs for everything.
+<ul>
+<li>I wanted to use Katex like I use for this blog, but they don&rsquo;t support canvas, nor exporting to SVG. So instead I&rsquo;m using MathJax, which was a journey. So MathJax takes some latex, outputs a SVG string, and then I load that SVG onto the canvas. Loading SVGs is also asynchronous, and everything else I do is synchronous, which was frustrating to convert stuff to ascynchronus.</li>
+<li>MathJax also isn&rsquo;t pretty, thankfully I found some very small project that simplified some of it. At the cost of like additional 1mb bundle size. I will definitely need to come back and optimize this.</li>
+</ul>
+</li>
+<li>The bosons paths (the squiggly lines). I didn&rsquo;t want to use images for the bosons since I knew I wanted smooth scaling. So instead I&rsquo;m manually generating the paths for the photons, weak, and strong bosons. The strong boson uses a cycloid path, which took some time to figure out the correct equation. Then the scaling/rotating to fit them into the correct paths.</li>
+<li>The dragging and dropping of lines is all done manually, and combining that with snap to grid was slightly more complex than anticipated. Particles need to be selected, and then I draw the circles for moving the lines, then I need up move everything associated with that line as it&rsquo;s being dragged. It was slightly more difficult since &ldquo;moving&rdquo; the latex symbols means they need to be redrawn which is again asynchronous (I can&rsquo;t move/scale the latex symbols because then they&rsquo;re sheared or upside down).</li>
+</ul>
+<h2 id="things-that-were-frustrating">Things that were frustrating</h2>
+<ul>
+<li>I wish Fabric.js had a userData attribute similar to Three.JS. I have to save a bunch of custom stuff on the individual fabric objects (most of the stuff I save is related to the underlying interaction model so I know what is what), but typescript doesn&rsquo;t like me randomly using random properties on the object. (Nor do I like it, I don&rsquo;t trust that the custom attributes will be honored). So instead I&rsquo;m using a bunch of @ts-ignores.</li>
+</ul>
+<h2 id="future">Future</h2>
+<ul>
+<li>Lots of bug fixes. The bosons aren&rsquo;t scaling well, the drag and drop is nasty, the arrows don&rsquo;t always align</li>
+<li>Upper toolbar for adding new particles</li>
+<li>State saving in the URL</li>
+<li>Side tool bar allowing you to swap replace/delete/modify the particles</li>
+<li>More examples</li>
+<li>mesons/baryons should be labeled as a particle, not just individual quarks (this one is surprisingly tricky. How do you represent a particle that is in a super position of two different states of quarks?)</li>
+</ul>
+<p>But overall I&rsquo;m excited! It&rsquo;s coming along nicely. I think it will be a very useful tool.</p>
+    </div>
+
+    <div class="article-info">
+    
+        <div class="article-date">2020-10-20</div>
+    
+    <div class="article-taxonomies">
+        
+            
+    </div>
+</div>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+</article>
+
+
+
+
+
+        </main>
+        <footer>
+            
+                <p>© Stuart Larsen, 2020<br>
+</p>
+
+<p>July 2020: I'm looking for a job related to physics/programming. If you have an open role, I'd love to
+    apply/chat! c0nrad@c0nrad.io</p>
+
+
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup {
+        background: #fff;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+        border: 1px solid;
+        margin-top: 20px;
+    }
+
+
+
+
+     
+</style>
+<div id="mc_embed_signup">
+    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
+        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+        novalidate>
+        <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Subscribe for new posts:</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                    class="button"></div>
+        </div>
+    </form>
+</div>
+
+
+            
+        </footer>
+    </div>
+</body>
+</html>

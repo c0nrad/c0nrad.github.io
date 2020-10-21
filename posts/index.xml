@@ -6,10 +6,52 @@
     <description>c0nrad&#39;s blog (Posts)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 17 Oct 2020 12:29:59 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2020 20:37:28 -0400</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Feynman Diagram Editor Pt 2</title>
+      <link>https://blog.c0nrad.io/posts/feynman-diagrams2/</link>
+      <pubDate>Tue, 20 Oct 2020 20:37:28 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/feynman-diagrams2/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s alive! &lt;a href=&#34;https://blog.c0nrad.io/feynman&#34;&gt;https://blog.c0nrad.io/feynman&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I just pushed out the first &amp;ldquo;version&amp;rdquo; of Feynman. The application is currently incredibly buggy. But I am excited to get this far so soon.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.c0nrad.io/feynman_1.png&#34; alt=&#34;/feynman_1.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;what-went-well&#34;&gt;What went well&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Fabric.JS is decently nice to use&lt;/li&gt;
+&lt;li&gt;Programming in typescript is 10x better than programming in javascript for catching those dumb bugs&lt;/li&gt;
+&lt;li&gt;VSCode&amp;rsquo;s &amp;ldquo;rename symbol&amp;rdquo; was surprisingly useful this time around&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;what-was-more-difficult-than-planned&#34;&gt;What was more difficult than planned&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Loading LateX onto canvas was more difficult than planned. It&amp;rsquo;s some nasty poopoo. But I need latex so I cna use the correct particle names. And I don&amp;rsquo;t want to have SVGs for everything.
+&lt;ul&gt;
+&lt;li&gt;I wanted to use Katex like I use for this blog, but they don&amp;rsquo;t support canvas, nor exporting to SVG. So instead I&amp;rsquo;m using MathJax, which was a journey. So MathJax takes some latex, outputs a SVG string, and then I load that SVG onto the canvas. Loading SVGs is also asynchronous, and everything else I do is synchronous, which was frustrating to convert stuff to ascynchronus.&lt;/li&gt;
+&lt;li&gt;MathJax also isn&amp;rsquo;t pretty, thankfully I found some very small project that simplified some of it. At the cost of like additional 1mb bundle size. I will definitely need to come back and optimize this.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The bosons paths (the squiggly lines). I didn&amp;rsquo;t want to use images for the bosons since I knew I wanted smooth scaling. So instead I&amp;rsquo;m manually generating the paths for the photons, weak, and strong bosons. The strong boson uses a cycloid path, which took some time to figure out the correct equation. Then the scaling/rotating to fit them into the correct paths.&lt;/li&gt;
+&lt;li&gt;The dragging and dropping of lines is all done manually, and combining that with snap to grid was slightly more complex than anticipated. Particles need to be selected, and then I draw the circles for moving the lines, then I need up move everything associated with that line as it&amp;rsquo;s being dragged. It was slightly more difficult since &amp;ldquo;moving&amp;rdquo; the latex symbols means they need to be redrawn which is again asynchronous (I can&amp;rsquo;t move/scale the latex symbols because then they&amp;rsquo;re sheared or upside down).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;things-that-were-frustrating&#34;&gt;Things that were frustrating&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;I wish Fabric.js had a userData attribute similar to Three.JS. I have to save a bunch of custom stuff on the individual fabric objects (most of the stuff I save is related to the underlying interaction model so I know what is what), but typescript doesn&amp;rsquo;t like me randomly using random properties on the object. (Nor do I like it, I don&amp;rsquo;t trust that the custom attributes will be honored). So instead I&amp;rsquo;m using a bunch of @ts-ignores.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;future&#34;&gt;Future&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Lots of bug fixes. The bosons aren&amp;rsquo;t scaling well, the drag and drop is nasty, the arrows don&amp;rsquo;t always align&lt;/li&gt;
+&lt;li&gt;Upper toolbar for adding new particles&lt;/li&gt;
+&lt;li&gt;State saving in the URL&lt;/li&gt;
+&lt;li&gt;Side tool bar allowing you to swap replace/delete/modify the particles&lt;/li&gt;
+&lt;li&gt;More examples&lt;/li&gt;
+&lt;li&gt;mesons/baryons should be labeled as a particle, not just individual quarks (this one is surprisingly tricky. How do you represent a particle that is in a super position of two different states of quarks?)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But overall I&amp;rsquo;m excited! It&amp;rsquo;s coming along nicely. I think it will be a very useful tool.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Feynman Diagram Editor Pt. 1</title>
