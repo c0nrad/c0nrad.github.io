@@ -6,10 +6,61 @@
     <description>c0nrad&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Oct 2020 20:37:28 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 05 Jan 2021 10:12:00 -0500</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Thermoshat</title>
+      <link>https://blog.c0nrad.io/posts/thermoshat/</link>
+      <pubDate>Tue, 05 Jan 2021 10:12:00 -0500</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/thermoshat/</guid>
+      <description>&lt;p&gt;Introducing the thermoshat. A raspberry pi to adjust my manual thermostat with the added of thrill of increased fire danger.&lt;/p&gt;
+&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m currently living in Houghton, MI, which is a bit cold in the winter. I wake up at 7am to turn on the heat in the apartment, but turning on the heat means going downstairs into the frigid cold and waiting 30 minutes for the house to heat up before I can start working.&lt;/p&gt;
+&lt;p&gt;Really all I need is a robot to turn the dial on the thermostat 30 minutes before I wake up&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Thermoshat was born.&lt;/p&gt;
+&lt;h2 id=&#34;details&#34;&gt;Details&lt;/h2&gt;
+&lt;p&gt;Currently the thermoshat&amp;rsquo;s only responsibility is to adjust the knob to keep the temperature around 74 degrees. I don&amp;rsquo;t trust it yet to leave it on all night.&lt;/p&gt;
+&lt;p&gt;Every few minutes the thermoshat checks the current temperature, and if it&amp;rsquo;s too cold it&amp;rsquo;ll move the thermostat warmer (assuming it&amp;rsquo;s not already at max), or colder.&lt;/p&gt;
+&lt;p&gt;To check of it&amp;rsquo;s at max, it uses an accelerometer to determine the orientation of the knob.&lt;/p&gt;
+&lt;p&gt;All in all the project was done in about 24 hours (noon to noon). The trickiest part was building an enclosure that wasn&amp;rsquo;t too abusive to the thermostat (this is an apartment, and eventually I need to disassemble everything).&lt;/p&gt;
+&lt;p&gt;The stepper motor I use wasn&amp;rsquo;t build to work with Kinex, so I had to super glue the components together.&lt;/p&gt;
+&lt;p&gt;I ended up using every single GPIO on the raspberry pi. I&amp;rsquo;m actually only using two of the four 7seg displays because I needed the two control wires for something else.&lt;/p&gt;
+&lt;h3 id=&#34;components&#34;&gt;Components&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Raspberry PI&lt;/li&gt;
+&lt;li&gt;Stepper Motor / Driver ULN2003&lt;/li&gt;
+&lt;li&gt;Accelerometer / Thermometer MPU6050&lt;/li&gt;
+&lt;li&gt;2x 7seg display&lt;/li&gt;
+&lt;li&gt;Kinex for the scaffolding&lt;/li&gt;
+&lt;li&gt;Breadboard / 9v battery / RPI GPIO extension&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;code&#34;&gt;Code&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/c0nrad/thermoshat&#34;&gt;https://github.com/c0nrad/thermoshat&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;lessons-learned&#34;&gt;Lessons Learned&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The MPU6050 is a pretty neat chip. Originally I was going to use it for a self balancing robot I&amp;rsquo;m working on, but I took a break from that to build this project.&lt;/li&gt;
+&lt;li&gt;The MPU6050 temp/accel fluctuate a lot, so I needed to keep a buffer to average them&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;mistakes&#34;&gt;Mistakes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Stepper motors get hot if you don&amp;rsquo;t release them, and that doesn&amp;rsquo;t work well with hot glue guns.&lt;/li&gt;
+&lt;li&gt;Hot glue isn&amp;rsquo;t the best when you want a very strong grip (brittle) for torque.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;future&#34;&gt;Future&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;I&amp;rsquo;d like to use a smaller chip. Maybe an arduino teensy.&lt;/li&gt;
+&lt;li&gt;It could be a fun chance for me to finally do something with Rust&lt;/li&gt;
+&lt;li&gt;Upload the data to my robotics server (I started building a little endpoint to collect sensor data, really it just dumps everything into mongodb and then I use mongo charts to view it)&lt;/li&gt;
+&lt;li&gt;7seg display is a little overkill in terms of the GPIOs.&lt;/li&gt;
+&lt;li&gt;Put everything onto a PCB, and 3d print the enclosure&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Will I actually do any of that stuff? Probably not. I&amp;rsquo;m supposed to be studying. But it was a fun project.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Feynman Diagram Editor Pt 2</title>
