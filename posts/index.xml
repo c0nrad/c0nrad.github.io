@@ -18,6 +18,7 @@
       
       <guid>https://blog.c0nrad.io/posts/thermoshat/</guid>
       <description>&lt;p&gt;Introducing the thermoshat. A raspberry pi to adjust my manual thermostat with the added of thrill of increased fire danger.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.c0nrad.io/thermoshat.jpg&#34; alt=&#34;/thermoshat&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
 &lt;p&gt;I&amp;rsquo;m currently living in Houghton, MI, which is a bit cold in the winter. I wake up at 7am to turn on the heat in the apartment, but turning on the heat means going downstairs into the frigid cold and waiting 30 minutes for the house to heat up before I can start working.&lt;/p&gt;
 &lt;p&gt;Really all I need is a robot to turn the dial on the thermostat 30 minutes before I wake up&amp;hellip;&lt;/p&gt;
@@ -58,8 +59,7 @@
 &lt;li&gt;7seg display is a little overkill in terms of the GPIOs.&lt;/li&gt;
 &lt;li&gt;Put everything onto a PCB, and 3d print the enclosure&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Will I actually do any of that stuff? Probably not. I&amp;rsquo;m supposed to be studying. But it was a fun project.&lt;/p&gt;
-</description>
+&lt;p&gt;Will I actually do any of that stuff? Probably not. I&amp;rsquo;m supposed to be studying. But it was a fun project.&lt;/p&gt;</description>
     </item>
     
     <item>
