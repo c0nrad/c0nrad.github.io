@@ -6,13 +6,52 @@
     <description>c0nrad&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 07 Jan 2021 14:38:37 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 08 Jan 2021 16:29:21 -0500</lastBuildDate>
     
     <atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Thermoshat 2</title>
+      <title>Thermoshat Pt. 3</title>
+      <link>https://blog.c0nrad.io/posts/thermoshat-3/</link>
+      <pubDate>Fri, 08 Jan 2021 16:29:21 -0500</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/thermoshat-3/</guid>
+      <description>&lt;p&gt;Setting up a metrics endpoint for thermoshat.&lt;/p&gt;
+&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+&lt;p&gt;Before going back to the balance bot, I realized it would be good to setup a metrics server to collect information about the runtime environment.&lt;/p&gt;
+&lt;p&gt;Originally I was going to setup a quick endpoint to record data and dump it into MongoDB, but then I remembered I can use MongoDB &lt;strike&gt;Stitch&lt;/strike&gt; Realm to accept HTTP requests and pipe it into MongoDB Atlas.&lt;/p&gt;
+&lt;p&gt;So that&amp;rsquo;s what I did, all said and done it took about 30 minutes, and now I have a simple reporting server and dashboard (using MongoDB Charts).&lt;/p&gt;
+&lt;h2 id=&#34;data-pipeline&#34;&gt;Data Pipeline&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Every 30 seconds or so my program sends two json bodies with the angle and temperature. &lt;a href=&#34;https://github.com/c0nrad/thermoshat/blob/master/metrics.py#L11&#34;&gt;code&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;version&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;GIT_VERSION&lt;/span&gt;,
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;ts&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;datetime.datetime.now().isoformat()&lt;/span&gt;,
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;temperature&amp;#34;&lt;/span&gt;,
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;temperature&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;68&lt;/span&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;MongoDB Realm ingests the data, stores it into the appropriate database and collection in MongoDB Atlas&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The code can be found here: &lt;a href=&#34;https://gist.github.com/c0nrad/beb9dd7413b5b3438c94d83160bffefd&#34;&gt;https://gist.github.com/c0nrad/beb9dd7413b5b3438c94d83160bffefd&lt;/a&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;MongoDB Charts then reads from MongoDB Atlas and displays the dashboard&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;dashboard&#34;&gt;Dashboard&lt;/h2&gt;
+&lt;iframe src=&#34;https://charts.mongodb.com/charts-thermoshat-fkuyl/public/dashboards/edc6b9bd-db35-4b8f-af69-249d395a3ca4&#34; style=&#34;width: 100%; height: 600px&#34;&gt; &lt;/iframe&gt;
+&lt;p&gt;The angle is the orientation of the dial. 180 points directly up, which is medium heat.&lt;/p&gt;
+&lt;h2 id=&#34;what-went-wrong&#34;&gt;What went wrong&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Dates are stupid. It took a little bit of massaging to get MongoDB Charts to accept my datetime. I ended up parsing and re-serializing the data in the Realm HTTP Endpoint.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;future&#34;&gt;Future&lt;/h2&gt;
+&lt;p&gt;It would be nice to have a realtime data server, but that&amp;rsquo;s for another day. I think when I start playing with camera&amp;rsquo;s I&amp;rsquo;ll setup a real server. Until then this will work well enough!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Thermoshat Pt. 2</title>
       <link>https://blog.c0nrad.io/posts/thermoshat-2/</link>
       <pubDate>Thu, 07 Jan 2021 14:38:37 -0500</pubDate>
       

@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer-when-downgrade">
 
-<title>Thermoshat Pt. 2  - c0nrad&#39;s blog</title>
+<title>Thermoshat Pt. 3  - c0nrad&#39;s blog</title>
 <meta name="description" content="Learning about physics">
 
 <link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
@@ -18,19 +18,19 @@
 
 <link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1610142405">
 
-<meta property="og:title" content="Thermoshat Pt. 2" />
-<meta property="og:description" content="Updates and finalizing the thermoshat project." />
+<meta property="og:title" content="Thermoshat Pt. 3" />
+<meta property="og:description" content="Setting up a metrics endpoint for thermoshat." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.c0nrad.io/posts/thermoshat-2/" />
+<meta property="og:url" content="https://blog.c0nrad.io/posts/thermoshat-3/" />
 <meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
-<meta property="article:published_time" content="2021-01-07T14:38:37-05:00" />
-<meta property="article:modified_time" content="2021-01-07T14:38:37-05:00" />
+<meta property="article:published_time" content="2021-01-08T16:29:21-05:00" />
+<meta property="article:modified_time" content="2021-01-08T16:29:21-05:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
 
-<meta name="twitter:title" content="Thermoshat Pt. 2"/>
-<meta name="twitter:description" content="Updates and finalizing the thermoshat project."/>
+<meta name="twitter:title" content="Thermoshat Pt. 3"/>
+<meta name="twitter:description" content="Setting up a metrics endpoint for thermoshat."/>
 
 
 
@@ -65,44 +65,55 @@
 
 <article class="post">
     <header>
-        <h1>Thermoshat Pt. 2</h1>
+        <h1>Thermoshat Pt. 3</h1>
     </header>
     <div class="content">
         <nav id="TableOfContents">
   <ul>
     <li><a href="#background">Background</a></li>
-    <li><a href="#updates">Updates</a>
-      <ul>
-        <li><a href="#target-temperature-based-on-time">Target temperature based on time</a></li>
-        <li><a href="#run-on-raspberry-pi-startup">Run on raspberry pi startup</a></li>
-      </ul>
-    </li>
-    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#data-pipeline">Data Pipeline</a></li>
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#what-went-wrong">What went wrong</a></li>
+    <li><a href="#future">Future</a></li>
   </ul>
 </nav>
 
-        <p>Updates and finalizing the thermoshat project.</p>
+        <p>Setting up a metrics endpoint for thermoshat.</p>
 <h2 id="background">Background</h2>
-<p>Two days ago I made a custom thermostat. More can be read here: <a href="/posts/thermoshat/">Thermoshat Pt1</a>.</p>
-<div style="text-align: center">
-<video controls src="/thermoshat.mp4" style="width: 100%;" autoplay loop ></video>
-</div>
-<h2 id="updates">Updates</h2>
-<p>It&rsquo;s been working surprisingly well!</p>
-<p>A added two more features:</p>
-<h3 id="target-temperature-based-on-time">Target temperature based on time</h3>
-<p>Now after 10PM it&rsquo;ll set the target temperature to 50F, and resume back to 74 at 6am.</p>
-<h3 id="run-on-raspberry-pi-startup">Run on raspberry pi startup</h3>
-<p>I added the script to /etc/rc.local so that it boots on startup, so I no longer need to ssh into the raspberry pi to start.</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>I&rsquo;m going to leave it on overnight. If I die in a fire, please inform the authorities of the cause.</p>
-<p>(Obviously said in humor, I&rsquo;ve been watching it, it looks fine, and we have a smoke detector).</p>
-<p>But I think this project is done!</p>
+<p>Before going back to the balance bot, I realized it would be good to setup a metrics server to collect information about the runtime environment.</p>
+<p>Originally I was going to setup a quick endpoint to record data and dump it into MongoDB, but then I remembered I can use MongoDB <strike>Stitch</strike> Realm to accept HTTP requests and pipe it into MongoDB Atlas.</p>
+<p>So that&rsquo;s what I did, all said and done it took about 30 minutes, and now I have a simple reporting server and dashboard (using MongoDB Charts).</p>
+<h2 id="data-pipeline">Data Pipeline</h2>
+<ol>
+<li>Every 30 seconds or so my program sends two json bodies with the angle and temperature. <a href="https://github.com/c0nrad/thermoshat/blob/master/metrics.py#L11">code</a></li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#960050;background-color:#1e0010">GIT_VERSION</span>,
+  <span style="color:#f92672">&#34;ts&#34;</span>: <span style="color:#960050;background-color:#1e0010">datetime.datetime.now().isoformat()</span>,
+  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;temperature&#34;</span>,
+  <span style="color:#f92672">&#34;temperature&#34;</span>: <span style="color:#ae81ff">68</span>
+}
+</code></pre></div><ol start="2">
+<li>MongoDB Realm ingests the data, stores it into the appropriate database and collection in MongoDB Atlas</li>
+</ol>
+<p>The code can be found here: <a href="https://gist.github.com/c0nrad/beb9dd7413b5b3438c94d83160bffefd">https://gist.github.com/c0nrad/beb9dd7413b5b3438c94d83160bffefd</a></p>
+<ol start="3">
+<li>MongoDB Charts then reads from MongoDB Atlas and displays the dashboard</li>
+</ol>
+<h2 id="dashboard">Dashboard</h2>
+<iframe src="https://charts.mongodb.com/charts-thermoshat-fkuyl/public/dashboards/edc6b9bd-db35-4b8f-af69-249d395a3ca4" style="width: 100%; height: 600px"> </iframe>
+<p>The angle is the orientation of the dial. 180 points directly up, which is medium heat.</p>
+<h2 id="what-went-wrong">What went wrong</h2>
+<ul>
+<li>Dates are stupid. It took a little bit of massaging to get MongoDB Charts to accept my datetime. I ended up parsing and re-serializing the data in the Realm HTTP Endpoint.</li>
+</ul>
+<h2 id="future">Future</h2>
+<p>It would be nice to have a realtime data server, but that&rsquo;s for another day. I think when I start playing with camera&rsquo;s I&rsquo;ll setup a real server. Until then this will work well enough!</p>
     </div>
 
     <div class="article-info">
     
-        <div class="article-date">2021-01-07</div>
+        <div class="article-date">2021-01-08</div>
     
     <div class="article-taxonomies">
         
