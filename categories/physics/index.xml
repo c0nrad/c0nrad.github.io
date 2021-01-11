@@ -21,12 +21,102 @@
     </item>
     
     <item>
+      <title>Feynman Diagram Editor Pt 2</title>
+      <link>https://blog.c0nrad.io/posts/feynman-diagrams2/</link>
+      <pubDate>Tue, 20 Oct 2020 20:37:28 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/feynman-diagrams2/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s alive! &lt;a href=&#34;https://blog.c0nrad.io/feynman&#34;&gt;https://blog.c0nrad.io/feynman&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Feynman Diagram Editor Pt. 1</title>
+      <link>https://blog.c0nrad.io/posts/feynman-diagrams/</link>
+      <pubDate>Sat, 17 Oct 2020 12:29:59 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/feynman-diagrams/</guid>
+      <description>&lt;p&gt;Starting a new project for validating Feynman diagrams.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Effective Nuclear Charge Calculations</title>
+      <link>https://blog.c0nrad.io/posts/enc/</link>
+      <pubDate>Mon, 12 Oct 2020 21:43:23 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/enc/</guid>
+      <description>&lt;p&gt;A smaller project involving plotting ionization energy for different effective nuclear charge models.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>SO(3) Lie Group Generators via Brute Force</title>
       <link>https://blog.c0nrad.io/posts/so3-exploration/</link>
       <pubDate>Sat, 03 Oct 2020 19:39:08 -0400</pubDate>
       
       <guid>https://blog.c0nrad.io/posts/so3-exploration/</guid>
       <description>&lt;p&gt;Brute forcing the generators for SO(3).&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>EM Particle Motion</title>
+      <link>https://blog.c0nrad.io/posts/em-particle-motion/</link>
+      <pubDate>Wed, 30 Sep 2020 17:26:11 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/em-particle-motion/</guid>
+      <description>&lt;p&gt;Simulating a particle under the influence. (Of electric and magnetic fields).&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Klein Gordon Eqn via Connected Springs</title>
+      <link>https://blog.c0nrad.io/posts/connect-springs/</link>
+      <pubDate>Sat, 12 Sep 2020 14:35:23 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/connect-springs/</guid>
+      <description>&lt;p&gt;Simulations Klein Gordon Eqn as a set of connected springs.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Spherical Bug</title>
+      <link>https://blog.c0nrad.io/posts/spherical-bug/</link>
+      <pubDate>Wed, 09 Sep 2020 09:16:42 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/spherical-bug/</guid>
+      <description>&lt;p&gt;Discussion of one of my longest living software bugs.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hydrogen Spectral Diagram</title>
+      <link>https://blog.c0nrad.io/posts/spectral/</link>
+      <pubDate>Sat, 29 Aug 2020 10:59:09 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/spectral/</guid>
+      <description>&lt;p&gt;Terminal application showing the spectral lines for electron transitions in hydrogen.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Interference</title>
+      <link>https://blog.c0nrad.io/posts/interference/</link>
+      <pubDate>Tue, 18 Aug 2020 18:53:54 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/interference/</guid>
+      <description>&lt;p&gt;Double Slit Interference Pattern demo.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Vector Calculus Part 3: Electric Dipole</title>
+      <link>https://blog.c0nrad.io/posts/vector-3-dipole/</link>
+      <pubDate>Tue, 21 Jul 2020 18:37:01 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/vector-3-dipole/</guid>
+      <description>&lt;p&gt;More fun with vector calc/electromagnetism.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Vector Calculus Part 2: Visualization</title>
+      <link>https://blog.c0nrad.io/posts/vector-2-viz/</link>
+      <pubDate>Mon, 20 Jul 2020 21:04:09 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/vector-2-viz/</guid>
+      <description>&lt;p&gt;Playing with three.js to do some vector visualizations.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -45,6 +135,43 @@
       
       <guid>https://blog.c0nrad.io/posts/numerical-differentiation/</guid>
       <description>&lt;p&gt;Some exploration into numerical differentiation.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Simulating Quantum Fourier Transform</title>
+      <link>https://blog.c0nrad.io/posts/qft/</link>
+      <pubDate>Tue, 07 Jul 2020 11:01:25 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/qft/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m pretty excited. I&amp;rsquo;m somewhat in disbelief that it even works. But I was able to implement Quantum Fourier Transform on my little &lt;a href=&#34;https://github.com/c0nrad/qrad&#34;&gt;quantum computation simulator&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Electron Wavefunctions for Hydrogen Part 2</title>
+      <link>https://blog.c0nrad.io/posts/hydrogen-pt2/</link>
+      <pubDate>Sat, 20 Jun 2020 14:37:31 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/hydrogen-pt2/</guid>
+      <description>&lt;p&gt;Part 2 of calculating the electron wavefunctions for hydrogen.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.c0nrad.io/hydrogen/&#34;&gt;View Visualization&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Electron Wavefunctions for Hydrogen Part 1</title>
+      <link>https://blog.c0nrad.io/posts/hydrogen-pt1/</link>
+      <pubDate>Thu, 28 May 2020 10:22:30 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/hydrogen-pt1/</guid>
+      <description>&lt;p&gt;The code/math behind calculating the electron wavefunctions for hydrogen.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Calculating Collisions Pt. 2</title>
+      <link>https://blog.c0nrad.io/posts/calculating-collisions-2/</link>
+      <pubDate>Mon, 18 May 2020 12:30:26 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/calculating-collisions-2/</guid>
+      <description>&lt;p&gt;Programming the equation we derived in the &lt;a href=&#34;https://blog.c0nrad.io/posts/calculating-collisions/&#34;&gt;last post&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
   </channel>

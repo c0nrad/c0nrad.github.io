@@ -142,6 +142,9 @@ if (!doNotTrack) {
     
 
     
+    
+      - <a class="label" href="https://blog.c0nrad.io/categories/electronics/">electronics </a><a class="label" href="https://blog.c0nrad.io/categories/simulation/">simulation </a>
+    
   </p>
   <h1 class="entry-title">
      Calculating Collisions 
@@ -232,23 +235,23 @@ $$</p>
 <p>$$
 \frac{1}{2} m_{1} v_{1i}^2 + \frac{1}{2} m_{2} v_{2i}^2 =  \frac{1}{2} m_{1} v_{1f}^2 +  \frac{1}{2} m_{2} v_{2f}^2
 $$</p>
-<p>Since we can calculate the initial momentum \( p_{i} \) and kinetic energy \( K_{i} \), let&rsquo;s substitute those into our two equations before things get messy:</p>
-<p>$$ p_{i} = m_{1} v_{1f} + m_{2} v_{2f} $$</p>
-<p>$$ K_{i} =  \frac{1}{2} m_{1} v_{1f}^2 +  \frac{1}{2} m_{2} v_{2f}^2 $$</p>
-<p>Then, we can solve both equations for \(  v_{2f} \):</p>
-<p>$$ \frac{p_{i} - m_{1} v_{1f}}{m_{2}} = v_{2f} $$
-$$ \frac{K_{i} - \frac{1}{2} m_{1} v_{1f}^2}{\frac{1}{2} m_{2}} = v_{2f}^2 $$</p>
+<p>Since we can calculate the initial momentum \( p*{i} \) and kinetic energy \( K*{i} \), let&rsquo;s substitute those into our two equations before things get messy:</p>
+<p>$$ p*{i} = m*{1} v*{1f} + m*{2} v_{2f} $$</p>
+<p>$$ K*{i} = \frac{1}{2} m*{1} v*{1f}^2 + \frac{1}{2} m*{2} v_{2f}^2 $$</p>
+<p>Then, we can solve both equations for \( v_{2f} \):</p>
+<p>$$ \frac{p*{i} - m*{1} v*{1f}}{m*{2}} = v*{2f} $$
+$$ \frac{K*{i} - \frac{1}{2} m*{1} v*{1f}^2}{\frac{1}{2} m*{2}} = v*{2f}^2 $$</p>
 <p>Now let&rsquo;s join them together so we&rsquo;re only left with \( v_{1f} \).</p>
-<p>$$ \frac{ (p_{i} - m_{1} v_{1f}) ^2}{m^2_2} =  \frac{K_{i} - \frac{1}{2} m_{1} v_{1f}^2}{\frac{1}{2} m_{2}} $$</p>
-<p>The only unknown left is \( v_{1f} \). Bingo! We have both \( v_{1f} \) and \( v_{1f}^2 \), so there will be multiple solutions(?). Let&rsquo;s simplify:</p>
-<p>$$ \frac{ p_{i}^2 - 2 p_{i} m_{1} v_{1f} + m_{1}^2 v_{1f}^2 }{m^2_2} =  \frac{ 2K_{i} -  m_{1} v_{1f}^2}{ m_{2}} $$</p>
+<p>$$ \frac{ (p*{i} - m*{1} v*{1f}) ^2}{m^2_2} = \frac{K*{i} - \frac{1}{2} m*{1} v*{1f}^2}{\frac{1}{2} m_{2}} $$</p>
+<p>The only unknown left is \( v*{1f} \). Bingo! We have both \( v*{1f} \) and \( v_{1f}^2 \), so there will be multiple solutions(?). Let&rsquo;s simplify:</p>
+<p>$$ \frac{ p*{i}^2 - 2 p*{i} m*{1} v*{1f} + m*{1}^2 v*{1f}^2 }{m^2*2} = \frac{ 2K*{i} - m*{1} v*{1f}^2}{ m_{2}} $$</p>
 <!-- $$  m_{2} (p_{i}^2 - 2 p_{i} m_{1} v_{1f} + m_{1}^2 v_{1f}^2)  =   m^2_2 (2K_{i} -  m_{1} v_{1f}^2) $$
 
 $$  p_{i}^2 m_{2} - 2 p_{i} m_{1} m_{2} v_{1f} + m_{2} m_{1}^2 v_{1f}^2  =    m^2_2 2K_{i} -    m^2_2 m_{1} v_{1f}^2 $$
 
 $$  v_{1f}^2 m_{2} m_{1}^2 + v_{1f}^2 m^2_2 m_{1} - 2 p_{i} m_{1} m_{2} v_{1f} + p_{i}^2 m_{2} - m^2_2 2K_{i}  =  0  $$ -->
-<p>$$  v_{1f}^2 ( m_{2} m_{1}^2 + m^2_2 m_{1}) + v_{1f} (- 2 p_{i} m_{1} m_{2})  + (p_{i}^2 m_{2} - 2 m^2_2 K_{i}) =  0  $$</p>
-<p>$$  v_{1f}^2  + v_{1f} \frac{(- 2 p_{i} m_{1} m_{2})}{m_{2} m_{1}^2 + m^2_2 m_{1}}  + \frac{p_{i}^2 m_{2} - 2 m^2_2 K_{i}}{m_{2} m_{1}^2 + m^2_2 m_{1}} =  0  $$</p>
+<p>$$ v*{1f}^2 ( m*{2} m*{1}^2 + m^2_2 m*{1}) + v*{1f} (- 2 p*{i} m*{1} m*{2}) + (p*{i}^2 m*{2} - 2 m^2*2 K*{i}) = 0 $$</p>
+<p>$$ v*{1f}^2 + v*{1f} \frac{(- 2 p*{i} m*{1} m*{2})}{m*{2} m*{1}^2 + m^2_2 m*{1}} + \frac{p*{i}^2 m*{2} - 2 m^2*2 K*{i}}{m*{2} m*{1}^2 + m^2*2 m*{1}} = 0 $$</p>
 <p>What does that mean? Not sure yet. Let&rsquo;s solve a couple of examples and see what happens.</p>
 <h4 id="two-equal-balls-colliding-at-equal-speed">Two equal balls colliding at equal speed</h4>
 <p><img src="/equalmass_equalv.png" alt="equal speed, equal mass"></p>
@@ -261,8 +264,8 @@ $$  v_{1f}^2 m_{2} m_{1}^2 + v_{1f}^2 m^2_2 m_{1} - 2 p_{i} m_{1} m_{2} v_{1f} +
 <th>\( v_{2i} \)</th>
 <th>\( p \)</th>
 <th>\( K_i \)</th>
-<th>\(  \frac{(- 2 p_{i} m_{1} m_{2})}{m_{2} m_{1}^2 + m^2_2 m_{1}} \)</th>
-<th>\( \frac{p_{i}^2 m_{2} - 2 m^2_2 K_{i}}{m_{2} m_{1}^2 + m^2_2 m_{1}} \)</th>
+<th>\( \frac{(- 2 p*{i} m*{1} m*{2})}{m*{2} m*{1}^2 + m^2_2 m*{1}} \)</th>
+<th>\( \frac{p*{i}^2 m*{2} - 2 m^2*2 K*{i}}{m*{2} m*{1}^2 + m^2*2 m*{1}} \)</th>
 </tr>
 </thead>
 <tbody>
@@ -279,7 +282,7 @@ $$  v_{1f}^2 m_{2} m_{1}^2 + v_{1f}^2 m^2_2 m_{1} - 2 p_{i} m_{1} m_{2} v_{1f} +
 </tbody>
 </table>
 <p>So our derived equation becomes:</p>
-<p>$$  v_{1f}^2  + v_{1f} (0) + -25 =  0  $$</p>
+<p>$$ v*{1f}^2 + v*{1f} (0) + -25 = 0 $$</p>
 <p>$$ v_{1f} = \pm 5 $$</p>
 <p>Which makes sense, two objects at equal speed and mass bounce off each other equally.</p>
 <h4 id="two-equal-mass-balls-colliding-at-unequal-speeds">Two equal mass balls colliding at unequal speeds</h4>
@@ -293,8 +296,8 @@ $$  v_{1f}^2 m_{2} m_{1}^2 + v_{1f}^2 m^2_2 m_{1} - 2 p_{i} m_{1} m_{2} v_{1f} +
 <th>\( v_{2i} \)</th>
 <th>\( p \)</th>
 <th>\( K_i \)</th>
-<th>\(  \frac{(- 2 p_{i} m_{1} m_{2})}{m_{2} m_{1}^2 + m^2_2 m_{1}} \)</th>
-<th>\( \frac{p_{i}^2 m_{2} - 2 m^2_2 K_{i}}{m_{2} m_{1}^2 + m^2_2 m_{1}} \)</th>
+<th>\( \frac{(- 2 p*{i} m*{1} m*{2})}{m*{2} m*{1}^2 + m^2_2 m*{1}} \)</th>
+<th>\( \frac{p*{i}^2 m*{2} - 2 m^2*2 K*{i}}{m*{2} m*{1}^2 + m^2*2 m*{1}} \)</th>
 </tr>
 </thead>
 <tbody>
@@ -310,7 +313,7 @@ $$  v_{1f}^2 m_{2} m_{1}^2 + v_{1f}^2 m^2_2 m_{1} - 2 p_{i} m_{1} m_{2} v_{1f} +
 </tr>
 </tbody>
 </table>
-<p>$$  v_{1f}^2  + v_{1f} (10) + -75 =  0  $$</p>
+<p>$$ v*{1f}^2 + v*{1f} (10) + -75 = 0 $$</p>
 <p>So we need to apply the quadratic formula (holy crap, high school math flash back):</p>
 <p>$$ v_{1f} = \frac{ -b \pm \sqrt{ b^2 - 4 a c}}{2a} $$</p>
 <p>$$ v_{1f} = 5,-15 $$</p>
@@ -330,8 +333,8 @@ $$  v_{1f}^2 m_{2} m_{1}^2 + v_{1f}^2 m^2_2 m_{1} - 2 p_{i} m_{1} m_{2} v_{1f} +
 <th>\( v_{2i} \)</th>
 <th>\( p \)</th>
 <th>\( K_i \)</th>
-<th>\(  \frac{(- 2 p_{i} m_{1} m_{2})}{m_{2} m_{1}^2 + m^2_2 m_{1}} \)</th>
-<th>\( \frac{p_{i}^2 m_{2} - 2 m^2_2 K_{i}}{m_{2} m_{1}^2 + m^2_2 m_{1}} \)</th>
+<th>\( \frac{(- 2 p*{i} m*{1} m*{2})}{m*{2} m*{1}^2 + m^2_2 m*{1}} \)</th>
+<th>\( \frac{p*{i}^2 m*{2} - 2 m^2*2 K*{i}}{m*{2} m*{1}^2 + m^2*2 m*{1}} \)</th>
 <th>\( v_{1f} \)</th>
 <th>\( v_{2f} \)</th>
 </tr>
@@ -377,8 +380,8 @@ $$  v_{1f}^2 m_{2} m_{1}^2 + v_{1f}^2 m^2_2 m_{1} - 2 p_{i} m_{1} m_{2} v_{1f} +
 </table>
 <p>So depending on the initial masses, a couple of things can happen.</p>
 <ul>
-<li>When \( m_1 = 1, m_2 = 15\), \( m_1  \) will be pushed back into the reverse direction, and \(m_2 \) will continue pushing ahead.</li>
-<li>When \( m_1 = 5, m_2 = 15\), \( m_1  \) will be pushed back, and \(m_2 \) <strong>will stop in place!</strong>. How cool!</li>
+<li>When \( m_1 = 1, m_2 = 15\), \( m_1 \) will be pushed back into the reverse direction, and \(m_2 \) will continue pushing ahead.</li>
+<li>When \( m_1 = 5, m_2 = 15\), \( m_1 \) will be pushed back, and \(m_2 \) <strong>will stop in place!</strong>. How cool!</li>
 <li>When \( m_1 = 10, m_2 ==15\), \(m_1 \) and \(m_2 \) will bounce back in opposite directions.</li>
 </ul>
 <h4 id="a-bigger-ball-gives-the-smaller-ball-a-gentle-love-tap">A bigger ball gives the smaller ball a gentle love tap</h4>
@@ -392,8 +395,8 @@ $$  v_{1f}^2 m_{2} m_{1}^2 + v_{1f}^2 m^2_2 m_{1} - 2 p_{i} m_{1} m_{2} v_{1f} +
 <th>\( v_{2i} \)</th>
 <th>\( p \)</th>
 <th>\( K_i \)</th>
-<th>\(  \frac{(- 2 p_{i} m_{1} m_{2})}{m_{2} m_{1}^2 + m^2_2 m_{1}} \)</th>
-<th>\( \frac{p_{i}^2 m_{2} - 2 m^2_2 K_{i}}{m_{2} m_{1}^2 + m^2_2 m_{1}} \)</th>
+<th>\( \frac{(- 2 p*{i} m*{1} m*{2})}{m*{2} m*{1}^2 + m^2_2 m*{1}} \)</th>
+<th>\( \frac{p*{i}^2 m*{2} - 2 m^2*2 K*{i}}{m*{2} m*{1}^2 + m^2*2 m*{1}} \)</th>
 </tr>
 </thead>
 <tbody>
@@ -409,11 +412,11 @@ $$  v_{1f}^2 m_{2} m_{1}^2 + v_{1f}^2 m^2_2 m_{1} - 2 p_{i} m_{1} m_{2} v_{1f} +
 </tr>
 </tbody>
 </table>
-<p>$$ v_{1f} = 10, 7.5 $$
-$$ v_{2f} = 5, 12.5 $$</p>
-<p>Now that&rsquo; weird. There&rsquo;s two solutions that don&rsquo;t match the initial conditions. But, we can eliminate one of them. If the bigger ball sneaks up on the little ball, it&rsquo;s probably not going to jump over the first ball. So we know that \(v_{1f} &lt; v_{2f} \). Only the second solution matches that. Therefore, the first ball transfers some of it&rsquo;s momentum to the second ball, as expected.</p>
-<p>$$ v_{1f} = 7.5 $$
-$$ v_{2f} = 12.5 $$</p>
+<p>$$ v*{1f} = 10, 7.5 $$
+$$ v*{2f} = 5, 12.5 $$</p>
+<p>Now that&rsquo; weird. There&rsquo;s two solutions that don&rsquo;t match the initial conditions. But, we can eliminate one of them. If the bigger ball sneaks up on the little ball, it&rsquo;s probably not going to jump over the first ball. So we know that \(v*{1f} &lt; v*{2f} \). Only the second solution matches that. Therefore, the first ball transfers some of it&rsquo;s momentum to the second ball, as expected.</p>
+<p>$$ v*{1f} = 7.5 $$
+$$ v*{2f} = 12.5 $$</p>
 <h3 id="open-questions">Open Questions</h3>
 <ol>
 <li>When the sphere&rsquo;s give each other a love tap, there&rsquo;s two solutions. Why doesn&rsquo;t one of the solutions equal the initial conditions?</li>
@@ -430,11 +433,6 @@ $$ v_{2f} = 12.5 $$</p>
     <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
     
     <time>May 17, 2019</time>
-    
-      <span class="categories">
-        Tags:
-        
-          <a class="category" href="https://blog.c0nrad.io/tags/newtonian">newtonian</a>  <a class="category" href="https://blog.c0nrad.io/tags/simulation">simulation</a>  
     
     </span>
   </p>

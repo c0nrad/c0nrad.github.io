@@ -142,6 +142,9 @@ if (!doNotTrack) {
     
 
     
+    
+      - <a class="label" href="https://blog.c0nrad.io/categories/physics/">physics </a><a class="label" href="https://blog.c0nrad.io/categories/simulation/">simulation </a>
+    
   </p>
   <h1 class="entry-title">
      Feynman Diagram Editor Pt. 1 
@@ -179,30 +182,31 @@ if (!doNotTrack) {
 <p>Right now it&rsquo;s just a library right here:</p>
 <p><a href="https://github.com/c0nrad/feynman">https://github.com/c0nrad/feynman</a></p>
 <p>But the library supports parsing interactions and then validating them for a few conservation laws. I still need to support spin, but I don&rsquo;t quite understand spin conservation yet, so I need to re-read Ch 4.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;PROTON + ANTIPROTON -&gt; PION_PLUS + PION&#34;</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;PROTON + ANTIPROTON -&gt; PION_PLUS + PION&#34;</span>);
 <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i1</span>), <span style="color:#e6db74">&#34;CHARGE_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">true</span>;
 
-<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;ETA_MESON -&gt; PHOTON + PHOTON&#34;</span>)
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;ETA_MESON -&gt; PHOTON + PHOTON&#34;</span>);
 <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i2</span>), <span style="color:#e6db74">&#34;CHARGE_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">false</span>;
 
-<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i3</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;SIGMA -&gt; LAMBDA + PION&#34;</span>)
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i3</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;SIGMA -&gt; LAMBDA + PION&#34;</span>);
 <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i3</span>), <span style="color:#e6db74">&#34;ENERGY_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">true</span>;
 
-<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i4</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;SIGMA_MINUS -&gt; NEUTRON + PION_MINUS&#34;</span>)
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i4</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;SIGMA_MINUS -&gt; NEUTRON + PION_MINUS&#34;</span>);
 <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i4</span>), <span style="color:#e6db74">&#34;CHARGE_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">false</span>;
 <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i4</span>), <span style="color:#e6db74">&#34;BARYON_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">false</span>;
 <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i4</span>), <span style="color:#e6db74">&#34;ENERGY_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">false</span>;
 
-<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i5</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;MUON -&gt; ELECTRON + ELECTRON_ANTINEUTRINO&#34;</span>)
-<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i5</span>), <span style="color:#e6db74">&#34;LEPTON_MUON_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">true</span>;
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i5</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;MUON -&gt; ELECTRON + ELECTRON_ANTINEUTRINO&#34;</span>);
+<span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i5</span>), <span style="color:#e6db74">&#34;LEPTON_MUON_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>
+  .<span style="color:#66d9ef">true</span>;
 
-<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i6</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;ELECTRON + PROTON -&gt; ELECTRON_NEUTRINO + PION&#34;</span>)
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i6</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;ELECTRON + PROTON -&gt; ELECTRON_NEUTRINO + PION&#34;</span>);
 <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i6</span>), <span style="color:#e6db74">&#34;BARYON_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">true</span>;
 
-<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i7</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;PION_PLUS + NEUTRON -&gt; PION_MINUS + PROTON&#34;</span>)
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i7</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;PION_PLUS + NEUTRON -&gt; PION_MINUS + PROTON&#34;</span>);
 <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i7</span>), <span style="color:#e6db74">&#34;CHARGE_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">true</span>;
 
-<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i8</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;SIGMA_PLUS + NEUTRON -&gt; SIGMA_MINUS + PROTON&#34;</span>)
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i8</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ParseInteraction</span>(<span style="color:#e6db74">&#34;SIGMA_PLUS + NEUTRON -&gt; SIGMA_MINUS + PROTON&#34;</span>);
 <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">hasError</span>(<span style="color:#a6e22e">validateInteraction</span>(<span style="color:#a6e22e">i7</span>), <span style="color:#e6db74">&#34;CHARGE_CONSERVATION&#34;</span>)).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">be</span>.<span style="color:#66d9ef">true</span>;
 </code></pre></div><h2 id="diagram">Diagram</h2>
 <p>Eventually I&rsquo;m thinking the tool will look something like this:</p>

@@ -53,6 +53,11 @@
   </url>
   
   <url>
+    <loc>https://blog.c0nrad.io/categories/simulation/</loc>
+    <lastmod>2020-10-20T20:37:28-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.c0nrad.io/posts/feynman-diagrams/</loc>
     <lastmod>2020-10-17T12:29:59-04:00</lastmod>
   </url>
@@ -104,11 +109,6 @@
   
   <url>
     <loc>https://blog.c0nrad.io/posts/interference/</loc>
-    <lastmod>2020-08-18T18:53:54-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/categories/simulation/</loc>
     <lastmod>2020-08-18T18:53:54-04:00</lastmod>
   </url>
   
@@ -253,18 +253,7 @@
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/newtonian/</loc>
-    <lastmod>2019-05-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/tags/simulation/</loc>
-    <lastmod>2019-05-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.c0nrad.io/tags/</loc>
-    <lastmod>2019-05-17T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>

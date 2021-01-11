@@ -6,10 +6,73 @@
     <description>Recent content in simulation on c0nrad&#39;s c0rner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Aug 2020 18:53:54 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2020 20:37:28 -0400</lastBuildDate>
     
 	<atom:link href="https://blog.c0nrad.io/categories/simulation/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Feynman Diagram Editor Pt 2</title>
+      <link>https://blog.c0nrad.io/posts/feynman-diagrams2/</link>
+      <pubDate>Tue, 20 Oct 2020 20:37:28 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/feynman-diagrams2/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s alive! &lt;a href=&#34;https://blog.c0nrad.io/feynman&#34;&gt;https://blog.c0nrad.io/feynman&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Feynman Diagram Editor Pt. 1</title>
+      <link>https://blog.c0nrad.io/posts/feynman-diagrams/</link>
+      <pubDate>Sat, 17 Oct 2020 12:29:59 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/feynman-diagrams/</guid>
+      <description>&lt;p&gt;Starting a new project for validating Feynman diagrams.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Effective Nuclear Charge Calculations</title>
+      <link>https://blog.c0nrad.io/posts/enc/</link>
+      <pubDate>Mon, 12 Oct 2020 21:43:23 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/enc/</guid>
+      <description>&lt;p&gt;A smaller project involving plotting ionization energy for different effective nuclear charge models.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>EM Particle Motion</title>
+      <link>https://blog.c0nrad.io/posts/em-particle-motion/</link>
+      <pubDate>Wed, 30 Sep 2020 17:26:11 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/em-particle-motion/</guid>
+      <description>&lt;p&gt;Simulating a particle under the influence. (Of electric and magnetic fields).&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Klein Gordon Eqn via Connected Springs</title>
+      <link>https://blog.c0nrad.io/posts/connect-springs/</link>
+      <pubDate>Sat, 12 Sep 2020 14:35:23 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/connect-springs/</guid>
+      <description>&lt;p&gt;Simulations Klein Gordon Eqn as a set of connected springs.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Spherical Bug</title>
+      <link>https://blog.c0nrad.io/posts/spherical-bug/</link>
+      <pubDate>Wed, 09 Sep 2020 09:16:42 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/spherical-bug/</guid>
+      <description>&lt;p&gt;Discussion of one of my longest living software bugs.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hydrogen Spectral Diagram</title>
+      <link>https://blog.c0nrad.io/posts/spectral/</link>
+      <pubDate>Sat, 29 Aug 2020 10:59:09 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/spectral/</guid>
+      <description>&lt;p&gt;Terminal application showing the spectral lines for electron transitions in hydrogen.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Interference</title>
@@ -64,6 +127,15 @@
       
       <guid>https://blog.c0nrad.io/posts/calculating-collisions-2/</guid>
       <description>&lt;p&gt;Programming the equation we derived in the &lt;a href=&#34;https://blog.c0nrad.io/posts/calculating-collisions/&#34;&gt;last post&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Calculating Collisions</title>
+      <link>https://blog.c0nrad.io/posts/calculating-collisions/</link>
+      <pubDate>Fri, 17 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/calculating-collisions/</guid>
+      <description>&lt;p&gt;My attempt at calculating the resulting velocities of two spheres colliding in 3D.&lt;/p&gt;</description>
     </item>
     
   </channel>

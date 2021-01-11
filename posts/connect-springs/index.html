@@ -142,6 +142,9 @@ if (!doNotTrack) {
     
 
     
+    
+      - <a class="label" href="https://blog.c0nrad.io/categories/physics/">physics </a><a class="label" href="https://blog.c0nrad.io/categories/simulation/">simulation </a>
+    
   </p>
   <h1 class="entry-title">
      Klein Gordon Eqn via Connected Springs 
@@ -190,23 +193,25 @@ if (!doNotTrack) {
 <p>There&rsquo;s two complications to add to fields.</p>
 <h3 id="special-relativity">Special Relativity</h3>
 <p>First off, in quantum field theory the fields (and emergent particle excitations) will be moving near the speed of light, so we need to take into account special relativity.</p>
-<p>Special relativity is the idea that all reference frames are equally valid, and the speed of light is a constant for everyone. These two rules create some inconsistencies in the old way of thinking about space and time. If I&rsquo;m moving near the speed of light and hold up a flash light, the light to me will appear to me to be going \( c = 300,000,000\frac{m}{s} \) . But to someone who is watching me go near the speed of light, my flashlight light will also look like it&rsquo;s going \( c \) (not \( 2  c \) as we would have expected). That&rsquo;s pretty weird.</p>
+<p>Special relativity is the idea that all reference frames are equally valid, and the speed of light is a constant for everyone. These two rules create some inconsistencies in the old way of thinking about space and time. If I&rsquo;m moving near the speed of light and hold up a flash light, the light to me will appear to me to be going \( c = 300,000,000\frac{m}{s} \) . But to someone who is watching me go near the speed of light, my flashlight light will also look like it&rsquo;s going \( c \) (not \( 2 c \) as we would have expected). That&rsquo;s pretty weird.</p>
 <p>They key is that &ldquo;time&rdquo; isn&rsquo;t quite what we thought, and it appears to be intimately related to space (hence spacetime).</p>
 <p>At any time we are moving through some combination of space or time. (And that sum is equal to a constant). For us humans, we almost exclusively move through &ldquo;time&rdquo;. But if you&rsquo;re moving near the speed of light, you move mostly through space, and less through time. It&rsquo;s said that photons are &ldquo;timeless&rdquo; because they move purely through space, and not through time. (since they are traveling at the speed of light.) I don&rsquo;t think it&rsquo;s too insightful to take that literally though.</p>
 <p>So, when dealing with things moving near the speed of light, we need to be careful that we respect the sum of space and time such that it&rsquo;s constant with all frames. That constant is:</p>
 <p>$$ (\Delta s)^2 = (c \Delta t)^2 - (\Delta x)^2 - (\Delta y)^2 - (\Delta z)^2 $$</p>
 <p>This is known as the spacetime interval.</p>
 <p>That notation can be cumbersome, so scientist instead created a construct known as a four-vector:</p>
-<p>$$ x_\mu = \begin{pmatrix} ct \\ x \\ y \\ z \\ \end{pmatrix}
+<p>$$
+x_\mu = \begin{pmatrix} ct \\ x \\ y \\ z \\ \end{pmatrix}
 $$</p>
 <p>Now space and time are on the same footing. \( x_0, x_1, x_2, x_3 \) are just components of a vector</p>
 <p>They also define something called the Minkowski metric:</p>
-<p>$$ \eta = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; -1 &amp; 0 &amp; 0 \\  0 &amp; 0 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; -1 \end{pmatrix}
+<p>$$
+\eta = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; -1 &amp; 0 &amp; 0 \\  0 &amp; 0 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; -1 \end{pmatrix}
 $$</p>
 <p>So instead we can say:</p>
-<p>$$ (\Delta s)^2 = x_\mu \eta^{\mu \nu} x_\nu $$</p>
+<p>$$ (\Delta s)^2 = x*\mu \eta^{\mu \nu} x*\nu $$</p>
 <p>We also need a derivative (velocity) of space time. This can be defined as:</p>
-<p>$$ \partial_\mu = \frac{\partial}{\partial \eta^{\mu \nu} x_\nu } = \frac{\partial}{\partial x^\mu } = \begin{pmatrix} \frac{\partial}{c \partial t} \\ - \frac{\partial}{\partial x} \\ - \frac{\partial}{\partial y} \\ - \frac{\partial}{\partial z} \\ \end{pmatrix}$$</p>
+<p>$$ \partial*\mu = \frac{\partial}{\partial \eta^{\mu \nu} x*\nu } = \frac{\partial}{\partial x^\mu } = \begin{pmatrix} \frac{\partial}{c \partial t} \\ - \frac{\partial}{\partial x} \\ - \frac{\partial}{\partial y} \\ - \frac{\partial}{\partial z} \\ \end{pmatrix}$$</p>
 <h3 id="types-of-fields">Types of Fields</h3>
 <p>There can also be different types of Fields! For the programmer, this just means that those functions can return something other than a float!</p>
 <p>For example we can have a vector field, this means that at each X, Y, Z, we&rsquo;ll get back a Vector{X: 1, Y: 3, Z: 3}. This could be useful for example if you want to model wind at each point in space. We know that window is blowing in some direction, so at each point you put a vector there to represent how fast and in which direction the wind is blowing.</p>
@@ -220,7 +225,7 @@ $$</p>
 <p>In everyday usage of Lagrangian, you figure out the Lagrangian \( L \) and then plug it into the Euler-Lagrange Equation:</p>
 <p>$$ \frac{\partial L}{\partial q} - \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q}} \right) = 0 $$</p>
 <p>For relativistic fields, a slightly different version of the Euler-Lagrange equation is used:</p>
-<p>$$ \frac{\partial \mathcal{L}}{\partial \phi} - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) = 0 $$</p>
+<p>$$ \frac{\partial \mathcal{L}}{\partial \phi} - \partial*\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial*\mu \phi)} \right) = 0 $$</p>
 <p>They look pretty similar, except \( \phi \) is used instead of position. And instead of \( \dot{q} \) as velocity, the relativistic derivative is used \( \partial_\mu \phi \).</p>
 <h2 id="klein-gordon-equation">Klein Gordon Equation</h2>
 <p>The Klein Gordon is the simplest of the free field wave equations. Free field just means &ldquo;non-interacting&rdquo;. The Klein Gordon equation describes how scalar fields evolve over time.</p>
@@ -229,13 +234,13 @@ $$</p>
 <p>The Lagrangian for the klein gordon equation is the following. Don&rsquo;t ask how to figure it out (I don&rsquo;t know). If I understand correctly, people in the past figured out the Klein-Gordon equation, and then worked back to get the Lagrangian (normally it&rsquo;s the other way, but the quantum world is weird and non-intuitive).</p>
 <p>$$ \mathcal{L} = \frac{1}{2} ( \partial_\mu \phi \partial^\mu \phi - m^2 \phi^2 ) $$</p>
 <p>It&rsquo;s a weird equation, but it kind of intuitively makes sense if we pull it apart. Remember L is of the form of kinetic - potential. And the first term kind of looks like kinetic energy. It&rsquo;s the velocity of the field squared, similar to \( \frac{1}{2} m v^2 \). And the second term is the potential which is \( - \frac{1}{2} m^2 \phi^2 \). For a spring the potential is \(-\frac{1}{2}kx^2 \). Not that different.</p>
-<p>You may notice that the \( \mu \) is upstairs on one of the partial derivatives, and downstairs on another partial derivative. That&rsquo;s to satisfy the relativistic spacetime interval we talked about earlier. \( (\Delta s)^2 = x_\mu \eta^{\mu \nu} x_\nu = x_\mu x^\mu \).</p>
+<p>You may notice that the \( \mu \) is upstairs on one of the partial derivatives, and downstairs on another partial derivative. That&rsquo;s to satisfy the relativistic spacetime interval we talked about earlier. \( (\Delta s)^2 = x*\mu \eta^{\mu \nu} x*\nu = x_\mu x^\mu \).</p>
 <h3 id="klein-gordon-equation-1">Klein Gordon Equation</h3>
 <p>So, we plug the Lagrangian into the Euler-Lagrange for fields and get back the <strong>Klein Gordon Equation</strong>:</p>
 <p>$$ (\partial_\mu \partial^\mu + m^2) \phi = 0 $$</p>
 <p>What does it mean? Well it can kind of be thought of as a set of springs where each spring is also attached to the spring next to it.</p>
 <p>If we expand the Lagrangian (in one direction x) we get:</p>
-<p>$$ \frac{1}{2} \left( \left(\frac{\partial}{c \partial t} \phi\right)^2  - \left(\frac{\partial \phi}{\partial x} \right)^2 -m^2 \phi^2\right) $$</p>
+<p>$$ \frac{1}{2} \left( \left(\frac{\partial}{c \partial t} \phi\right)^2 - \left(\frac{\partial \phi}{\partial x} \right)^2 -m^2 \phi^2\right) $$</p>
 <p>The first term, \( \left(\frac{\partial}{c \partial t} \phi\right)^2 \), is the kinetic energy of the harmonic oscillators. It&rsquo;s related to the &ldquo;change of the field over time&rdquo; similar to the velocity of the field.</p>
 <p>The second term, \( - \left(\frac{\partial \phi}{\partial x} \right)^2 \), is subtracted, meaning it&rsquo;s a potential, and deals with the change of the field in relation to space. So the parts of the field that are significantly higher than nearby points will be brought down. It&rsquo;s similar to rubber bands connected to neighboring elements of the field.</p>
 <p>The last term \( -m^2 \phi^2 \) is the potential energy of the individual elements of the field, similar to a spring. If \( \phi \) is high at some point, it will be brought down quickly.</p>
