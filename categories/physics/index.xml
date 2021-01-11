@@ -174,5 +174,14 @@
       <description>&lt;p&gt;Programming the equation we derived in the &lt;a href=&#34;https://blog.c0nrad.io/posts/calculating-collisions/&#34;&gt;last post&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>Calculating Collisions</title>
+      <link>https://blog.c0nrad.io/posts/calculating-collisions/</link>
+      <pubDate>Fri, 17 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/calculating-collisions/</guid>
+      <description>&lt;p&gt;My attempt at calculating the resulting velocities of two spheres colliding in 3D.&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>
