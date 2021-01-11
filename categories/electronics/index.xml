@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>electronics on c0nrad&#39;s c0rner</title>
+    <link>https://blog.c0nrad.io/categories/electronics/</link>
+    <description>Recent content in electronics on c0nrad&#39;s c0rner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 08 Jan 2021 16:29:21 -0500</lastBuildDate>
+    
+	<atom:link href="https://blog.c0nrad.io/categories/electronics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Thermoshat Pt. 3</title>
+      <link>https://blog.c0nrad.io/posts/thermoshat-3/</link>
+      <pubDate>Fri, 08 Jan 2021 16:29:21 -0500</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/thermoshat-3/</guid>
+      <description>&lt;p&gt;Setting up a metrics endpoint for thermoshat.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Thermoshat Pt. 2</title>
+      <link>https://blog.c0nrad.io/posts/thermoshat-2/</link>
+      <pubDate>Thu, 07 Jan 2021 14:38:37 -0500</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/thermoshat-2/</guid>
+      <description>&lt;p&gt;Updates and finalizing the thermoshat project.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Thermoshat Pt. 1</title>
+      <link>https://blog.c0nrad.io/posts/thermoshat/</link>
+      <pubDate>Tue, 05 Jan 2021 10:12:00 -0500</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/thermoshat/</guid>
+      <description>&lt;p&gt;Introducing the thermoshat. A raspberry pi to adjust my manual thermostat with the added of thrill of increased fire danger.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

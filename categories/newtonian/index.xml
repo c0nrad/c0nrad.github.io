@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>newtonian on c0nrad&#39;s c0rner</title>
+    <link>https://blog.c0nrad.io/categories/newtonian/</link>
+    <description>Recent content in newtonian on c0nrad&#39;s c0rner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 18 May 2020 12:30:26 -0400</lastBuildDate>
+    
+	<atom:link href="https://blog.c0nrad.io/categories/newtonian/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Calculating Collisions Pt. 2</title>
+      <link>https://blog.c0nrad.io/posts/calculating-collisions-2/</link>
+      <pubDate>Mon, 18 May 2020 12:30:26 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/calculating-collisions-2/</guid>
+      <description>&lt;p&gt;Programming the equation we derived in the &lt;a href=&#34;https://blog.c0nrad.io/posts/calculating-collisions/&#34;&gt;last post&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

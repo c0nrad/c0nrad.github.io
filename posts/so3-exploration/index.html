@@ -1,74 +1,162 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
     
-        
-<meta charset="utf-8">
-<meta name="HandheldFriendly" content="True">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer-when-downgrade">
-
-<title>SO(3) Lie Group Generators via Brute Force  - c0nrad&#39;s blog</title>
-<meta name="description" content="Learning about physics">
-
-<link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
-<link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
-
-<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1610398466" />
-
-<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1610398466">
-
-<meta property="og:title" content="SO(3) Lie Group Generators via Brute Force" />
-<meta property="og:description" content="Brute forcing the generators for SO(3)." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.c0nrad.io/posts/so3-exploration/" />
-<meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
-<meta property="article:published_time" content="2020-10-03T19:39:08-04:00" />
-<meta property="article:modified_time" content="2020-10-03T19:39:08-04:00" />
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
-
-<meta name="twitter:title" content="SO(3) Lie Group Generators via Brute Force"/>
-<meta name="twitter:description" content="Brute forcing the generators for SO(3)."/>
-
-
-
-
-
-
     
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>SO(3) Lie Group Generators via Brute Force</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+    <link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
+  <meta name="author" content="Stuart Larsen">
+
+  
+  <meta name="generator" content="Hugo 0.70.0" />
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-165926825-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  
+  
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+  
+  
+  <meta name="twitter:title" content="SO(3) Lie Group Generators via Brute Force"/>
+  <meta name="twitter:description" content="Brute forcing the generators for SO(3)."/>
+  
+  <meta name="twitter:domain" content="blog.c0nrad.io"/>
+  <meta name="twitter:creator" content="@CryptoGangsta"/>
+
+  
 </head>
 <body>
-    <a class="skip-main" href="#main">Skip to main content</a>
-    <div class="container">
-        <header> 
-            
-                <h1 class="site-header">
-    <a href="https://blog.c0nrad.io/">c0nrad&#39;s blog</a>
-</h1>
-<nav>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="https://blog.c0nrad.io/">c0nrad&#39;s c0rner</a></h1>
+    <h2>Learning and learning</h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+        <option value="https://c0nrad.io">» Website</option>
+      
+        <option value="https://github.com/c0nrad/">» Github</option>
+      
+        <option value="https://twitter.com/xc0nradx">» Twitter</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
     
+      <li><a href="https://c0nrad.io" title="Website"  rel="noopener noreferrer">Website</a></li>
     
-    <a class="" href="https://c0nrad.io" title="">About</a>
+  
     
-    <a class="" href="https://github.com/c0nrad/" title="">Github</a>
+      <li><a href="https://github.com/c0nrad/" title="Github"  rel="noopener noreferrer">Github</a></li>
     
-    <a class="" href="https://twitter.com/xc0nradx" title="">Twitter</a>
+  
     
+      <li><a href="https://twitter.com/xc0nradx" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+</ul>
+
+<ul class="subscription">
+  
+    
+        <a href="https://blog.c0nrad.io/index.xml" target="_blank" type="application/rss+xml" title="RSS" rel="noopener noreferrer"><i class="fa fa-rss-square fa-lg"></i></a>
+    
+  
+</ul>
+
+
 </nav>
 
-            
-        </header>
-        <main id="main" tabindex="-1"> 
-            
 
-<article class="post">
-    <header>
-        <h1>SO(3) Lie Group Generators via Brute Force</h1>
-    </header>
-    <div class="content">
-        <nav id="TableOfContents">
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+  <p class="meta">Oct 3, 2020
+     - 15 minute read 
+    
+
+    
+    
+      - <a class="label" href="https://blog.c0nrad.io/categories/physics/">physics </a>
+    
+  </p>
+  <h1 class="entry-title">
+     SO(3) Lie Group Generators via Brute Force 
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+            <nav id="TableOfContents">
   <ul>
     <li><a href="#motivation">Motivation</a></li>
     <li><a href="#background">Background</a></li>
@@ -95,8 +183,8 @@
     </li>
   </ul>
 </nav>
-
-        <p>Brute forcing the generators for SO(3).</p>
+          
+          <p>Brute forcing the generators for SO(3).</p>
 <h2 id="motivation">Motivation</h2>
 <p>I&rsquo;m currently reading through <a href="https://www.amazon.com/Physics-Symmetry-Undergraduate-Lecture-Notes/dp/3319666304">Physics from Symmetry</a> by Jakob Schwichtenberg. One of the sections, (<em>4.4.1 The Generators and Lie Algebra of \( SO(3) \)</em>), talks about generating the SO(3) rotation matrixes by first determining a set of Lie Algebra generators, and then doing some exponential matrix math.</p>
 <p>The book hands the reader a couple of linearly independent generator matrixes that can be used to generate the group elements. But I was curious if they were a unique set of matrices. It seemed like it would be fun to figure out by brute force.</p>
@@ -111,18 +199,24 @@
 <li>Orthogonal means that \( O^T O = 1 \). Being orthogonal means that the matrix is length preserving.</li>
 </ul>
 <p>The standard rotation matrices in 3D are:</p>
-<p>$$ R_x = \begin{pmatrix}
-1 &amp; 0 &amp; 0  \\
-0 &amp; \cos(\theta) &amp; -\sin(\theta)  \\
-0 &amp; \sin(\theta) &amp; \cos(\theta) \end{pmatrix} $$</p>
-<p>$$ R_y = \begin{pmatrix}
-\cos(\theta) &amp; 0 &amp; \sin(\theta)  \\
-0 &amp; 1 &amp; 0  \\
--\sin(\theta) &amp; 0 &amp; \cos(\theta) \end{pmatrix} $$</p>
-<p>$$ R_z = \begin{pmatrix}
-\cos(\theta) &amp; -\sin(\theta) &amp; 0  \\
-\sin(\theta) &amp; \cos(\theta) &amp; 0  \\
-0 &amp; 0 &amp; 0 \end{pmatrix} $$</p>
+<p>$$
+R_x = \begin{pmatrix}
+1 &amp; 0 &amp; 0  \<br>
+0 &amp; \cos(\theta) &amp; -\sin(\theta)  \<br>
+0 &amp; \sin(\theta) &amp; \cos(\theta) \end{pmatrix}
+$$</p>
+<p>$$
+R_y = \begin{pmatrix}
+\cos(\theta) &amp; 0 &amp; \sin(\theta)  \<br>
+0 &amp; 1 &amp; 0  \<br>
+-\sin(\theta) &amp; 0 &amp; \cos(\theta) \end{pmatrix}
+$$</p>
+<p>$$
+R_z = \begin{pmatrix}
+\cos(\theta) &amp; -\sin(\theta) &amp; 0  \<br>
+\sin(\theta) &amp; \cos(\theta) &amp; 0  \<br>
+0 &amp; 0 &amp; 0 \end{pmatrix}
+$$</p>
 <p>So if you had a vector you wanted to rotate around some axis, you could take one ot those matrixes, plug in \(\theta\), and you&rsquo;d have a length preserving rotation!</p>
 <h2 id="lie-group">Lie Group</h2>
 <p>Lie Groups deal with groups of continuous symmetry transformation, as opposed to discrete symmetry transformations. For example if you&rsquo;re looking at a square, you can only rotate it so many ways such that it&rsquo;ll still look the same (by 0, 90, 180, 270 degrees). But you can rotate a circle by any angle, and it&rsquo;s still the same looking circle. Since the square only allows a set number of rotations it is a discrete group, whereas a circle is a continuous group.</p>
@@ -143,8 +237,10 @@
 <p>So to calculate members of a lie group using the lie algebra, we need a set of generator matrixes. We&rsquo;ll then take these generator matrices, raise them to \( e^{tX} \) and get some group elements.</p>
 <p>We know a little bit about how these generator matrices should look.</p>
 <p>We know that the resulting matrices (we will call the group matrices O, and the generator matrices J) must have the properties such that:</p>
-<p>$$ \begin{aligned}
-O^T O = I &amp;   &amp;   &amp;   &amp; \det(O) = 1 \end{aligned} $$</p>
+<p>$$
+\begin{aligned}
+O^T O = I &amp;   &amp;   &amp;   &amp; \det(O) = 1 \end{aligned}
+$$</p>
 <p>And since:</p>
 <p>$$ O = e^{\theta J} $$</p>
 <p>We have our first condition on the generators J:</p>
@@ -156,81 +252,97 @@ $$ \implies tr(J) = 0 $$</p>
 <p>That&rsquo;s enough to start brute forcing!</p>
 <h2 id="brute-forcing-generators">Brute Forcing Generators</h2>
 <p>So we specifically want something of the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">random3</span>()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">random3</span>();
 <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">transpose</span>().<span style="color:#a6e22e">add</span>(<span style="color:#a6e22e">a</span>).<span style="color:#a6e22e">equals</span>(<span style="color:#a6e22e">Zero3</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">trace</span>() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
-    <span style="color:#75715e">// do something
+  <span style="color:#75715e">// do something
 </span><span style="color:#75715e"></span>}
 </code></pre></div><p>(full code can be found <a href="https://github.com/c0nrad/group_brute">here</a>)</p>
 <p>Random3() randomly adds either 1, 0, -1 to each spot in a 3x3 matrix.</p>
 <p>What&rsquo;s was somewhat interesting is that I get back 27 unique matrixes that fulfil that requirement.</p>
 <p>Some example matrixes:</p>
-<p>$$ J_{random1} = \begin{pmatrix}
-0 &amp; -1 &amp; 0  \\
-1 &amp; 0 &amp; 0  \\
-0 &amp; 0 &amp; 0 \end{pmatrix} $$</p>
-<p>$$ J_{random2} = \begin{pmatrix}
-0 &amp; 1 &amp; -1  \\
--1 &amp; 0 &amp; 0  \\
-1 &amp; 0 &amp; 0 \end{pmatrix} $$</p>
-<p>$$ J_{random3} = \begin{pmatrix}
-0 &amp; 0 &amp; 0  \\
-0 &amp; 0 &amp; -1  \\
-0 &amp; 1 &amp; 0 \end{pmatrix} $$</p>
+<p>$$
+J_{random1} = \begin{pmatrix}
+0 &amp; -1 &amp; 0  \<br>
+1 &amp; 0 &amp; 0  \<br>
+0 &amp; 0 &amp; 0 \end{pmatrix}
+$$</p>
+<p>$$
+J_{random2} = \begin{pmatrix}
+0 &amp; 1 &amp; -1  \<br>
+-1 &amp; 0 &amp; 0  \<br>
+1 &amp; 0 &amp; 0 \end{pmatrix}
+$$</p>
+<p>$$
+J_{random3} = \begin{pmatrix}
+0 &amp; 0 &amp; 0  \<br>
+0 &amp; 0 &amp; -1  \<br>
+0 &amp; 1 &amp; 0 \end{pmatrix}
+$$</p>
 <p>They all make sense, they&rsquo;re symmetric across the diagonal axis (requirement of \( O^T O = I \)).</p>
-<p>But, we can also see that \( J_{random1} \) contains similar elements from \( J_{random2} \). We know there&rsquo;s three rotation matrixes, maybe instead we try to find sets of three matrixes that are linear independent in the set of 27 matrxies that fulfil the initial requirements.</p>
+<p>But, we can also see that \( J*{random1} \) contains similar elements from \( J*{random2} \). We know there&rsquo;s three rotation matrixes, maybe instead we try to find sets of three matrixes that are linear independent in the set of 27 matrxies that fulfil the initial requirements.</p>
 <h2 id="linear-independent">Linear Independent</h2>
 <p>So maybe of our 27 matrixes, maybe there&rsquo;s only a couple that are linearly independent.</p>
 <p>We can iterate over this too via code.</p>
 <p>For three matrixes to be linearly independent we need it such that the only solution to the following below is when \( 0 = k_1 = k_2 = k_3 \) (this means that you can&rsquo;t build one of the matrix from a combination from others):</p>
 <p>$$ k_1 J_1 + k_2 J_2 + k_3 J_3 = 0 $$</p>
 <p>To do this we have to solve a system of equations! In our above example:</p>
-<p>$$ k_1 J_1 + k_2 J_2 + k_3 J_3 = \begin{pmatrix}
-0 &amp; -k_1 + k_2 &amp; -k_2  \\
-k_1 -k_2 &amp; 0 &amp; -k_3  \\
+<p>$$
+k_1 J_1 + k_2 J_2 + k_3 J_3 = \begin{pmatrix}
+0 &amp; -k_1 + k_2 &amp; -k_2  \<br>
+k_1 -k_2 &amp; 0 &amp; -k_3  \<br>
 k_2 &amp; k_3 &amp; 0 \end{pmatrix} = \begin{pmatrix}
-0 &amp; 0 &amp; 0  \\
-0 &amp; 0 &amp; 0  \\
-0 &amp; 0 &amp; 0 \end{pmatrix} $$</p>
+0 &amp; 0 &amp; 0  \<br>
+0 &amp; 0 &amp; 0  \<br>
+0 &amp; 0 &amp; 0 \end{pmatrix}
+$$</p>
 <p>So from that we get our system of equations:</p>
-<p>$$ \begin{aligned}
--k_1 + k_2 = 0 \\ -k_2 = 0 \\ k_1 - k_2 = 0 \\ -k_3 = 0 \\ k_2 = 0 \\ k_3 = 0 \end{aligned} $$</p>
+<p>$$
+\begin{aligned}
+-k_1 + k_2 = 0 \\ -k_2 = 0 \\ k_1 - k_2 = 0 \\ -k_3 = 0 \\ k_2 = 0 \\ k_3 = 0 \end{aligned}
+$$</p>
 <p>But there&rsquo;s an easier way, for there to be a solution, there must be a non-zero determinate. So we can take the determinate of our system to quickly check.</p>
 <p>But we hit a problem, after brute forcing through the determinates for all the combinations I found: <strong>All of the matrixes and their linear combinations have determinate zero</strong>! So that doesn&rsquo;t help reduce the set.</p>
 <h2 id="generators">Generators</h2>
 <p>Well, maybe we&rsquo;ll find a requirement on the J matrixes as we continue forward with generating the SO(3) group elements.</p>
 <p>Once we have a J, we&rsquo;re going to calculate \(R_1 = e^{\theta J_1} \). Since we&rsquo;re going to do some taylor series expansions, we might as well calculate \( J^0, J^1, J^2, J^3, J^4, J^5\) now.</p>
-<p>$$ J^0 = \begin{pmatrix}
-1 &amp; 0 &amp; 0  \\
-0 &amp; 1 &amp; 0  \\
+<p>$$
+J^0 = \begin{pmatrix}
+1 &amp; 0 &amp; 0  \<br>
+0 &amp; 1 &amp; 0  \<br>
 0 &amp; 0 &amp; 1 \end{pmatrix}, J^1  = \begin{pmatrix}
-0  &amp;  0  &amp;  0  \\
-0  &amp;  0  &amp;  1  \\
+0  &amp;  0  &amp;  0  \<br>
+0  &amp;  0  &amp;  1  \<br>
 0  &amp;  -1  &amp;  0 \end{pmatrix}, J^2 = \begin{pmatrix}
-0  &amp;  0  &amp;  0  \\
-0  &amp;  -1  &amp;  0  \\
-0  &amp;  0  &amp;  -1 \end{pmatrix} $$</p>
-<p>$$ J^3  = \begin{pmatrix}
-0  &amp;  0  &amp;  0  \\
-0  &amp;  0  &amp;  -1  \\
+0  &amp;  0  &amp;  0  \<br>
+0  &amp;  -1  &amp;  0  \<br>
+0  &amp;  0  &amp;  -1 \end{pmatrix}
+$$</p>
+<p>$$
+J^3  = \begin{pmatrix}
+0  &amp;  0  &amp;  0  \<br>
+0  &amp;  0  &amp;  -1  \<br>
 0  &amp;  1  &amp;  0  \end{pmatrix}, J^4 = \begin{pmatrix}
-0  &amp;  0  &amp;  0  \\
-0  &amp;  1  &amp;  0  \\
+0  &amp;  0  &amp;  0  \<br>
+0  &amp;  1  &amp;  0  \<br>
 0  &amp;  0  &amp;  1  \end{pmatrix}, J^5 = \begin{pmatrix}
-0  &amp;  0  &amp;  0  \\
-0  &amp;  0  &amp;  1  \\
-0  &amp;  -1  &amp;  0 \end{pmatrix} $$</p>
+0  &amp;  0  &amp;  0  \<br>
+0  &amp;  0  &amp;  1  \<br>
+0  &amp;  -1  &amp;  0 \end{pmatrix}
+$$</p>
 <p>There&rsquo;s something pretty amazing there. They form their own cyclic group! \( J^1 = J^5 \). It turns out this is a very important property. Some of them also somewhat look like the identity matrix! \( J^4 == I - \delta_{111} \). Let&rsquo;s just call that \( K \).</p>
 <p>So we know that:</p>
-<p>$$ \begin{aligned}
-J^1_1 &amp; = J_1 \\
-J^2_1 &amp; = -K \\
-J^3_1 &amp; = -J_1 \\
-J^4_1 &amp; = K \\
-J^5_1 &amp; = J_1 \end{aligned} $$</p>
+<p>$$
+\begin{aligned}
+J^1_1 &amp; = J_1 \<br>
+J^2_1 &amp; = -K \<br>
+J^3_1 &amp; = -J_1 \<br>
+J^4_1 &amp; = K \<br>
+J^5_1 &amp; = J_1 \end{aligned}
+$$</p>
 <p>Let&rsquo;s start generating!</p>
 <h2 id="generating-so3">Generating SO(3)</h2>
 <p>We&rsquo;re going to use the \( J^1 \) from above, and plug it into \( e^{\theta J_1} \).</p>
-<p>$$ R_1 = \sum^{\infty}_{n=0} \frac{(\theta J_1)^n}{n!} \approx \left(\frac{1 I}{1} \right) + \left(\frac{\theta J_1^1}{1}\right) + \left(\frac{\theta^2 J^2_1}{2!} \right) + \left(\frac{\theta^3 J^3_1}{3!}\right) + \left(\frac{\theta^4 J^4_1}{4!}\right) + \left(\frac{\theta^5 J^5_1}{5!}\right) + &hellip; $$</p>
+<p>$$ R<em>1 = \sum^{\infty}</em>{n=0} \frac{(\theta J_1)^n}{n!} \approx \left(\frac{1 I}{1} \right) + \left(\frac{\theta J_1^1}{1}\right) + \left(\frac{\theta^2 J^2_1}{2!} \right) + \left(\frac{\theta^3 J^3_1}{3!}\right) + \left(\frac{\theta^4 J^4_1}{4!}\right) + \left(\frac{\theta^5 J^5_1}{5!}\right) + &hellip; $$</p>
 <p>And we know some interesting things about the \( J \) powers:</p>
 <p>$$ = I + (\theta J_1) + \frac{\theta^2-K}{2!} + \frac{\theta^3-J_1}{3!} + \frac{\theta^4+K}{4!} + \frac{\theta^5 + J_1}{5!} + &hellip; $$</p>
 <p>Then, doing some careful rearranging:</p>
@@ -239,10 +351,12 @@ J^5_1 &amp; = J_1 \end{aligned} $$</p>
 <p>$$ \cos(x) = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} &hellip; $$
 $$ \sin(x) = x - \frac{x^3}{x!} + \frac{x^5}{x!} - \frac{x^7}{7!} &hellip; $$</p>
 <p>Making the substitions we get the following:</p>
-<p>$$ R_1 = \delta_{111} + K \cos(\theta) + I \sin(\theta) = \begin{pmatrix}
-1 &amp; 0 &amp; 0  \\
-0 &amp; \cos(\theta) &amp; -\sin(\theta)  \\
-0 &amp; \sin(\theta) &amp; \cos(\theta) \end{pmatrix} $$</p>
+<p>$$
+R_1 = \delta_{111} + K \cos(\theta) + I \sin(\theta) = \begin{pmatrix}
+1 &amp; 0 &amp; 0  \<br>
+0 &amp; \cos(\theta) &amp; -\sin(\theta)  \<br>
+0 &amp; \sin(\theta) &amp; \cos(\theta) \end{pmatrix}
+$$</p>
 <p>Holy guacamole batman! We generated \( R_1 \).</p>
 <h2 id="other-choices-of-j">Other choices of J</h2>
 <p>But we used only one of the 27 J matrices, what happens if we pick any of the others?</p>
@@ -250,154 +364,176 @@ $$ \sin(x) = x - \frac{x^3}{x!} + \frac{x^5}{x!} - \frac{x^7}{7!} &hellip; $$</p
 <p>Well, \( -J_1 \) was also a matrix. Its powers also have that cyclic property. Following the math through, we&rsquo;d get \( -R_1 \), which is just a rotation in the opposite direction. (\( R_1^{-1} = -R_1 \)).</p>
 <p>We also have \( J_2, J_3 \) which will result in our standard \( R_2, R_3 \) matrixes, and their negatives, \( -J_2, -J_3 \implies -R_2, -R_3 \).</p>
 <p>The zero matrix also fulfils the requirements to be a J matrix, and it results in the I transformation.</p>
-<p>The other matrix are combinations of \( J_1, J_2, J_3  \), let&rsquo;s see what \( J_1 + J_2 \) generates:</p>
-<p>$$ J_{12} = J_1 + J_2 = \begin{pmatrix}
-0  &amp;  0  &amp;  1  \\
-0  &amp;  0  &amp;  -1  \\
--1  &amp;  1  &amp;  1  \end{pmatrix} $$</p>
+<p>The other matrix are combinations of \( J_1, J_2, J_3 \), let&rsquo;s see what \( J_1 + J_2 \) generates:</p>
+<p>$$
+J_{12} = J_1 + J_2 = \begin{pmatrix}
+0  &amp;  0  &amp;  1  \<br>
+0  &amp;  0  &amp;  -1  \<br>
+-1  &amp;  1  &amp;  1  \end{pmatrix}
+$$</p>
 <p>And calculating some powers:</p>
-<p>$$ J^0 = \begin{pmatrix}
-1 &amp; 0 &amp; 0 \\
-0 &amp; 1 &amp; 0 \\
-0 &amp; 0 &amp; 1 \\
+<p>$$
+J^0 = \begin{pmatrix}
+1 &amp; 0 &amp; 0 \<br>
+0 &amp; 1 &amp; 0 \<br>
+0 &amp; 0 &amp; 1 \<br>
 \end{pmatrix} J^1 = \begin{pmatrix}
-0 &amp; 0 &amp; 1 \\
-0 &amp; 0 &amp; -1 \\
--1 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 \<br>
+0 &amp; 0 &amp; -1 \<br>
+-1 &amp; 1 &amp; 0 \<br>
 \end{pmatrix} J^2 = \begin{pmatrix}
--1 &amp; 1 &amp; 0 \\
-1 &amp; -1 &amp; 0 \\
-0 &amp; 0 &amp; -2 \\
-\end{pmatrix} $$</p>
-<p>$$ J^3 = \begin{pmatrix}
-0 &amp; 0 &amp; -2 \\
-0 &amp; 0 &amp; 2 \\
-2 &amp; -2 &amp; 0 \\
+-1 &amp; 1 &amp; 0 \<br>
+1 &amp; -1 &amp; 0 \<br>
+0 &amp; 0 &amp; -2 \<br>
+\end{pmatrix}
+$$</p>
+<p>$$
+J^3 = \begin{pmatrix}
+0 &amp; 0 &amp; -2 \<br>
+0 &amp; 0 &amp; 2 \<br>
+2 &amp; -2 &amp; 0 \<br>
 \end{pmatrix}
 J^4 = \begin{pmatrix}
-2 &amp; -2 &amp; 0 \\
--2 &amp; 2 &amp; 0 \\
-0 &amp; 0 &amp; 4 \\
+2 &amp; -2 &amp; 0 \<br>
+-2 &amp; 2 &amp; 0 \<br>
+0 &amp; 0 &amp; 4 \<br>
 \end{pmatrix}
 J^5 = \begin{pmatrix}
-0 &amp; 0 &amp; 4 \\
-0 &amp; 0 &amp; -4 \\
--4 &amp; 4 &amp; 0 \\
-\end{pmatrix} $$
-$$ J^6 = \begin{pmatrix}
--4 &amp; 4 &amp; 0 \\
-4 &amp; -4 &amp; 0 \\
-0 &amp; 0 &amp; -8 \\
+0 &amp; 0 &amp; 4 \<br>
+0 &amp; 0 &amp; -4 \<br>
+-4 &amp; 4 &amp; 0 \<br>
+\end{pmatrix}
+$$</p>
+<p>$$
+J^6 = \begin{pmatrix}
+-4 &amp; 4 &amp; 0 \<br>
+4 &amp; -4 &amp; 0 \<br>
+0 &amp; 0 &amp; -8 \<br>
 \end{pmatrix}
 J^7 = \begin{pmatrix}
-0 &amp; 0 &amp; -8 \\
-0 &amp; 0 &amp; 8 \\
-8 &amp; -8 &amp; 0 \\
+0 &amp; 0 &amp; -8 \<br>
+0 &amp; 0 &amp; 8 \<br>
+8 &amp; -8 &amp; 0 \<br>
 \end{pmatrix}
 J^8 = \begin{pmatrix}
-8 &amp; -8 &amp; 0 \\
--8 &amp; 8 &amp; 0 \\
-0 &amp; 0 &amp; 16 \\
-\end{pmatrix} $$
-$$ J^9 = \begin{pmatrix}
-0 &amp; 0 &amp; 16 \\
-0 &amp; 0 &amp; -16 \\
--16 &amp; 16 &amp; 0 \\
-\end{pmatrix} $$</p>
+8 &amp; -8 &amp; 0 \<br>
+-8 &amp; 8 &amp; 0 \<br>
+0 &amp; 0 &amp; 16 \<br>
+\end{pmatrix}
+$$</p>
+<p>$$
+J^9 = \begin{pmatrix}
+0 &amp; 0 &amp; 16 \<br>
+0 &amp; 0 &amp; -16 \<br>
+-16 &amp; 16 &amp; 0 \<br>
+\end{pmatrix}
+$$</p>
 <p>Very odd. So, \( J^9 = J^1 2^{n/2} \)</p>
-<p>$$ \begin{aligned}
-J^0 &amp;  = I \\
-J^1 &amp;  = J \\
-J^2 &amp; = -I -(-\delta_{12} + -\delta_{21} + \delta_{33})  \\
-J^3 &amp; = -2 J \\
-J^4 &amp; = 2I + 2(-\delta_{12} + -\delta_{21} + \delta_{33}) \\
-J^5 &amp; = 4J \\
-J^6 &amp; = -4I - 4(-\delta_{12} + -\delta_{21} + \delta_{33}) \\
-J^7 &amp; = -8J \\
-J^8 &amp; = 8I + 8(-\delta_{12} -\delta_{21} + \delta_{33}) \\
-J^9 &amp; = 16 J \end{aligned} $$</p>
-<p>Curiouser and Curiouser. We can sneakily pull out a couple of things. The \(J^1, J^3, J^5, J^7, J^9 \) terms look like our taylor expanded friend \( \sin(x) \). (Ignoring the \( 2^{n/2} \)). We also have two different groupings of \( \cos(x) \), the I and the weird off elements thing (let&rsquo;s call it \( K = (-\delta_{12} -\delta_{21} + \delta_{33}) \).</p>
+<p>$$
+\begin{aligned}
+J^0 &amp;  = I \<br>
+J^1 &amp;  = J \<br>
+J^2 &amp; = -I -(-\delta_{12} + -\delta_{21} + \delta_{33})  \<br>
+J^3 &amp; = -2 J \<br>
+J^4 &amp; = 2I + 2(-\delta_{12} + -\delta_{21} + \delta_{33}) \<br>
+J^5 &amp; = 4J \<br>
+J^6 &amp; = -4I - 4(-\delta_{12} + -\delta_{21} + \delta_{33}) \<br>
+J^7 &amp; = -8J \<br>
+J^8 &amp; = 8I + 8(-\delta_{12} -\delta_{21} + \delta_{33}) \<br>
+J^9 &amp; = 16 J \end{aligned}
+$$</p>
+<p>Curiouser and Curiouser. We can sneakily pull out a couple of things. The \(J^1, J^3, J^5, J^7, J^9 \) terms look like our taylor expanded friend \( \sin(x) \). (Ignoring the \( 2^{n/2} \)). We also have two different groupings of \( \cos(x) \), the I and the weird off elements thing (let&rsquo;s call it \( K = (-\delta*{12} -\delta*{21} + \delta_{33}) \).</p>
 <p>So, ignoring all the \( 2^{n/2} \) elements, we know the solution will look something of the form:</p>
-<p>$$ R_12 = J \sin(\theta) + I \cos(\theta) + K \cos(\theta)$$
-$$ = \begin{pmatrix}
-0 &amp; 0 &amp; \sin(\theta)  \\
-0 &amp; 0 &amp; -\sin(\theta)  \\
+<p>$$ R_12 = J \sin(\theta) + I \cos(\theta) + K \cos(\theta)$$</p>
+<p>$$
+= \begin{pmatrix}
+0 &amp; 0 &amp; \sin(\theta)  \<br>
+0 &amp; 0 &amp; -\sin(\theta)  \<br>
 -\sin(\theta) &amp; \sin(\theta) &amp; 0 \end{pmatrix} + \begin{pmatrix}
-\cos(\theta) &amp; 0 &amp; 0  \\
-0 &amp; \cos(\theta) &amp; 0  \\
+\cos(\theta) &amp; 0 &amp; 0  \<br>
+0 &amp; \cos(\theta) &amp; 0  \<br>
 0 &amp; 0 &amp; \cos(\theta) \end{pmatrix} + \begin{pmatrix}
-0 &amp; -\cos(\theta) &amp; 0  \\
--\cos(\theta) &amp; 0 &amp; 0  \\
-0 &amp; 0 &amp; \cos(\theta) \end{pmatrix}$$</p>
-<p>$$ = \begin{pmatrix}
-\cos(\theta) &amp; -\cos(\theta) &amp; \sin(\theta)  \\
--\cos(\theta) &amp; \cos(\theta) &amp; -\sin(\theta)  \\
--\sin(\theta) &amp; \sin(\theta) &amp; 2\cos(\theta) \end{pmatrix} $$</p>
+0 &amp; -\cos(\theta) &amp; 0  \<br>
+-\cos(\theta) &amp; 0 &amp; 0  \<br>
+0 &amp; 0 &amp; \cos(\theta) \end{pmatrix}
+$$</p>
+<p>$$
+= \begin{pmatrix}
+\cos(\theta) &amp; -\cos(\theta) &amp; \sin(\theta)  \<br>
+-\cos(\theta) &amp; \cos(\theta) &amp; -\sin(\theta)  \<br>
+-\sin(\theta) &amp; \sin(\theta) &amp; 2\cos(\theta) \end{pmatrix}
+$$</p>
 <p>Well it turns out that looks suspiciously like:</p>
 <img src="/r_xy.png" style="border: 1px solid">
 <p>Which is just rotating around X and Y by \( \theta \).</p>
 <p>And it turns out if we had been a bit smarter and multiplied the matrix by \( \sqrt{2} \) before doing the expansion, we would have gotten that!</p>
-<p>$$ J^0 = \begin{pmatrix}
-1 &amp; 0 &amp; 0 \\
-0 &amp; 1 &amp; 0 \\
-0 &amp; 0 &amp; 1 \\
+<p>$$
+J^0 = \begin{pmatrix}
+1 &amp; 0 &amp; 0 \<br>
+0 &amp; 1 &amp; 0 \<br>
+0 &amp; 0 &amp; 1 \<br>
 \end{pmatrix}
 J^1 = \begin{pmatrix}
-0 &amp; 0 &amp; \sqrt{2} \\
-0 &amp; 0 &amp; -\sqrt{2} \\
--\sqrt{2} &amp; \sqrt{2} &amp; 0 \\
+0 &amp; 0 &amp; \sqrt{2} \<br>
+0 &amp; 0 &amp; -\sqrt{2} \<br>
+-\sqrt{2} &amp; \sqrt{2} &amp; 0 \<br>
 \end{pmatrix}
 J^2 = \begin{pmatrix}
--.5 &amp; .5 &amp; 0 \\
-.5 &amp; -.5 &amp; 0 \\
-0 &amp; 0 &amp; -1 \\
-\end{pmatrix} $$
-$$ J^3 = \begin{pmatrix}
-0 &amp; 0 &amp; -\sqrt{2} \\
-0 &amp; 0 &amp; \sqrt{2} \\
-\sqrt{2} &amp; -\sqrt{2} &amp; 0 \\
+-.5 &amp; .5 &amp; 0 \<br>
+.5 &amp; -.5 &amp; 0 \<br>
+0 &amp; 0 &amp; -1 \<br>
+\end{pmatrix}
+$$</p>
+<p>$$
+J^3 = \begin{pmatrix}
+0 &amp; 0 &amp; -\sqrt{2} \<br>
+0 &amp; 0 &amp; \sqrt{2} \<br>
+\sqrt{2} &amp; -\sqrt{2} &amp; 0 \<br>
 \end{pmatrix}
 J^4 = \begin{pmatrix}
-.5 &amp; -.5 &amp; 0 \\
--.5 &amp; .5 &amp; 0 \\
-0 &amp; 0 &amp; 1 \\
+.5 &amp; -.5 &amp; 0 \<br>
+-.5 &amp; .5 &amp; 0 \<br>
+0 &amp; 0 &amp; 1 \<br>
 \end{pmatrix}
 J^5 = \begin{pmatrix}
-0 &amp; 0 &amp; \sqrt{2} \\
-0 &amp; 0 &amp; -\sqrt{2} \\
--\sqrt{2} &amp; \sqrt{2} &amp; 0 \\
-\end{pmatrix} $$</p>
+0 &amp; 0 &amp; \sqrt{2} \<br>
+0 &amp; 0 &amp; -\sqrt{2} \<br>
+-\sqrt{2} &amp; \sqrt{2} &amp; 0 \<br>
+\end{pmatrix}
+$$</p>
 <h2 id="linear-combinations-of-generators">Linear Combinations of Generators</h2>
 <p>So, the 27 matrxies are all the different combinations of rotations possible!</p>
 <p>And this answers our original questions, are the matrixes that the book gave us the unique solution. No, they&rsquo;re all valid rotation groups, but in terms of standard convention yes. We have a standard definition of \( R_x(\theta) \), and \( J_1 \) and only \( J_1 \) maps to that.</p>
 <p>So now, we can build a map of all the other different rotations!</p>
-<p>$$0 \implies I, \\
-J_1 \implies R_x(\theta), \\
-J_2 \implies R_y(\theta), \\
-J_3 \implies R_z(\theta), \\
--J_1 \implies R_x(-\theta), \\
--J_2 \implies R_y(-\theta) , \\
--J_3 \implies R_z(-\theta), \\
-J_1 + J_2 \implies R_x(\theta) R_y(\theta), \\
-J_1 + J_3 \implies R_x(\theta) R_z(\theta), \\
-J_1 + -J_2 \implies R_x(\theta) R_y(-\theta) , \\
-J_1 + -J_3 \implies R_z(\theta) R_z(-\theta) , \\
--J_1 + J_2 \implies R_x(-\theta) R_y(\theta), \\
--J_1 + J_3 \implies R_x(-\theta) R_z(\theta), \\
--J_1 + -J_2 \implies R_x(-\theta) R_y(-\theta) , \\
--J_1 + -J_3 \implies R_x(-\theta) R_z(-\theta) , \\
-J_2 + J_3 \implies R_y(\theta) R_z(\theta), \\
-J_2 + -J_3 \implies R_y(\theta) R_z(-\theta), \\
--J_2 + J_3 \implies R_y(-\theta) R_z(\theta), \\
--J_2 + -J_3 \implies R_y(-\theta) R_z(-\theta), \\
-J_1 + J_2 + J_3 \implies R_x(\theta) R_y(\theta) R_z(\theta), \\
-J_1 + J_2 + -J_3 \implies R_x(\theta) R_y(\theta) R_z(-\theta), \\
-J_1 + -J_2 + J_3 \implies R_x(\theta) R_y(-\theta) R_z(\theta) , \\
-J_1 + -J_2 + -J_3 \implies R_x(\theta) R_y(-\theta) R_z(-\theta), \\
--J_1 + J_2 + J_3 \implies R_x(-\theta) R_y(\theta) R_z(\theta), \\
--J_1 + J_2 + -J_3 \implies R_x(-\theta) R_y(\theta) R_z(-\theta), \\
--J_1 + -J_2 + J_3 \implies R_x(-\theta) R_y(-\theta) R_z(\theta) , \\
--J_1 + -J_2 + -J_3 \implies R_x(-\theta) R_y(-\theta) R_z(-\theta)$$</p>
+<p>$$
+0 \implies I, \<br>
+J_1 \implies R_x(\theta), \<br>
+J_2 \implies R_y(\theta), \<br>
+J_3 \implies R_z(\theta), \<br>
+-J_1 \implies R_x(-\theta), \<br>
+-J_2 \implies R_y(-\theta) , \<br>
+-J_3 \implies R_z(-\theta), \<br>
+J_1 + J_2 \implies R_x(\theta) R_y(\theta), \<br>
+J_1 + J_3 \implies R_x(\theta) R_z(\theta), \<br>
+J_1 + -J_2 \implies R_x(\theta) R_y(-\theta) , \<br>
+J_1 + -J_3 \implies R_z(\theta) R_z(-\theta) , \<br>
+-J_1 + J_2 \implies R_x(-\theta) R_y(\theta), \<br>
+-J_1 + J_3 \implies R_x(-\theta) R_z(\theta), \<br>
+-J_1 + -J_2 \implies R_x(-\theta) R_y(-\theta) , \<br>
+-J_1 + -J_3 \implies R_x(-\theta) R_z(-\theta) , \<br>
+J_2 + J_3 \implies R_y(\theta) R_z(\theta), \<br>
+J_2 + -J_3 \implies R_y(\theta) R_z(-\theta), \<br>
+-J_2 + J_3 \implies R_y(-\theta) R_z(\theta), \<br>
+-J_2 + -J_3 \implies R_y(-\theta) R_z(-\theta), \<br>
+J_1 + J_2 + J_3 \implies R_x(\theta) R_y(\theta) R_z(\theta), \<br>
+J_1 + J_2 + -J_3 \implies R_x(\theta) R_y(\theta) R_z(-\theta), \<br>
+J_1 + -J_2 + J_3 \implies R_x(\theta) R_y(-\theta) R_z(\theta) , \<br>
+J_1 + -J_2 + -J_3 \implies R_x(\theta) R_y(-\theta) R_z(-\theta), \<br>
+-J_1 + J_2 + J_3 \implies R_x(-\theta) R_y(\theta) R_z(\theta), \<br>
+-J_1 + J_2 + -J_3 \implies R_x(-\theta) R_y(\theta) R_z(-\theta), \<br>
+-J_1 + -J_2 + J_3 \implies R_x(-\theta) R_y(-\theta) R_z(\theta) , \<br>
+-J_1 + -J_2 + -J_3 \implies R_x(-\theta) R_y(-\theta) R_z(-\theta)
+$$</p>
 <p>We have now accounted for the 27 matrixes.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>That was a fun project. It ended up being a little bit longer than planned, but it was very neat to explore.</p>
@@ -414,72 +550,126 @@ J_1 + -J_2 + -J_3 \implies R_x(\theta) R_y(-\theta) R_z(-\theta), \\
 </ul>
 <h3 id="whats-next">What&rsquo;s next?</h3>
 <p>I&rsquo;m going to generate some of the other groups, but I probably won&rsquo;t blog about it unless something exciting happens. I imagine the next blog post will be about Poincare group or spinors.</p>
-    </div>
-
-    <div class="article-info">
-    
-        <div class="article-date">2020-10-03</div>
-    
-    <div class="article-taxonomies">
+        </div>
         
-            
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
+    
+    <time>Oct 3, 2020</time>
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/em-particle-motion/" title="EM Particle Motion">EM Particle Motion</a>
+    
+
+    
+      <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/enc/" title="Effective Nuclear Charge Calculations">Effective Nuclear Charge Calculations</a>
+    
+  </p>
+  
+</footer>
+
+      </article>
     </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>Who am I?</h1>
+    
+
+    <p>
+      
+        I am Stuart. In a previous life I was a programmer, electrical engineer, then a security engineer. Now I run <a href="https://csper.io">Csper</a> and spend my free time tinkering with physics/electronics.
+</br></br>
+I write about physics, life, and learning.
+</br>
+      
+    </p>
+  </section>
+
+
+
+  
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      <a target="_blank" rel="noopener noreferrer" href="https://github.com/c0nrad/" title="https://github.com/c0nrad/"><i class="fa fa-github fa-3x"></i></a>
+      
+      
+      <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/xc0nradx/" title="https://twitter.com/xc0nradx/"><i class="fa fa-twitter fa-3x"></i></a>
+      
+         
+      
+      <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/c0nrad" title="https://www.linkedin.com/in/c0nrad"><i class="fa fa-linkedin fa-3x"></i></a>
+      
+      
+      
+      
+      
+      
+
+    
+    
+    </li>
+  </ul>
+
+  
+
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
+
+  
+  
+  
+</aside>
+
+  </div>
 </div>
-
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
 
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</article>
+    
+    
+    
 
-
-
-
-
-        </main>
-        <footer>
-            
-                <p>© Stuart Larsen, 2021<br>
-</p>
-
-
-<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-    #mc_embed_signup {
-        background: #fff;
-        clear: left;
-        font: 14px Helvetica, Arial, sans-serif;
-        border: 1px solid;
-        margin-top: 20px;
-    }
-
-
-
-
-     
-</style>
-<div id="mc_embed_signup">
-    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
-        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
-        novalidate>
-        <div id="mc_embed_signup_scroll">
-            <label for="mce-EMAIL">Subscribe for new posts:</label>
-            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-            
-            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
-                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
-            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
-                    class="button"></div>
-        </div>
-    </form>
-</div>
-
-
-            
-        </footer>
-    </div>
-</body>
+    
+  </body>
 </html>
+

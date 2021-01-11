@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>quantum mechanics on c0nrad&#39;s c0rner</title>
+    <link>https://blog.c0nrad.io/categories/quantum-mechanics/</link>
+    <description>Recent content in quantum mechanics on c0nrad&#39;s c0rner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 20 Jun 2020 14:37:31 -0400</lastBuildDate>
+    
+	<atom:link href="https://blog.c0nrad.io/categories/quantum-mechanics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Electron Wavefunctions for Hydrogen Part 2</title>
+      <link>https://blog.c0nrad.io/posts/hydrogen-pt2/</link>
+      <pubDate>Sat, 20 Jun 2020 14:37:31 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/hydrogen-pt2/</guid>
+      <description>&lt;p&gt;Part 2 of calculating the electron wavefunctions for hydrogen.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.c0nrad.io/hydrogen/&#34;&gt;View Visualization&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Electron Wavefunctions for Hydrogen Part 1</title>
+      <link>https://blog.c0nrad.io/posts/hydrogen-pt1/</link>
+      <pubDate>Thu, 28 May 2020 10:22:30 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/hydrogen-pt1/</guid>
+      <description>&lt;p&gt;The code/math behind calculating the electron wavefunctions for hydrogen.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>GiNaC on Macos</title>
+      <link>https://blog.c0nrad.io/posts/ginac-on-macos/</link>
+      <pubDate>Wed, 27 May 2020 18:43:40 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/ginac-on-macos/</guid>
+      <description>&lt;p&gt;A quick guide on getting started with GiNaC on macos.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Quantum Infinite Well</title>
+      <link>https://blog.c0nrad.io/posts/quantum-infinite-well/</link>
+      <pubDate>Fri, 22 May 2020 12:30:26 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/quantum-infinite-well/</guid>
+      <description>&lt;p&gt;Calculating the stationary states of an electron in a quantum infinite well.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>personal on c0nrad&#39;s c0rner</title>
+    <link>https://blog.c0nrad.io/categories/personal/</link>
+    <description>Recent content in personal on c0nrad&#39;s c0rner</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 15 Oct 2020 10:24:08 -0400</lastBuildDate>
+    
+	<atom:link href="https://blog.c0nrad.io/categories/personal/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Independent Study</title>
+      <link>https://blog.c0nrad.io/posts/independent-study/</link>
+      <pubDate>Thu, 15 Oct 2020 10:24:08 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/independent-study/</guid>
+      <description>&lt;p&gt;Thinking out loud about my future.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Florida</title>
+      <link>https://blog.c0nrad.io/posts/florida/</link>
+      <pubDate>Mon, 29 Jun 2020 12:06:58 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/florida/</guid>
+      <description>&lt;p&gt;We moved to Florida! Made a little video.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

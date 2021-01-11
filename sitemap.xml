@@ -8,13 +8,28 @@
   </url>
   
   <url>
+    <loc>https://blog.c0nrad.io/categories/</loc>
+    <lastmod>2021-01-11T11:10:40-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.c0nrad.io/posts/relaxation/</loc>
+    <lastmod>2021-01-11T11:10:40-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.c0nrad.io/categories/physics/</loc>
     <lastmod>2021-01-11T11:10:40-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.c0nrad.io/posts/</loc>
     <lastmod>2021-01-11T11:10:40-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.c0nrad.io/categories/electronics/</loc>
+    <lastmod>2021-01-08T16:29:21-05:00</lastmod>
   </url>
   
   <url>
@@ -44,6 +59,11 @@
   
   <url>
     <loc>https://blog.c0nrad.io/posts/independent-study/</loc>
+    <lastmod>2020-10-15T10:24:08-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.c0nrad.io/categories/personal/</loc>
     <lastmod>2020-10-15T10:24:08-04:00</lastmod>
   </url>
   
@@ -88,17 +108,12 @@
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/simulation/</loc>
+    <loc>https://blog.c0nrad.io/categories/simulation/</loc>
     <lastmod>2020-08-18T18:53:54-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/</loc>
-    <lastmod>2020-08-18T18:53:54-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/tags/matrix/</loc>
+    <loc>https://blog.c0nrad.io/categories/matrix/</loc>
     <lastmod>2020-08-07T18:37:01-04:00</lastmod>
   </url>
   
@@ -108,22 +123,22 @@
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/numerical/</loc>
+    <loc>https://blog.c0nrad.io/categories/numerical/</loc>
     <lastmod>2020-08-07T18:37:01-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/programming/</loc>
+    <loc>https://blog.c0nrad.io/categories/programming/</loc>
     <lastmod>2020-08-07T18:37:01-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/em/</loc>
+    <loc>https://blog.c0nrad.io/categories/em/</loc>
     <lastmod>2020-07-21T18:37:01-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/vector/</loc>
+    <loc>https://blog.c0nrad.io/categories/vector/</loc>
     <lastmod>2020-07-21T18:37:01-04:00</lastmod>
   </url>
   
@@ -143,7 +158,7 @@
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/computational-physics/</loc>
+    <loc>https://blog.c0nrad.io/categories/computational-physics/</loc>
     <lastmod>2020-07-11T23:12:13-04:00</lastmod>
   </url>
   
@@ -153,17 +168,12 @@
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/physics/</loc>
-    <lastmod>2020-07-11T23:12:13-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.c0nrad.io/posts/numerical-differentiation/</loc>
     <lastmod>2020-07-10T20:01:46-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/quantum-computation/</loc>
+    <loc>https://blog.c0nrad.io/categories/quantum-computation/</loc>
     <lastmod>2020-07-10T09:26:38-04:00</lastmod>
   </url>
   
@@ -188,17 +198,12 @@
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/personal/</loc>
-    <lastmod>2020-06-29T12:06:58-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.c0nrad.io/posts/hydrogen-pt2/</loc>
     <lastmod>2020-06-20T14:37:31-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/quantum-mechanics/</loc>
+    <loc>https://blog.c0nrad.io/categories/quantum-mechanics/</loc>
     <lastmod>2020-06-20T14:37:31-04:00</lastmod>
   </url>
   
@@ -208,7 +213,7 @@
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/startup/</loc>
+    <loc>https://blog.c0nrad.io/categories/startup/</loc>
     <lastmod>2020-06-16T07:59:02-04:00</lastmod>
   </url>
   
@@ -223,7 +228,7 @@
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/ginacs/</loc>
+    <loc>https://blog.c0nrad.io/categories/ginacs/</loc>
     <lastmod>2020-05-27T18:43:40-04:00</lastmod>
   </url>
   
@@ -238,7 +243,7 @@
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/tags/newtonian/</loc>
+    <loc>https://blog.c0nrad.io/categories/newtonian/</loc>
     <lastmod>2020-05-18T12:30:26-04:00</lastmod>
   </url>
   
@@ -248,7 +253,18 @@
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/categories/</loc>
+    <loc>https://blog.c0nrad.io/tags/newtonian/</loc>
+    <lastmod>2019-05-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.c0nrad.io/tags/simulation/</loc>
+    <lastmod>2019-05-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.c0nrad.io/tags/</loc>
+    <lastmod>2019-05-17T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>

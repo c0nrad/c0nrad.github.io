@@ -1,76 +1,161 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
     
-        
-<meta charset="utf-8">
-<meta name="HandheldFriendly" content="True">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer-when-downgrade">
-
-<title>Spherical Bug  - c0nrad&#39;s blog</title>
-<meta name="description" content="Learning about physics">
-
-<link rel="icon" type="image/x-icon" href="https://blog.c0nrad.io/favicon.ico">
-<link rel="apple-touch-icon-precomposed" href="https://blog.c0nrad.io/favicon.png">
-
-<link rel="stylesheet" href="https://blog.c0nrad.io/css/style.css?rnd=1610398466" />
-
-<link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css?rnd=1610398466">
-
-<meta property="og:title" content="Spherical Bug" />
-<meta property="og:description" content="Discussion of one of my longest living software bugs." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.c0nrad.io/posts/spherical-bug/" />
-<meta property="og:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
-<meta property="article:published_time" content="2020-09-09T09:16:42-04:00" />
-<meta property="article:modified_time" content="2020-09-09T09:16:42-04:00" />
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://blog.c0nrad.io/static/walljump.gif"/>
-
-<meta name="twitter:title" content="Spherical Bug"/>
-<meta name="twitter:description" content="Discussion of one of my longest living software bugs."/>
-
-
-
-
-
-
     
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>Spherical Bug</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+    <link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
+  <meta name="author" content="Stuart Larsen">
+
+  
+  <meta name="generator" content="Hugo 0.70.0" />
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-165926825-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  
+  
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+  
+  
+  <meta name="twitter:title" content="Spherical Bug"/>
+  <meta name="twitter:description" content="Discussion of one of my longest living software bugs."/>
+  
+  <meta name="twitter:domain" content="blog.c0nrad.io"/>
+  <meta name="twitter:creator" content="@CryptoGangsta"/>
+
+  
 </head>
 <body>
-    <a class="skip-main" href="#main">Skip to main content</a>
-    <div class="container">
-        <header> 
-            
-                <h1 class="site-header">
-    <a href="https://blog.c0nrad.io/">c0nrad&#39;s blog</a>
-</h1>
-<nav>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="https://blog.c0nrad.io/">c0nrad&#39;s c0rner</a></h1>
+    <h2>Learning and learning</h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+        <option value="https://c0nrad.io">» Website</option>
+      
+        <option value="https://github.com/c0nrad/">» Github</option>
+      
+        <option value="https://twitter.com/xc0nradx">» Twitter</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
     
+      <li><a href="https://c0nrad.io" title="Website"  rel="noopener noreferrer">Website</a></li>
     
-    <a class="" href="https://c0nrad.io" title="">About</a>
+  
     
-    <a class="" href="https://github.com/c0nrad/" title="">Github</a>
+      <li><a href="https://github.com/c0nrad/" title="Github"  rel="noopener noreferrer">Github</a></li>
     
-    <a class="" href="https://twitter.com/xc0nradx" title="">Twitter</a>
+  
     
+      <li><a href="https://twitter.com/xc0nradx" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+</ul>
+
+<ul class="subscription">
+  
+    
+        <a href="https://blog.c0nrad.io/index.xml" target="_blank" type="application/rss+xml" title="RSS" rel="noopener noreferrer"><i class="fa fa-rss-square fa-lg"></i></a>
+    
+  
+</ul>
+
+
 </nav>
 
-            
-        </header>
-        <main id="main" tabindex="-1"> 
-            
 
-<article class="post">
-    <header>
-        <h1>Spherical Bug</h1>
-    </header>
-    <div class="content">
-        <nav id="TableOfContents"></nav>
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
 
-        <p>Discussion of one of my longest living software bugs.</p>
+        
+        
+
+<header>
+  <p class="meta">Sep 9, 2020
+     - 3 minute read 
+    
+
+    
+  </p>
+  <h1 class="entry-title">
+     Spherical Bug 
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+            <nav id="TableOfContents"></nav>
+          
+          <p>Discussion of one of my longest living software bugs.</p>
 <h1 id="overview">Overview</h1>
 <p>Many moons ago I built a little tool to visualize the electron orbitals of hydrogen:</p>
 <p><a href="https://blog.c0nrad.io/hydrogenjs">https://blog.c0nrad.io/hydrogenjs</a></p>
@@ -94,72 +179,126 @@
 <h1 id="next">Next</h1>
 <p>It&rsquo;s possible i&rsquo;ll be doing some research with one my professors here at MTU. So many one of my models will have &ldquo;practical&rdquo; use! We&rsquo;ll see.</p>
 <p>Until then, I have a huge list of things I want to program, I plan on doing one this weekend, see ya then!</p>
-    </div>
-
-    <div class="article-info">
-    
-        <div class="article-date">2020-09-09</div>
-    
-    <div class="article-taxonomies">
+        </div>
         
-            
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
+    
+    <time>Sep 9, 2020</time>
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/scattering-angles/" title="Scattering Angles">Scattering Angles</a>
+    
+
+    
+      <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/connect-springs/" title="Klein Gordon Eqn via Connected Springs">Klein Gordon Eqn via Connected Springs</a>
+    
+  </p>
+  
+</footer>
+
+      </article>
     </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>Who am I?</h1>
+    
+
+    <p>
+      
+        I am Stuart. In a previous life I was a programmer, electrical engineer, then a security engineer. Now I run <a href="https://csper.io">Csper</a> and spend my free time tinkering with physics/electronics.
+</br></br>
+I write about physics, life, and learning.
+</br>
+      
+    </p>
+  </section>
+
+
+
+  
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      <a target="_blank" rel="noopener noreferrer" href="https://github.com/c0nrad/" title="https://github.com/c0nrad/"><i class="fa fa-github fa-3x"></i></a>
+      
+      
+      <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/xc0nradx/" title="https://twitter.com/xc0nradx/"><i class="fa fa-twitter fa-3x"></i></a>
+      
+         
+      
+      <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/c0nrad" title="https://www.linkedin.com/in/c0nrad"><i class="fa fa-linkedin fa-3x"></i></a>
+      
+      
+      
+      
+      
+      
+
+    
+    
+    </li>
+  </ul>
+
+  
+
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
+
+  
+  
+  
+</aside>
+
+  </div>
 </div>
-
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
 
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
 
-</article>
+    
+    
+    
 
-
-
-
-
-        </main>
-        <footer>
-            
-                <p>© Stuart Larsen, 2021<br>
-</p>
-
-
-<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-    #mc_embed_signup {
-        background: #fff;
-        clear: left;
-        font: 14px Helvetica, Arial, sans-serif;
-        border: 1px solid;
-        margin-top: 20px;
-    }
-
-
-
-
-     
-</style>
-<div id="mc_embed_signup">
-    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
-        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
-        novalidate>
-        <div id="mc_embed_signup_scroll">
-            <label for="mce-EMAIL">Subscribe for new posts:</label>
-            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-            
-            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
-                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
-            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
-                    class="button"></div>
-        </div>
-    </form>
-</div>
-
-
-            
-        </footer>
-    </div>
-</body>
+    
+  </body>
 </html>
+
