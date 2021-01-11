@@ -26,20 +26,20 @@
 &lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
 &lt;h3 id=&#34;the-problem&#34;&gt;The Problem&lt;/h3&gt;
 &lt;p&gt;Most electrostatic problems involve finding the electric field given a static charge distribution. The charge distribution can be a set of point charges \( q \), a line charge \( \lambda \), a surface charge \( \sigma \), or a charge density \( \rho \).&lt;/p&gt;
-&lt;p&gt;The core relation between charges is given by Coulomb&amp;rsquo;s law:&lt;/p&gt;
+&lt;p&gt;The relation between charges and electric field is given by Coulomb&amp;rsquo;s law:&lt;/p&gt;
 &lt;p&gt;$$ \bm{E}(\bm{r}) = \frac{1}{4 \pi \epsilon_0 } \int \frac {\hat{\bm{r}}}{r^2} \rho(\rm{r\prime})d\bm{r}\prime $$&lt;/p&gt;
-&lt;p&gt;But for situations were there isn&amp;rsquo;t a symmetry we can (ab)use, the integral can get pretty nasty.&lt;/p&gt;
-&lt;p&gt;Instead we can tackle the problem by using Poisson&amp;rsquo;s equation:&lt;/p&gt;
+&lt;p&gt;But in situations where there isn&amp;rsquo;t a symmetry we can (ab)use the integral can get pretty nasty.&lt;/p&gt;
+&lt;p&gt;Instead we can tackle the problem of determining the electric field by using Poisson&amp;rsquo;s equation:&lt;/p&gt;
 &lt;p&gt;$$ \nabla^2 V = -\frac{1}{\epsilon_0} \rho $$&lt;/p&gt;
-&lt;p&gt;Poisson&amp;rsquo;s equation comes from combining Gauss&amp;rsquo;s law in differential form \( \nabla \cdot \bm{E} = \frac{\rho}{\epsilon_0} \) and the definition of electric potential \( E = -\nabla V \). Gauss&amp;rsquo;s law simply states that the divergence (the amount of &amp;ldquo;stuff&amp;rdquo; flowing out) must be equal to the amount of charge inside that&amp;rsquo;s generating the flow. It sounds obvious, but having it in mathematical form is extremely useful.&lt;/p&gt;
+&lt;p&gt;Poisson&amp;rsquo;s equation comes from combining Gauss&amp;rsquo;s law (in differential form) \( \nabla \cdot \bm{E} = \frac{\rho}{\epsilon_0} \) and the definition of electric potential \( E = -\nabla V \). Gauss&amp;rsquo;s law simply states that the divergence (the amount of &amp;ldquo;stuff&amp;rdquo; flowing out) must be equal to the amount of charge inside that&amp;rsquo;s generating the flow. It sounds obvious, but having it in mathematical form is extremely useful.&lt;/p&gt;
 &lt;p&gt;Poisson&amp;rsquo;s equation says that if we take the Laplacian ( \( \nabla^2 V = \frac{\partial^2 V}{\partial x^2} + \frac{\partial^2 V}{\partial y^2} + \frac{\partial^2 V}{\partial z^2} \)) of the electric potential we will get the charge density. Once we know the potential we can easily convert to the electric field.&lt;/p&gt;
-&lt;p&gt;Commonly we want to calculate the electric field were there is no charge. There&amp;rsquo;s charge nearby, but not in the region of space we are interested in evaluating. In this case Poisson&amp;rsquo;s equation becomes Laplace&amp;rsquo;s equation:&lt;/p&gt;
+&lt;p&gt;Commonly we want to calculate the electric field where there is no charge density. There &lt;em&gt;is&lt;/em&gt; charge nearby, but not in the region of space we are interested in evaluating. In this case Poisson&amp;rsquo;s equation becomes Laplace&amp;rsquo;s equation:&lt;/p&gt;
 &lt;p&gt;$$ \nabla^2 V = 0 $$&lt;/p&gt;
-&lt;p&gt;This is the specific equation we are interested in solving right now.&lt;/p&gt;
-&lt;p&gt;So an example problem would be &amp;ldquo;imagine we have a box of conductors where one side has a specific charge (or is held to a potential), and the rest are grounded (held to a different potential).&lt;/p&gt;
+&lt;p&gt;This is the specific equation we are interested in solving.&lt;/p&gt;
+&lt;p&gt;So an example problem would be: imagine we have a box of conductors with one side having a specific charge (or is being held to a potential), and the rest of the sides are grounded (held to a different potential), determine the potential/electric field.&lt;/p&gt;
 &lt;h3 id=&#34;laplaces-equation&#34;&gt;Laplace&amp;rsquo;s equation&lt;/h3&gt;
-&lt;p&gt;The solution to Partial Differential Equations (PDEs) such as Laplaces equation can be tricky to solve. The solutions can contain an artibrary number of constants. There&amp;rsquo;s not even a general solution.&lt;/p&gt;
-&lt;p&gt;But there are certain properties that all the solution of Laplace&amp;rsquo;s equation will contain.&lt;/p&gt;
+&lt;p&gt;The solution to Partial Differential Equations (PDEs) such as Laplace&amp;rsquo;s equation can be tricky to solve. The solutions can contain an arbitrary number of constants. (There&amp;rsquo;s not a general solution.)&lt;/p&gt;
+&lt;p&gt;But there are certain properties that solution of Laplace&amp;rsquo;s equation will contain that will be useful.&lt;/p&gt;
 &lt;p&gt;The most important property that we will use is the fact that solutions of Laplace&amp;rsquo;s equation are &amp;ldquo;boring&amp;rdquo;. They are actually the most &amp;ldquo;boring&amp;rdquo; they can be. The solution curves are smooth, and any point in the solution is the average of all nearby points.&lt;/p&gt;
 &lt;h3 id=&#34;boundary-values&#34;&gt;Boundary Values&lt;/h3&gt;
 &lt;p&gt;To actually solve for the potential, we also need the boundary values of the space we are interested in. The two boundaries we can use are either:&lt;/p&gt;
@@ -50,12 +50,12 @@
 &lt;p&gt;There&amp;rsquo;s also something called the &amp;ldquo;uniqueness theorem&amp;rdquo; which states that if we can find one solution that fits laplace&amp;rsquo;s equation and the boundary values, we actually found the &lt;em&gt;only&lt;/em&gt; solution to the problem. This is extremely profound. There&amp;rsquo;s a couple of technicalities, but they are minor (such as technically it&amp;rsquo;s the electric field that is unique).&lt;/p&gt;
 &lt;h2 id=&#34;solutions&#34;&gt;Solutions&lt;/h2&gt;
 &lt;h3 id=&#34;method-of-relaxation&#34;&gt;Method of relaxation&lt;/h3&gt;
-&lt;p&gt;This is the computer solution to determining V given the boundary conditions.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Method of relaxation&amp;rdquo; is the numeric approximate solution to determining V given the boundary conditions.&lt;/p&gt;
 &lt;p&gt;In two dimensions this is the equation we are trying to solve:&lt;/p&gt;
 &lt;p&gt;$$
 \frac{\partial^2 V}{\partial x^2} + \frac{\partial^2 V}{\partial y^2} = 0
 $$&lt;/p&gt;
-&lt;p&gt;Well, if we split our experiment into a set of grid points, and by using the official definition of a derivative (the limit) twice, we can get an estimation for the second derivative:&lt;/p&gt;
+&lt;p&gt;If we split our experiment into a set of grid points, and then use the official definition of a derivative (the limit definition) twice, we can get an estimation for the second derivative:&lt;/p&gt;
 &lt;p&gt;$$
 \frac{\partial^2 V}{\partial x^2} = \frac{V(x+a, y) + V(x-a, y) - 2 V(x, y)}{a^2}
 $$&lt;/p&gt;
@@ -70,12 +70,12 @@ $$&lt;/p&gt;
 &lt;p&gt;The code can be found here:&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/c0nrad/relaxation&#34;&gt;https://github.com/c0nrad/relaxation&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;separation-of-variables&#34;&gt;Separation of Variables&lt;/h3&gt;
-&lt;p&gt;We won&amp;rsquo;t be analyzing these here, but using separation of variables we can get an analytical solution. In separation of variables we assume the solution is actually a combination of two/three functions multiplied together that each only depend on one variable each. It&amp;rsquo;s a big simplification, but it actually works and a general solution can eventually be plucked out. Separation of variables is used in a lot of different fields of physics.&lt;/p&gt;
-&lt;p&gt;In spherical coordinates we get out some harmonic functions which is pretty neat!&lt;/p&gt;
+&lt;p&gt;We won&amp;rsquo;t be analyzing these here, but using separation of variables we can get an analytical solution. In separation of variables we assume the solution is actually a combination of two/three functions multiplied together that each only depend on one variable. It&amp;rsquo;s a big simplification, but it actually works and a solution can be plucked out. Separation of variables is used in a lot of different fields of physics. (For example, separation of variables was used for the &lt;a href=&#34;http://blog.c0nrad.io/hydrogenjs/&#34;&gt;hydrogen model&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Using separation of variables in spherical coordinates for solving laplace&amp;rsquo;s equation we get out some harmonic functions which is pretty neat!&lt;/p&gt;
 &lt;p&gt;You can also solve them using Green&amp;rsquo;s functions (which are integrals on dirac delta functions). I&amp;rsquo;ll talk about these at some point in the future.&lt;/p&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;It was a fun afternoon project. But I don&amp;rsquo;t think I&amp;rsquo;ll be extending it at all.&lt;/p&gt;
-&lt;p&gt;Up next is simulating different types of Ion Traps using &lt;a href=&#34;https://emmy-viz.github.io/emmy/&#34;&gt;emmy&lt;/a&gt;.&lt;/p&gt;</description>
+&lt;p&gt;Up next I think I&amp;rsquo;ll try to simulate different types of Ion Traps using &lt;a href=&#34;https://emmy-viz.github.io/emmy/&#34;&gt;emmy&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
