@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
@@ -17,7 +14,7 @@
   
 
   
-  <title>programming</title>
+  <title>Mulbrute</title>
 
   
   
@@ -36,7 +33,7 @@
   <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
 
   
-  <link href="/categories/programming/index.xml" rel="alternate" type="application/rss+xml" title="c0nrad&#39;s c0rner" />
+  
 
   <meta name="description" content="" />
   <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
@@ -51,6 +48,16 @@
   
   
     
+
+  
+    <meta name="twitter:card" content="summary"/>
+  
+  
+  <meta name="twitter:title" content="Mulbrute"/>
+  <meta name="twitter:description" content="QHack 2021 submission project, a tool for brute forcing quantum multiplication circuits."/>
+  
+  <meta name="twitter:domain" content="blog.c0nrad.io"/>
+  <meta name="twitter:creator" content="@CryptoGangsta"/>
 
   
 </head>
@@ -119,122 +126,80 @@
 <div id="main">
   <div id="content">
     <div>
-      <article role="article">
-        <header>
-          <h1 class="entry-title">
-            Category: programming
-          </h1>
-        </header>
-        <div id="blog-archives" class="category">
-          
-          <h2>
-            2020
-          </h2>
-          <article>
-            <h1>
-              <a href="https://blog.c0nrad.io/posts/mat-inv/" title="Matrix Inversion">Matrix Inversion</a>
-            </h1>
-            <time>
-              <span class="month">Aug</span>
-              <span class="day">7</span>
-            </time>
-            <footer>
-              <span class="categories"> 
-                
-                
-                posted in:
-                 <a class="category" href="https://blog.c0nrad.io/categories/programming">programming</a> <a class="category" href="https://blog.c0nrad.io/categories/numerical">numerical</a> <a class="category" href="https://blog.c0nrad.io/categories/matrix">matrix</a>
-              </br>
-                
+      <article class="hentry" role="article">
 
-                
-                
-              </span>
-            </footer>
-          </article>
-          
-          <h2>
-            2020
-          </h2>
-          <article>
-            <h1>
-              <a href="https://blog.c0nrad.io/posts/vector-3-dipole/" title="Vector Calculus Part 3: Electric Dipole">Vector Calculus Part 3: Electric Dipole</a>
-            </h1>
-            <time>
-              <span class="month">Jul</span>
-              <span class="day">21</span>
-            </time>
-            <footer>
-              <span class="categories"> 
-                
-                
-                posted in:
-                 <a class="category" href="https://blog.c0nrad.io/categories/programming">programming</a> <a class="category" href="https://blog.c0nrad.io/categories/numerical">numerical</a> <a class="category" href="https://blog.c0nrad.io/categories/vector">vector</a> <a class="category" href="https://blog.c0nrad.io/categories/em">EM</a> <a class="category" href="https://blog.c0nrad.io/categories/physics">physics</a>
-              </br>
-                
+        
+        
 
-                
-                
-              </span>
-            </footer>
-          </article>
-          
-          <h2>
-            2020
-          </h2>
-          <article>
-            <h1>
-              <a href="https://blog.c0nrad.io/posts/vector-2-viz/" title="Vector Calculus Part 2: Visualization">Vector Calculus Part 2: Visualization</a>
-            </h1>
-            <time>
-              <span class="month">Jul</span>
-              <span class="day">20</span>
-            </time>
-            <footer>
-              <span class="categories"> 
-                
-                
-                posted in:
-                 <a class="category" href="https://blog.c0nrad.io/categories/programming">programming</a> <a class="category" href="https://blog.c0nrad.io/categories/numerical">numerical</a> <a class="category" href="https://blog.c0nrad.io/categories/vector">vector</a> <a class="category" href="https://blog.c0nrad.io/categories/em">EM</a> <a class="category" href="https://blog.c0nrad.io/categories/physics">physics</a>
-              </br>
-                
+<header>
+  <p class="meta">Feb 28, 2021
+     - 2 minute read 
+    
 
-                
-                
-              </span>
-            </footer>
-          </article>
-          
-          <h2>
-            2020
-          </h2>
-          <article>
-            <h1>
-              <a href="https://blog.c0nrad.io/posts/vector-calculus/" title="Vector Calculus">Vector Calculus</a>
-            </h1>
-            <time>
-              <span class="month">Jul</span>
-              <span class="day">19</span>
-            </time>
-            <footer>
-              <span class="categories"> 
-                
-                
-                posted in:
-                 <a class="category" href="https://blog.c0nrad.io/categories/programming">programming</a> <a class="category" href="https://blog.c0nrad.io/categories/numerical">numerical</a> <a class="category" href="https://blog.c0nrad.io/categories/vector">vector</a> <a class="category" href="https://blog.c0nrad.io/categories/em">EM</a>
-              </br>
-                
+    
+    
+      - <a class="label" href="https://blog.c0nrad.io/categories/quantum-computation/">quantum computation </a>
+    
+  </p>
+  <h1 class="entry-title">
+     Mulbrute 
+  </h1>
+</header>
 
-                
-                
-              </span>
-            </footer>
-          </article>
+
+        <div class="entry-content">
           
+          
+          
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#mulbrute">mulbrute</a></li>
+  </ul>
+</nav>
+          
+          <p>QHack 2021 submission project, a tool for brute forcing quantum multiplication circuits.</p>
+<h2 id="overview">Overview</h2>
+<p>Last week I participated in the QHack 2021 hackathon and challenge board.</p>
+<p>The challenge board was very cool. It was a set of 12 quantum computing challenges involving different machine learning quantum algorithms. The website was down for a bit at the start, but once they worked out the kinks it was a very well done set of challenges.</p>
+<p>For the first time I can say I feel like I understand the basics of constructing quantum ansatz, doing different variational algorithms, training hamiltonians and more. It was a great learning experience and I look forward to participating again next year. (Team Sloppy Joe Pirates solved all the challenges, coming in 47th place.)</p>
+<p>The event also included an open hackathon. For the hackathon I worked on an old problem that still frustrates me&hellip;</p>
+<p>It&rsquo;s hard to multiply on quantum circuits!</p>
+<p>Instead of being clever, I decided to see if I can just brute force circuits that do the multiplication for me.</p>
+<h2 id="mulbrute">mulbrute</h2>
+<p>For the hackathon I built mulbrute, a brute force tool with an AFL inspired interface:</p>
+<p><img src="/mulbrute_1bit.gif" alt="mulbrute"></p>
+<p>The full description and code can be found on the repo:
+<a href="https://github.com/c0nrad/mulbrute">https://github.com/c0nrad/mulbrute</a></p>
+<p>It didn&rsquo;t place well in the hackathon, but I still plan on working on it over the next few days. (Currently waiting to hear back about a job! So hoping this will keep me distracted.) But since i&rsquo;m able to score the different circuits I think I can actually switch to a more intelligent depth first search and then use some tricks to simplify the test cases.</p>
+<p>The tool could maybe even be made more general. Sometimes I need a circuit that puts qubits into a very specific state, why not have a tool that can construct arbitrary circuits based off truth tables?</p>
+<p>We&rsquo;ll see, hopefully something happens and I&rsquo;ll report back.</p>
         </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
+    
+    <time>Feb 28, 2021</time>
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/plasma-leak/" title="Plasma Leak">Plasma Leak</a>
+    
+
+    
+  </p>
+  
+</footer>
+
       </article>
     </div>
-
     
 
 <aside class="sidebar thirds">
@@ -358,6 +323,10 @@ I write about physics, life, and learning.
 </aside>
   </div>
 </div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
 
     <footer role="contentinfo">
       <p>Copyright &copy; 2021 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
