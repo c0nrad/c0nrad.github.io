@@ -6,10 +6,19 @@
     <description>Recent content in quantum computation on c0nrad&#39;s c0rner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Jul 2021 21:24:02 -0700</lastBuildDate>
+    <lastBuildDate>Thu, 22 Jul 2021 22:18:37 -0700</lastBuildDate>
     
 	<atom:link href="https://blog.c0nrad.io/categories/quantum-computation/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Randomized Benchmarking of a noisy quantum simulator Pt. 1</title>
+      <link>https://blog.c0nrad.io/posts/randomized-benchmarking/</link>
+      <pubDate>Thu, 22 Jul 2021 22:18:37 -0700</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/randomized-benchmarking/</guid>
+      <description>&lt;p&gt;This post covers the simplest of error models and some simulated randomized benchmarking results.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Density Operators</title>
