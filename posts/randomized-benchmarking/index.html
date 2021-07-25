@@ -176,15 +176,15 @@
 <h2 id="background">Background</h2>
 <h3 id="depolarizing-noise">Depolarizing Noise</h3>
 <p>For the first error model, it was recommended that I use Depolarizing Noise (thanks Daniel and Miro!). I copied the operators from <a href="https://arxiv.org/abs/2101.02109">this paper</a>. (I believe these are called Kraus operators:)</p>
-<p>$$ K_{D_0} = \sqrt{1-p_1} I $$
-$$ K_{D_1} = \sqrt{ \frac{p_1}{3}} X $$
-$$ K_{D_2} = \sqrt{ \frac{p_1}{3}} Y $$
-$$ K_{D_3} = \sqrt{ \frac{p_1}{3}} Z $$</p>
+<p>$$ K*{D_0} = \sqrt{1-p_1} I $$
+$$ K*{D*1} = \sqrt{ \frac{p_1}{3}} X $$
+$$ K*{D*2} = \sqrt{ \frac{p_1}{3}} Y $$
+$$ K*{D_3} = \sqrt{ \frac{p_1}{3}} Z $$</p>
 <p>And then using the operator sum representation:</p>
-<p>$$ \rho^{\prime} = \sum^3_{i=0} K_{D_i} \rho K^{\dagger}_{D_i} $$</p>
+<p>$$ \rho^{\prime} = \sum^3*{i=0} K*{D*i} \rho K^{\dagger}*{D_i} $$</p>
 <p>Which is pretty easy to represent in code:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DepolarizingNoise</span> {
-<span style="color:#75715e">//...
+  <span style="color:#75715e">//...
 </span><span style="color:#75715e"></span>  <span style="color:#a6e22e">evolve</span>(<span style="color:#a6e22e">density</span>: <span style="color:#66d9ef">DensityMatrix</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">DensityMatrix</span> {
     <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">out</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">DensityMatrix</span>.<span style="color:#a6e22e">fromZero</span>(<span style="color:#ae81ff">1</span>);
 
@@ -199,7 +199,8 @@ $$ K_{D_3} = \sqrt{ \frac{p_1}{3}} Z $$</p>
     <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>;
   }
 }
-</code></pre></div><h3 id="randomized-benchmarking">Randomized Benchmarking</h3>
+</code></pre></div><p>This noise essentially &ldquo;shrinks&rdquo; the bloch sphere. It represents &ldquo;non-ideal&rdquo; gates and is applied after each gate.</p>
+<h3 id="randomized-benchmarking">Randomized Benchmarking</h3>
 <p>Randomized Benchmarking is a simple way to calculate the average error of your clifford gates.</p>
 <p>Basically you just create a bunch of random circuits of depth/2, and then append the inverse of all those gates. The inverse is important so we know that all the circuits should results in zero. Repeat this for increasing depths, and you can see how fast your circuits fall off.</p>
 <p>For my particular simulation I used 1000 shots, with depths from [0, 10, 20, 30, &hellip; 250].</p>
@@ -248,7 +249,7 @@ $$ K_{D_3} = \sqrt{ \frac{p_1}{3}} Z $$</p>
             <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">gates</span>[Math.<span style="color:#a6e22e">floor</span>(Math.<span style="color:#a6e22e">random</span>() <span style="color:#f92672">*</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">gates</span>.<span style="color:#a6e22e">length</span>)];
 
           <span style="color:#a6e22e">gates</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">random_gate</span>);
-          <span style="color:#a6e22e">uncompute_gates</span>.<span style="color:#a6e22e">unshift</span>(<span style="color:#a6e22e">random_gate</span>);
+          <span style="color:#a6e22e">uncompute_gates</span>.<span style="color:#a6e22e">unshift</span>(<span style="color:#a6e22e">random_gate</span>.<span style="color:#a6e22e">inverse</span>());
         }
         <span style="color:#a6e22e">c1</span>.<span style="color:#a6e22e">moments</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gates</span>.<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">uncompute_gates</span>);
 
@@ -281,6 +282,8 @@ $$ K_{D_3} = \sqrt{ \frac{p_1}{3}} Z $$</p>
         <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/density-operators/" title="Density Operators">Density Operators</a>
     
 
+    
+      <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/prime-walker/" title="Prime Walker">Prime Walker</a>
     
   </p>
   

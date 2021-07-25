@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>Prime Walker</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+    <link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+
+  
+  
+
+  <meta name="description" content="Playing with prime numbers" />
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
+  <meta name="author" content="Stuart Larsen">
+
+  
+  <meta name="generator" content="Hugo 0.70.0" />
+
+  
+  
+
+  
+  
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+  
+  
+  <meta name="twitter:title" content="Prime Walker"/>
+  <meta name="twitter:description" content="Playing with prime numbers"/>
+  
+  <meta name="twitter:domain" content="blog.c0nrad.io"/>
+  <meta name="twitter:creator" content="@CryptoGangsta"/>
+
+  
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="https://blog.c0nrad.io/">c0nrad&#39;s c0rner</a></h1>
+    <h2>Learning and learning</h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+        <option value="https://blog.c0nrad.io/">» Home</option>
+      
+        <option value="https://c0nrad.io">» Website</option>
+      
+        <option value="https://github.com/c0nrad/">» Github</option>
+      
+        <option value="https://twitter.com/xc0nradx">» Twitter</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="https://blog.c0nrad.io/" title="Home">Home</a></li>
+    
+  
+    
+      <li><a href="https://c0nrad.io" title="Website"  rel="noopener noreferrer">Website</a></li>
+    
+  
+    
+      <li><a href="https://github.com/c0nrad/" title="Github"  rel="noopener noreferrer">Github</a></li>
+    
+  
+    
+      <li><a href="https://twitter.com/xc0nradx" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+</ul>
+
+<ul class="subscription">
+  
+    
+        <a href="https://blog.c0nrad.io/index.xml" target="_blank" type="application/rss+xml" title="RSS" rel="noopener noreferrer"><i class="fa fa-rss-square fa-lg"></i></a>
+    
+  
+</ul>
+
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+  <p class="meta">Jul 24, 2021
+     - 2 minute read 
+    
+
+    
+    
+      - <a class="label" href="https://blog.c0nrad.io/categories/prime/">prime </a>
+    
+  </p>
+  <h1 class="entry-title">
+     Prime Walker 
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#background">Background</a>
+      <ul>
+        <li><a href="#walking-the-linear-line">Walking the linear line</a></li>
+        <li><a href="#other-silly-idea">Other silly idea</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+          
+          <p>Another attempt at a factoring algorithm.</p>
+<h2 id="background">Background</h2>
+<p>I spent a couple of hours today playing with prime numbers. It&rsquo;s such a simple and fun problem.</p>
+<h3 id="walking-the-linear-line">Walking the linear line</h3>
+<p>So I was wondering, would a walking algorithm work at all? Similar to the GCD algorithms, what if we updated p and q so they walked closed to N? If p_guess * q_guess is too large, shrink p_guess, and if it&rsquo;s too small, increase q_guess. Something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">small_step</span>(<span style="color:#a6e22e">N</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">a</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">b</span> <span style="color:#66d9ef">int</span>) (<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>) {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">a</span><span style="color:#f92672">*</span><span style="color:#a6e22e">b</span> &lt; <span style="color:#a6e22e">N</span> {
+		<span style="color:#a6e22e">step</span> <span style="color:#f92672">:=</span> int(<span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Ceil</span>(float64(((<span style="color:#a6e22e">N</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">a</span><span style="color:#f92672">*</span><span style="color:#a6e22e">b</span>) <span style="color:#f92672">/</span> <span style="color:#a6e22e">b</span>))))
+
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">step</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+			<span style="color:#a6e22e">step</span> = <span style="color:#ae81ff">1</span>
+		}
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">step</span>, <span style="color:#a6e22e">b</span>
+	} <span style="color:#66d9ef">else</span> {
+		<span style="color:#a6e22e">step</span> <span style="color:#f92672">:=</span> int(<span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Ceil</span>(float64(float64(<span style="color:#a6e22e">a</span><span style="color:#f92672">*</span><span style="color:#a6e22e">b</span><span style="color:#f92672">-</span><span style="color:#a6e22e">N</span>) <span style="color:#f92672">/</span> float64(<span style="color:#a6e22e">a</span>))))
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">step</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+			<span style="color:#a6e22e">step</span> = <span style="color:#ae81ff">1</span>
+		}
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">step</span>
+	}
+}
+</code></pre></div><p>It&rsquo;s kind of similar to the different root finding methods, where you jump along the line and get closer and closer.</p>
+<p>Would it be at all efficient? I was thinking/hoping that I could make big steps and skip lots of checks.</p>
+<p>And it works decently well, but nothing ground breaking. The diagrams are kind of neat though:</p>
+<p><img src="/119.png" alt="119"></p>
+<p><img src="/361.png" alt="361"></p>
+<p>It starts at (2, N/2), and walks down along the linear line. I converted it to golang&rsquo;s big.Int and tried some larger prime numbers, and there&rsquo;s no way it&rsquo;ll factor anything useful.</p>
+<p>I&rsquo;m wondering if maybe I can do some random modulus jumping and play off similar relations that shor&rsquo;s algorithms play with:</p>
+<p>$$ a^x = 1 mod N, gcd(a^{p/2}-1, N) $$</p>
+<p>But very dubious.</p>
+<h3 id="other-silly-idea">Other silly idea</h3>
+<p>I was reading some book on Quantum Information theory, and they were again deriving the probability/information equation (rareness of event gives <code>log</code> information).</p>
+<p>And then I was thinking maybe I could convert a factoring algorithm from a multiplication problem to a log addition problem.</p>
+<p>$$ \log(p*q) = \log(p) + \log(q) $$</p>
+<p>But I don&rsquo;t think this helps at all. Really what makes primes an interesting problem is that they are integers, and we depart from that with logrithms. Maybe if I did a log change of base, and summed over all bases and could find something like orthagonality constraint and cancel out the non-integer answers. But I&rsquo;ve never heard of anything like that.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Not much, but it was a fun couple of hours.</p>
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
+    
+    <time>Jul 24, 2021</time>
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/randomized-benchmarking/" title="Randomized Benchmarking of a noisy quantum simulator Pt. 1">Randomized Benchmarking of a noisy quantum simulator Pt. 1</a>
+    
+
+    
+  </p>
+  
+</footer>
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+    <h1>Who am I?</h1>
+    
+
+    <p>
+      
+      <img src="/me.png" style="width: 100%"> 
+I am Stuart. In a previous life I was a programmer, electrical engineer, and then a security engineer. Now I run <a href="https://csper.io">Csper.io</a> and spend my free time tinkering with physics/electronics.
+</br></br>
+My goal is to understand why the universe exists. I have a lot of learning to do.
+<br/><br/>
+I write about physics, life, and learning.
+</br>
+      
+    </p>
+  </section>
+
+  
+
+  
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      <a target="_blank" rel="noopener noreferrer" href="https://github.com/c0nrad/" title="https://github.com/c0nrad/"><i
+          class="fa fa-github fa-3x"></i></a>
+      
+      
+      <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/xc0nradx/" title="https://twitter.com/xc0nradx/"><i
+          class="fa fa-twitter fa-3x"></i></a>
+      
+      
+      
+      
+      <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/c0nrad" title="https://www.linkedin.com/in/c0nrad"><i
+          class="fa fa-linkedin fa-3x"></i></a>
+      
+      
+      
+      
+      
+      
+
+      
+      
+    </li>
+  </ul>
+
+
+  
+
+  
+  
+  <section class="odd">
+    
+    <h1>Collections</h1>
+    
+    
+    <li>
+      <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+    </li>
+    
+    <li>
+      <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+    </li>
+    
+    <li>
+      <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+    </li>
+    
+    <li>
+      <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+    </li>
+    
+  </section>
+  
+  
+
+  
+  
+  
+
+
+  
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup {
+        background: #fff;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+        border: 1px solid;
+        margin-top: 20px;
+    }
+
+
+
+
+     
+</style>
+<div id="mc_embed_signup">
+    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
+        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+        novalidate>
+        <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Subscribe for new posts:</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                    class="button"></div>
+        </div>
+    </form>
+</div>
+
+
+
+</aside>
+  </div>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+      <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+          var u="//c0nrad.matomo.cloud/";
+          _paq.push(['setTrackerUrl', u+'piwik.php']);
+          _paq.push(['setSiteId',  1 ]);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+      </script>
+    
+    
+
+    
+  </body>
+</html>
+
