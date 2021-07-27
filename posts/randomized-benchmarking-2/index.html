@@ -14,7 +14,7 @@
   
 
   
-  <title>Prime Walker</title>
+  <title>Randomized Benchmarking of a noisy quantum simulator Pt. 2</title>
 
   
   
@@ -35,7 +35,7 @@
   
   
 
-  <meta name="description" content="Playing with prime numbers" />
+  <meta name="description" content="Finishing the RB simulator" />
   <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
   <meta name="author" content="Stuart Larsen">
 
@@ -53,8 +53,8 @@
     <meta name="twitter:card" content="summary"/>
   
   
-  <meta name="twitter:title" content="Prime Walker"/>
-  <meta name="twitter:description" content="Playing with prime numbers"/>
+  <meta name="twitter:title" content="Randomized Benchmarking of a noisy quantum simulator Pt. 2"/>
+  <meta name="twitter:description" content="Finishing the RB simulator"/>
   
   <meta name="twitter:domain" content="blog.c0nrad.io"/>
   <meta name="twitter:creator" content="@CryptoGangsta"/>
@@ -132,17 +132,17 @@
         
 
 <header>
-  <p class="meta">Jul 24, 2021
+  <p class="meta">Jul 27, 2021
      - 2 minute read 
     
 
     
     
-      - <a class="label" href="https://blog.c0nrad.io/categories/prime/">prime </a>
+      - <a class="label" href="https://blog.c0nrad.io/categories/quantum-computation/">quantum computation </a>
     
   </p>
   <h1 class="entry-title">
-     Prime Walker 
+     Randomized Benchmarking of a noisy quantum simulator Pt. 2 
   </h1>
 </header>
 
@@ -153,47 +153,40 @@
           
             <nav id="TableOfContents">
   <ul>
-    <li><a href="#background">Background</a>
-      <ul>
-        <li><a href="#walking-the-linear-line">Walking the linear line</a></li>
-        <li><a href="#other-silly-idea">Other silly idea</a></li>
-        <li><a href="#conclusion">Conclusion</a></li>
-      </ul>
-    </li>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#what-went-well">What went well</a></li>
+    <li><a href="#what-didnt-go-well">What didn&rsquo;t go well</a></li>
+    <li><a href="#future">Future</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
           
-          <p>Another attempt at a factoring algorithm.</p>
-<h2 id="background">Background</h2>
-<p>I spent another couple of hours today attempting to factor numbers. It&rsquo;s such a simple and fun problem.</p>
-<h3 id="walking-the-linear-line">Walking the linear line</h3>
-<p>Todays idea was to create a walking algorithm. I&rsquo;m sure it&rsquo;s been done before.</p>
-<p>But the idea was that maybe I could factor \( N = p*q \) by starting with \( p=2 \) and \( q=N/2 \) and increase p as much as possible (such that the product is less than N), and then decrease q as much as possible (so that it&rsquo;s close to N), and then continue walking q and p closer and closer.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">small_step</span>(<span style="color:#a6e22e">N</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">a</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">b</span> <span style="color:#66d9ef">int</span>) (<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>) {
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">a</span><span style="color:#f92672">*</span><span style="color:#a6e22e">b</span> &lt; <span style="color:#a6e22e">N</span> {
-		<span style="color:#a6e22e">step</span> <span style="color:#f92672">:=</span> int(<span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Ceil</span>(float64(((<span style="color:#a6e22e">N</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">a</span><span style="color:#f92672">*</span><span style="color:#a6e22e">b</span>) <span style="color:#f92672">/</span> <span style="color:#a6e22e">b</span>))))
-		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">step</span>, <span style="color:#a6e22e">b</span>
-	} <span style="color:#66d9ef">else</span> {
-		<span style="color:#a6e22e">step</span> <span style="color:#f92672">:=</span> int(<span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Ceil</span>(float64(float64(<span style="color:#a6e22e">a</span><span style="color:#f92672">*</span><span style="color:#a6e22e">b</span><span style="color:#f92672">-</span><span style="color:#a6e22e">N</span>) <span style="color:#f92672">/</span> float64(<span style="color:#a6e22e">a</span>))))
-		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">step</span>
-	}
-}
-</code></pre></div><p>It&rsquo;s kind of similar to the different root finding methods, where you jump along the line and get closer and closer.</p>
-<p>Would it be at all efficient? I was thinking/hoping that I could make big steps and skip lots of checks.</p>
-<p>And it works decently well, but nothing ground breaking. The diagrams are kind of neat though:</p>
-<p><img src="/119.png" alt="119"></p>
-<p><img src="/361.png" alt="361"></p>
-<p>It starts at (2, N/2), and walks down along the linear line. I converted it to golang&rsquo;s big.Int and tried some larger prime numbers, and there&rsquo;s no way it&rsquo;ll factor anything useful.</p>
-<p>In the future I&rsquo;m wondering if maybe I can do some random modulus jumping and play off similar relations that shor&rsquo;s algorithms play with:</p>
-<p>$$ a^x = 1 mod N, gcd(a^{p/2}-1, N) $$</p>
-<p>But very dubious.</p>
-<h3 id="other-silly-idea">Other silly idea</h3>
-<p>I was reading some book on Quantum Information theory, and they were again deriving the probability/information equation (rareness of event gives <code>log</code> information).</p>
-<p>And then I was thinking maybe I could convert a factoring algorithm from a multiplication problem to a log addition problem.</p>
-<p>$$ \log(p*q) = \log(p) + \log(q) $$</p>
-<p>But I don&rsquo;t think this helps at all. Really what makes primes an interesting problem is that they are integers, and we depart from that with logrithms. Maybe if I did a log change of base, and summed over all bases and could find something like orthagonality constraint and cancel out the non-integer answers. But I&rsquo;ve never heard of anything like that.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>Not much, but it was a fun couple of hours.</p>
+          <p>The randomized benchmarking simulator is released!</p>
+<h2 id="overview">Overview</h2>
+<p>You can check it out here:</p>
+<p><a href="https://blog.c0nrad.io/qc.js/rb/">https://blog.c0nrad.io/qc.js/rb/</a></p>
+<h2 id="what-went-well">What went well</h2>
+<p>I don&rsquo;t think he&rsquo;ll read this, but thank you Daniel for your help fixing the noise model! I was following some paper, but their noise model wasn&rsquo;t preserving trace.</p>
+<ul>
+<li>From a code test-ability standpoint, I like that representing the state as a density operator means I don&rsquo;t need to have a vector class. When using the state vector, I found myself implementing a lot of similar functions for both vector and matrix (or I could subclass, but I never really liked that either)</li>
+<li>ng-katex is a very handy package for putting latex in html pages</li>
+<li>the progress bar took a little bit of effort, but it&rsquo;s neat. (I added a little bit of tech debt, the callback method is&hellip; questionable. I needed to use setTimeout so that the angular thread would update the UI, but getting rxjs to work correctly was being annoying, so I just have a progress callback and that checks if it&rsquo;s the last result&hellip;)</li>
+</ul>
+<h2 id="what-didnt-go-well">What didn&rsquo;t go well</h2>
+<ul>
+<li>The trace on the density matrix wasn&rsquo;t adding up for some gates, and I eventually found out I was using the transpose instead of dagger operator on some state evolution function.</li>
+<li>The fitting method is really bad. I wonder if there&rsquo;s a way to pin the fitting function to always use one point as the origin.</li>
+</ul>
+<h2 id="future">Future</h2>
+<p>I probably won&rsquo;t, but if I do come back to this model, I should do the following:</p>
+<ul>
+<li>Fix the plotting so that it plots &ldquo;survivability&rdquo; (although I&rsquo;m not sure how to calculate that. A random circuit is still correct half the time.)</li>
+<li>Fix the fitting function</li>
+<li>&ldquo;Fidelity&rdquo; of the circuit</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Overall a fun project and I learned a lot.</p>
+<p>I think next will be creating an online circuit editor with noise that will allow &ldquo;classical&rdquo; processing to be interspersed so that I can test out some error correction schemes.</p>
         </div>
         
 
@@ -201,7 +194,7 @@
   <p class="meta">
     <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
     
-    <time>Jul 24, 2021</time>
+    <time>Jul 27, 2021</time>
     
     </span>
   </p>
@@ -210,11 +203,9 @@
 
   <p class="meta">
     
-        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/randomized-benchmarking/" title="Randomized Benchmarking of a noisy quantum simulator Pt. 1">Randomized Benchmarking of a noisy quantum simulator Pt. 1</a>
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/prime-walker/" title="Prime Walker">Prime Walker</a>
     
 
-    
-      <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/randomized-benchmarking-2/" title="Randomized Benchmarking of a noisy quantum simulator Pt. 2">Randomized Benchmarking of a noisy quantum simulator Pt. 2</a>
     
   </p>
   

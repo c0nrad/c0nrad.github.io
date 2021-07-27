@@ -202,17 +202,17 @@
 <h3 id="construction">Construction</h3>
 <p>Density operators (also called density matrixes) are composes of a set of pure states (pure states being the standard ket structure).</p>
 <p>For each ket we assign a probability and then project the state and add them:</p>
-<p>$$ \rho = \sum_i  p_i | \psi_i \rangle \langle \psi_i |  $$</p>
+<p>$$ \rho = \sum_i p_i | \psi_i \rangle \langle \psi_i | $$</p>
 <p>For example, the density operator corresponding to \( |0\rangle \) is just:</p>
-<p>$$ \rho = \sum_i  p_i | \psi_i \rangle \langle \psi_i | = \sum_0 1 [1, 0]^T [1, 0] = \begin{bmatrix} 1&amp; 0 \\ 0 &amp; 0 \ \end{bmatrix} $$</p>
+<p>$$ \rho = \sum_i p_i | \psi_i \rangle \langle \psi_i | = \sum_0 1 [1, 0]^T [1, 0] = \begin{bmatrix} 1&amp; 0 \\ 0 &amp; 0 \ \end{bmatrix} $$</p>
 <h3 id="evolution">Evolution</h3>
 <p>To perform a unitary evolution of a density matrix we simply apply:</p>
 <p>$$ \rho = U \rho U^{\dagger} $$</p>
 <p>So to apply a X (NOT) gate to our state, we simply apply:</p>
-<p>$$ \rho = U \rho U^{\dagger} = \begin{bmatrix} 0&amp; 1 \\ 1 &amp; 0 \ \end{bmatrix} \begin{bmatrix} 1&amp; 0 \\ 0 &amp; 0 \ \end{bmatrix} \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0 \ \end{bmatrix}  = \begin{bmatrix}  0&amp; 0 \\ 0 &amp; 1 \ \end{bmatrix} $$</p>
+<p>$$ \rho = U \rho U^{\dagger} = \begin{bmatrix} 0&amp; 1 \\ 1 &amp; 0 \ \end{bmatrix} \begin{bmatrix} 1&amp; 0 \\ 0 &amp; 0 \ \end{bmatrix} \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0 \ \end{bmatrix} = \begin{bmatrix} 0&amp; 0 \\ 0 &amp; 1 \ \end{bmatrix} $$</p>
 <h3 id="measurement">Measurement</h3>
 <p>Now we can project a measurement. So the probability of getting \( |1\rangle \) is:</p>
-<p>$$ p( |1\rangle ) = tr(M^{\dagger}_m M_m \rho) = tr( \begin{bmatrix} 0&amp; 0 \\ 0 &amp; 1 \ \end{bmatrix} \begin{bmatrix} 0&amp; 0 \\ 0 &amp; 1 \ \end{bmatrix}  \begin{bmatrix} 0&amp;0 \\ 0 &amp; 1 \ \end{bmatrix} ) = 1$$</p>
+<p>$$ p( |1\rangle ) = tr(M^{\dagger}_m M_m \rho) = tr( \begin{bmatrix} 0&amp; 0 \\ 0 &amp; 1 \ \end{bmatrix} \begin{bmatrix} 0&amp; 0 \\ 0 &amp; 1 \ \end{bmatrix} \begin{bmatrix} 0&amp;0 \\ 0 &amp; 1 \ \end{bmatrix} ) = 1$$</p>
 <p>(Where \( tr \) is trace).</p>
 <p>Wow. Applying a NOT gate to the \( |0\rangle \) gets us \( |1\rangle \). Cutting edge stuff.</p>
 <h2 id="code">Code</h2>
