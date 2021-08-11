@@ -14,7 +14,7 @@
   
 
   
-  <title>Vector Calculus Part 3: Electric Dipole</title>
+  <title>Quantum Circuit Editor Pt. 1</title>
 
   
   
@@ -35,7 +35,7 @@
   
   
 
-  <meta name="description" content="" />
+  <meta name="description" content="Quantum Circuit Editor" />
   <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
   <meta name="author" content="Stuart Larsen">
 
@@ -53,8 +53,8 @@
     <meta name="twitter:card" content="summary"/>
   
   
-  <meta name="twitter:title" content="Vector Calculus Part 3: Electric Dipole"/>
-  <meta name="twitter:description" content="More fun with vector calc/electromagnetism."/>
+  <meta name="twitter:title" content="Quantum Circuit Editor Pt. 1"/>
+  <meta name="twitter:description" content="Quantum Circuit Editor"/>
   
   <meta name="twitter:domain" content="blog.c0nrad.io"/>
   <meta name="twitter:creator" content="@CryptoGangsta"/>
@@ -132,17 +132,17 @@
         
 
 <header>
-  <p class="meta">Jul 21, 2020
-     - 1 minute read 
+  <p class="meta">Aug 10, 2021
+     - 3 minute read 
     
 
     
     
-      - <a class="label" href="https://blog.c0nrad.io/categories/programming/">programming </a><a class="label" href="https://blog.c0nrad.io/categories/numerical/">numerical </a><a class="label" href="https://blog.c0nrad.io/categories/vector/">vector </a><a class="label" href="https://blog.c0nrad.io/categories/em/">EM </a><a class="label" href="https://blog.c0nrad.io/categories/physics/">physics </a>
+      - <a class="label" href="https://blog.c0nrad.io/categories/quantum-computation/">quantum computation </a>
     
   </p>
   <h1 class="entry-title">
-     Vector Calculus Part 3: Electric Dipole 
+     Quantum Circuit Editor Pt. 1 
   </h1>
 </header>
 
@@ -153,33 +153,59 @@
           
             <nav id="TableOfContents">
   <ul>
-    <li><a href="#electric-dipole">Electric Dipole</a></li>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#why-care">Why care?</a></li>
+    <li><a href="#what-went-well">What went well?</a></li>
+    <li><a href="#what-didnt-go-well">What didn&rsquo;t go well?</a></li>
+    <li><a href="#future">Future</a></li>
   </ul>
 </nav>
           
-          <p>More fun with vector calc/electromagnetism.</p>
-<h2 id="electric-dipole">Electric Dipole</h2>
-<div style="width: 100%; text-align: center">
-<canvas width="700" height="600" id="canvas_dipole"></canvas>
-</div>
-<p>So in the above diagram there&rsquo;s a positive and negative charge, and the little floaty red dots are &ldquo;test charges&rdquo;. (You may need to zoom in with mouse scroll)</p>
-<p>I&rsquo;m trying to figure out the best way to visualize electric fields. I think this is better than the <a href="https://blog.c0nrad.io/posts/vector-2-viz/#vector-field">previous attempt</a>, but still not great.</p>
-<p>I worry that it will give the impression that there are things moving in the electric field.</p>
-<p>Some other ideas:</p>
+          <p>Initial version of a quantum circuit editor.</p>
+<h2 id="overview">Overview</h2>
+<p>Here&rsquo;s the result so far:</p>
+<p><img src="/circuit.gif" alt="QCE Classical"></p>
+<p>The key detail is the two \( f(x) \) blocks. This circuit performs classical computing on the measured qubits mid-circuit to allow for additional insertion of mid-circuit gates.</p>
+<h2 id="why-care">Why care?</h2>
+<p>Quantum Error Correction! I&rsquo;ll go more into detail later, but essentially to do QEC, we need a way to make mid circuit measurements and update the circuit for errors.</p>
+<p>Why care about Quantum Error Correction? Quantum computers are super sensitive to noise (<a href="/posts/density-operators/">see the density operator post</a> for more info. We need Quantum Error Correction to build usable Quantum Computers.</p>
+<h2 id="what-went-well">What went well?</h2>
 <ul>
-<li>Have it like a gif, where every second it resets</li>
-<li>Have the test points leave a &ldquo;path&rdquo;</li>
-<li>Keep it simple, only show 2D slices</li>
-<li>Go back to vectors, and keep them all the same size, but change alpha based on magnitude</li>
-</ul>
-<p>Some inspiration:</p>
+<li>The circuit is built entirely out of HTML!
 <ul>
-<li><a href="https://youtu.be/LB8Rhcb4eQM?t=200">https://youtu.be/LB8Rhcb4eQM?t=200</a></li>
-<li><a href="https://youtu.be/rB83DpBJQsE?t=154">https://youtu.be/rB83DpBJQsE?t=154</a> (I like how the length is based on the magnitude)</li>
+<li>This is a little overkill&hellip; I probably should have gone with canvas, but it&rsquo;s neat that you can build something like that with just HTML. I didn&rsquo;t even use <code>z-index</code>. Everything is explicitly checked and added. (Lots of flexbox). Technically the LaTeX might be using canvas, not sure.</li>
 </ul>
-<p>I thought about using a density, but E is a vector field, and so needs to display direction.</p>
-<p>We&rsquo;ll see. But progress is being made!</p>
-<script src="https://cdn.jsdelivr.net/gh/c0nrad/vector/examples/dipole/app_v1.js"></script>
+</li>
+<li>Mid-circuit measurements works! This is something my last quantum simulator didn&rsquo;t have. The ability to measure a single qubit during mid execution is pretty cool (and it was easier than I thought. Just tensor some projection state between a bunch of identity matrixes)</li>
+<li>For building gates like CCCNOTCCC, I used to have some pretty <a href="https://github.com/c0nrad/qrad/blob/master/moment.go#L144">complex algorithm</a>, but now that I&rsquo;m one quantum smarter, it turns out I can do it a little simpler by being smart about the projection operators for the conditionals.</li>
+<li>Adding classical functions &ldquo;works&rdquo;:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#a6e22e">c1</span>.<span style="color:#a6e22e">appendFunction</span>((<span style="color:#a6e22e">classicalBits</span>: <span style="color:#66d9ef">number</span>[])<span style="color:#f92672">:</span> <span style="color:#a6e22e">Moment</span>[] <span style="color:#f92672">=&gt;</span> {
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">out</span> <span style="color:#f92672">=</span> [];
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">classicalBits</span>[<span style="color:#ae81ff">0</span>]) {
+    <span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">push</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Moment</span>(<span style="color:#a6e22e">XGate</span>, [<span style="color:#ae81ff">0</span>], [], [], <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>));
+  }
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">classicalBits</span>[<span style="color:#ae81ff">1</span>]) {
+    <span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">push</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Moment</span>(<span style="color:#a6e22e">XGate</span>, [<span style="color:#ae81ff">1</span>], [], [], <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>));
+  }
+
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>;
+});
+</code></pre></div><p>It&rsquo;s a little ugly, but I&rsquo;ll clean that up in the future. Each <code>moment</code> is a slice in time, with the gate, the gateIndexes, controlIndexes, classicalIndexes, and then circuit size.</p>
+<h2 id="what-didnt-go-well">What didn&rsquo;t go well?</h2>
+<ul>
+<li>Well, it went fine. But building circuits in HTML is a little bit of a pain. I&rsquo;m holding off on adding barriers and muli-wire gates because I don&rsquo;t want to touch it. But I will one day. I think overall I prefer HTML to canvas (for portability and interoperability)</li>
+</ul>
+<h2 id="future">Future</h2>
+<p>I have an ever increasing list of todo&rsquo;s. But I think the main ones are:</p>
+<ul>
+<li>Start implementing different QEC schemes! I think I have all the pieces.</li>
+<li>Allow the user to turn on the noise models as seen in the <a href="https://blog.c0nrad.io/qc.js/rb/">RB playground</a> to simulate errors</li>
+<li>Implement drag and drop (another thing I know how to do, I&rsquo;m just dragging my feet on since it&rsquo;s a pain)</li>
+<li>More than like 8 qubits is pretty slow. Probably need to use one of the GPU matrix libraries instead of rolling my own matrix math.</li>
+<li>Deploy!</li>
+</ul>
+<p>Hopefully within a week or two people can use the circuit build to play with different error correction schemes!</p>
         </div>
         
 
@@ -187,7 +213,7 @@
   <p class="meta">
     <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
     
-    <time>Jul 21, 2020</time>
+    <time>Aug 10, 2021</time>
     
     </span>
   </p>
@@ -196,11 +222,9 @@
 
   <p class="meta">
     
-        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/vector-2-viz/" title="Vector Calculus Part 2: Visualization">Vector Calculus Part 2: Visualization</a>
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/randomized-benchmarking-2/" title="Randomized Benchmarking of a noisy quantum simulator Pt. 2">Randomized Benchmarking of a noisy quantum simulator Pt. 2</a>
     
 
-    
-      <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/mat-inv/" title="Matrix Inversion">Matrix Inversion</a>
     
   </p>
   
