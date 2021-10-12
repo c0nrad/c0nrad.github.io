@@ -6,10 +6,19 @@
     <description>Recent content in Posts on c0nrad&#39;s c0rner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Aug 2021 09:31:09 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 11 Oct 2021 17:44:54 -0700</lastBuildDate>
     
 	<atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Slack LaTeX</title>
+      <link>https://blog.c0nrad.io/posts/slack-latex/</link>
+      <pubDate>Mon, 11 Oct 2021 17:44:54 -0700</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/slack-latex/</guid>
+      <description>&lt;p&gt;I had fun building a new product with my partner called &lt;a href=&#34;https://slacklatex.com&#34;&gt;Slack LaTeX&lt;/a&gt;. It&amp;rsquo;s a slack app for embedding formatted equations (through LaTeX). This post covers some of the motivation and some of the fun technical architecture design decisions.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Quantum Circuit Editor Pt. 1</title>

@@ -14,7 +14,7 @@
   
 
   
-  <title>Quantum Circuit Editor Pt. 1</title>
+  <title>Slack LaTeX</title>
 
   
   
@@ -35,7 +35,7 @@
   
   
 
-  <meta name="description" content="Quantum Circuit Editor" />
+  <meta name="description" content="Building a new product" />
   <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
   <meta name="author" content="Stuart Larsen">
 
@@ -53,8 +53,8 @@
     <meta name="twitter:card" content="summary"/>
   
   
-  <meta name="twitter:title" content="Quantum Circuit Editor Pt. 1"/>
-  <meta name="twitter:description" content="Quantum Circuit Editor"/>
+  <meta name="twitter:title" content="Slack LaTeX"/>
+  <meta name="twitter:description" content="Building a new product"/>
   
   <meta name="twitter:domain" content="blog.c0nrad.io"/>
   <meta name="twitter:creator" content="@CryptoGangsta"/>
@@ -132,17 +132,17 @@
         
 
 <header>
-  <p class="meta">Aug 10, 2021
-     - 3 minute read 
+  <p class="meta">Oct 11, 2021
+     - 4 minute read 
     
 
     
     
-      - <a class="label" href="https://blog.c0nrad.io/categories/quantum-computation/">quantum computation </a>
+      - <a class="label" href="https://blog.c0nrad.io/categories/programming/">programming </a>
     
   </p>
   <h1 class="entry-title">
-     Quantum Circuit Editor Pt. 1 
+     Slack LaTeX 
   </h1>
 </header>
 
@@ -153,59 +153,56 @@
           
             <nav id="TableOfContents">
   <ul>
-    <li><a href="#overview">Overview</a></li>
-    <li><a href="#why-care">Why care?</a></li>
-    <li><a href="#what-went-well">What went well?</a></li>
-    <li><a href="#what-didnt-go-well">What didn&rsquo;t go well?</a></li>
-    <li><a href="#future">Future</a></li>
+    <li><a href="#motivation">Motivation</a></li>
+    <li><a href="#architecture">Architecture</a>
+      <ul>
+        <li><a href="#backend">Backend</a></li>
+        <li><a href="#frontend">Frontend</a></li>
+      </ul>
+    </li>
+    <li><a href="#what-went-well">What went well</a></li>
+    <li><a href="#what-didnt-go-well">What didn&rsquo;t go well</a></li>
   </ul>
 </nav>
           
-          <p>Initial version of a quantum circuit editor.</p>
-<h2 id="overview">Overview</h2>
-<p>Here&rsquo;s the result so far:</p>
-<p><img src="/circuit.gif" alt="QCE Classical"></p>
-<p>The key detail is the two \( f(x) \) blocks. This circuit performs classical computing on the measured qubits mid-circuit to allow for additional insertion of mid-circuit gates.</p>
-<h2 id="why-care">Why care?</h2>
-<p>Quantum Error Correction! I&rsquo;ll go more into detail later, but essentially to do QEC, we need a way to make mid circuit measurements and update the circuit for errors.</p>
-<p>Why care about Quantum Error Correction? Quantum computers are super sensitive to noise (<a href="/posts/density-operators/">see the density operator post</a> for more info. We need Quantum Error Correction to build usable Quantum Computers.</p>
-<h2 id="what-went-well">What went well?</h2>
+          <p>I had fun building a new product with my partner called <a href="https://slacklatex.com">Slack LaTeX</a>. It&rsquo;s a slack app for embedding formatted equations (through LaTeX). This post covers some of the motivation and some of the fun technical architecture design decisions.</p>
+<p><img src="https://slacklatex.com/static/media/demo_img.e6305cbf.png" alt="slack latex demo"></p>
+<h2 id="motivation">Motivation</h2>
+<p>I find myself without a job again, and &ldquo;idle hands are the devil&rsquo;s workshop&rdquo;. It&rsquo;s also been awhile since I built anything fun. My partner (a frontend developer) and I have talked about building a product together for awhile, and now the stars aligned so we decided to give it a go.</p>
+<p>Why Slack LaTeX? Well two things. My previous employer (a physics based company) sometimes typed really confusing equations into slack. Sometimes parantheses monsters, sometimes equations were just ambiguous. They looked for a solution and couldn&rsquo;t find anything.</p>
+<p>There&rsquo;s also a stack overflow question with 52k views looking for a solution. Although the question specifically says &ldquo;no image based rendering&rdquo; which is what we ended up doing. But if you want a solution that every platform can use without installing anything, it sadly has to be image based.</p>
+<p>It seemed there was at least a little demand, so we decided to quickly build something and see if there was any real demand.</p>
+<h2 id="architecture">Architecture</h2>
+<p>Here&rsquo;s the architecture we ended up building:</p>
+<h3 id="backend">Backend</h3>
+<p><img src="/slack-latex-backend.png" alt="backend"></p>
+<p>The ec2 servers have a nodejs server installed with express that services the latex rendering. They internally run phantomjs (headless chrome) and render the LaTeX using <a href="https://katex.org/">KaTeX</a>.</p>
+<p>At first I tried to build this infrastructure using Lambda. I really want to like Lambda, but it&rsquo;s just a pain to develop with. The logging is confusing, the infrastructure is confusing. The iteration speed is slow. I don&rsquo;t feel like I&rsquo;m in control. I actually got it all setup on Lambda (using Applications and Cloudformation), but I didn&rsquo;t like it. (There was some hacky stuff with bundling chrome so that it&rsquo;d hit the allowed size
+limit). Making changes is a pain, and when I return to this project in 6 months to make a fix, I&rsquo;m going to hate myself for using lambda.</p>
+<p>But I&rsquo;m pretty happy with the setup. It&rsquo;s not in an ec2-autoscaling group, but it&rsquo;s ready to be when we get heavier traffic. And I wrote a playbook on how to setup the ec2s for when we get there.</p>
+<p>I love logs, so there&rsquo;s special middleware for logging each request (in json), along with other events of note. These logs are sent to aws cloudwatch. (Cloudwatch also handles our uptime health checks). Emails are also sent to a google group when we get a new customer.</p>
+<h3 id="frontend">Frontend</h3>
+<p><img src="/slack-latex-frontend.png" alt="frontend"></p>
+<p>My partner built the frontend. It&rsquo;s very nice having someone to help with the frontend work!</p>
+<p>She built it using React, no special libraries.</p>
+<p>We setup a makefile so she can one command deploy to s3 and invalidate the cache. Developing at lightspeed.</p>
+<p>Overall it looks very snazzy.</p>
+<h2 id="what-went-well">What went well</h2>
 <ul>
-<li>The circuit is built entirely out of HTML!
+<li><a href="https://stripe.com/payments/checkout">Stripe Checkout</a> and <a href="https://stripe.com/docs/billing/subscriptions/customer-portal">Stripe Customer Portal</a> are amazing.
 <ul>
-<li>This is a little overkill&hellip; I probably should have gone with canvas, but it&rsquo;s neat that you can build something like that with just HTML. I didn&rsquo;t even use <code>z-index</code>. Everything is explicitly checked and added. (Lots of flexbox). Technically the LaTeX might be using canvas, not sure.</li>
+<li>I don&rsquo;t ever have to see or think about a credit card. Customers can swap out their own credit card, cancel subscriptions, update billing addresses, etc, all without contacting support</li>
+<li>I didn&rsquo;t mention it in this article, but it involves setting up a webhook to listen to stripe events (there&rsquo;s one nasty thing with nodejs middleware parsing the response body before stripe has a chance to validate with a signature, but it&rsquo;s easy to work around)</li>
 </ul>
 </li>
-<li>Mid-circuit measurements works! This is something my last quantum simulator didn&rsquo;t have. The ability to measure a single qubit during mid execution is pretty cool (and it was easier than I thought. Just tensor some projection state between a bunch of identity matrixes)</li>
-<li>For building gates like CCCNOTCCC, I used to have some pretty <a href="https://github.com/c0nrad/qrad/blob/master/moment.go#L144">complex algorithm</a>, but now that I&rsquo;m one quantum smarter, it turns out I can do it a little simpler by being smart about the projection operators for the conditionals.</li>
-<li>Adding classical functions &ldquo;works&rdquo;:</li>
+<li>I know I&rsquo;m a broken record, but MongoDB Atlas / Charts are amazing. Dead simple auto scaling, super easy to modify a schema, and it just works. I also setup an internal dashboard using MongoDB Charts to monitor application metrics.</li>
+<li>Kind of silly, but slack is pretty nice for us to collaborate. We have channels for bot design, infrastructure, and general company stuff. It&rsquo;s nice to keep all threads of communication separated.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#a6e22e">c1</span>.<span style="color:#a6e22e">appendFunction</span>((<span style="color:#a6e22e">classicalBits</span>: <span style="color:#66d9ef">number</span>[])<span style="color:#f92672">:</span> <span style="color:#a6e22e">Moment</span>[] <span style="color:#f92672">=&gt;</span> {
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">out</span> <span style="color:#f92672">=</span> [];
-  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">classicalBits</span>[<span style="color:#ae81ff">0</span>]) {
-    <span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">push</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Moment</span>(<span style="color:#a6e22e">XGate</span>, [<span style="color:#ae81ff">0</span>], [], [], <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>));
-  }
-  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">classicalBits</span>[<span style="color:#ae81ff">1</span>]) {
-    <span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">push</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Moment</span>(<span style="color:#a6e22e">XGate</span>, [<span style="color:#ae81ff">1</span>], [], [], <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>));
-  }
-
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>;
-});
-</code></pre></div><p>It&rsquo;s a little ugly, but I&rsquo;ll clean that up in the future. Each <code>moment</code> is a slice in time, with the gate, the gateIndexes, controlIndexes, classicalIndexes, and then circuit size.</p>
-<h2 id="what-didnt-go-well">What didn&rsquo;t go well?</h2>
-<ul>
-<li>Well, it went fine. But building circuits in HTML is a little bit of a pain. I&rsquo;m holding off on adding barriers and muli-wire gates because I don&rsquo;t want to touch it. But I will one day. I think overall I prefer HTML to canvas (for portability and interoperability)</li>
-</ul>
-<h2 id="future">Future</h2>
-<p>I have an ever increasing list of todo&rsquo;s. But I think the main ones are:</p>
-<ul>
-<li>Start implementing different QEC schemes! I think I have all the pieces.</li>
-<li>Allow the user to turn on the noise models as seen in the <a href="https://blog.c0nrad.io/qc.js/rb/">RB playground</a> to simulate errors</li>
-<li>Implement drag and drop (another thing I know how to do, I&rsquo;m just dragging my feet on since it&rsquo;s a pain)</li>
-<li>More than like 8 qubits is pretty slow. Probably need to use one of the GPU matrix libraries instead of rolling my own matrix math.</li>
-<li>Deploy!</li>
-</ul>
-<p>Hopefully within a week or two people can use the circuit build to play with different error correction schemes!</p>
+<p>But overall I just can&rsquo;t believe how easy it is these days to launch a new product. Everything is taken care of for you. Just a little bit of glue and you can solve real problems.</p>
+<h2 id="what-didnt-go-well">What didn&rsquo;t go well</h2>
+<p>As mentioned earlier, I wish Lambda was smoother. I really want to like it, and I feel like the apps I build should be good usecases for lambda.</p>
+<p>There was some annoying issue related to the AWS region and using a route53 top level ALIAS with cloudfront. I think you can only use them if your bucket is in us-east-1 or something? I didn&rsquo;t quite understand. Also handling redirects from <a href="http://www.slacklatex.com">www.slacklatex.com</a> to slacklatex.com was a little awkward. You have to use the custom URL in the CDN settings (the s3 website), not the default.</p>
+<p>But otherwise everything went well! We&rsquo;re excited to see how this product grows. We have many ideas for V2.</p>
         </div>
         
 
@@ -213,7 +210,7 @@
   <p class="meta">
     <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
     
-    <time>Aug 10, 2021</time>
+    <time>Oct 11, 2021</time>
     
     </span>
   </p>
@@ -222,11 +219,9 @@
 
   <p class="meta">
     
-        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/randomized-benchmarking-2/" title="Randomized Benchmarking of a noisy quantum simulator Pt. 2">Randomized Benchmarking of a noisy quantum simulator Pt. 2</a>
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/quantum-circuit-editor/" title="Quantum Circuit Editor Pt. 1">Quantum Circuit Editor Pt. 1</a>
     
 
-    
-      <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/slack-latex/" title="Slack LaTeX">Slack LaTeX</a>
     
   </p>
   
