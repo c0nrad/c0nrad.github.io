@@ -40,7 +40,7 @@
   <meta name="author" content="Stuart Larsen">
 
   
-  <meta name="generator" content="Hugo 0.70.0" />
+  <meta name="generator" content="Hugo 0.79.1" />
 
   
   
@@ -262,7 +262,7 @@ $$ f_4(x) = cos(2x) + e^{-\frac{x^2}{2}} sin(10x) $$</p>
 <p><a href="https://github.com/c0nrad/csim/blob/master/examples/diff_examples/diff_examples.png?raw=true"><img src="https://raw.githubusercontent.com/c0nrad/csim/master/examples/diff_examples/diff_examples.png" alt="diff_examples"></a>
 (<a href="https://github.com/c0nrad/csim/blob/master/examples/diff_modes/multiple_h.png">Image</a> | <a href="https://github.com/c0nrad/csim/blob/master/examples/diff_examples/diff_examples.go">Code</a>)</p>
 <h2 id="legendre-polynomials">Legendre Polynomials</h2>
-<p>In my <a href="https://blog.c0nrad.io/posts/hydrogen-pt1/">electron orbitals simulator</a> I had to calculate the Legendre Polynomials (using Rodrigues&rsquo; Formula):</p>
+<p>In my <a href="https://blog.c0nrad.io/posts/hydrogen-pt1/">electron orbitals simulator</a> I had to calculate the Legendre Polynomials (using Rodrigues' Formula):</p>
 <p>$$ P_l(x) = \frac{1}{2^l l!} \left(\frac{d}{dx}\right)^l (x^2 - 1)^l $$</p>
 <p>Knowing that I&rsquo;d have to calculate the derivative of this function was one of the reasons I decided to <a href="https://blog.c0nrad.io/posts/ginac-on-macos/">check out GiNaCs</a> in the first place. (GiNaCs has a symbolic differentiator).</p>
 <p>But now with a Numeric Differentiator, I have no need for the symbolic executioner! (Obviously not fully true, it&rsquo;s still <em>extremely</em> nice to have the symbols).</p>

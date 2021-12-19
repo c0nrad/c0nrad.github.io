@@ -5,10 +5,6 @@
     <link>https://blog.c0nrad.io/tags/</link>
     <description>Recent content in Tags on c0nrad&#39;s c0rner</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="https://blog.c0nrad.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="https://blog.c0nrad.io/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

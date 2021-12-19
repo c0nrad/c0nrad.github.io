@@ -6,11 +6,7 @@
     <description>Recent content in ginacs on c0nrad&#39;s c0rner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 May 2020 18:43:40 -0400</lastBuildDate>
-    
-	<atom:link href="https://blog.c0nrad.io/categories/ginacs/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 27 May 2020 18:43:40 -0400</lastBuildDate><atom:link href="https://blog.c0nrad.io/categories/ginacs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GiNaC on Macos</title>
       <link>https://blog.c0nrad.io/posts/ginac-on-macos/</link>

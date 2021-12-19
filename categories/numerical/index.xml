@@ -6,11 +6,7 @@
     <description>Recent content in numerical on c0nrad&#39;s c0rner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Aug 2020 18:37:01 -0400</lastBuildDate>
-    
-	<atom:link href="https://blog.c0nrad.io/categories/numerical/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 07 Aug 2020 18:37:01 -0400</lastBuildDate><atom:link href="https://blog.c0nrad.io/categories/numerical/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Matrix Inversion</title>
       <link>https://blog.c0nrad.io/posts/mat-inv/</link>

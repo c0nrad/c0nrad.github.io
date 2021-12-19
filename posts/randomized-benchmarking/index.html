@@ -40,7 +40,7 @@
   <meta name="author" content="Stuart Larsen">
 
   
-  <meta name="generator" content="Hugo 0.70.0" />
+  <meta name="generator" content="Hugo 0.79.1" />
 
   
   
@@ -188,7 +188,7 @@ $$ K*{D_3} = \sqrt{ \frac{p_1}{3}} Z $$</p>
 </span><span style="color:#75715e"></span>  <span style="color:#a6e22e">evolve</span>(<span style="color:#a6e22e">density</span>: <span style="color:#66d9ef">DensityMatrix</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">DensityMatrix</span> {
     <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">out</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">DensityMatrix</span>.<span style="color:#a6e22e">fromZero</span>(<span style="color:#ae81ff">1</span>);
 
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">operator</span> <span style="color:#a6e22e">of</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">operators</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">operator</span> <span style="color:#66d9ef">of</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">operators</span>) {
       <span style="color:#a6e22e">out</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DensityMatrix</span>(
         <span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">add</span>(
           <span style="color:#a6e22e">operator</span>.<span style="color:#a6e22e">mulMatrix</span>(<span style="color:#a6e22e">density</span>).<span style="color:#a6e22e">mulMatrix</span>(<span style="color:#a6e22e">operator</span>.<span style="color:#a6e22e">adjoint</span>())

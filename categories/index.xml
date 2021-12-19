@@ -6,10 +6,24 @@
     <description>Recent content in Categories on c0nrad&#39;s c0rner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Oct 2021 17:44:54 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 17 Dec 2021 12:24:02 -0700</lastBuildDate><atom:link href="https://blog.c0nrad.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>classical mechanics</title>
+      <link>https://blog.c0nrad.io/categories/classical-mechanics/</link>
+      <pubDate>Fri, 17 Dec 2021 12:24:02 -0700</pubDate>
+      
+      <guid>https://blog.c0nrad.io/categories/classical-mechanics/</guid>
+      <description></description>
+    </item>
     
-	<atom:link href="https://blog.c0nrad.io/categories/index.xml" rel="self" type="application/rss+xml" />
-    
+    <item>
+      <title>simulation</title>
+      <link>https://blog.c0nrad.io/categories/simulation/</link>
+      <pubDate>Fri, 17 Dec 2021 12:24:02 -0700</pubDate>
+      
+      <guid>https://blog.c0nrad.io/categories/simulation/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>programming</title>
@@ -53,15 +67,6 @@
       <pubDate>Mon, 18 Jan 2021 15:25:22 -0500</pubDate>
       
       <guid>https://blog.c0nrad.io/categories/physics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>simulation</title>
-      <link>https://blog.c0nrad.io/categories/simulation/</link>
-      <pubDate>Mon, 18 Jan 2021 15:25:22 -0500</pubDate>
-      
-      <guid>https://blog.c0nrad.io/categories/simulation/</guid>
       <description></description>
     </item>
     

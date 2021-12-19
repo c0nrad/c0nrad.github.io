@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>Sim 1: Two Body Central Force</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+    <link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+
+  
+  
+
+  <meta name="description" content="Simulation of some simple two body central force problems" />
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
+  <meta name="author" content="Stuart Larsen">
+
+  
+  <meta name="generator" content="Hugo 0.79.1" />
+
+  
+  
+
+  
+  
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+  
+  
+  <meta name="twitter:title" content="Sim 1: Two Body Central Force"/>
+  <meta name="twitter:description" content="Simulation of some simple two body central force problems"/>
+  
+  <meta name="twitter:domain" content="blog.c0nrad.io"/>
+  <meta name="twitter:creator" content="@CryptoGangsta"/>
+
+  
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="https://blog.c0nrad.io/">c0nrad&#39;s c0rner</a></h1>
+    <h2>Learning and learning</h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+        <option value="https://blog.c0nrad.io/">» Home</option>
+      
+        <option value="https://c0nrad.io">» Website</option>
+      
+        <option value="https://github.com/c0nrad/">» Github</option>
+      
+        <option value="https://twitter.com/xc0nradx">» Twitter</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="https://blog.c0nrad.io/" title="Home">Home</a></li>
+    
+  
+    
+      <li><a href="https://c0nrad.io" title="Website"  rel="noopener noreferrer">Website</a></li>
+    
+  
+    
+      <li><a href="https://github.com/c0nrad/" title="Github"  rel="noopener noreferrer">Github</a></li>
+    
+  
+    
+      <li><a href="https://twitter.com/xc0nradx" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+</ul>
+
+<ul class="subscription">
+  
+    
+        <a href="https://blog.c0nrad.io/index.xml" target="_blank" type="application/rss+xml" title="RSS" rel="noopener noreferrer"><i class="fa fa-rss-square fa-lg"></i></a>
+    
+  
+</ul>
+
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+  <p class="meta">Dec 17, 2021
+     - 5 minute read 
+    
+
+    
+    
+      - <a class="label" href="https://blog.c0nrad.io/categories/simulation/">simulation </a><a class="label" href="https://blog.c0nrad.io/categories/classical-mechanics/">classical mechanics </a>
+    
+  </p>
+  <h1 class="entry-title">
+     Sim 1: Two Body Central Force 
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#why-99-simulations">Why 99 simulations</a></li>
+    <li><a href="#two-body-central-force-problems">Two Body Central Force Problems</a>
+      <ul>
+        <li><a href="#central-force">Central Force</a></li>
+        <li><a href="#reference-frame-center-of-mass">Reference Frame, Center of Mass</a></li>
+      </ul>
+    </li>
+    <li><a href="#solving-the-lagrangian">Solving the Lagrangian</a></li>
+    <li><a href="#simulation">Simulation</a>
+      <ul>
+        <li><a href="#what-went-well">What went well</a></li>
+      </ul>
+    </li>
+    <li><a href="#random-thought">Random Thought</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+          
+          <p>Day one of building 99 simulations. We&rsquo;ll reduce a problem that at first requires 6 parameters with coupling, to a problem with just 3 (or 2, depending on how you look at it) by exploiting the symmetry. &ldquo;Nature does not care how we describe her&rdquo;.</p>
+<h2 id="why-99-simulations">Why 99 simulations</h2>
+<p>I&rsquo;ve been doing the <a href="https://physics.yale.edu/academics/graduate-studies/graduate-student-handbook/qualifying-exam-past-exams">previous qualification exams</a> on Yale&rsquo;s website as practice for graduate school. And to be honest, I&rsquo;m so bored. I really don&rsquo;t enjoy sludging through problems. I think I&rsquo;m a decent programmer, and I got that way because I truly do enjoy doing programming problems. And because I enjoy the programming challenges, I do them. But with physics problems I&rsquo;m always dragging my feet. I think in a perfect world I&rsquo;d have infinite motivation to sit down for 10 hours a day and do problems, but I&rsquo;m not perfect.</p>
+<p>So to compromise, instead I&rsquo;m going to try to take all the <a href="https://physics.yale.edu/sites/default/files/files/Topics%20for%20the%20Qualifying%20ExaminationForAugust2018%20(1).pdf">topics</a> on Yale&rsquo;s qualifying exam, and try to simulate them, and also write a little blog post about some of the math. Hopefully this way I&rsquo;ll at least enjoy learning some new physics topics. Eventually I&rsquo;ll need to go back and actually practice solving problems, but I&rsquo;ll pass that hurdle later. Until then, I&rsquo;d just like to have fun learning in my free time.</p>
+<p>For the first topic, I&rsquo;m taking a look at two body central force problems.</p>
+<h2 id="two-body-central-force-problems">Two Body Central Force Problems</h2>
+<p>A number of important systems are two body central force systems. Examples include modeling hydrogen&rsquo;s electron and proton (<a href="https://blog.c0nrad.io/hydrogenjs/#/">previous sim</a>), modeling planetary bodies (earth-moon or sun-earth), and more.</p>
+<p>Modeling these problems just using their position and velocity can get a little tricky. Writing a simple \( r_1(t) \) requires knowledge of \( r_2(t) \) which is also coupled to \( r_1(t) \). The solution will not be simple. But instead if we abuse some symmetry and choice of coordinates, we can model the system in a much simpler way.</p>
+<h3 id="central-force">Central Force</h3>
+<p>Two common central forces are gravity and electric charge (Coulomb). These forces are &ldquo;conservative&rdquo; (1. force only depends on \( \vec{r} \) 2. the work between any two points is the same along any path. Friction is not a conservative force since not all paths are the same).</p>
+<p>If we look at the potential for both gravity and coulomb&rsquo;s law we&rsquo;ll notice something peculiar about the r terms.</p>
+<p>$$ U_{gravity}(r_1, r_2) = \frac{G m_1 m_2}{ |r_1 - r_2|} $$</p>
+<p>$$ U_{coulomb}(r_1, r_2) = \frac{1}{4 \pi \epsilon_0} \frac{q_1 q_2}{ |r_1 - r_2|} $$</p>
+<p>Both the equations only depend on the relative distance between the objects. So instead of modeling the potentials as \( U(\vec{r_1}, \vec{r_2}) \) we could instead model the potential with the relative position \( \vec{r} = |\vec{r_1} - \vec{r_2}| \), so \( U(\vec{r}) \).</p>
+<p>So now our Lagrangian has two parameters:</p>
+<p>$$ L = \frac{1}{2} m_1 \dot{r}^2_1 + \frac{1}{2} m_2 \dot{r}^2_2 - U(\vec{r}) $$</p>
+<p>But we can do better!</p>
+<h3 id="reference-frame-center-of-mass">Reference Frame, Center of Mass</h3>
+<p>We get to choose our frame of reference. So, we could be naive and imagine the two bodies moving through space and rotating around each other, or we could make it easy and define our coordinate system such that the two bodies are spinning around a constant point.</p>
+<p>This constant point is the center of mass \( \vec{R} = \frac{m_1 \vec{r_1} + m_2 \vec{r_2}}{m_1 + m_2} \).</p>
+<p>We can now rewrite \( \vec{r_1} \) and \( \vec{r_2} \) in terms of \( \vec{R} \) and \( \vec{r} \).</p>
+<p>$$ \vec{r_1} = \vec{R} + \frac{m_2}{M} \vec{r} \qquad \vec{r_2} = \vec{R} - \frac{m_1}{M}\vec{r} $$</p>
+<p>So now if we substitute this into our Lagrangian:</p>
+<p>$$ L = \frac{1}{2} m_1 \dot{r}^2_1 + \frac{1}{2} m_2 \dot{r}^2_2 - U(r) $$
+$$ L = \frac{1}{2} m_1 (\dot{R} + \frac{m_2}{M}\dot{r})^2 + \frac{1}{2} m_2 (\dot{R} - \frac{m_1}{M}\dot{r})^2 - U(r) $$
+$$ L = \frac{1}{2} (M \dot{R}^2 + \mu \dot{r}^2) - U(r) $$</p>
+<p>Where we define \( \mu \) as the reduced mass \( \mu = \frac{m_1 m_2}{m_1 + m_2} \).</p>
+<p>We can also just set our center of mass to be zero in the coordinate system, and then the lagrangian is even simpler!</p>
+<h2 id="solving-the-lagrangian">Solving the Lagrangian</h2>
+<p>We have two coordinates, \(R\) and \(r\). Plugging the first coordinate into the euler-lagrange equation we get:</p>
+<p>$$
+\frac{d}{dt} \frac{\partial L}{\partial \dot{R}} = \frac{ \partial L}{\partial R}
+$$</p>
+<p>$$ \frac{d}{dt} M \dot{R} = 0 $$</p>
+<p>Momentum is conserved.</p>
+<p>Plugging in the second coordinate:</p>
+<p>$$
+\frac{d}{dt} \frac{\partial L}{\partial \dot{r}} = \frac{ \partial L}{\partial r}
+$$</p>
+<p>$$
+\frac{d}{dt} \mu \dot{r} = -\frac{\partial U(r)}{\partial r}
+$$</p>
+<p>Newton&rsquo;s equation with reduced mass instead of mass for a single particle!!</p>
+<p>We can reduce it even further, but I&rsquo;ll save that for the next project. For now let&rsquo;s build a simulation of what we have so far.</p>
+<h2 id="simulation">Simulation</h2>
+<p><a href="https://blog.c0nrad.io/sims/twobody/">https://blog.c0nrad.io/sims/twobody/</a></p>
+<p><a href="https://blog.c0nrad.io/sims/twobody/"><img src="/twobody.png" alt="twobody"></a></p>
+<p>This simulation tracks the movements of two bodies under the influence of a central force. Under the hood the simulation uses semi-implicit euler. It calculates the center of mass, reduced mass, and relative position vector.</p>
+<p>On the technical side it&rsquo;s using paperjs for the canvas and angular for the UI.</p>
+<h3 id="what-went-well">What went well</h3>
+<ul>
+<li>paperjs was pretty simple to use. I&rsquo;m only drawing circles, but it did what I needed it to do</li>
+<li>Tracking center of mass is pretty cool. I&rsquo;m slightly cheating by just moving the viewport, but it wouldn&rsquo;t be hard to actually change the frame of reference</li>
+<li>It&rsquo;s a good base simulation for moving on to more exciting simulations! (tracking the potential and different conic sections)</li>
+</ul>
+<h2 id="random-thought">Random Thought</h2>
+<p>Converting the problem to center of mass and relative position really reminds me of doing the change of basis to normal modes when doing coupled oscilators. Maybe I&rsquo;ll go back later and see if this can be represented as an eigenvalue problem and deduce the CM and relative position coordinates.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>A fun first project. I&rsquo;m excited to build further on the simulation with conic sections and potential graphs.</p>
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
+    
+    <time>Dec 17, 2021</time>
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/slack-latex/" title="Slack LaTeX">Slack LaTeX</a>
+    
+
+    
+  </p>
+  
+</footer>
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+    <h1>Who am I?</h1>
+    
+
+    <p>
+      
+      <img src="/me.png" style="width: 100%"> 
+I am Stuart. In a previous life I was a programmer, electrical engineer, and a security engineer. Now I spend my free time tinkering with physics.
+</br></br>
+My goal is to understand why the universe exists. I have a lot of learning to do.
+<br/><br/>
+I write about physics, life, and learning.
+</br>
+      
+    </p>
+  </section>
+
+  
+
+  
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      <a target="_blank" rel="noopener noreferrer" href="https://github.com/c0nrad/" title="https://github.com/c0nrad/"><i
+          class="fa fa-github fa-3x"></i></a>
+      
+      
+      <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/xc0nradx/" title="https://twitter.com/xc0nradx/"><i
+          class="fa fa-twitter fa-3x"></i></a>
+      
+      
+      
+      
+      <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/c0nrad" title="https://www.linkedin.com/in/c0nrad"><i
+          class="fa fa-linkedin fa-3x"></i></a>
+      
+      
+      
+      
+      
+      
+
+      
+      
+    </li>
+  </ul>
+
+
+  
+
+  
+  
+  <section class="odd">
+    
+    <h1>Collections</h1>
+    
+    
+    <li>
+      <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+    </li>
+    
+    <li>
+      <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+    </li>
+    
+    <li>
+      <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+    </li>
+    
+    <li>
+      <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+    </li>
+    
+  </section>
+  
+  
+
+  
+  
+  
+
+
+  
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup {
+        background: #fff;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+        border: 1px solid;
+        margin-top: 20px;
+    }
+
+
+
+
+     
+</style>
+<div id="mc_embed_signup">
+    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
+        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+        novalidate>
+        <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Subscribe for new posts:</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                    class="button"></div>
+        </div>
+    </form>
+</div>
+
+
+
+</aside>
+  </div>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+      <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+          var u="//c0nrad.matomo.cloud/";
+          _paq.push(['setTrackerUrl', u+'piwik.php']);
+          _paq.push(['setSiteId',  1 ]);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+      </script>
+    
+    
+
+    
+  </body>
+</html>
+
