@@ -6,11 +6,11 @@
     <description>Recent content in Posts on c0nrad&#39;s c0rner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Dec 2021 12:24:02 -0700</lastBuildDate><atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Dec 2021 05:24:02 -0700</lastBuildDate><atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Sim 1: Two Body Central Force</title>
       <link>https://blog.c0nrad.io/posts/sim-1-two-body-central-force/</link>
-      <pubDate>Fri, 17 Dec 2021 12:24:02 -0700</pubDate>
+      <pubDate>Sun, 19 Dec 2021 05:24:02 -0700</pubDate>
       
       <guid>https://blog.c0nrad.io/posts/sim-1-two-body-central-force/</guid>
       <description>&lt;p&gt;Day one of building 99 simulations. We&amp;rsquo;ll reduce a problem that at first requires 6 parameters with coupling, to a problem with just 3 (or 2, depending on how you look at it) by exploiting the symmetry. &amp;ldquo;Nature does not care how we describe her&amp;rdquo;.&lt;/p&gt;</description>
