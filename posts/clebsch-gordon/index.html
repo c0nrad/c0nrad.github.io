@@ -14,7 +14,7 @@
   
 
   
-  <title>Sim 4: Clebsch Gordon Coefficients</title>
+  <title>Sim 4: Clebsch-Gordan Coefficients</title>
 
   
   
@@ -35,7 +35,7 @@
   
   
 
-  <meta name="description" content="Generating the clebsch gordon coefficients" />
+  <meta name="description" content="Generating the clebsch gordan coefficients" />
   <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
   <meta name="author" content="Stuart Larsen">
 
@@ -53,8 +53,8 @@
     <meta name="twitter:card" content="summary"/>
   
   
-  <meta name="twitter:title" content="Sim 4: Clebsch Gordon Coefficients"/>
-  <meta name="twitter:description" content="Generating the clebsch gordon coefficients"/>
+  <meta name="twitter:title" content="Sim 4: Clebsch-Gordan Coefficients"/>
+  <meta name="twitter:description" content="Generating the clebsch gordan coefficients"/>
   
   <meta name="twitter:domain" content="blog.c0nrad.io"/>
   <meta name="twitter:creator" content="@CryptoGangsta"/>
@@ -139,7 +139,7 @@
     
   </p>
   <h1 class="entry-title">
-     Sim 4: Clebsch Gordon Coefficients 
+     Sim 4: Clebsch-Gordan Coefficients 
   </h1>
 </header>
 
@@ -168,12 +168,12 @@
   </ul>
 </nav>
           
-          <p>This post covers a script I wrote for generating the clebsch gordon coefficients.</p>
+          <p>This post covers a script I wrote for generating the clebsch-gordan coefficients by scratch.</p>
 <h1 id="motivation">Motivation</h1>
 <p>We know from classical mechanics that it&rsquo;s pretty easy to find the composite angular momentum of a system. You just add up all the angular momentum vectors.</p>
 <p>Does the same strategy work at the scale of quantum mechanics?</p>
 <p>Turns out&hellip; not exactly. When adding two particles with different angular momentum, you get a combination of different possible spin/angular momentum results.</p>
-<p>Calculating the probabilities of different angular momentums isn&rsquo;t difficult, but a little tedious, so most people use a special table, commonly referred to as the <a href="https://en.wikipedia.org/wiki/Clebsch%E2%80%93Gordan_coefficients">Clebsch-Gordon</a> coefficients.</p>
+<p>Calculating the probabilities of different angular momentums isn&rsquo;t difficult, but a little tedious, so most people use a special table, commonly referred to as the <a href="https://en.wikipedia.org/wiki/Clebsch%E2%80%93Gordan_coefficients">Clebsch-Gordan</a> coefficients.</p>
 <p>As an example, if you had two spin-1 particles and put them in a box and you know the first one has \( m_l = 1 \) and the second has \( m_l == -1 \), we can look up and see that:</p>
 <p>$$ \Ket{1\ 1\ 1\ -1} = \sqrt{\frac{1}{6}}\Ket{2\ 0} + \sqrt{\frac{1}{2}} \Ket{1\ 0} + \sqrt{\frac{1}{3}}\Ket{0\ 0}$$</p>
 <p>Where the first ket is the two particles \( \Ket{l_1\ l_2\ m_1\ m_2} \), and the following kets are the composite angular momentums \( \Ket{l\ m} \).</p>
@@ -189,8 +189,8 @@
 $$</p>
 <h2 id="operators">Operators</h2>
 <p>There&rsquo;s a couple of questions we can ask of our system. Ideally we&rsquo;d like to know the angular momentum vector, but sadly that&rsquo;s not possible as seen by the commutation relation for angular momentum \( [L_x, L_y] = i \hbar L_z \), where \( L_x \) is the operator that tells us the angular momentum in the z direction \( L_z \Ket{l\ m_l}_z = \hbar m \Ket{l\ m_l}_z \).</p>
-<p>It&rsquo;s also a very curious fact that both angular momentum and spin are described by the same algebra. \( [S_x, S_y] = i \hbar S_z \).</p>
-<p>So we can only know one component of the angular momentum vector. But thankfully there is something else that commutes with the individual operators&hellip; \( L^2 \). (In group theory this is called the Casmir operator, more info in a <a href="/posts/so3-exploration/">previous blog post</a>). The eigenvalue of the \( L^2 \) operator gives us a scalar with the total angular momentum of the particle.</p>
+<p>(It&rsquo;s also a very curious fact that both angular momentum and spin are described by the same algebra. \( [S_x, S_y] = i \hbar S_z \).)</p>
+<p>But getting back on track, we can only know one component of the angular momentum vector. But thankfully there is something else that commutes with the individual operators&hellip; \( L^2 \). (In group theory this is called the Casmir operator, more info in a <a href="/posts/so3-exploration/">previous blog post</a>). The eigenvalue of the \( L^2 \) operator gives us a scalar with the total angular momentum of the particle.</p>
 <p>So in total we can know the angular momentum in one direction (z) and the total angular momentum. These are the \( l \) and \( m_l \) values from earlier.</p>
 <p>There&rsquo;s two other operators that will be essential later, the ladder operators for angular momentun. \( L_{+}, L_{-} \). These ladder operators are similar to the ladder operators from the harmonic oscillator. Using them we can go up and down in angular momentum values ( \( m_l \)).</p>
 <p>$$
@@ -247,7 +247,7 @@ $$</p>
 </ul>
 <h3 id="what-didt-go-well">What did&rsquo;t go well</h3>
 <ul>
-<li>It took awhile to really grok the Clebsch-Gordon table, I should have spent a little bit more time up front understanding what I really was trying to do. I didn&rsquo;t understand it as well as I thought</li>
+<li>It took awhile to really grok the Clebsch-Gordan table, I should have spent a little bit more time up front understanding what I really was trying to do. I didn&rsquo;t understand it as well as I thought</li>
 </ul>
 <h2 id="future">Future</h2>
 <p>I&rsquo;m guessing I&rsquo;ll eventually need this for some particle simulations in the future. So this library will sit on the shelf until then.</p>
