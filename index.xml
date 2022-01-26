@@ -6,7 +6,16 @@
     <description>Recent content on c0nrad&#39;s c0rner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 Jan 2022 13:40:45 -0800</lastBuildDate><atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Jan 2022 15:50:49 -0800</lastBuildDate><atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sim 6: Ising Model Pt. 1</title>
+      <link>https://blog.c0nrad.io/posts/ising-1/</link>
+      <pubDate>Tue, 25 Jan 2022 15:50:49 -0800</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/ising-1/</guid>
+      <description>&lt;p&gt;We build out a simple Ising model simulator for future expansion.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Sim 5: Wien&#39;s Law from Plank&#39;s Blackbody Radiation Formula using Sympy</title>
       <link>https://blog.c0nrad.io/posts/wien-plank-sympy/</link>

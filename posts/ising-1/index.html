@@ -14,7 +14,7 @@
   
 
   
-  <title>Sim 5: Wien&#39;s Law from Plank&#39;s Blackbody Radiation Formula using Sympy</title>
+  <title>Sim 6: Ising Model Pt. 1</title>
 
   
   
@@ -35,7 +35,7 @@
   
   
 
-  <meta name="description" content="Derive wien&#39;s constant from planks distribution law" />
+  <meta name="description" content="" />
   <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
   <meta name="author" content="Stuart Larsen">
 
@@ -53,8 +53,8 @@
     <meta name="twitter:card" content="summary"/>
   
   
-  <meta name="twitter:title" content="Sim 5: Wien&#39;s Law from Plank&#39;s Blackbody Radiation Formula using Sympy"/>
-  <meta name="twitter:description" content="Derive wien&#39;s constant from planks distribution law"/>
+  <meta name="twitter:title" content="Sim 6: Ising Model Pt. 1"/>
+  <meta name="twitter:description" content="We build out a simple Ising model simulator for future expansion."/>
   
   <meta name="twitter:domain" content="blog.c0nrad.io"/>
   <meta name="twitter:creator" content="@CryptoGangsta"/>
@@ -132,17 +132,14 @@
         
 
 <header>
-  <p class="meta">Jan 17, 2022
-     - 4 minute read 
+  <p class="meta">Jan 25, 2022
+     - 2 minute read 
     
 
     
-    
-      - <a class="label" href="https://blog.c0nrad.io/categories/simulation/">simulation </a>
-    
   </p>
   <h1 class="entry-title">
-     Sim 5: Wien&#39;s Law from Plank&#39;s Blackbody Radiation Formula using Sympy 
+     Sim 6: Ising Model Pt. 1 
   </h1>
 </header>
 
@@ -153,53 +150,36 @@
           
             <nav id="TableOfContents">
   <ul>
-    <li><a href="#planks-law">Plank&rsquo;s Law</a></li>
-    <li><a href="#wiens-law">Wien&rsquo;s Law</a></li>
-    <li><a href="#calculating-wiens-constant">Calculating Wien&rsquo;s constant</a></li>
-    <li><a href="#solution-using-sympy">Solution using Sympy</a></li>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#simulation">Simulation</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
           
-          <p>We derive wien&rsquo;s constant using plank&rsquo;s blackbody radiation formula.</p>
-<h1 id="overview">Overview</h1>
-<p>I had to memorize Wien&rsquo;s constant for the physics GRE. At the time I had a lot to memorize so I didn&rsquo;t think much of it, but it was a little strange that Wien&rsquo;s constant wasn&rsquo;t given in terms of some other variables. For example, fine structure constant is roughly 1/137, but it comes from \( \frac{e^2}{4 \pi \epsilon_0} \frac{1}{\hbar c} \).</p>
-<p>But after digging deeper, it turns out that Wien&rsquo;s constant can&rsquo;t be given in terms of other constants! But we can still derive it (numerically).</p>
-<p>In this post we will (1) talk about Plank&rsquo;s Distribution Law (2) talk about Wien&rsquo;s law (3) do a couple of quick examples (4) derive Wien&rsquo;s constant (5) try out sympy and see if it makes deriving Wien&rsquo;s constant any easier</p>
-<h2 id="planks-law">Plank&rsquo;s Law</h2>
-<p>Oddly enough, one of the big problems that spurred in the quantum revolution of the early 1900s was the calculation of black body radiation. All objects are constantly radiating some form of electromagnetic radiation, where the intensity and wavelength of radiation depends on temperature.</p>
-<p>The current model at the time was known as &ldquo;Rayleigh-Jeans law&rdquo;. It worked well at low frequencies, but quickly diverged at high frequencies giving rise to infinite intensities. This was known as the ultraviolet catastrophe.</p>
-<p>Plank proposed something radical; he quantized the energy. Instead of treating energy as continuous, he discretized it, and lo and behold the divergence went away.</p>
-<p>$$ u(\lambda, T) = \frac{8 c^{2} h \pi}{\lambda^{5} \left(e^{\frac{c h}{T k \lambda}} - 1\right)} $$</p>
-<p>Plank&rsquo;s law for a few temperatures can be seen here (<a href="https://github.com/c0nrad/sims/blob/master/wien/plank.py">source</a>):</p>
-<p><img src="/plank.png" alt="/plank.png"></p>
-<p>As an example, a campfire burns at roughly 1200K. Most of the radiation is coming out as infra-red (the right side of the chart). It&rsquo;s not the visibile (left side of chart) component that keeps you warm.</p>
-<h2 id="wiens-law">Wien&rsquo;s Law</h2>
-<p>Wien&rsquo;s law gives you the peak wavelength of black-body radiation for different temperatures. It&rsquo;s a very simple equation:</p>
-<p>$$ \lambda_{peak} = \frac{2.9 * 10^{-3}}{T} $$</p>
-<p>As a simple example, the sun roughly burns at 5800K, which equates to a peak wavelength of 500 nm (blue), which is (not) coincidentally in the visible spectrum. It was very nice of the sun to output mostly in the spectrum that our eyes can see! (just kidding Darwin).</p>
-<h2 id="calculating-wiens-constant">Calculating Wien&rsquo;s constant</h2>
-<p>Where did the constant \( 2.9 * 10^{-3} \) in Wien&rsquo;s law come from? Why don&rsquo;t we represent it using fundamental constants?</p>
-<p>Well, it turns out it&rsquo;s not possible, at least not in a way similar to the fine structure constant. There&rsquo;s a step in the derivation where we have to numerically solve an equation.</p>
-<p>Let&rsquo;s calculate the Wien constant. As a reminder, we want the &ldquo;peak&rdquo; (highest intensity) for each wavelength/temperature pair. We can find the maximum (peak) by finding where the derivative is zero.</p>
-<p>$$ \frac{\partial}{\partial \lambda} \frac{8 c^{2} h \pi}{\lambda^{5} \left(e^{\frac{c h}{T k \lambda}} - 1\right)} = 0$$</p>
-<p>So after taking the derivative of the Plank Blackbody Equation we get:</p>
-<p>$$
-\frac{40 c^{2} h \pi}{\lambda^{6} \left(e^{\frac{c h}{T k \lambda}} - 1\right)} + \frac{8 c^{3} h^{2} \pi e^{\frac{c h}{T k \lambda}}}{T k \lambda^{7} \left(e^{\frac{c h}{T k \lambda}} - 1\right)^{2}}
-$$</p>
-<p>After substituting \( u = \frac{c h}{T k \lambda} \) and solving for u we get:</p>
-<p>$$ u = W\left(- \frac{5}{e^{5}}\right) + 5 \approx 4.965 $$</p>
-<p>Where W is the <a href="https://en.wikipedia.org/wiki/Lambert_W_function">Lambert W function</a>. This is why we can&rsquo;t write out a closed form solution, the equation is transcendental. W is the inverse of \( u e^u \).</p>
-<p>But now we&rsquo;re done!</p>
-<p>$$ u = \frac{c h}{T k \lambda} \approx 4.965 $$
-$$ \lambda = \frac{0.0029}{T} $$</p>
-<h2 id="solution-using-sympy">Solution using Sympy</h2>
-<p><a href="https://github.com/c0nrad/sims/blob/master/wien/wien.py">Source Code</a>.</p>
-<p>It was my first time using sympy. I have mixed feelings about it. I had to tinker a lot with the substitutions to get it to solve what I wanted, and I was worried it wouldn&rsquo;t be able to solve it at all. (At first it was just hanging and I had no idea if it would ever complete). I spent a good hour just tinkering with it, whereas I wouldn&rsquo;t be surprised if mathematica just solved it directly.</p>
-<p>But, having the computation natively in python is such a huge plus. I&rsquo;ll probably reach to sympy when I know the equations aren&rsquo;t too hard or I need to connect to external systems/resources. But mathematica will probably be my go to when the equations get tough.</p>
-<p><img src="/wiencalc.png" alt="/wiencalc.png"></p>
-<h1 id="conclusion">Conclusion</h1>
-<p>Overall, it was a fun project. I wish I could have been there during the beginnings of the quantum revolution. But I guess you never really know you&rsquo;re in the revolution until it&rsquo;s over.</p>
-<p>I&rsquo;m not sure what project I&rsquo;ll tackle next. I&rsquo;ve been looking at some lattice gauge calculations, and PBS Spacetime just published a <a href="https://www.youtube.com/watch?v=55c9wkNmfn0">neat video on DFT</a> which might be fun to try.</p>
+          <p>We build out a simple Ising model simulator for future expansion.</p>
+<h2 id="overview">Overview</h2>
+<p>The Ising model is probably the most famous (real) physics simulation. It&rsquo;s a useful tool for studying phase transitions and critical phenomena.</p>
+<p>Even though it&rsquo;s relatively simple, and almost 100 years old, it&rsquo;s still an area of <a href="https://arxiv.org/abs/1203.6064">active research</a>.</p>
+<p>The most common usecase is for studying magnetization. We know that materials are composed of a huge quantity of electons, and we also know that electons have a spin property that someone acts like a magnet. When a large number of these electons spin in the same direction we get a bar magnet.</p>
+<p>But it&rsquo;s a balancing act to have a bar magnet.</p>
+<p>On one hand, a collection of electrons spining in the same direction is lower energy, but there&rsquo;s also a non-stop barage of collisions and vibrations in the quantum world that will upset the system from all pointing in the same direction.</p>
+<p>If we take a room temperature bar magnet and heat it up, it will slowly lose its magnetism. The thermal jitters will disrupt the overall magnetism.</p>
+<h2 id="simulation">Simulation</h2>
+<p>To model this, we imagine a 2D grid where each spot can either point up or down.</p>
+<p>We then perform a number of steps where at each step we:</p>
+<ol>
+<li>Pick a random spot</li>
+<li>Calculate the energy difference if the spot was flipped</li>
+<li>If the energy is less, accept and flip (nature likes minimum energy)</li>
+<li>If \( e^{-dE/T} \) is greater than a randomly generated number (0,1), accept and flip</li>
+<li>Otherwise reject and continue</li>
+</ol>
+<h2 id="results">Results</h2>
+<p><a href="https://blog.c0nrad.io/sims/ising"><img src="/ising.png" alt="/ising.png"></a></p>
+<p>It&rsquo;s ugly and barebones, but it&rsquo;s a good starting ground, and the critical temperature came out correctly. (I&rsquo;ll describe critical temperature and the math in the next blog post).</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Good steps so far! I&rsquo;m excited to dig into the math and solve analytically the 2D case, and also add some features to the simulation (charts of E/M, sim controls).</p>
         </div>
         
 
@@ -207,7 +187,7 @@ $$ \lambda = \frac{0.0029}{T} $$</p>
   <p class="meta">
     <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
     
-    <time>Jan 17, 2022</time>
+    <time>Jan 25, 2022</time>
     
     </span>
   </p>
@@ -216,11 +196,9 @@ $$ \lambda = \frac{0.0029}{T} $$</p>
 
   <p class="meta">
     
-        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/clebsch-gordan/" title="Sim 4: Clebsch-Gordan Coefficients">Sim 4: Clebsch-Gordan Coefficients</a>
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/wien-plank-sympy/" title="Sim 5: Wien&#39;s Law from Plank&#39;s Blackbody Radiation Formula using Sympy">Sim 5: Wien&#39;s Law from Plank&#39;s Blackbody Radiation Formula using Sympy</a>
     
 
-    
-      <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/ising-1/" title="Sim 6: Ising Model Pt. 1">Sim 6: Ising Model Pt. 1</a>
     
   </p>
   
