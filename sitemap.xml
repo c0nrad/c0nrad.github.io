@@ -4,12 +4,32 @@
   
   <url>
     <loc>https://blog.c0nrad.io/</loc>
-    <lastmod>2022-01-25T15:50:49-08:00</lastmod>
+    <lastmod>2022-03-16T08:22:04-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.c0nrad.io/categories/</loc>
+    <lastmod>2022-03-16T08:22:04-07:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.c0nrad.io/posts/</loc>
-    <lastmod>2022-01-25T15:50:49-08:00</lastmod>
+    <lastmod>2022-03-16T08:22:04-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.c0nrad.io/posts/sim-7-ising-2/</loc>
+    <lastmod>2022-03-16T08:22:04-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.c0nrad.io/categories/simulation/</loc>
+    <lastmod>2022-03-16T08:22:04-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.c0nrad.io/categories/stat-mech/</loc>
+    <lastmod>2022-03-16T08:22:04-07:00</lastmod>
   </url>
   
   <url>
@@ -18,17 +38,7 @@
   </url>
   
   <url>
-    <loc>https://blog.c0nrad.io/categories/</loc>
-    <lastmod>2022-01-17T13:40:45-08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.c0nrad.io/posts/wien-plank-sympy/</loc>
-    <lastmod>2022-01-17T13:40:45-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/categories/simulation/</loc>
     <lastmod>2022-01-17T13:40:45-08:00</lastmod>
   </url>
   

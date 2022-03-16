@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
@@ -14,7 +17,7 @@
   
 
   
-  <title>Sim 6: Ising Model Pt. 1</title>
+  <title>stat mech</title>
 
   
   
@@ -33,7 +36,7 @@
   <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
 
   
-  
+  <link href="/categories/stat-mech/index.xml" rel="alternate" type="application/rss+xml" title="c0nrad&#39;s c0rner" />
 
   <meta name="description" content="" />
   <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
@@ -48,16 +51,6 @@
   
   
     
-
-  
-    <meta name="twitter:card" content="summary"/>
-  
-  
-  <meta name="twitter:title" content="Sim 6: Ising Model Pt. 1"/>
-  <meta name="twitter:description" content="We build out a simple Ising model simulator for future expansion."/>
-  
-  <meta name="twitter:domain" content="blog.c0nrad.io"/>
-  <meta name="twitter:creator" content="@CryptoGangsta"/>
 
   
 </head>
@@ -126,88 +119,44 @@
 <div id="main">
   <div id="content">
     <div>
-      <article class="hentry" role="article">
-
-        
-        
-
-<header>
-  <p class="meta">Jan 25, 2022
-     - 2 minute read 
-    
-
-    
-  </p>
-  <h1 class="entry-title">
-     Sim 6: Ising Model Pt. 1 
-  </h1>
-</header>
-
-
-        <div class="entry-content">
+      <article role="article">
+        <header>
+          <h1 class="entry-title">
+            Category: stat mech
+          </h1>
+        </header>
+        <div id="blog-archives" class="category">
           
+          <h2>
+            2022
+          </h2>
+          <article>
+            <h1>
+              <a href="https://blog.c0nrad.io/posts/sim-7-ising-2/" title="Sim 7: A failed attempt at an exact critical temperature for 3D Ising">Sim 7: A failed attempt at an exact critical temperature for 3D Ising</a>
+            </h1>
+            <time>
+              <span class="month">Mar</span>
+              <span class="day">16</span>
+            </time>
+            <footer>
+              <span class="categories"> 
+                
+                
+                posted in:
+                 <a class="category" href="https://blog.c0nrad.io/categories/simulation">simulation</a> <a class="category" href="https://blog.c0nrad.io/categories/stat-mech">stat mech</a>
+              </br>
+                
+
+                
+                
+              </span>
+            </footer>
+          </article>
           
-          
-            <nav id="TableOfContents">
-  <ul>
-    <li><a href="#overview">Overview</a></li>
-    <li><a href="#simulation">Simulation</a></li>
-    <li><a href="#results">Results</a></li>
-    <li><a href="#conclusion">Conclusion</a></li>
-  </ul>
-</nav>
-          
-          <p>We build out a simple Ising model simulator for future expansion.</p>
-<h2 id="overview">Overview</h2>
-<p>The Ising model is probably the most famous (real) physics simulation. It&rsquo;s a useful tool for studying phase transitions and critical phenomena.</p>
-<p>Even though it&rsquo;s relatively simple, and almost 100 years old, it&rsquo;s still an area of <a href="https://arxiv.org/abs/1203.6064">active research</a>.</p>
-<p>The most common usecase is for studying magnetization. We know that materials are composed of a huge quantity of electrons, and we also know that electrons have a property called spin that somewhat acts like a magnet. When a large number of these electrons spin in the same direction we get a bar magnet.</p>
-<p>But it&rsquo;s a balancing act to have a bar magnet.</p>
-<p>On one hand, a collection of electrons spinning in the same direction is lower energy, but there&rsquo;s also a non-stop barrage of collisions and vibrations in the quantum world that will upset the system from all pointing in the same direction.</p>
-<p>If we take a room temperature bar magnet and heat it up, it will slowly lose its magnetism. The thermal jitters will disrupt the overall magnetism.</p>
-<h2 id="simulation">Simulation</h2>
-<p>To model this, we imagine a 2D grid where each spot can either point up or down.</p>
-<p>We then perform a number of steps where at each step we:</p>
-<ol>
-<li>Pick a random spot</li>
-<li>Calculate the energy difference if the spot was flipped</li>
-<li>If the energy is less, accept and flip (nature likes minimum energy)</li>
-<li>If \( e^{-dE/T} \) is greater than a randomly generated number (0,1), accept and flip</li>
-<li>Otherwise reject and continue</li>
-</ol>
-<h2 id="results">Results</h2>
-<p><a href="https://blog.c0nrad.io/sims/ising"><img src="/ising.png" alt="/ising.png"></a></p>
-<p>It&rsquo;s ugly and barebones, but it&rsquo;s a good starting ground, and the critical temperature came out correctly. (I&rsquo;ll describe critical temperature and the math in the next blog post).</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>Good steps so far! I&rsquo;m excited to dig into the math and solve analytically the 2D case, and also add some features to the simulation (charts of E/M, sim controls).</p>
         </div>
-        
-
-<footer>
-  <p class="meta">
-    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
-    
-    <time>Jan 25, 2022</time>
-    
-    </span>
-  </p>
-
-  
-
-  <p class="meta">
-    
-        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/wien-plank-sympy/" title="Sim 5: Wien&#39;s Law from Plank&#39;s Blackbody Radiation Formula using Sympy">Sim 5: Wien&#39;s Law from Plank&#39;s Blackbody Radiation Formula using Sympy</a>
-    
-
-    
-      <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/sim-7-ising-2/" title="Sim 7: A failed attempt at an exact critical temperature for 3D Ising">Sim 7: A failed attempt at an exact critical temperature for 3D Ising</a>
-    
-  </p>
-  
-</footer>
-
       </article>
     </div>
+
     
 
 <aside class="sidebar thirds">
@@ -331,10 +280,6 @@ I write about physics, life, and learning.
 </aside>
   </div>
 </div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
 
     <footer role="contentinfo">
       <p>Copyright &copy; 2022 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -

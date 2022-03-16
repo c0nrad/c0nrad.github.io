@@ -14,7 +14,7 @@
   
 
   
-  <title>Sim 6: Ising Model Pt. 1</title>
+  <title>Sim 7: A failed attempt at an exact critical temperature for 3D Ising</title>
 
   
   
@@ -53,8 +53,8 @@
     <meta name="twitter:card" content="summary"/>
   
   
-  <meta name="twitter:title" content="Sim 6: Ising Model Pt. 1"/>
-  <meta name="twitter:description" content="We build out a simple Ising model simulator for future expansion."/>
+  <meta name="twitter:title" content="Sim 7: A failed attempt at an exact critical temperature for 3D Ising"/>
+  <meta name="twitter:description" content=""/>
   
   <meta name="twitter:domain" content="blog.c0nrad.io"/>
   <meta name="twitter:creator" content="@CryptoGangsta"/>
@@ -132,14 +132,17 @@
         
 
 <header>
-  <p class="meta">Jan 25, 2022
-     - 2 minute read 
+  <p class="meta">Mar 16, 2022
+     - 4 minute read 
     
 
     
+    
+      - <a class="label" href="https://blog.c0nrad.io/categories/simulation/">simulation </a><a class="label" href="https://blog.c0nrad.io/categories/stat-mech/">stat mech </a>
+    
   </p>
   <h1 class="entry-title">
-     Sim 6: Ising Model Pt. 1 
+     Sim 7: A failed attempt at an exact critical temperature for 3D Ising 
   </h1>
 </header>
 
@@ -150,36 +153,51 @@
           
             <nav id="TableOfContents">
   <ul>
-    <li><a href="#overview">Overview</a></li>
-    <li><a href="#simulation">Simulation</a></li>
-    <li><a href="#results">Results</a></li>
+    <li><a href="#critical-temperature">Critical Temperature</a></li>
+    <li><a href="#my-failed-attempt">My failed attempt</a>
+      <ul>
+        <li><a href="#what-went-wrong">What went wrong</a></li>
+        <li><a href="#a-bandaid-attempt">A bandaid attempt</a></li>
+      </ul>
+    </li>
     <li><a href="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
           
-          <p>We build out a simple Ising model simulator for future expansion.</p>
-<h2 id="overview">Overview</h2>
-<p>The Ising model is probably the most famous (real) physics simulation. It&rsquo;s a useful tool for studying phase transitions and critical phenomena.</p>
-<p>Even though it&rsquo;s relatively simple, and almost 100 years old, it&rsquo;s still an area of <a href="https://arxiv.org/abs/1203.6064">active research</a>.</p>
-<p>The most common usecase is for studying magnetization. We know that materials are composed of a huge quantity of electrons, and we also know that electrons have a property called spin that somewhat acts like a magnet. When a large number of these electrons spin in the same direction we get a bar magnet.</p>
-<p>But it&rsquo;s a balancing act to have a bar magnet.</p>
-<p>On one hand, a collection of electrons spinning in the same direction is lower energy, but there&rsquo;s also a non-stop barrage of collisions and vibrations in the quantum world that will upset the system from all pointing in the same direction.</p>
-<p>If we take a room temperature bar magnet and heat it up, it will slowly lose its magnetism. The thermal jitters will disrupt the overall magnetism.</p>
-<h2 id="simulation">Simulation</h2>
-<p>To model this, we imagine a 2D grid where each spot can either point up or down.</p>
-<p>We then perform a number of steps where at each step we:</p>
-<ol>
-<li>Pick a random spot</li>
-<li>Calculate the energy difference if the spot was flipped</li>
-<li>If the energy is less, accept and flip (nature likes minimum energy)</li>
-<li>If \( e^{-dE/T} \) is greater than a randomly generated number (0,1), accept and flip</li>
-<li>Otherwise reject and continue</li>
-</ol>
-<h2 id="results">Results</h2>
-<p><a href="https://blog.c0nrad.io/sims/ising"><img src="/ising.png" alt="/ising.png"></a></p>
-<p>It&rsquo;s ugly and barebones, but it&rsquo;s a good starting ground, and the critical temperature came out correctly. (I&rsquo;ll describe critical temperature and the math in the next blog post).</p>
+          <h1 id="introduction">Introduction</h1>
+<p>The Ising model is a pretty nifty little model. From just some simple nearest neighbor interactions and binary spin states, we can get non-trivial behaviour. It will be that non-trivial behaviour that will be the reason I was unable to solve for the critical temperature.</p>
+<h2 id="critical-temperature">Critical Temperature</h2>
+<p>One thing that is neat about the ising model is that the temperature drops below the &ldquo;critical temperature&rdquo;, the model will break symmetry and randomly magnetize in one direction.</p>
+<p>The calculation of that critical temperature has been done for the 2D Ising Model \( \frac{2}{\ln{(1 + \sqrt{2})}} \), but not the 3D model. There was some <a href="https://arxiv.org/abs/1203.6064">recent research</a> in the area, but as far as I know, no exact solution.</p>
+<p>What a fun challenge to attempt!</p>
+<h2 id="my-failed-attempt">My failed attempt</h2>
+<p>The big picture of my attempt: For a specific magnetization and temperature, why not calculate the probability that we move towards &ldquo;conforming magnetization&rdquo; or away from it. We do this by counting states and multiplying a lot of probabilities together (basically following a single step of the metropolis algorithm).</p>
+<p>I started with the 2D model since this method should easily extend to 3D, and we can verify it works.</p>
+<p>The code can be found <a href="https://github.com/c0nrad/sims/blob/master/ising/scripts/ising_towards_black.py">here</a>.</p>
+<p>It produces images like this:</p>
+<p><a href="/towards_black.png"><img src="/towards_black.png" alt="/towards_black.png"></a></p>
+<p>We can see that for different temperatures, the simulation will tend towards
+&ldquo;conforming magnetization&rdquo; or away to randomness.</p>
+<p>I already knew it didn&rsquo;t seem right, but I plugged it into sympy and took some derivatives and plots of this 2D function:</p>
+<p><img src="/2d_plot.png" alt="/2d_plot.png"></p>
+<p>The exact critical temperature we&rsquo;re looking for is around 2.269. And we&rsquo;re looking for the temperature that just kisses the X axis, which on the plot is around 2.1.</p>
+<h3 id="what-went-wrong">What went wrong</h3>
+<p>For this algorithm to work, I calculate the probability of each local spot occuring (example: a spin up in the middle, with 3 spin down neighbors). Since we&rsquo;re looking at 5 different spots at once (middle, plus 4 neighbors), there&rsquo;s 2^5 (32) different types of spots. So we just calculate the probability that each state will switch or not towards chaos (using metropolisis), and multiply it by the probability of that specific spot occuring.</p>
+<p>To calculate the probability of a spot occuring, I use overall magnetization \( M \) and just make a naive \( M^4 \) sort of calculation to get the probability that all the neighbors are spin up (and continue for the other 31 states).</p>
+<p>This would work fine if there wasn&rsquo;t non-trivial behaviour.</p>
+<p>The problem is that ising is non-trivial! There are domains of similar spins, so I can&rsquo;t just say the probability of all spin ups is \( M^4 \), it&rsquo;s slightly more likely since they like to group up.</p>
+<p><img src="/big_ising.png" alt="/big_ising.png">.</p>
+<p>You can see above that even with an equal probability of purple or yellow at the critical temperature, it&rsquo;s not evenly spread around, it&rsquo;s clumpy.</p>
+<h3 id="a-bandaid-attempt">A bandaid attempt</h3>
+<p>Okay, so we can&rsquo;t use the average magnetization to calculate the probability of each of the 32 local states. Can we use nearest neighbor spin correlation functions \( &lt;s&gt; \)?</p>
+<p>I again naively thought we could just find some \( s(M, T) \) (what is the probability that a neighbor is the same color given a magnetization and temperature) function that would give us the correct number, (spoiler that also won&rsquo;t work, for reasons later).</p>
+<p>So, I tried to fit a function to \( s(M, T) \) (data taken from long running simulations):</p>
+<p><img src="/s_fit.png" alt="/s_fit.png"></p>
+<p>But I was unable to find a function that fit exactly.</p>
+<p>And recently I realized the idea was flawed from the start. For example, there are two different states that have three white cells (with one in the middle). You could have the three white cells in a line, or the three white cells in the corner. Both would be the same probability according to \( s(M,T) \) but due to the non-trivial grouping, they should not have the same probability.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>Good steps so far! I&rsquo;m excited to dig into the math and solve analytically the 2D case, and also add some features to the simulation (charts of E/M, sim controls).</p>
+<p>I was a little disappointed that the method didn&rsquo;t end up working out. It was an exciting few days getting everything working, and finding the flaw was a little but heartbreaking, but I ended up learning a lot.</p>
+<p>Not sure what is next, maybe I&rsquo;ll finally do the electron magnetic moment calculation.</p>
         </div>
         
 
@@ -187,7 +205,7 @@
   <p class="meta">
     <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
     
-    <time>Jan 25, 2022</time>
+    <time>Mar 16, 2022</time>
     
     </span>
   </p>
@@ -196,11 +214,9 @@
 
   <p class="meta">
     
-        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/wien-plank-sympy/" title="Sim 5: Wien&#39;s Law from Plank&#39;s Blackbody Radiation Formula using Sympy">Sim 5: Wien&#39;s Law from Plank&#39;s Blackbody Radiation Formula using Sympy</a>
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/ising-1/" title="Sim 6: Ising Model Pt. 1">Sim 6: Ising Model Pt. 1</a>
     
 
-    
-      <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/sim-7-ising-2/" title="Sim 7: A failed attempt at an exact critical temperature for 3D Ising">Sim 7: A failed attempt at an exact critical temperature for 3D Ising</a>
     
   </p>
   
