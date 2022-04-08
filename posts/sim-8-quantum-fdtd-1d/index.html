@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>Sim 8 Quantum FDTD simulation 1d</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+    <link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
+  <meta name="author" content="Stuart Larsen">
+
+  
+  <meta name="generator" content="Hugo 0.79.1" />
+
+  
+  
+
+  
+  
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+  
+  
+  <meta name="twitter:title" content="Sim 8 Quantum FDTD simulation 1d"/>
+  <meta name="twitter:description" content=""/>
+  
+  <meta name="twitter:domain" content="blog.c0nrad.io"/>
+  <meta name="twitter:creator" content="@CryptoGangsta"/>
+
+  
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="https://blog.c0nrad.io/">c0nrad&#39;s c0rner</a></h1>
+    <h2>Learning and learning</h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+        <option value="https://blog.c0nrad.io/">» Home</option>
+      
+        <option value="https://c0nrad.io">» Website</option>
+      
+        <option value="https://github.com/c0nrad/">» Github</option>
+      
+        <option value="https://twitter.com/xc0nradx">» Twitter</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="https://blog.c0nrad.io/" title="Home">Home</a></li>
+    
+  
+    
+      <li><a href="https://c0nrad.io" title="Website"  rel="noopener noreferrer">Website</a></li>
+    
+  
+    
+      <li><a href="https://github.com/c0nrad/" title="Github"  rel="noopener noreferrer">Github</a></li>
+    
+  
+    
+      <li><a href="https://twitter.com/xc0nradx" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+</ul>
+
+<ul class="subscription">
+  
+    
+        <a href="https://blog.c0nrad.io/index.xml" target="_blank" type="application/rss+xml" title="RSS" rel="noopener noreferrer"><i class="fa fa-rss-square fa-lg"></i></a>
+    
+  
+</ul>
+
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+  <p class="meta">Apr 8, 2022
+     - 2 minute read 
+    
+
+    
+    
+      - <a class="label" href="https://blog.c0nrad.io/categories/simulation/">simulation </a><a class="label" href="https://blog.c0nrad.io/categories/quantum/">quantum </a>
+    
+  </p>
+  <h1 class="entry-title">
+     Sim 8 Quantum FDTD simulation 1d 
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#details">Details</a></li>
+    <li><a href="#random-notes">Random Notes</a></li>
+    <li><a href="#future">Future</a></li>
+  </ul>
+</nav>
+          
+          <h1 id="introduction">Introduction</h1>
+<p>In this post we simulate the schrodinger equation using FDTD (finite-difference time-domain). We scatter a gaussian wavepacket off a step potential.</p>
+<p>This so far has been one of my favorite simulations. We can only exactly solve the Schrodinger equations for a few simple potentials, but this method allows us to see what would happen to a gaussian wavepacket on any potential.</p>
+<h2 id="results">Results</h2>
+<p><a href="https://blog.c0nrad.io/sims/qfdtd1d/">Live Animation</a></p>
+<p>Video:
+<video autoplay loop controls src="/schrodinger_gauss_scatter.mp4">
+</video></p>
+<h2 id="details">Details</h2>
+<p>This work was heavily based off these two resources:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=S-6Z8N-30AU">https://www.youtube.com/watch?v=S-6Z8N-30AU</a></li>
+<li><a href="https://scipy-cookbook.readthedocs.io/_downloads/bca7b26f2efcc85a15a70187c3989aa1/Schrodinger_FDTD.pdf">https://scipy-cookbook.readthedocs.io/_downloads/bca7b26f2efcc85a15a70187c3989aa1/Schrodinger_FDTD.pdf</a></li>
+</ul>
+<p>The idea is relatively simple. We want to simulate the Schrodinger equation for a specific potential:</p>
+<p>$$ i \hbar \frac{\partial \psi(x, t)}{\partial t} = - \frac{\hbar^2}{2m} \frac{\partial^2 \psi(x, t)}{\partial x^2} + V(x) \psi(x,t)$$</p>
+<p>Specifically we want to see how \( \psi \) changes with time.</p>
+<p>We see that the time derivative can be calculated by the Laplacian (double derivative with respect to position) and the potential.</p>
+<p>The trick we use is to turn the continuous equation into a lattice of points, and use the definition of a derivative:</p>
+<p>$$
+\frac{d \psi}{d x} \approx \lim_{a \to small} \frac{ \psi(x+a) - \psi(x) }{a}
+$$</p>
+<p>$$
+\frac{d^2 \psi}{d x^2} \approx \lim_{a \to small} \frac{ \psi(x+a) - 2\psi(x) + \psi(x-a) }{a^2}
+$$</p>
+<p>Plugging this into the schrodinger equation and massaging the constants we get these two very simple update equations (for each grid spot)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">psi_i_future</span>[<span style="color:#a6e22e">x</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">c1</span> <span style="color:#f92672">*</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">psi_r_present</span>[<span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">psi_r_present</span>[<span style="color:#a6e22e">x</span>] <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">psi_r_present</span>[<span style="color:#a6e22e">x</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) <span style="color:#f92672">-</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">c2V</span>[<span style="color:#a6e22e">x</span>] <span style="color:#f92672">*</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">psi_r_present</span>[<span style="color:#a6e22e">x</span>] <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">psi_i_past</span>[<span style="color:#a6e22e">x</span>];
+<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">psi_r_future</span>[<span style="color:#a6e22e">x</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">c1</span> <span style="color:#f92672">*</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">psi_i_present</span>[<span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">psi_i_present</span>[<span style="color:#a6e22e">x</span>] <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">psi_i_present</span>[<span style="color:#a6e22e">x</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">c2V</span>[<span style="color:#a6e22e">x</span>] <span style="color:#f92672">*</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">psi_i_present</span>[<span style="color:#a6e22e">x</span>] <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">psi_r_past</span>[<span style="color:#a6e22e">x</span>];
+</code></pre></div><p>And that&rsquo;s it!</p>
+<p>I just love how much easier it is to code solutions numerically than attempt to solve them exactly.</p>
+<p><a href="https://github.com/c0nrad/sims/tree/master/qfdtd1d">Code</a></p>
+<h2 id="random-notes">Random Notes</h2>
+<ul>
+<li>The article recommended splitting the schrodinger equation into two equations for the real and complex values. I followed the advice, but I think for 2D I&rsquo;m just going to use complex numbers instead</li>
+<li>The simulation was very slow at first, thankfully Chrome has really nifty profiling tools and I was able to see I just had a heap leak and garbage collection was being called a lot
+<ul>
+<li>I am slightly nervous about the 2D simulation being slow, but we&rsquo;ll cross that bridge later</li>
+</ul>
+</li>
+<li>The initial gaussian pulse was initially being split into two parts going opposite directions. There was a bug in my update equation which caused that to happen</li>
+</ul>
+<h2 id="future">Future</h2>
+<p>Up next is scattering electrons off a double slit. So I&rsquo;m working on a 2D simulation of this.</p>
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
+    
+    <time>Apr 8, 2022</time>
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/sim-7-ising-2/" title="Sim 7: A failed attempt at an exact critical temperature for 3D Ising">Sim 7: A failed attempt at an exact critical temperature for 3D Ising</a>
+    
+
+    
+  </p>
+  
+</footer>
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+    <h1>Who am I?</h1>
+    
+
+    <p>
+      
+      <img src="/me.png" style="width: 100%"> 
+I am Stuart. In a previous life I was a programmer, electrical engineer, and a security engineer. Now I spend my free time tinkering with physics.
+</br></br>
+My goal is to understand why the universe exists. I have a lot of learning to do.
+<br/><br/>
+I write about physics, life, and learning.
+</br>
+      
+    </p>
+  </section>
+
+  
+
+  
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      <a target="_blank" rel="noopener noreferrer" href="https://github.com/c0nrad/" title="https://github.com/c0nrad/"><i
+          class="fa fa-github fa-3x"></i></a>
+      
+      
+      <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/xc0nradx/" title="https://twitter.com/xc0nradx/"><i
+          class="fa fa-twitter fa-3x"></i></a>
+      
+      
+      
+      
+      <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/c0nrad" title="https://www.linkedin.com/in/c0nrad"><i
+          class="fa fa-linkedin fa-3x"></i></a>
+      
+      
+      
+      
+      
+      
+
+      
+      
+    </li>
+  </ul>
+
+
+  
+
+  
+  
+  <section class="odd">
+    
+    <h1>Collections</h1>
+    
+    
+    <li>
+      <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+    </li>
+    
+    <li>
+      <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+    </li>
+    
+    <li>
+      <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+    </li>
+    
+    <li>
+      <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+    </li>
+    
+  </section>
+  
+  
+
+  
+  
+  
+
+
+  
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup {
+        background: #fff;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+        border: 1px solid;
+        margin-top: 20px;
+    }
+
+
+
+
+     
+</style>
+<div id="mc_embed_signup">
+    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
+        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+        novalidate>
+        <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Subscribe for new posts:</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                    class="button"></div>
+        </div>
+    </form>
+</div>
+
+
+
+</aside>
+  </div>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2022 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+      <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+          var u="//c0nrad.matomo.cloud/";
+          _paq.push(['setTrackerUrl', u+'piwik.php']);
+          _paq.push(['setSiteId',  1 ]);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+      </script>
+    
+    
+
+    
+  </body>
+</html>
+
