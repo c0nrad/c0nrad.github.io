@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
@@ -17,7 +14,7 @@
   
 
   
-  <title>quantum</title>
+  <title>Sim 10: Numerically solving Schrodinger via Crank-Nicolson in C&#43;&#43;</title>
 
   
   
@@ -36,7 +33,7 @@
   <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
 
   
-  <link href="/categories/quantum/index.xml" rel="alternate" type="application/rss+xml" title="c0nrad&#39;s c0rner" />
+  
 
   <meta name="description" content="" />
   <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
@@ -51,6 +48,16 @@
   
   
     
+
+  
+    <meta name="twitter:card" content="summary"/>
+  
+  
+  <meta name="twitter:title" content="Sim 10: Numerically solving Schrodinger via Crank-Nicolson in C&#43;&#43;"/>
+  <meta name="twitter:description" content=""/>
+  
+  <meta name="twitter:domain" content="blog.c0nrad.io"/>
+  <meta name="twitter:creator" content="@CryptoGangsta"/>
 
   
 </head>
@@ -119,96 +126,108 @@
 <div id="main">
   <div id="content">
     <div>
-      <article role="article">
-        <header>
-          <h1 class="entry-title">
-            Category: quantum
-          </h1>
-        </header>
-        <div id="blog-archives" class="category">
-          
-          <h2>
-            2022
-          </h2>
-          <article>
-            <h1>
-              <a href="https://blog.c0nrad.io/posts/sim-10-crank-that-nicolson/" title="Sim 10: Numerically solving Schrodinger via Crank-Nicolson in C&#43;&#43;">Sim 10: Numerically solving Schrodinger via Crank-Nicolson in C&#43;&#43;</a>
-            </h1>
-            <time>
-              <span class="month">Apr</span>
-              <span class="day">13</span>
-            </time>
-            <footer>
-              <span class="categories"> 
-                
-                
-                posted in:
-                 <a class="category" href="https://blog.c0nrad.io/categories/simulation">simulation</a> <a class="category" href="https://blog.c0nrad.io/categories/quantum">quantum</a>
-              </br>
-                
+      <article class="hentry" role="article">
 
-                
-                
-              </span>
-            </footer>
-          </article>
-          
-          <h2>
-            2022
-          </h2>
-          <article>
-            <h1>
-              <a href="https://blog.c0nrad.io/posts/sim-9-double-slit-schrodinger-fdtd/" title="Sim 9 Double Slit Simulation - Schrodinger FDTD">Sim 9 Double Slit Simulation - Schrodinger FDTD</a>
-            </h1>
-            <time>
-              <span class="month">Apr</span>
-              <span class="day">9</span>
-            </time>
-            <footer>
-              <span class="categories"> 
-                
-                
-                posted in:
-                 <a class="category" href="https://blog.c0nrad.io/categories/simulation">simulation</a> <a class="category" href="https://blog.c0nrad.io/categories/quantum">quantum</a>
-              </br>
-                
+        
+        
 
-                
-                
-              </span>
-            </footer>
-          </article>
-          
-          <h2>
-            2022
-          </h2>
-          <article>
-            <h1>
-              <a href="https://blog.c0nrad.io/posts/sim-8-quantum-fdtd-1d/" title="Sim 8 Quantum Step Potential Simulation - Schrodinger FDTD">Sim 8 Quantum Step Potential Simulation - Schrodinger FDTD</a>
-            </h1>
-            <time>
-              <span class="month">Apr</span>
-              <span class="day">8</span>
-            </time>
-            <footer>
-              <span class="categories"> 
-                
-                
-                posted in:
-                 <a class="category" href="https://blog.c0nrad.io/categories/simulation">simulation</a> <a class="category" href="https://blog.c0nrad.io/categories/quantum">quantum</a>
-              </br>
-                
+<header>
+  <p class="meta">Apr 13, 2022
+     - 3 minute read 
+    
 
-                
-                
-              </span>
-            </footer>
-          </article>
+    
+    
+      - <a class="label" href="https://blog.c0nrad.io/categories/simulation/">simulation </a><a class="label" href="https://blog.c0nrad.io/categories/quantum/">quantum </a>
+    
+  </p>
+  <h1 class="entry-title">
+     Sim 10: Numerically solving Schrodinger via Crank-Nicolson in C&#43;&#43; 
+  </h1>
+</header>
+
+
+        <div class="entry-content">
           
+          
+          
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#crank-nicolson">Crank Nicolson</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#what-went-well">What went well</a></li>
+    <li><a href="#what-didnt-go-well">What didn&rsquo;t go well</a></li>
+    <li><a href="#future">Future</a></li>
+  </ul>
+</nav>
+          
+          <h1 id="overview">Overview</h1>
+<p>I think the big take-away for me on this project was realizing how much I miss C++.</p>
+<p><a href="https://github.com/c0nrad/sims/blob/master/crankNicolson/main.cpp">Code</a></p>
+<p>It was an absolute pleasure to program, and so fast!</p>
+<h2 id="crank-nicolson">Crank Nicolson</h2>
+<p>For this exercise I used the <a href="https://en.wikipedia.org/wiki/Crank%E2%80%93Nicolson_method">Crank Nicolson</a> method, which is an unconditionally stable finite difference method for solving partial differential equations.</p>
+<p>To get the Crank Nicolson equation you basically take the standard FTCS equation (Forward Time Central Space) both forward and backwards and combine the equations.</p>
+<p>$$ \psi(x, t+h) - h\frac{i \hbar}{4 m a^2}[\psi(x+a, t+h) + \psi(x-a, t+h) - 2 \psi(x, t+h)] \\ = \psi(x,t) + h \frac{i \hbar}{4 m a^2}[\psi(x+a, t) + \psi(x-a, t) - 2\psi(x, t)] $$</p>
+<p>If you massage the coefficients you can construct a matrix equation similar to:</p>
+<p>$$ \bm{A} \psi(t+h) = \bm{B} \psi(t) $$</p>
+<p>And, so for each step we just want to solve for \( \psi(t+h) \). But what&rsquo;s neat is that the matrixes are Tridiagonal.</p>
+<p>It&rsquo;s easy to calculate \( \bm{B} \psi(t) \), and then we have an equation of the form of \( \bm{A} x = v \). And since it&rsquo;s tridiagonal we can use <a href="https://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm">Thomas&rsquo;s algorithm</a> (just gaussian elimination with backpropogation). (<a href="https://github.com/c0nrad/sims/blob/master/crankNicolson/main.cpp#L72">Source Code</a>) \( O(n) \) instead of \( O(n^3) \).</p>
+<h2 id="results">Results</h2>
+<p><img src="/crankNicolson.gif" alt="crankNicolson.gif"></p>
+<p>An electron bouncing in an infinite well. Not that exciting, but look that it&rsquo;s 5000 grid points, and simulating thousands of steps takes less than a second. Pretty neat.</p>
+<h2 id="what-went-well">What went well</h2>
+<ul>
+<li>At first I hand rolled my own matrix math, and then switched to the Eigen package, which was wayyyyy faster.
+<ul>
+<li>The SparseMatrix implementation is also amazingly great since the \( A, B \) matrixes would have been 5000x5000</li>
+</ul>
+</li>
+<li>Hand rolling the Thomas algorithm was surprisingly smooth (although Eigen does the back propogation for me).</li>
+</ul>
+<h2 id="what-didnt-go-well">What didn&rsquo;t go well</h2>
+<ul>
+<li>Plotting in c++ is terrible, I was about to use ROOT but eventually just decided to skip that mess and use gnuplot. So plotting is done outside the program. But gnuplot makes gifs which is nice.</li>
+<li>I haven&rsquo;t done much c++ programming on MacOS, but it&rsquo;s a bummer that the profilers are so hard to setup. Eventually I found out MacOS has a tool call &ldquo;Instrument&rdquo; which worked alright.
+<ul>
+<li>There weren&rsquo;t any leaks, but it was still nice to check</li>
+</ul>
+</li>
+</ul>
+<h2 id="future">Future</h2>
+<p>Two ideas:</p>
+<ul>
+<li>I have a <a href="https://blog.c0nrad.io/hydrogenjs/#/">hydrogen orbital simulation</a> which samples the analytically solved solutions. Why not let crank-nicolson do the heavy lifting and solve the problem just from a potential? Is that even possible?</li>
+<li>And then, why not take my c++ code, and compile it to web assembly and see how fast it is to invoke from javascript?</li>
+</ul>
+<p>I also saw that there&rsquo;s a way to numerically solve the Schrodinger equation using some spectral method that I&rsquo;ll probably look at.</p>
+<p>Either way I&rsquo;m excited! These last few simulations have been my favorite.</p>
         </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
+    
+    <time>Apr 13, 2022</time>
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/sim-9-double-slit-schrodinger-fdtd/" title="Sim 9 Double Slit Simulation - Schrodinger FDTD">Sim 9 Double Slit Simulation - Schrodinger FDTD</a>
+    
+
+    
+  </p>
+  
+</footer>
+
       </article>
     </div>
-
     
 
 <aside class="sidebar thirds">
@@ -332,6 +351,10 @@ I write about physics, life, and learning.
 </aside>
   </div>
 </div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
 
     <footer role="contentinfo">
       <p>Copyright &copy; 2022 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
