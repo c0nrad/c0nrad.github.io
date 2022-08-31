@@ -6,7 +6,18 @@
     <description>Recent content in Posts on c0nrad&#39;s c0rner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 Apr 2022 13:59:20 -0700</lastBuildDate><atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Aug 2022 16:31:22 -0400</lastBuildDate><atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>More Fun With Ising</title>
+      <link>https://blog.c0nrad.io/posts/more-fun-with-ising/</link>
+      <pubDate>Sun, 28 Aug 2022 16:31:22 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/more-fun-with-ising/</guid>
+      <description>It&amp;rsquo;s been awhile since I&amp;rsquo;ve posted, so I figured I&amp;rsquo;d talk about what I&amp;rsquo;ve been working on for the last few months. Specifically some new attempts for solving the Ising models.
+ Puzzle Piece Representation of the Ising model The &amp;ldquo;puzzle piece&amp;rdquo; representation of the ising model is my attempt to find a simpler solution for 2D (and hopefully one that extends to 3D).
+To be honest, it&amp;rsquo;s not that well motivated.</description>
+    </item>
+    
     <item>
       <title>Sim 10: Numerically solving Schrodinger via Crank-Nicolson in C&#43;&#43;</title>
       <link>https://blog.c0nrad.io/posts/sim-10-crank-that-nicolson/</link>
