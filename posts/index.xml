@@ -6,7 +6,19 @@
     <description>Recent content in Posts on c0nrad&#39;s c0rner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Aug 2022 16:31:22 -0400</lastBuildDate><atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Sep 2022 19:55:11 -0400</lastBuildDate><atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Simple Lorentz Boost Script</title>
+      <link>https://blog.c0nrad.io/posts/simple-lorentz-boost-script/</link>
+      <pubDate>Wed, 07 Sep 2022 19:55:11 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/simple-lorentz-boost-script/</guid>
+      <description>Like every human being, I have a hard time visualizing Lorentz boosts. (Lorentz boosts being the change in velocity that respects special relativity.
+I&amp;rsquo;m considering doing some sort of animations that will show how different events would look depending on your boosted velocity.
+But, before that I wrote a little script to try to gain some more intuition behind the boosts:
+import numpy as np import matplotlib.pyplot as plot events = [np.</description>
+    </item>
+    
     <item>
       <title>More Fun With Ising</title>
       <link>https://blog.c0nrad.io/posts/more-fun-with-ising/</link>
