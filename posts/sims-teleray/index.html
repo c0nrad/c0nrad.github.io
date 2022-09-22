@@ -14,7 +14,7 @@
   
 
   
-  <title>Simple Lorentz Boost Script</title>
+  <title>Sim 11: Ray Tracing Telescope</title>
 
   
   
@@ -35,7 +35,7 @@
   
   
 
-  <meta name="description" content="Script to perform a 1D Lorentz boost" />
+  <meta name="description" content="" />
   <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
   <meta name="author" content="Stuart Larsen">
 
@@ -53,8 +53,11 @@
     <meta name="twitter:card" content="summary"/>
   
   
-  <meta name="twitter:title" content="Simple Lorentz Boost Script"/>
-  <meta name="twitter:description" content="Script to perform a 1D Lorentz boost"/>
+  <meta name="twitter:title" content="Sim 11: Ray Tracing Telescope"/>
+  <meta name="twitter:description" content="Today&rsquo;s project was building a little ray tracing telescope with a fake CCD. You can play with it here:
+https://blog.c0nrad.io/sims/teleray/
+
+(code)"/>
   
   <meta name="twitter:domain" content="blog.c0nrad.io"/>
   <meta name="twitter:creator" content="@CryptoGangsta"/>
@@ -132,17 +135,14 @@
         
 
 <header>
-  <p class="meta">Sep 7, 2022
+  <p class="meta">Sep 22, 2022
      - 2 minute read 
     
 
     
-    
-      - <a class="label" href="https://blog.c0nrad.io/categories/physics/">physics </a>
-    
   </p>
   <h1 class="entry-title">
-     Simple Lorentz Boost Script 
+     Sim 11: Ray Tracing Telescope 
   </h1>
 </header>
 
@@ -153,48 +153,62 @@
           
             <nav id="TableOfContents">
   <ul>
+    <li><a href="#background">Background</a></li>
+    <li><a href="#how-it-works">How it works</a>
+      <ul>
+        <li><a href="#mirrors">Mirrors</a></li>
+        <li><a href="#walls">Walls</a></li>
+        <li><a href="#ccd">CCD</a></li>
+        <li><a href="#rays">Rays</a></li>
+        <li><a href="#interface">Interface</a></li>
+      </ul>
+    </li>
+    <li><a href="#what-went-well">What went well?</a></li>
+    <li><a href="#what-did-not-go-well">What did not go well</a></li>
     <li><a href="#future">Future</a></li>
   </ul>
 </nav>
           
-          <p>Like every human being, I have a hard time visualizing Lorentz boosts. (Lorentz boosts being the change in velocity that respects special relativity.</p>
-<p>I&rsquo;m considering doing some sort of animations that will show how different events would look depending on your boosted velocity.</p>
-<p>But, before that I wrote a little script to try to gain some more intuition behind the boosts:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
-<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plot
-
-events <span style="color:#f92672">=</span> [np<span style="color:#f92672">.</span>array([a]) <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> [(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1.5</span>), (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>)]]
-
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_boost</span>(velocity):
-    gamma <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> velocity <span style="color:#f92672">*</span> velocity)
-    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>matrix([[gamma, <span style="color:#f92672">-</span>velocity <span style="color:#f92672">*</span> gamma], [<span style="color:#f92672">-</span>velocity <span style="color:#f92672">*</span> gamma, gamma]])
-
-
-plot<span style="color:#f92672">.</span>scatter([a<span style="color:#f92672">.</span>item(<span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> events], [a<span style="color:#f92672">.</span>item(<span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> events], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;before boost&#34;</span>)
-<span style="color:#66d9ef">for</span> v <span style="color:#f92672">in</span> [<span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.3</span>, <span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0.6</span>, <span style="color:#ae81ff">0.7</span>, <span style="color:#ae81ff">0.8</span>, <span style="color:#ae81ff">0.9</span>]:
-    boost <span style="color:#f92672">=</span> generate_boost(v)
-    plot<span style="color:#f92672">.</span>scatter(
-        [(boost <span style="color:#f92672">*</span> a<span style="color:#f92672">.</span>transpose())<span style="color:#f92672">.</span>item(<span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> events],
-        [(boost <span style="color:#f92672">*</span> a<span style="color:#f92672">.</span>transpose())<span style="color:#f92672">.</span>item(<span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> events],
-        label<span style="color:#f92672">=</span>f<span style="color:#e6db74">&#34;after boost v={v}c&#34;</span>,
-    )
-plot<span style="color:#f92672">.</span>title(f<span style="color:#e6db74">&#34;Boost of points {[a[0].tolist() for a in events]}&#34;</span>)
-plot<span style="color:#f92672">.</span>xlim([<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>])
-plot<span style="color:#f92672">.</span>ylim([<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>])
-plot<span style="color:#f92672">.</span>grid(True)
-plot<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;x (lightseconds)&#34;</span>)
-plot<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;t (seconds)&#34;</span>)
-plot<span style="color:#f92672">.</span>legend()
-plot<span style="color:#f92672">.</span>show()
-plot<span style="color:#f92672">.</span>pause()
-</code></pre></div><p>Which produces the following plot:</p>
-<p><img src="/boost.png" alt="boost.png"></p>
-<p>An example point that really shows the weirdness is the point that starts at (1, 2), and when boosted by v=(.5c), it&rsquo;s at (0, 1.8). Classically if you were boosted by v=.5c, you&rsquo;d expect the resulting event to take place at (0, 2), but here the event happens even sooner.</p>
+          <p>Today&rsquo;s project was building a little ray tracing telescope with a fake CCD. You can play with it here:</p>
+<p><a href="https://blog.c0nrad.io/sims/teleray/">https://blog.c0nrad.io/sims/teleray/</a></p>
+<p><a href="https://blog.c0nrad.io/sims/teleray/"><img src="/teleray.png" alt="/teleray.png"></a></p>
+<p>(<a href="https://github.com/c0nrad/sims/blob/master/teleray/src/app/app.component.ts">code</a>)</p>
+<h2 id="background">Background</h2>
+<p>I have a homework assignment involving the calculation of some quantity related to a Cassegrain telescope. So being the procrastinator I am, I decided to instead build a little ray tracer telescope model instead.</p>
+<p>Really I just wanted to play with building different types of lenses and mirrors and have some fun. And I figured it&rsquo;d look neat.</p>
+<h2 id="how-it-works">How it works</h2>
+<h3 id="mirrors">Mirrors</h3>
+<p>The model renders the primary and secondary mirror first. To generate these objects I use a &ldquo;Lathe&rdquo; geometry, where I define a line and ThreeJS will rotate the line around to build a surface. This allows me to generate lenses and mirrors of arbitrary shape.</p>
+<h3 id="walls">Walls</h3>
+<p>Next I generate the struts that block the light. These items are used in the collision detection to block the rays of light.</p>
+<h3 id="ccd">CCD</h3>
+<p>At the bottom there is a fake CCD, when a ray hits the device it records which cell and saves to a counts matrix for displaying later.</p>
+<h3 id="rays">Rays</h3>
+<p>Rays are generated by following the path and seeing what object they collide with.</p>
+<p>It the ray collides with a Wall, it is stopped. If it collides with a mirror, it&rsquo;ll calculate the normal vector and then the reflection angle.</p>
+<p>If the ray hits a CCD the count is recorded.</p>
+<h3 id="interface">Interface</h3>
+<p>The interface is build using Angular. You&rsquo;re able to adjust a number of parameters of the mirror including radius, position, etc.</p>
+<h2 id="what-went-well">What went well?</h2>
+<ul>
+<li>Graphics on ThreeJS always look neat</li>
+<li>The CCD capture code was super simple, and looks cool</li>
+</ul>
+<h2 id="what-did-not-go-well">What did not go well</h2>
+<ul>
+<li>Collision detection (ray caster)
+<ul>
+<li>Due to some ThreeJS internals, you&rsquo;re supposed to update the world matrix to get ray casting to work after moving an object. The object will be in the correct spot on the screen, but not in some internal matrix. I spent a good few hours trying to figure out why my collisions were off.</li>
+<li>Surfaces by default are not double sided, so collisions only happen one way, combined with the previous issue, it was very frustrating to debug</li>
+</ul>
+</li>
+</ul>
 <h2 id="future">Future</h2>
-<p>I&rsquo;m imagining a gif of a set of timelines that show when and where you&rsquo;d see the event depending on velocity, I think it could even be 2D plots for both X-Y and maybe even a set of points.</p>
-<p>We&rsquo;ll see what looks good.</p>
-
+<p>Probably nothing. The following things could be cool, but I probably won&rsquo;t do them. I should be studying.</p>
+<ul>
+<li>Use wavefronts instead of light points to model diffraction.</li>
+<li>Add point sources of light instead of collimated light</li>
+</ul>
         </div>
         
 
@@ -202,7 +216,7 @@ plot<span style="color:#f92672">.</span>pause()
   <p class="meta">
     <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
     
-    <time>Sep 7, 2022</time>
+    <time>Sep 22, 2022</time>
     
     </span>
   </p>
@@ -211,11 +225,9 @@ plot<span style="color:#f92672">.</span>pause()
 
   <p class="meta">
     
-        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/more-fun-with-ising/" title="More Fun With Ising">More Fun With Ising</a>
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/simple-lorentz-boost-script/" title="Simple Lorentz Boost Script">Simple Lorentz Boost Script</a>
     
 
-    
-      <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/sims-teleray/" title="Sim 11: Ray Tracing Telescope">Sim 11: Ray Tracing Telescope</a>
     
   </p>
   

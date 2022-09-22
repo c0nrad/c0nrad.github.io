@@ -6,7 +6,19 @@
     <description>Recent content in Posts on c0nrad&#39;s c0rner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Sep 2022 19:55:11 -0400</lastBuildDate><atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 22 Sep 2022 12:14:28 -0400</lastBuildDate><atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sim 11: Ray Tracing Telescope</title>
+      <link>https://blog.c0nrad.io/posts/sims-teleray/</link>
+      <pubDate>Thu, 22 Sep 2022 12:14:28 -0400</pubDate>
+      
+      <guid>https://blog.c0nrad.io/posts/sims-teleray/</guid>
+      <description>&lt;p&gt;Today&amp;rsquo;s project was building a little ray tracing telescope with a fake CCD. You can play with it here:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.c0nrad.io/sims/teleray/&#34;&gt;https://blog.c0nrad.io/sims/teleray/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.c0nrad.io/sims/teleray/&#34;&gt;&lt;img src=&#34;https://blog.c0nrad.io/teleray.png&#34; alt=&#34;/teleray.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;(&lt;a href=&#34;https://github.com/c0nrad/sims/blob/master/teleray/src/app/app.component.ts&#34;&gt;code&lt;/a&gt;)&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Simple Lorentz Boost Script</title>
       <link>https://blog.c0nrad.io/posts/simple-lorentz-boost-script/</link>
