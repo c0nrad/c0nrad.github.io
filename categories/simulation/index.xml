@@ -1,219 +1,152 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>simulation on c0nrad&#39;s c0rner</title>
+    <title>Simulation on c0nrad&#39;s c0rner</title>
     <link>https://blog.c0nrad.io/categories/simulation/</link>
-    <description>Recent content in simulation on c0nrad&#39;s c0rner</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Simulation on c0nrad&#39;s c0rner</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 Apr 2022 13:59:20 -0700</lastBuildDate><atom:link href="https://blog.c0nrad.io/categories/simulation/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Sim 10: Numerically solving Schrodinger via Crank-Nicolson in C&#43;&#43;</title>
-      <link>https://blog.c0nrad.io/posts/sim-10-crank-that-nicolson/</link>
-      <pubDate>Wed, 13 Apr 2022 13:59:20 -0700</pubDate>
-      
-      <guid>https://blog.c0nrad.io/posts/sim-10-crank-that-nicolson/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sim 9 Double Slit Simulation - Schrodinger FDTD</title>
-      <link>https://blog.c0nrad.io/posts/sim-9-double-slit-schrodinger-fdtd/</link>
-      <pubDate>Sat, 09 Apr 2022 07:50:35 -0700</pubDate>
-      
-      <guid>https://blog.c0nrad.io/posts/sim-9-double-slit-schrodinger-fdtd/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sim 8 Quantum Step Potential Simulation - Schrodinger FDTD</title>
-      <link>https://blog.c0nrad.io/posts/sim-8-quantum-fdtd-1d/</link>
-      <pubDate>Fri, 08 Apr 2022 08:33:55 -0700</pubDate>
-      
-      <guid>https://blog.c0nrad.io/posts/sim-8-quantum-fdtd-1d/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Wed, 16 Mar 2022 08:22:04 -0700</lastBuildDate>
+    <atom:link href="https://blog.c0nrad.io/categories/simulation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Sim 7: A failed attempt at an exact critical temperature for 3D Ising</title>
       <link>https://blog.c0nrad.io/posts/sim-7-ising-2/</link>
       <pubDate>Wed, 16 Mar 2022 08:22:04 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/sim-7-ising-2/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Sim 5: Wien&#39;s Law from Plank&#39;s Blackbody Radiation Formula using Sympy</title>
       <link>https://blog.c0nrad.io/posts/wien-plank-sympy/</link>
       <pubDate>Mon, 17 Jan 2022 13:40:45 -0800</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/wien-plank-sympy/</guid>
       <description>&lt;p&gt;We derive wien&amp;rsquo;s constant using plank&amp;rsquo;s blackbody radiation formula.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Sim 3: Kepler Problems</title>
       <link>https://blog.c0nrad.io/posts/sim-3-kepler-problems/</link>
       <pubDate>Wed, 22 Dec 2021 10:07:03 -0800</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/sim-3-kepler-problems/</guid>
-      <description>&lt;p&gt;We solve for the different types of orbits of the &lt;a href=&#34;https://en.wikipedia.org/wiki/Kepler_problem&#34;&gt;Kepler Problem&lt;/a&gt; (two body central force problems).&lt;/p&gt;</description>
+      <description>&lt;p&gt;We solve for the different types of orbits of the &#xA;&lt;a href=&#34;https://en.wikipedia.org/wiki/Kepler_problem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kepler Problem&lt;/a&gt; (two body central force problems).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Sim 2: Effective Potential</title>
       <link>https://blog.c0nrad.io/posts/sim-2-effective-potential/</link>
       <pubDate>Sun, 19 Dec 2021 11:00:24 -0800</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/sim-2-effective-potential/</guid>
       <description>&lt;p&gt;Plot the effective potential for the two body force simulation.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Sim 1: Two Body Central Force</title>
       <link>https://blog.c0nrad.io/posts/sim-1-two-body-central-force/</link>
       <pubDate>Sun, 19 Dec 2021 05:24:02 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/sim-1-two-body-central-force/</guid>
       <description>&lt;p&gt;Day one of building 99 simulations. We&amp;rsquo;ll reduce a problem that at first requires 6 parameters with coupling, to a problem with just 3 (or 2, depending on how you look at it) by exploiting the symmetry. &amp;ldquo;Nature does not care how we describe her&amp;rdquo;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Plasma Leak</title>
       <link>https://blog.c0nrad.io/posts/plasma-leak/</link>
       <pubDate>Mon, 18 Jan 2021 15:25:22 -0500</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/plasma-leak/</guid>
       <description>&lt;p&gt;Plasma leak the game.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Feynman Diagram Editor Pt 2</title>
       <link>https://blog.c0nrad.io/posts/feynman-diagrams2/</link>
       <pubDate>Tue, 20 Oct 2020 20:37:28 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/feynman-diagrams2/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s alive! &lt;a href=&#34;https://blog.c0nrad.io/feynman&#34;&gt;https://blog.c0nrad.io/feynman&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;It&amp;rsquo;s alive! &#xA;&lt;a href=&#34;https://blog.c0nrad.io/feynman&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://blog.c0nrad.io/feynman&lt;/a&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Feynman Diagram Editor Pt. 1</title>
       <link>https://blog.c0nrad.io/posts/feynman-diagrams/</link>
       <pubDate>Sat, 17 Oct 2020 12:29:59 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/feynman-diagrams/</guid>
       <description>&lt;p&gt;Starting a new project for validating Feynman diagrams.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Effective Nuclear Charge Calculations</title>
       <link>https://blog.c0nrad.io/posts/enc/</link>
       <pubDate>Mon, 12 Oct 2020 21:43:23 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/enc/</guid>
       <description>&lt;p&gt;A smaller project involving plotting ionization energy for different effective nuclear charge models.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>EM Particle Motion</title>
       <link>https://blog.c0nrad.io/posts/em-particle-motion/</link>
       <pubDate>Wed, 30 Sep 2020 17:26:11 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/em-particle-motion/</guid>
       <description>&lt;p&gt;Simulating a particle under the influence. (Of electric and magnetic fields).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Klein Gordon Eqn via Connected Springs</title>
       <link>https://blog.c0nrad.io/posts/connect-springs/</link>
       <pubDate>Sat, 12 Sep 2020 14:35:23 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/connect-springs/</guid>
       <description>&lt;p&gt;Simulations Klein Gordon Eqn as a set of connected springs.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Spherical Bug</title>
       <link>https://blog.c0nrad.io/posts/spherical-bug/</link>
       <pubDate>Wed, 09 Sep 2020 09:16:42 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/spherical-bug/</guid>
       <description>&lt;p&gt;Discussion of one of my longest living software bugs.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Hydrogen Spectral Diagram</title>
       <link>https://blog.c0nrad.io/posts/spectral/</link>
       <pubDate>Sat, 29 Aug 2020 10:59:09 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/spectral/</guid>
       <description>&lt;p&gt;Terminal application showing the spectral lines for electron transitions in hydrogen.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Interference</title>
       <link>https://blog.c0nrad.io/posts/interference/</link>
       <pubDate>Tue, 18 Aug 2020 18:53:54 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/interference/</guid>
       <description>&lt;p&gt;Double Slit Interference Pattern demo.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Electron Wavefunctions for Hydrogen Part 2</title>
       <link>https://blog.c0nrad.io/posts/hydrogen-pt2/</link>
       <pubDate>Sat, 20 Jun 2020 14:37:31 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/hydrogen-pt2/</guid>
-      <description>&lt;p&gt;Part 2 of calculating the electron wavefunctions for hydrogen.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://blog.c0nrad.io/hydrogen/&#34;&gt;View Visualization&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Part 2 of calculating the electron wavefunctions for hydrogen.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;&lt;a href=&#34;https://blog.c0nrad.io/hydrogen/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View Visualization&lt;/a&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Electron Wavefunctions for Hydrogen Part 1</title>
       <link>https://blog.c0nrad.io/posts/hydrogen-pt1/</link>
       <pubDate>Thu, 28 May 2020 10:22:30 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/hydrogen-pt1/</guid>
       <description>&lt;p&gt;The code/math behind calculating the electron wavefunctions for hydrogen.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>GiNaC on Macos</title>
       <link>https://blog.c0nrad.io/posts/ginac-on-macos/</link>
       <pubDate>Wed, 27 May 2020 18:43:40 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/ginac-on-macos/</guid>
       <description>&lt;p&gt;A quick guide on getting started with GiNaC on macos.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Quantum Infinite Well</title>
       <link>https://blog.c0nrad.io/posts/quantum-infinite-well/</link>
       <pubDate>Fri, 22 May 2020 12:30:26 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/quantum-infinite-well/</guid>
       <description>&lt;p&gt;Calculating the stationary states of an electron in a quantum infinite well.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Calculating Collisions Pt. 2</title>
       <link>https://blog.c0nrad.io/posts/calculating-collisions-2/</link>
       <pubDate>Mon, 18 May 2020 12:30:26 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/calculating-collisions-2/</guid>
-      <description>&lt;p&gt;Programming the equation we derived in the &lt;a href=&#34;https://blog.c0nrad.io/posts/calculating-collisions/&#34;&gt;last post&lt;/a&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Programming the equation we derived in the &#xA;&lt;a href=&#34;https://blog.c0nrad.io/posts/calculating-collisions/&#34;&gt;last post&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Calculating Collisions</title>
       <link>https://blog.c0nrad.io/posts/calculating-collisions/</link>
       <pubDate>Fri, 17 May 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/calculating-collisions/</guid>
       <description>&lt;p&gt;My attempt at calculating the resulting velocities of two spheres colliding in 3D.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

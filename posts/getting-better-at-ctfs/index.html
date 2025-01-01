@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title></title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+    <link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  
+    <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
+  <meta name="author" content="Stuart Larsen">
+
+  
+  <meta name="generator" content="Hugo 0.140.2">
+
+  
+  
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+  
+  
+  <meta name="twitter:title" content=""/>
+  <meta name="twitter:description" content=""/>
+  
+  <meta name="twitter:domain" content="blog.c0nrad.io"/>
+  <meta name="twitter:creator" content="@CryptoGangsta"/>
+
+  
+
+  
+  
+
+
+
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="https://blog.c0nrad.io/">c0nrad&#39;s c0rner</a></h1>
+    <h2>Learning and learning</h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+        <option value="https://blog.c0nrad.io/">» Home</option>
+      
+        <option value="https://c0nrad.io">» Website</option>
+      
+        <option value="https://github.com/c0nrad/">» Github</option>
+      
+        <option value="https://twitter.com/c0nrad_jr">» Twitter</option>
+      
+        <option value="https://c0nradsc0rner.com">» Other Blog</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="https://blog.c0nrad.io/" title="Home">Home</a></li>
+    
+  
+    
+      <li><a href="https://c0nrad.io" title="Website"  rel="noopener noreferrer">Website</a></li>
+    
+  
+    
+      <li><a href="https://github.com/c0nrad/" title="Github"  rel="noopener noreferrer">Github</a></li>
+    
+  
+    
+      <li><a href="https://twitter.com/c0nrad_jr" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+    
+      <li><a href="https://c0nradsc0rner.com" title="Other Blog"  rel="noopener noreferrer">Other Blog</a></li>
+    
+  
+</ul>
+
+<ul class="subscription">
+  
+    
+        <a href="https://blog.c0nrad.io/index.xml" target="_blank" type="application/rss+xml" title="RSS" rel="noopener noreferrer"><i class="fa fa-rss-square fa-lg"></i></a>
+    
+  
+</ul>
+
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+  <p class="meta">Jan 1, 0001
+     - 0 minute read 
+
+    
+  </p>
+  <h1 class="entry-title">
+      
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+            <nav id="TableOfContents"></nav>
+          
+          <!-- ---
+title: "How to win more CTFs"
+date: 2024-10-06T10:20:23-07:00
+draft: true
+categories: ["CTFs"]
+---
+
+These are my thoughts/plan on how to win more CTFs. I'd love your feedback!
+
+
+
+
+## Introduction
+
+After a CTF ends I like to ask myself: "why didn't I win this CTF?", or "why didn't I do better?". 
+
+I'm not particularliy dissapointed in myself. On the contrary, I can't believe at how much I've learned in the last few years! 
+
+But, to state the obvious, if I want to win, I need to not lose.
+
+So, why am I losing, and what can I do to fix it?
+
+### Thoughs on why I lose
+
+* Mental Stamina
+    * During an average day, I can only focus hard for about 5-6 hours.
+    * During a competition, I can only focus for about 12-16 hours (but it's not sustainable for multiple days).
+    * If I could focus more, I could solve more challenges.
+* Lack of knowledge
+    * I think this is the most obvious, and the easiest to grow. No one knows everything. And I personally believe a "good" ctf player is just someone who has seen the tricks before. Sometimes it's an extension/combination of the tricks, but you have to know the tricks.
+    * So, figuring out what skills/tricks I was missing during the CTF, and then rapidly learing those techniques. As an example, on a recent CTF I left points on the table becuse I'm slow at browser-pwn, and I'm also not good at constructing custom lattices for LLL. So those are two things I'm working on. Maybe you don't know that "fl" can be one unicode character to bypass pyjails. Etc.
+* Guessy Chals
+    * Since I play solo, time/mental-energy are my most key resource. 
+    * Sourceless web, certain misc, forensics, etc, can be huge time sinks with less reliable points
+* Incorrect tooling
+    * On a recent CTF I left points on the table because I used Ghidra instead of Ida. I love Ghidra, but I'm beginning to see the short comings when reversing more complex binaires. Certain critical memcpys didn't show up in the disassembly, the function databases aren't as good, etc. Sadly I think I'll need to buy an Ida license.
+    * I'm not good at windows tooling either. When doing windows forensics, I have to manually reverse everything instead of running malware in a sandbox/debugger.
+* Motivation/burnout
+    * Sometimes I quit a CTF early because I don't think I can solve a challenge and I'm tired, but I find out while reading the writeups I had the skills to solve it.
+    * There are some weekends where I question why I'm playing CTFs, or I just don't have the moitivation. It's rare, but it needs to be managed.
+* CTF event selection
+    * Not all CTFs are well suited for solo players. 
+    * Specifically any team-based guessy/reverse heavy CTFs without source
+* Wrist issues
+    * This is a personal point, but for years I've had issues with my wrists. Probably spending 12+ hours every day on the computer since I was 10 doesn't help. Sometimes I quit because my wrist flare up.
+* Life
+    * This is a very individual bucket, and ad-hoc. But sometimes life gets in the way. We're not robots, and I have a wife and extended family/friends and a job (csper.io). These things are all more important than CTFs. But, effort and forthought can be done to make sure that they succeed in harmony. 
+
+### What am I doing to improve at the above issues?
+
+* Mental Stamina
+    * General Health
+        * As part of a push for longevity/wellbeing, but also to be able to focus for longer, I've encorporated a number of health habits over the last 12 months:
+            * Tracking my sleep with WHOOP, and trying to get a 100% average. (currently at 89%. Life gets in the way, but I want to keep working at it, I've learned a lot about my sleep over the last year). I think if we ever stop doing monthly AirBnB travel I can perfect a setup that allows me to get 100%. 
+            * Tracking my micro/macro nutrients with cronometer. I found a diet that works for me that hits all the micro/macro. Lots of veggies, legumes, nuts, etc.
+            * Exercise program. Supposidly there's a link between weigh lifting and learning/memory, so I workout a 3-4 times a week. On off days I jog or walk. And rarely I'll do some HIT/sprints. But that's more for longevity, not CTFs.
+            * Limiting alchohol. Sadly I know that for myself alchohol is terrible for performance and memory. So I try to have no more than one drink a month. But I do partake in edibles. If I was perfect I probably wouldn't. But it's nice to relax here and there and just veg out on a movie/show while buzzed. 
+        * To be honest, I don't know how much (if any) these health changes have an impact on my CTF playing. But I think at least mentally being happy with your body is one less thing to worry about so you can focus more on CTFs. 
+    * Context Switching
+        * I think a lot of mental energy is spent switching between different tasks and thought patterns. To combat this:
+            * I have a CTF script for ctfd and a few other platforms that automatically downloads and organizes all the challenges directories. This allows me to efficnetly leave notes and switch between tasks in a clean way. I think having a structured place to leave notes is useful so I don't have to keep it in my brain.
+            * Sort life before the CTF starts. If I have a work email looming over me, or a bunch of chores that need to be done, get those done before the CTF so I can clear my brain of all reminders.
+            * I have a notepad where I sometimes write down a list of everything that is bothering me at that moment. I think writing it down helps get it out so it doesn't randomly pop up while playing CTFs.
+    * During the CTF
+        * I'm working on this one. But an idea I want to test is taking a walk during the CTF, depending on the length of the CTF. 
+        * Drinking water during the event
+        * If anything is bothering me, write it down for later
+    * Other mental hacks
+        * Meditation? A quick google doesn't leave me to convinced though.
+
+* Lack of Knowledge
+    * I have about 4-6 hours a day I can grind to learn as much stuff as possible for CTFs. What is the most effective way to spend this time?
+    * Writeups
+        * The most obvious, but reading the writeups for all CTF challenges I missed! I find this is pretty much irresistable. I would guess/hope everyone does this. 
+    * Learning strategies
+        * Books, tutorials, read old writeups, grind wargames/live challenges, VR, bug bounty...
+        * I think grinding challenges that have writeups/help is best strategy for me 
+            * I don't think struggling over a hard or no-writeup challenge over multiple days is the most efficient use of time. 
+                * If you're unable to solve the chal, you've gain nothing
+                * Maybe when I was younger, it was useful to spin my wheels, but I don't think so anymore
+                * When I'm stuck for awhile, I read the writeup, I have the "aha!" moment, and I continue
+            * I think it's super important that I try the challenge first though. I find that blindly reading writeups is not that useful for me. I need to try the challenge first
+            * I use pwn.college, HTB retired chals, cryptohack. They either have writeups, or friendly staff to help when you get stuck
+        * Previously I used to watch YT videos of writeups from CryptoCat/LiveOverflow/AlmondForce/JohnHamond. But, I don't learn from that content anymore. But they can be great to level up at the start. I hear SloppyJoePirates is also really good.
+    * 
+        
+    
+
+
+### Other considations
+
+* Burnout
+* Shift in priorities -->
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
+    
+    <time>Jan 1, 0001</time>
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+
+    
+      <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/calculating-collisions/" title="Calculating Collisions">Calculating Collisions</a>
+    
+  </p>
+</footer>
+
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>Who am I?</h1>
+    
+
+    <p>
+      
+        <img src="/me.png" style="width: 100%"> 
+CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pirates</a>). Founder (<a href="https://csper.io">csper.io</a>). Enjoyer of security/software/physics.
+      
+    </p>
+  </section>
+
+  
+  
+
+
+
+<ul class="sidebar-nav">
+  <li class="sidebar-nav-item">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  
+  
+  </li>
+</ul>
+
+  
+
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/ctfs" title="CTFs" >CTFs</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
+
+  
+  
+  
+</aside>
+
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2025 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+
+
+
+    
+    
+    
+
+    
+  </body>
+</html>
+

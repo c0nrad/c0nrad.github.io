@@ -30,20 +30,19 @@
   
 
   
-  <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
+    <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
 
   
   
 
   <meta name="description" content="Quantum Teleportation Algorithm and improvements to qrad" />
-  <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
   <meta name="author" content="Stuart Larsen">
 
   
-  <meta name="generator" content="Hugo 0.79.1" />
-
-  
-  
+  <meta name="generator" content="Hugo 0.140.2">
 
   
   
@@ -60,6 +59,12 @@
   <meta name="twitter:creator" content="@CryptoGangsta"/>
 
   
+
+  
+  
+
+
+
 </head>
 <body>
 
@@ -84,7 +89,9 @@
       
         <option value="https://github.com/c0nrad/">» Github</option>
       
-        <option value="https://twitter.com/xc0nradx">» Twitter</option>
+        <option value="https://twitter.com/c0nrad_jr">» Twitter</option>
+      
+        <option value="https://c0nradsc0rner.com">» Other Blog</option>
       
   </select>
 </fieldset>
@@ -106,7 +113,11 @@
     
   
     
-      <li><a href="https://twitter.com/xc0nradx" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+      <li><a href="https://twitter.com/c0nrad_jr" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+    
+      <li><a href="https://c0nradsc0rner.com" title="Other Blog"  rel="noopener noreferrer">Other Blog</a></li>
     
   
 </ul>
@@ -134,7 +145,6 @@
 <header>
   <p class="meta">Jul 3, 2020
      - 6 minute read 
-    
 
     
     
@@ -175,10 +185,14 @@
 <li>learning more about the universe</li>
 <li>learning something practical</li>
 </ol>
-<p>A long time ago I built a <a href="https://github.com/c0nrad/qrad">little Quantum Computer Simulator</a> for a internal company &ldquo;hackathon&rdquo;. At the time I worked at a database company, so I implemented <a href="https://en.wikipedia.org/wiki/Grover%27s_algorithm">Grover&rsquo;s algorithm</a>. (Grover&rsquo;s Algorithm can be used to find an element in an unsorted array. Normally you&rsquo;d have to search every element in the array until you get a match, but using a quantum computer, you can do it significantly faster (supposedly O(Sqrt(N)), but for smaller data sets I was able to do it in one pass. I&rsquo;ll be talking about Grover&rsquo;s algorithm at some point in the near future :), see next paragraph).</p>
+<p>A long time ago I built a 
+<a href="https://github.com/c0nrad/qrad" target="_blank" rel="noopener">little Quantum Computer Simulator</a> for a internal company &ldquo;hackathon&rdquo;. At the time I worked at a database company, so I implemented 
+<a href="https://en.wikipedia.org/wiki/Grover%27s_algorithm" target="_blank" rel="noopener">Grover&rsquo;s algorithm</a>. (Grover&rsquo;s Algorithm can be used to find an element in an unsorted array. Normally you&rsquo;d have to search every element in the array until you get a match, but using a quantum computer, you can do it significantly faster (supposedly O(Sqrt(N)), but for smaller data sets I was able to do it in one pass. I&rsquo;ll be talking about Grover&rsquo;s algorithm at some point in the near future :), see next paragraph).</p>
 <p>I decided my next &ldquo;long term&rdquo; project will be to build a Quantum Hash Cracking algorithm. After thinking more about it, I&rsquo;m pretty sure I can do it with Grover&rsquo;s algorithm. But since it&rsquo;s a simulated quantum computer, I can only simulate a couple of qubits, I so think I&rsquo;ll actually be &ldquo;cracking&rdquo; CRC4. We&rsquo;ll see. Maybe if I can get it working I can finagle IBM/GOOG into letting me verify CRC-16 or something on one of their quantum computers.</p>
 <h2 id="upgrades-to-qrad">Upgrades to QRAD</h2>
-<p>But the quantum hash-cracker is a little ways off. First I want to dust off the <a href="https://github.com/c0nrad/qrad">old simulator</a>. The old simulator was heavily based on the book <a href="https://www.amazon.com/Quantum-Computing-Computer-Scientists-Yanofsky/dp/0521879965?tag=techblast0f-20">Quantum Computing for Computer Scientist</a>. A great book if you have a CS background and want to get your hands dirty.</p>
+<p>But the quantum hash-cracker is a little ways off. First I want to dust off the 
+<a href="https://github.com/c0nrad/qrad" target="_blank" rel="noopener">old simulator</a>. The old simulator was heavily based on the book 
+<a href="https://www.amazon.com/Quantum-Computing-Computer-Scientists-Yanofsky/dp/0521879965?tag=techblast0f-20" target="_blank" rel="noopener">Quantum Computing for Computer Scientist</a>. A great book if you have a CS background and want to get your hands dirty.</p>
 <p>But, after playing with IBM&rsquo;s Qiskit, Google&rsquo;s Cirq and Algassert&rsquo;s Quirk, and I love how they do certain things. Specifically how they approach circuit building, so I rebuilt part of my simulator. Specifically:</p>
 <ol>
 <li>Added &ldquo;Moments&rdquo;, a better way to organize gates</li>
@@ -197,13 +211,16 @@
 <p>Alice must then perform some actions both her original qubit and her entangled qubit. After performing the actions she will measure the state of her two qubits (destroying the qubit she wants to transfer).</p>
 <p>Alice then sends Bob the results of her measurements. (two classical bits). Using those two classical bits, Bob can construct the original state of Alice&rsquo;s first Qubit.</p>
 <h3 id="the-circuits">The circuits</h3>
-<p>If you want to see a very neat demo of the algorithm, check out Algassert&rsquo;s online quantum editor for <a href="https://algassert.com/quirk#circuit=%7B%22cols%22:%5B%5B1,%22H%22%5D,%5B1,%22%E2%80%A2%22,1,1,%22X%22%5D,%5B%22%E2%80%A6%22,%22%E2%80%A6%22,1,1,%22%E2%80%A6%22%5D,%5B%22%E2%80%A6%22,%22%E2%80%A6%22,1,1,%22%E2%80%A6%22%5D,%5B%22~87lj%22%5D,%5B%22Bloch%22%5D,%5B%22%E2%80%A2%22,%22X%22%5D,%5B%22H%22%5D,%5B%22Measure%22,%22Measure%22%5D,%5B1,%22%E2%80%A2%22,1,1,%22X%22%5D,%5B%22%E2%80%A2%22,1,1,1,%22Z%22%5D,%5B1,1,1,1,%22Bloch%22%5D,%5B1,1,1,1,%22~f7c0%22%5D%5D,%22gates%22:%5B%7B%22id%22:%22~87lj%22,%22name%22:%22message%22,%22circuit%22:%7B%22cols%22:%5B%5B%22e%5E-iYt%22%5D,%5B%22X%5Et%22%5D%5D%7D%7D,%7B%22id%22:%22~f7c0%22,%22name%22:%22received%22,%22matrix%22:%22%7B%7B1,0%7D,%7B0,1%7D%7D%22%7D%5D%7D">quantum teleportation</a>.</p>
+<p>If you want to see a very neat demo of the algorithm, check out Algassert&rsquo;s online quantum editor for 
+<a href="https://algassert.com/quirk#circuit=%7b%22cols%22:[[1,%22H%22],[1,%22%E2%80%A2%22,1,1,%22X%22],[%22%E2%80%A6%22,%22%E2%80%A6%22,1,1,%22%E2%80%A6%22],[%22%E2%80%A6%22,%22%E2%80%A6%22,1,1,%22%E2%80%A6%22],[%22~87lj%22],[%22Bloch%22],[%22%E2%80%A2%22,%22X%22],[%22H%22],[%22Measure%22,%22Measure%22],[1,%22%E2%80%A2%22,1,1,%22X%22],[%22%E2%80%A2%22,1,1,1,%22Z%22],[1,1,1,1,%22Bloch%22],[1,1,1,1,%22~f7c0%22]],%22gates%22:[%7b%22id%22:%22~87lj%22,%22name%22:%22message%22,%22circuit%22:%7b%22cols%22:[[%22e%5e-iYt%22],[%22X%5et%22]]%7d%7d,%7b%22id%22:%22~f7c0%22,%22name%22:%22received%22,%22matrix%22:%22%7b%7b1,0%7d,%7b0,1%7d%7d%22%7d]%7d" target="_blank" rel="noopener">quantum teleportation</a>.</p>
 <p>Here&rsquo;s my significantly less sexy circuit diagram:</p>
 <p><img src="/teleportation.png" alt="equal speed, equal mass"></p>
 <p>Code:
-<a href="https://github.com/c0nrad/qrad/blob/master/circuits/teleportation/teleportation.go">https://github.com/c0nrad/qrad/blob/master/circuits/teleportation/teleportation.go</a></p>
+
+<a href="https://github.com/c0nrad/qrad/blob/master/circuits/teleportation/teleportation.go" target="_blank" rel="noopener">https://github.com/c0nrad/qrad/blob/master/circuits/teleportation/teleportation.go</a></p>
 <h3 id="the-maths">The maths</h3>
-<p>The coolest part of the whole thing (in my opinion) is the maths. Following along in <a href="https://www.amazon.com/Quantum-Computation-Information-10th-Anniversary/dp/1107002176/ref=sr_1_3?dchild=1&amp;keywords=quantum+information&amp;qid=1593801365&amp;sr=8-3&amp;tag=techblast0f-20">Quantum Computation and Information Theory</a> (supposedly the bible in the field, haven&rsquo;t finished it yet though, so no opinion yet), there&rsquo;s a single line that pretty much describes the entire algorithm:</p>
+<p>The coolest part of the whole thing (in my opinion) is the maths. Following along in 
+<a href="https://www.amazon.com/Quantum-Computation-Information-10th-Anniversary/dp/1107002176/ref=sr_1_3?dchild=1&amp;keywords=quantum&#43;information&amp;qid=1593801365&amp;sr=8-3&amp;tag=techblast0f-20" target="_blank" rel="noopener">Quantum Computation and Information Theory</a> (supposedly the bible in the field, haven&rsquo;t finished it yet though, so no opinion yet), there&rsquo;s a single line that pretty much describes the entire algorithm:</p>
 <p>$$ |\psi\rangle = \frac{1}{2} [ |00 \rangle (\alpha|0\rangle + \beta|1\rangle) + |01 \rangle(\alpha|1\rangle + \beta |0\rangle) + |10\rangle (\alpha|0\rangle - \beta|1\rangle) + |11\rangle(\alpha|1\rangle - \beta|0\rangle) ]$$</p>
 <p>It can be a little tricky to read. Here&rsquo;s a cheat sheet.</p>
 <ul>
@@ -236,10 +253,11 @@
 <li>(Edit, some more people responded, I can&rsquo;t use Tensor products. Not going crazy)</li>
 </ul>
 </li>
-<li>Collapsing a single qubit. First you have to measure if the qubit should be &ldquo;1' or &ldquo;0&rdquo;, and then collapsing all the states that depend on that qubit, and then re-normalizing. I also had the Qubits reversed in my diagram which led to some very confusing bugs.</li>
+<li>Collapsing a single qubit. First you have to measure if the qubit should be &ldquo;1&rsquo; or &ldquo;0&rdquo;, and then collapsing all the states that depend on that qubit, and then re-normalizing. I also had the Qubits reversed in my diagram which led to some very confusing bugs.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
-<p>Anyways just some fun stuff I&rsquo;ve been up to. Being 100% honest, I&rsquo;m not always the best at responding (sorry), but if you have any questions or comments feel free to reach out! <a href="mailto:c0nrad@c0nrad.io">c0nrad@c0nrad.io</a></p>
+<p>Anyways just some fun stuff I&rsquo;ve been up to. Being 100% honest, I&rsquo;m not always the best at responding (sorry), but if you have any questions or comments feel free to reach out! 
+<a href="mailto:c0nrad@c0nrad.io">c0nrad@c0nrad.io</a></p>
 <p>I&rsquo;m hoping I&rsquo;ll have the Quantum Hash Cracking algorithm out soon. But in the meantime I still need to learn some other stuff first, so probably a few more algorithms first.</p>
         </div>
         
@@ -264,8 +282,8 @@
       <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/qft/" title="Simulating Quantum Fourier Transform">Simulating Quantum Fourier Transform</a>
     
   </p>
-  
 </footer>
+
 
       </article>
     </div>
@@ -275,150 +293,103 @@
   <section class="first odd">
 
     
-    <h1>Who am I?</h1>
+      <h1>Who am I?</h1>
     
 
     <p>
       
-      <img src="/me.png" style="width: 100%"> 
-I am Stuart. In a previous life I was a programmer, electrical engineer, and a security engineer. Now I spend my free time tinkering with physics.
-</br></br>
-My goal is to understand why the universe exists. I have a lot of learning to do.
-<br/><br/>
-I write about physics, life, and learning.
-</br>
+        <img src="/me.png" style="width: 100%"> 
+CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pirates</a>). Founder (<a href="https://csper.io">csper.io</a>). Enjoyer of security/software/physics.
       
     </p>
   </section>
 
   
-
-  
-  <ul class="sidebar-nav">
-    <li class="sidebar-nav-item">
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/c0nrad/" title="https://github.com/c0nrad/"><i
-          class="fa fa-github fa-3x"></i></a>
-      
-      
-      <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/xc0nradx/" title="https://twitter.com/xc0nradx/"><i
-          class="fa fa-twitter fa-3x"></i></a>
-      
-      
-      
-      
-      <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/c0nrad" title="https://www.linkedin.com/in/c0nrad"><i
-          class="fa fa-linkedin fa-3x"></i></a>
-      
-      
-      
-      
-      
-      
-
-      
-      
-    </li>
-  </ul>
-
-
   
 
-  
-  
-  <section class="odd">
-    
-    <h1>Collections</h1>
+
+
+<ul class="sidebar-nav">
+  <li class="sidebar-nav-item">
     
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
-    </li>
     
-  </section>
-  
-  
+    
+    
+    
+    
+    
+    
 
   
   
+  </li>
+</ul>
+
   
 
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/ctfs" title="CTFs" >CTFs</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
 
   
-<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-    #mc_embed_signup {
-        background: #fff;
-        clear: left;
-        font: 14px Helvetica, Arial, sans-serif;
-        border: 1px solid;
-        margin-top: 20px;
-    }
-
-
-
-
-     
-</style>
-<div id="mc_embed_signup">
-    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
-        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
-        novalidate>
-        <div id="mc_embed_signup_scroll">
-            <label for="mce-EMAIL">Subscribe for new posts:</label>
-            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-            
-            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
-                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
-            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
-                    class="button"></div>
-        </div>
-    </form>
-</div>
-
-
-
+  
+  
 </aside>
+
   </div>
 </div>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
 
+
+
+
     <footer role="contentinfo">
-      <p>Copyright &copy; 2022 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+      <p>Copyright &copy; 2025 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>
 
     
     
-      <script type="text/javascript">
-        var _paq = _paq || [];
-         
-        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-          var u="//c0nrad.matomo.cloud/";
-          _paq.push(['setTrackerUrl', u+'piwik.php']);
-          _paq.push(['setSiteId',  1 ]);
-          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-        })();
-      </script>
+
+
+
+    
     
     
 

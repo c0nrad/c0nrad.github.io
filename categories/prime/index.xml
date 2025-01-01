@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>prime on c0nrad&#39;s c0rner</title>
+    <title>Prime on c0nrad&#39;s c0rner</title>
     <link>https://blog.c0nrad.io/categories/prime/</link>
-    <description>Recent content in prime on c0nrad&#39;s c0rner</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Prime on c0nrad&#39;s c0rner</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 24 Jul 2021 22:23:16 -0700</lastBuildDate><atom:link href="https://blog.c0nrad.io/categories/prime/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Jul 2021 22:23:16 -0700</lastBuildDate>
+    <atom:link href="https://blog.c0nrad.io/categories/prime/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Prime Walker</title>
       <link>https://blog.c0nrad.io/posts/prime-walker/</link>
       <pubDate>Sat, 24 Jul 2021 22:23:16 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/prime-walker/</guid>
       <description>&lt;p&gt;Another attempt at a factoring algorithm.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

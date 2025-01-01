@@ -1,83 +1,68 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>quantum computation on c0nrad&#39;s c0rner</title>
+    <title>Quantum Computation on c0nrad&#39;s c0rner</title>
     <link>https://blog.c0nrad.io/categories/quantum-computation/</link>
-    <description>Recent content in quantum computation on c0nrad&#39;s c0rner</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Quantum Computation on c0nrad&#39;s c0rner</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Aug 2021 09:31:09 -0700</lastBuildDate><atom:link href="https://blog.c0nrad.io/categories/quantum-computation/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Aug 2021 09:31:09 -0700</lastBuildDate>
+    <atom:link href="https://blog.c0nrad.io/categories/quantum-computation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Quantum Circuit Editor Pt. 1</title>
       <link>https://blog.c0nrad.io/posts/quantum-circuit-editor/</link>
       <pubDate>Tue, 10 Aug 2021 09:31:09 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/quantum-circuit-editor/</guid>
       <description>&lt;p&gt;Initial version of a quantum circuit editor.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Randomized Benchmarking of a noisy quantum simulator Pt. 2</title>
       <link>https://blog.c0nrad.io/posts/randomized-benchmarking-2/</link>
       <pubDate>Tue, 27 Jul 2021 15:09:55 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/randomized-benchmarking-2/</guid>
       <description>&lt;p&gt;The randomized benchmarking simulator is released!&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Randomized Benchmarking of a noisy quantum simulator Pt. 1</title>
       <link>https://blog.c0nrad.io/posts/randomized-benchmarking/</link>
       <pubDate>Thu, 22 Jul 2021 22:18:37 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/randomized-benchmarking/</guid>
       <description>&lt;p&gt;This post covers the simplest of error models and some simulated randomized benchmarking results.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Density Operators</title>
       <link>https://blog.c0nrad.io/posts/density-operators/</link>
       <pubDate>Tue, 20 Jul 2021 21:24:02 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/density-operators/</guid>
       <description>&lt;p&gt;This post covers my transition from using pure states to mixed states in my quantum simulator.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Mulbrute</title>
       <link>https://blog.c0nrad.io/posts/mulbrute/</link>
       <pubDate>Sun, 28 Feb 2021 11:04:32 -0500</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/mulbrute/</guid>
       <description>&lt;p&gt;QHack 2021 submission project, a tool for brute forcing quantum multiplication circuits.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Shor&#39;s Algorithm</title>
       <link>https://blog.c0nrad.io/posts/shors/</link>
       <pubDate>Fri, 10 Jul 2020 09:26:38 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/shors/</guid>
       <description>&lt;p&gt;Shor&amp;rsquo;s algorithm is probably the most well known quantum algorithm. But it turns out I didn&amp;rsquo;t understand it as well as I thought.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Simulating Quantum Fourier Transform</title>
       <link>https://blog.c0nrad.io/posts/qft/</link>
       <pubDate>Tue, 07 Jul 2020 11:01:25 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/qft/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m pretty excited. I&amp;rsquo;m somewhat in disbelief that it even works. But I was able to implement Quantum Fourier Transform on my little &lt;a href=&#34;https://github.com/c0nrad/qrad&#34;&gt;quantum computation simulator&lt;/a&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I&amp;rsquo;m pretty excited. I&amp;rsquo;m somewhat in disbelief that it even works. But I was able to implement Quantum Fourier Transform on my little &#xA;&lt;a href=&#34;https://github.com/c0nrad/qrad&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;quantum computation simulator&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Quantum Teleportation Algorithm</title>
       <link>https://blog.c0nrad.io/posts/quantum-teleportation/</link>
       <pubDate>Fri, 03 Jul 2020 13:24:22 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/quantum-teleportation/</guid>
       <description>&lt;p&gt;This post is split into two parts. The first section is my motivation, and some background on the upgrades I made to my quantum simulator. The second part is implementing the Quantum Teleportation algorithm.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

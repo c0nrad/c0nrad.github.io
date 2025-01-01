@@ -30,20 +30,19 @@
   
 
   
-  <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
+    <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
 
   
   
 
   <meta name="description" content="Calculate the different orbit types" />
-  <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
   <meta name="author" content="Stuart Larsen">
 
   
-  <meta name="generator" content="Hugo 0.79.1" />
-
-  
-  
+  <meta name="generator" content="Hugo 0.140.2">
 
   
   
@@ -60,6 +59,12 @@
   <meta name="twitter:creator" content="@CryptoGangsta"/>
 
   
+
+  
+  
+
+
+
 </head>
 <body>
 
@@ -84,7 +89,9 @@
       
         <option value="https://github.com/c0nrad/">» Github</option>
       
-        <option value="https://twitter.com/xc0nradx">» Twitter</option>
+        <option value="https://twitter.com/c0nrad_jr">» Twitter</option>
+      
+        <option value="https://c0nradsc0rner.com">» Other Blog</option>
       
   </select>
 </fieldset>
@@ -106,7 +113,11 @@
     
   
     
-      <li><a href="https://twitter.com/xc0nradx" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+      <li><a href="https://twitter.com/c0nrad_jr" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+    
+      <li><a href="https://c0nradsc0rner.com" title="Other Blog"  rel="noopener noreferrer">Other Blog</a></li>
     
   
 </ul>
@@ -134,7 +145,6 @@
 <header>
   <p class="meta">Dec 22, 2021
      - 4 minute read 
-    
 
     
     
@@ -167,9 +177,11 @@
   </ul>
 </nav>
           
-          <p>We solve for the different types of orbits of the <a href="https://en.wikipedia.org/wiki/Kepler_problem">Kepler Problem</a> (two body central force problems).</p>
+          <p>We solve for the different types of orbits of the 
+<a href="https://en.wikipedia.org/wiki/Kepler_problem" target="_blank" rel="noopener">Kepler Problem</a> (two body central force problems).</p>
 <h2 id="introduction">Introduction</h2>
-<p>In the <a href="https://blog.c0nrad.io/posts/sim-2-effective-potential/">previous post</a> we reduced our two body problem to a single effective potential problem:</p>
+<p>In the 
+<a href="https://blog.c0nrad.io/posts/sim-2-effective-potential/" target="_blank" rel="noopener">previous post</a> we reduced our two body problem to a single effective potential problem:</p>
 <p>$$ U_{eff}(r) = U(r) + U_{cf}(r) = U(r) + \frac{l^2}{2 \mu r^2} $$</p>
 <p>We can now determine the allowed types of orbits. To do this we are going to do some variable substitution, and determine \( r(\phi) \) which will allow us to see the orbits more clearly. During this process we will define a new variable called eccentricity that determines the orbit.</p>
 <h2 id="solving-for--rphi-">Solving for \( r(\phi) \)</h2>
@@ -183,7 +195,8 @@
 <p>$$ u&quot;(\phi) = -u(\phi) - \frac{\mu}{l^2 u(\phi)^2}F$$</p>
 <p>Next we plug in our force equation: \( F = -G m_1 m_2 / r^2 = -\gamma u^2\):</p>
 <p>$$ u&quot;(\phi) = -u(\phi) - \frac{\mu}{l^2 u(\phi)^2} (- \gamma u^2) = -u(\phi) - \frac{\gamma \mu}{l^2}$$</p>
-<p>This equation is surprisingly simple due to the fact that our force equation is an inverse squared force, the \( u(\phi) \) terms cancel out. (Coincidentally I&rsquo;m in the process of solving a related problem in a <a href="https://www.amazon.com/gp/product/0226121097/ref=ppx_yo_dt_b_asin_title_o05_s00?ie=UTF8&amp;psc=1">physics problem book</a>, page 8 problem 8). I believe this implies that only inverse-square forces have stable orbits, but I haven&rsquo;t proved it yet.</p>
+<p>This equation is surprisingly simple due to the fact that our force equation is an inverse squared force, the \( u(\phi) \) terms cancel out. (Coincidentally I&rsquo;m in the process of solving a related problem in a 
+<a href="https://www.amazon.com/gp/product/0226121097/ref=ppx_yo_dt_b_asin_title_o05_s00?ie=UTF8&amp;psc=1" target="_blank" rel="noopener">physics problem book</a>, page 8 problem 8). I believe this implies that only inverse-square forces have stable orbits, but I haven&rsquo;t proved it yet.</p>
 <p>Since the last term is constant, the solution is just the constant plus a sinusoid:</p>
 <p>$$ u(\phi) = \frac{1}{r} = \frac{\gamma \mu}{l^2} + A \cos\phi = \frac{\gamma \mu}{l^2} (1 + \epsilon \cos\phi) = \frac{1}{c}(1 + \epsilon \cos \phi) $$</p>
 <p>In the last stage we defined a new variable we will call the eccentricity (which will become obvious why soon), and \( c = \frac{l^2}{\gamma \mu} \) for bookkeeping.</p>
@@ -207,10 +220,12 @@ $$</p>
 <p>If \( \epsilon &gt; 1 \) we will have a maximum \( \phi_{max} \) which defines the range for some sort of hyperbola.</p>
 <h3 id="eccentricity-plot">Eccentricity Plot</h3>
 <p>There&rsquo;s a fun plot here showing the trajectories of different eccentricities:</p>
-<p><a href="https://en.wikipedia.org/wiki/Orbital_eccentricity">https://en.wikipedia.org/wiki/Orbital_eccentricity</a></p>
+<p>
+<a href="https://en.wikipedia.org/wiki/Orbital_eccentricity" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Orbital_eccentricity</a></p>
 <h2 id="simulation">Simulation</h2>
 <p>Not a huge update, but now the simulation shows the eccentricity of the orbit.</p>
-<p><a href="https://blog.c0nrad.io/sims/twobody/">https://blog.c0nrad.io/sims/twobody/</a></p>
+<p>
+<a href="https://blog.c0nrad.io/sims/twobody/" target="_blank" rel="noopener">https://blog.c0nrad.io/sims/twobody/</a></p>
 <h2 id="conclusion">Conclusion</h2>
 <p>This is the last post on two body central force problems. I&rsquo;m not sure what I&rsquo;ll do next, but hopefully something just as fun and insightful.</p>
         </div>
@@ -236,8 +251,8 @@ $$</p>
       <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/clebsch-gordan/" title="Sim 4: Clebsch-Gordan Coefficients">Sim 4: Clebsch-Gordan Coefficients</a>
     
   </p>
-  
 </footer>
+
 
       </article>
     </div>
@@ -247,150 +262,103 @@ $$</p>
   <section class="first odd">
 
     
-    <h1>Who am I?</h1>
+      <h1>Who am I?</h1>
     
 
     <p>
       
-      <img src="/me.png" style="width: 100%"> 
-I am Stuart. In a previous life I was a programmer, electrical engineer, and a security engineer. Now I spend my free time tinkering with physics.
-</br></br>
-My goal is to understand why the universe exists. I have a lot of learning to do.
-<br/><br/>
-I write about physics, life, and learning.
-</br>
+        <img src="/me.png" style="width: 100%"> 
+CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pirates</a>). Founder (<a href="https://csper.io">csper.io</a>). Enjoyer of security/software/physics.
       
     </p>
   </section>
 
   
-
-  
-  <ul class="sidebar-nav">
-    <li class="sidebar-nav-item">
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/c0nrad/" title="https://github.com/c0nrad/"><i
-          class="fa fa-github fa-3x"></i></a>
-      
-      
-      <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/xc0nradx/" title="https://twitter.com/xc0nradx/"><i
-          class="fa fa-twitter fa-3x"></i></a>
-      
-      
-      
-      
-      <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/c0nrad" title="https://www.linkedin.com/in/c0nrad"><i
-          class="fa fa-linkedin fa-3x"></i></a>
-      
-      
-      
-      
-      
-      
-
-      
-      
-    </li>
-  </ul>
-
-
   
 
-  
-  
-  <section class="odd">
-    
-    <h1>Collections</h1>
+
+
+<ul class="sidebar-nav">
+  <li class="sidebar-nav-item">
     
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
-    </li>
     
-  </section>
-  
-  
+    
+    
+    
+    
+    
+    
 
   
   
+  </li>
+</ul>
+
   
 
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/ctfs" title="CTFs" >CTFs</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
 
   
-<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-    #mc_embed_signup {
-        background: #fff;
-        clear: left;
-        font: 14px Helvetica, Arial, sans-serif;
-        border: 1px solid;
-        margin-top: 20px;
-    }
-
-
-
-
-     
-</style>
-<div id="mc_embed_signup">
-    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
-        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
-        novalidate>
-        <div id="mc_embed_signup_scroll">
-            <label for="mce-EMAIL">Subscribe for new posts:</label>
-            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-            
-            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
-                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
-            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
-                    class="button"></div>
-        </div>
-    </form>
-</div>
-
-
-
+  
+  
 </aside>
+
   </div>
 </div>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
 
+
+
+
     <footer role="contentinfo">
-      <p>Copyright &copy; 2022 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+      <p>Copyright &copy; 2025 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>
 
     
     
-      <script type="text/javascript">
-        var _paq = _paq || [];
-         
-        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-          var u="//c0nrad.matomo.cloud/";
-          _paq.push(['setTrackerUrl', u+'piwik.php']);
-          _paq.push(['setSiteId',  1 ]);
-          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-        })();
-      </script>
+
+
+
+    
     
     
 

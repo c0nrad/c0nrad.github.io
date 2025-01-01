@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>Reasons to Not Be Hard on Yourself (CTFs)</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+    <link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  
+    <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
+  <meta name="author" content="Stuart Larsen">
+
+  
+  <meta name="generator" content="Hugo 0.140.2">
+
+  
+  
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+  
+  
+  <meta name="twitter:title" content="Reasons to Not Be Hard on Yourself (CTFs)"/>
+  <meta name="twitter:description" content="Every once in a while I either get a Discord message or see a post about someone who is feeling down about not doing well on CTFs. To be honest, I also sometimes make the mistake of feeling down when I compare myself to others.
+As we go into 2025, here are my opinions on why we both shouldn&rsquo;t be too hard on ourselves.
+1. CTFs are not &ldquo;Real World&rdquo; Security"/>
+  
+  <meta name="twitter:domain" content="blog.c0nrad.io"/>
+  <meta name="twitter:creator" content="@CryptoGangsta"/>
+
+  
+
+  
+  
+
+
+
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="https://blog.c0nrad.io/">c0nrad&#39;s c0rner</a></h1>
+    <h2>Learning and learning</h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+        <option value="https://blog.c0nrad.io/">» Home</option>
+      
+        <option value="https://c0nrad.io">» Website</option>
+      
+        <option value="https://github.com/c0nrad/">» Github</option>
+      
+        <option value="https://twitter.com/c0nrad_jr">» Twitter</option>
+      
+        <option value="https://c0nradsc0rner.com">» Other Blog</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="https://blog.c0nrad.io/" title="Home">Home</a></li>
+    
+  
+    
+      <li><a href="https://c0nrad.io" title="Website"  rel="noopener noreferrer">Website</a></li>
+    
+  
+    
+      <li><a href="https://github.com/c0nrad/" title="Github"  rel="noopener noreferrer">Github</a></li>
+    
+  
+    
+      <li><a href="https://twitter.com/c0nrad_jr" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+    
+      <li><a href="https://c0nradsc0rner.com" title="Other Blog"  rel="noopener noreferrer">Other Blog</a></li>
+    
+  
+</ul>
+
+<ul class="subscription">
+  
+    
+        <a href="https://blog.c0nrad.io/index.xml" target="_blank" type="application/rss+xml" title="RSS" rel="noopener noreferrer"><i class="fa fa-rss-square fa-lg"></i></a>
+    
+  
+</ul>
+
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+  <p class="meta">Dec 31, 2024
+     - 12 minute read 
+
+    
+    
+      - <a class="label" href="https://blog.c0nrad.io/categories/ctfs/">CTFs </a>
+    
+  </p>
+  <h1 class="entry-title">
+     Reasons to Not Be Hard on Yourself (CTFs) 
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+            <nav id="TableOfContents"></nav>
+          
+          <p>Every once in a while I either get a Discord message or see a post about someone who is feeling down about not doing well on CTFs. To be honest, I also sometimes make the mistake of feeling down when I compare myself to others.</p>
+<p>As we go into 2025, here are my opinions on why we both shouldn&rsquo;t be too hard on ourselves.</p>
+<p><strong>1. CTFs are not &ldquo;Real World&rdquo; Security</strong></p>
+<p>Before CTF&rsquo;ing, I worked with plenty of very valuable security engineers/practitioners that can not do basic exploits. I would still argue that they are great engineers.</p>
+<p>This also applies to me. Before CTFing, when I worked at various software companies, I knew a tiny fraction of what I currently know. But I still think I provided adequate value to the companies I worked for.</p>
+<p>If you’re doing CTFs in an attempt to get a job, just remember that a lot of jobs are about reducing and managing risk, which is mostly the very easy basics: &ldquo;Do we not have MFA? Let&rsquo;s install MFA.&rdquo; &ldquo;Are we not applying patches/upgrades? Let&rsquo;s do that.&rdquo; &ldquo;Do we not have a scheduled yearly pentest? Let&rsquo;s find someone.&rdquo; &ldquo;Are people reporting bugs to us? Let&rsquo;s respond to that email.&rdquo; “Do we have a process to rotate credentials?” etc.</p>
+<p>I also was/worked with plenty of pentesters who are good enough at their job but have a small fraction of the knowledge I think a decent CTF player has. And that is totally fine. A SQLi in the wild is usually just a vanilla SQL injection. There&rsquo;s no crazy filtering, no blind timing leaks using ReDoS, no nothing. You usually don&rsquo;t even have to write an exploit (although PoC|GTFO is nice). It&rsquo;s just, &ldquo;Hey, there&rsquo;s a SQL injection, this is why it&rsquo;s bad, here&rsquo;s how to fix it.&rdquo; You can be a good pentester without being a CTF god.</p>
+<p>Things may be slightly different if you work in vulnerability research, but that is a super tiny minority of security. And even then, I think one could argue that target selection and persistence may be more important skills than being a CTF god.</p>
+<p>Back when I was hiring people onto my security engineering team, I would make sure individuals knew the basics for their role (for example, if you do websec, you need to understand sessions, have no problem with at least the OWASP top 10 and mitigations, write scripts, etc.), but assuming you can do the essentials of your job, I really want to know: Can I trust you to communicate with other teams without messing up relationships? Can you discover areas of risk and find solutions? Are you humble and curious and not a drag to work with? &ldquo;I do not know, but will find out&rdquo; is almost always an appropriate response (as long as I can trust you to find out).</p>
+<p>Currently I run a company involving CSP (Content-Security-Policy). Not once have I discussed CSP bypasses with anyone. No one cares. The average security engineer I talk to while doing deployments does not understand the basics of CSP (although usually during the intro sales call people will say they do, but then 5 minutes into a demo they will state they do not). But that’s okay; that is the reason why my company exists. I would still argue that they are great engineers, but not CTF gods.</p>
+<p>It&rsquo;s easy to get wrapped up in the CTF world, but it is not close to the real world.</p>
+<p><strong>2. Time in the field</strong></p>
+<p>CTFs cover a very wide set of topics. I think &ldquo;time in the field&rdquo; is the biggest leg up you can have as a CTF player. So if you&rsquo;re younger, you&rsquo;re coming in with a serious disadvantage.</p>
+<p>For me, starting out in security/programming was the hardest. You don&rsquo;t know what you don&rsquo;t know. Everything is new and slow. Everyone is smarter. There&rsquo;s an infinite amount of things to learn. How can you exploit HTTP request smuggling when you barely understand HTTP?</p>
+<p>But I can say after 20 years in the field, it’s so much easier. Using the HTTP request smuggling attacks as an example, now that through various jobs I’ve written an HTTP fuzzer, familiar with ASCII codes, familiar with HTTP headers, written and played with HTTP proxies, thinking about how to abuse an HTTP request smuggling is much easier. And that applies to pretty much any topic. If you’re curious at work or in general, eventually you’ll visit all these topics, and the more you learn, the easier it gets.</p>
+<p>So if you&rsquo;re just starting out in security, don&rsquo;t worry. It takes time. It&rsquo;s hardest now, but it will get easier as you learn all the pieces.</p>
+<p><strong>3. Writeups are &ldquo;polished.&rdquo;</strong></p>
+<p>It&rsquo;s easy to sound smart in a writeup. You can hide all your mistakes (intentionally or not), and it distills potentially many hours/days of work into a 10-minute read/video. And that&rsquo;s a good thing.</p>
+<p>Writeups do not show all the pain/struggle/mistakes, the hundreds of open tabs, collaboration with teammates, luck, the years of grinding, and previous experience. It would make them boring.</p>
+<p>Also, sometimes bugs are found &ldquo;dumbly&rdquo; with a fuzzer, and then a story is constructed around the bug.</p>
+<p>And writeups are just one person&rsquo;s experience; there&rsquo;s no writeup for the hundreds of people that attempted the challenge or target and didn&rsquo;t succeed.</p>
+<p>Writeups for existing challenges (HTB, etc.) may even be copies of existing content.</p>
+<p>If you get depressed reading writeups thinking you&rsquo;ll never be that good. Don&rsquo;t worry; I’d recommend doing your own writeup, waiting a year, and then rereading it. I think you&rsquo;ll be surprised how smart you sound.</p>
+<p>Write-ups are also just great; please write more write-ups! (I prefer video, but anything works.)</p>
+<p><strong>4. Social Media is Deceptive</strong></p>
+<p>It may seem like everyone on social media platforms are absolutely crushing it. But I think it’s deceptive.</p>
+<p>Vulnerability research companies must market themselves. They must make all their research sound like the biggest and best new bugs around. They have to market their work to get contracts. It must sound like the companies are always pushing out novel and interesting exploits and doing cutting-edge stuff. The hype isn&rsquo;t bad; it&rsquo;s just business.</p>
+<p>Individuals also have to do the same; they have to market themselves. They are showing their very best accomplishments on a global stage.</p>
+<p>But for every 10 people that are posting about some new exploit or project or accomplishment or bug bounty reward, there are 100(?), 1000(?), 10,000(?) people who are not showing anything.</p>
+<p>People (usually) don&rsquo;t post about the months where nothing happened. And people usually make things sound more exciting than they really are.</p>
+<p>Personally, I’ve been avoiding X more and more (although I’m about to post this on X), but I don’t think social media is real, and I don’t think it’s healthy (for me anyways).</p>
+<p><strong>5. Cheating</strong></p>
+<p>Sadly, cheating does happen in CTFs.</p>
+<p>Cheating is such an assumed problem that it&rsquo;s &ldquo;common knowledge&rdquo; that we can&rsquo;t restrict team sizes because people will just cheat.</p>
+<p>There&rsquo;s what I call &ldquo;soft cheating.&rdquo; Maybe you&rsquo;re talking to a friend on another team about being stuck on a challenge, and they say, &ldquo;Oh wow, I&rsquo;m surprised you&rsquo;re stuck on it; I&rsquo;m pretty sure you know how to solve that challenge.&rdquo; It&rsquo;s not sharing a solution, but that&rsquo;s usually all the hint that someone needs to help solve a challenge. Now they know the issue is not some idea they don&rsquo;t know; it&rsquo;s just that they missed something. It’s not “hard cheating,” but it’s still an unfair advantage in my opinion.</p>
+<p>Another form of “soft cheating” can come from CTF admins. People have sent me screenshots of conversations with CTF admins during a CTF where they were able to beg for some &ldquo;extra nudges&rdquo; from an admin.</p>
+<p>And of course, there is &ldquo;real cheating,&rdquo; where teams have helped each other. There&rsquo;s been plenty of drama that you can google for. And they only get caught because they share the exact same flag hash. I would assume the majority of cheating involves just sharing an idea. &ldquo;Oh, that chal was a House of Force&rdquo; is all you need, and that is much harder to detect.</p>
+<p>I personally believe that &ldquo;soft cheating&rdquo; is pretty high. Because of my YT channel, I used to get an absurd number of people asking me for hints during live CTFs. It doesn&rsquo;t have to be direct either. People will try to discuss challenges in case I leak something like, &ldquo;Ha, this CTF is so fun, but I&rsquo;m stuck on xxxx.&rdquo; If you&rsquo;ve messaged me during a CTF, you may notice I do not respond to anyone. Partly because I am busy playing solo, but also because I do not want to accidentally leak any sort of hint.</p>
+<p>But I personally believe the vast majority of players do not cheat. It is also my opinion that the more you play, the less likely you are to cheat. I think cheating occurs more on the junior level, but that’s just a guess.</p>
+<p>In general, I think it&rsquo;s easy to get frustrated about cheating, but I don&rsquo;t think there&rsquo;s an obvious solution, and it&rsquo;s not worth getting worked up about. Do the best you can do, and don&rsquo;t worry about the rest. Cheaters hopefully exist in their little groups, and hopefully you can outskill them.</p>
+<p><strong>6. Team Size</strong></p>
+<p>If you&rsquo;re new to CTFs you may not realize how large some of the CTF teams are. Check out the members on the top teams on CTFTime. (The current second-place team has 70 players listed.) And that&rsquo;s not everyone on those teams; plenty of people don&rsquo;t care about CTFtime.</p>
+<p>It makes sense that people merge into larger and larger teams. If you want to put a first on your resume, why not team up with 100+ other people? If you want to go to DEFCON, why compete with a bunch of sweaty teams when you can all go together?</p>
+<p>I&rsquo;ve jokingly considered asking my 3000 YouTube subscribers to form a temporary team at some point just to show how stupid the current system is. But I don&rsquo;t have a solution to the problem, so I&rsquo;d just be creating drama for nothing.</p>
+<p><strong>7. Solve count</strong></p>
+<p>If you&rsquo;re playing a CTF and see that 30 people have already solved a challenge you are stuck on, it can sometimes be disheartening if you compare yourself. But you probably don&rsquo;t see the hundred-plus people who are currently struggling with the challenge. If there are 500 people grinding through the web category and one of the chals only has 10 solves, that&rsquo;s maybe 200-300 motivated people that spent a day or two and tried and failed.</p>
+<p>Some teams also have a bit of specialization. You&rsquo;re not going against thousands of people who are like you. If you&rsquo;re playing in a CTF with 5000 participants, there&rsquo;s going to be a handful of people who specialize in kernel security for their work/PhD. It makes sense that those are the people who beat the hard kernel challenge, not as many average security professionals.</p>
+<p><strong>8. CTFs are getting harder</strong></p>
+<p>The first CTF I won was back in 2016, and one of the least solved chals was a basic buffer overflow (I think this was before pwntools). The web chal was some basic XSS with trivial filtering.</p>
+<p>But now there’s more new content, more CVEs, more ideas, the challenges are more diverse/obscure and harder. As a challenge author, I’d rather make a challenge on something new. But this means that as a new player, you have to learn years of CTF challenge history.</p>
+<p>In some ways it is easier; there are so many people writing writeups, and the tooling is amazing (pwn before pwntools/pwndbg/gef was pretty annoying).</p>
+<p>There’s also a history/culture of problems and challenges. People release “revenge” challenges to previous challenges, and so the challenge is much easier if you’ve seen its evolution and read the writeups every step of the way.</p>
+<p>But a new player is still required to learn years of history to catch up.</p>
+<p><strong>9. CTF Sweats</strong></p>
+<p>As CTFs become more popular, it raises the bar in multiple ways. Supposedly, hackthebox has 1.7 million accounts. I highly doubt that number, but still. That’s a lot of people who are interested in technical security!</p>
+<p>If there are 1.7 million people who are vaguely interested in wargames/boxes/CTFs, and the “most interested/competitive” players play CTFS, that’s quite the talent funnel.</p>
+<p>And as competition grows, more “sweats” join the game. Sadly, I consider myself a sweat now; I grind like 4-6 hours a day because I enjoy it.</p>
+<p>CTFs are also global. If you&rsquo;re coming from high school/college and did competitions, you may be used to only competing with a talent pool that consisted of your city and neighboring cities. Now you&rsquo;re competing with the best in the entire world.</p>
+<p>There are some people who have been playing CTFs for a very long time, and so naturally they’re extremely good. And that’s great! Depending on how long you’ve been playing, it makes sense that there will be many people who are so much better. They’re not savants (I think, maybe); they just have been playing for a long time and have seen the tricks and evolution.</p>
+<p>So, accepting that some people are sweats in the game, and unless you&rsquo;re willing to sacrifice a lot, it is what it is.</p>
+<p><strong>10. CTFs do not matter that much.</strong></p>
+<p>Lastly, I would assume for most people&rsquo;s goals, there are probably more efficient avenues for success than grinding CTFs.</p>
+<p>If you&rsquo;re not having fun playing CTFs, that is totally okay. You can be very successful without playing CTFs. They really don&rsquo;t matter that much. If you place first or last, no one really cares.</p>
+<p>For me, I love that tickle when you see some code that seems very reasonable, but there’s supposedly a bug that I just don&rsquo;t see. I&rsquo;m also very competitive and have nothing better to do.</p>
+<p>For others, some say, &ldquo;Maybe the real flags are the friends you make along the way.&rdquo;.</p>
+<p>But whatever the reason is, I do hope your 2025 CTF year is happy, healthy, and fruitful, and that you are proud of how far you’ve come and that you won&rsquo;t be too hard on yourself.
+-SJP</p>
+
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
+    
+    <time>Dec 31, 2024</time>
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/sim-7-ising-2/" title="Sim 7: A failed attempt at an exact critical temperature for 3D Ising">Sim 7: A failed attempt at an exact critical temperature for 3D Ising</a>
+    
+
+    
+  </p>
+</footer>
+
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>Who am I?</h1>
+    
+
+    <p>
+      
+        <img src="/me.png" style="width: 100%"> 
+CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pirates</a>). Founder (<a href="https://csper.io">csper.io</a>). Enjoyer of security/software/physics.
+      
+    </p>
+  </section>
+
+  
+  
+
+
+
+<ul class="sidebar-nav">
+  <li class="sidebar-nav-item">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  
+  
+  </li>
+</ul>
+
+  
+
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/ctfs" title="CTFs" >CTFs</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
+
+  
+  
+  
+</aside>
+
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2025 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+
+
+
+    
+    
+    
+
+    
+  </body>
+</html>
+

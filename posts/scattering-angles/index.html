@@ -30,20 +30,19 @@
   
 
   
-  <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
+    <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
 
   
   
 
   <meta name="description" content="" />
-  <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
   <meta name="author" content="Stuart Larsen">
 
   
-  <meta name="generator" content="Hugo 0.79.1" />
-
-  
-  
+  <meta name="generator" content="Hugo 0.140.2">
 
   
   
@@ -60,6 +59,12 @@
   <meta name="twitter:creator" content="@CryptoGangsta"/>
 
   
+
+  
+  
+
+
+
 </head>
 <body>
 
@@ -84,7 +89,9 @@
       
         <option value="https://github.com/c0nrad/">» Github</option>
       
-        <option value="https://twitter.com/xc0nradx">» Twitter</option>
+        <option value="https://twitter.com/c0nrad_jr">» Twitter</option>
+      
+        <option value="https://c0nradsc0rner.com">» Other Blog</option>
       
   </select>
 </fieldset>
@@ -106,7 +113,11 @@
     
   
     
-      <li><a href="https://twitter.com/xc0nradx" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+      <li><a href="https://twitter.com/c0nrad_jr" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+    
+      <li><a href="https://c0nradsc0rner.com" title="Other Blog"  rel="noopener noreferrer">Other Blog</a></li>
     
   
 </ul>
@@ -134,7 +145,6 @@
 <header>
   <p class="meta">Aug 30, 2020
      - 3 minute read 
-    
 
     
   </p>
@@ -166,7 +176,8 @@
 <video controls src="/collisions.mp4" style="width: 75%;" autoplay loop ></video>
 </div>
 <h2 id="background">Background</h2>
-<p>In one of my <a href="https://blog.c0nrad.io/posts/calculating-collisions-2/">first blog posts</a>, I talked about the difficulty I had with calculating the resulting angles from a collision of two spheres.</p>
+<p>In one of my 
+<a href="https://blog.c0nrad.io/posts/calculating-collisions-2/" target="_blank" rel="noopener">first blog posts</a>, I talked about the difficulty I had with calculating the resulting angles from a collision of two spheres.</p>
 <div style="text-align: center">
 <video controls src="/bad_sphere_angle.mp4" style="width: 75%;" autoplay loop ></video>
 </div>
@@ -175,7 +186,8 @@
 <p>I reached out to my professor of classical mechanics about the above problem, and he suggested I read Ch. 14 of Taylor&rsquo;s Mechanics on Collision Theory. The chapter was pretty interesting, and it was stuff I wanted to learn sooner or later. I&rsquo;m hoping soon I can start modeling particle collisions (a long term goal of mine, I&rsquo;m about halfway through &ldquo;Elementary Particles&rdquo; by Griffiths).</p>
 <p>Anyways, in Taylor&rsquo;s book, example 14.5 talks about hard sphere scattering, and it turns out that the angle of incidence and reflection are equal. Kind of reminds me of bouncing photons off a medium.</p>
 <p>To be honest, I don&rsquo;t quite understand why the angles should be equal. There&rsquo;s probably some beautiful action/Lagrangian minimization that shows that it must be the path. I&rsquo;ll solve that another day.</p>
-<p>But, poking around some more, I found out that <a href="https://en.wikipedia.org/wiki/Elastic_collision#Two-dimensional">wikipedia</a> lists the equations I needed:</p>
+<p>But, poking around some more, I found out that 
+<a href="https://en.wikipedia.org/wiki/Elastic_collision#Two-dimensional" target="_blank" rel="noopener">wikipedia</a> lists the equations I needed:</p>
 <p>$$ \bm{v_1 \prime} = \bm{v_1} - \frac{2m_2}{m_1 + m_2} \frac{ &lt; \bm{v_1} - \bm{v_2}, \bm{x_1} - \bm{x_2}&gt;}{ || \bm{x_1} - \bm{x_2} ||^2} ( \bm{x_1} - \bm{x_2}) $$</p>
 <p>$$ \bm{v_2 \prime} = \bm{v_1} - \frac{2m_1}{m_1 + m_2} \frac{ &lt; \bm{v_2} - \bm{v_1}, \bm{x_2} - \bm{x_1}&gt;}{ || \bm{x_2} - \bm{x_1} ||^2} ( \bm{x_2} - \bm{x_1}) $$</p>
 <p>With this, I could put a bunch of balls into a container and watch them bounce! I think I might use this in the future to do some Statistical Mechanics/Boltzman entropy modeling fun later:</p>
@@ -185,11 +197,13 @@
 <div style="text-align: center">
 <video controls src="/collisions.mp4" style="width: 75%;" autoplay loop ></video>
 </div>
-<p>(<a href="https://github.com/scatter">Code</a>)</p>
+<p>(
+<a href="https://github.com/scatter" target="_blank" rel="noopener">Code</a>)</p>
 <p>It turned out pretty nice.</p>
 <p>From this I was able to plot the scattering angle against the impact parameter (b, how much offset the two items are).</p>
 <p><img src="/scatter.png" alt="scatter">
-(<a href="https://github.com/scatter">Code</a>)</p>
+(
+<a href="https://github.com/scatter" target="_blank" rel="noopener">Code</a>)</p>
 <p>Pretty neat stuff. It&rsquo;s cool how often stuff bounces back. I imagine this is probably similar to what Rutherford saw all those years ago.</p>
 <h3 id="what-was-difficult">What was difficult</h3>
 <ul>
@@ -231,8 +245,8 @@
       <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/spherical-bug/" title="Spherical Bug">Spherical Bug</a>
     
   </p>
-  
 </footer>
+
 
       </article>
     </div>
@@ -242,150 +256,103 @@
   <section class="first odd">
 
     
-    <h1>Who am I?</h1>
+      <h1>Who am I?</h1>
     
 
     <p>
       
-      <img src="/me.png" style="width: 100%"> 
-I am Stuart. In a previous life I was a programmer, electrical engineer, and a security engineer. Now I spend my free time tinkering with physics.
-</br></br>
-My goal is to understand why the universe exists. I have a lot of learning to do.
-<br/><br/>
-I write about physics, life, and learning.
-</br>
+        <img src="/me.png" style="width: 100%"> 
+CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pirates</a>). Founder (<a href="https://csper.io">csper.io</a>). Enjoyer of security/software/physics.
       
     </p>
   </section>
 
   
-
-  
-  <ul class="sidebar-nav">
-    <li class="sidebar-nav-item">
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/c0nrad/" title="https://github.com/c0nrad/"><i
-          class="fa fa-github fa-3x"></i></a>
-      
-      
-      <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/xc0nradx/" title="https://twitter.com/xc0nradx/"><i
-          class="fa fa-twitter fa-3x"></i></a>
-      
-      
-      
-      
-      <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/c0nrad" title="https://www.linkedin.com/in/c0nrad"><i
-          class="fa fa-linkedin fa-3x"></i></a>
-      
-      
-      
-      
-      
-      
-
-      
-      
-    </li>
-  </ul>
-
-
   
 
-  
-  
-  <section class="odd">
-    
-    <h1>Collections</h1>
+
+
+<ul class="sidebar-nav">
+  <li class="sidebar-nav-item">
     
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
-    </li>
     
-  </section>
-  
-  
+    
+    
+    
+    
+    
+    
 
   
   
+  </li>
+</ul>
+
   
 
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/ctfs" title="CTFs" >CTFs</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
 
   
-<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-    #mc_embed_signup {
-        background: #fff;
-        clear: left;
-        font: 14px Helvetica, Arial, sans-serif;
-        border: 1px solid;
-        margin-top: 20px;
-    }
-
-
-
-
-     
-</style>
-<div id="mc_embed_signup">
-    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
-        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
-        novalidate>
-        <div id="mc_embed_signup_scroll">
-            <label for="mce-EMAIL">Subscribe for new posts:</label>
-            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-            
-            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
-                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
-            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
-                    class="button"></div>
-        </div>
-    </form>
-</div>
-
-
-
+  
+  
 </aside>
+
   </div>
 </div>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
 
+
+
+
     <footer role="contentinfo">
-      <p>Copyright &copy; 2022 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+      <p>Copyright &copy; 2025 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>
 
     
     
-      <script type="text/javascript">
-        var _paq = _paq || [];
-         
-        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-          var u="//c0nrad.matomo.cloud/";
-          _paq.push(['setTrackerUrl', u+'piwik.php']);
-          _paq.push(['setSiteId',  1 ]);
-          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-        })();
-      </script>
+
+
+
+    
     
     
 

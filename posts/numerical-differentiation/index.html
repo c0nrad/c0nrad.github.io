@@ -30,20 +30,19 @@
   
 
   
-  <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
+    <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
 
   
   
 
   <meta name="description" content="" />
-  <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
   <meta name="author" content="Stuart Larsen">
 
   
-  <meta name="generator" content="Hugo 0.79.1" />
-
-  
-  
+  <meta name="generator" content="Hugo 0.140.2">
 
   
   
@@ -60,6 +59,12 @@
   <meta name="twitter:creator" content="@CryptoGangsta"/>
 
   
+
+  
+  
+
+
+
 </head>
 <body>
 
@@ -84,7 +89,9 @@
       
         <option value="https://github.com/c0nrad/">» Github</option>
       
-        <option value="https://twitter.com/xc0nradx">» Twitter</option>
+        <option value="https://twitter.com/c0nrad_jr">» Twitter</option>
+      
+        <option value="https://c0nradsc0rner.com">» Other Blog</option>
       
   </select>
 </fieldset>
@@ -106,7 +113,11 @@
     
   
     
-      <li><a href="https://twitter.com/xc0nradx" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+      <li><a href="https://twitter.com/c0nrad_jr" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+    
+      <li><a href="https://c0nradsc0rner.com" title="Other Blog"  rel="noopener noreferrer">Other Blog</a></li>
     
   
 </ul>
@@ -134,7 +145,6 @@
 <header>
   <p class="meta">Jul 10, 2020
      - 5 minute read 
-    
 
     
     
@@ -171,7 +181,8 @@
           
           <p>Some exploration into numerical differentiation.</p>
 <h2 id="introduction">Introduction</h2>
-<p>I just picked up a new book: <a href="https://www.amazon.com/Concepts-Computational-Physics-Benjamin-Stickler/dp/3319272632/">Basic Concepts in Computational Physics</a>. I&rsquo;ve been planning on building simulators for EM and Relativity. But after doing some research on how other people built them, I realized I should probably learn some of the basics of computational physics first. Other people seem to use FDTD (Finite-Difference Time-Domain) for simulations, and I have no idea what that is.</p>
+<p>I just picked up a new book: 
+<a href="https://www.amazon.com/Concepts-Computational-Physics-Benjamin-Stickler/dp/3319272632/" target="_blank" rel="noopener">Basic Concepts in Computational Physics</a>. I&rsquo;ve been planning on building simulators for EM and Relativity. But after doing some research on how other people built them, I realized I should probably learn some of the basics of computational physics first. Other people seem to use FDTD (Finite-Difference Time-Domain) for simulations, and I have no idea what that is.</p>
 <p>To the <s>drawing</s> learning board!</p>
 <p>The first chapter was on Numerical Differentiation. Here&rsquo;s some fancy charts and explanations I made after implementing the chapter in code.</p>
 <h2 id="differentiation">Differentiation</h2>
@@ -183,31 +194,31 @@
 <p>$$ f^\prime(x) = \lim_{h\to\infty} \frac{f(x+h) - f(x)}{h} $$</p>
 <p>And the idea behind numerical differentiation isn&rsquo;t that different. But instead of taking the limit, we just make h very small. When h is very small, we just assume the line is linear and use the equation for finding the slope of a linear line.</p>
 <p>But, we need to make a choice. Let&rsquo;s say we want to find the slope at \( x<em>i \) should we use \( x</em>{i-1}, x*{i} \) as the two points? Or \( x*{i}, x*{i+1} \) or maybe \( x*{i-1}, x_{i+1} \)?</p>
-<p>$$ f^\prime*{forward}(x_i) = \frac{ f(x*{i+1}) - f(x*i) }{h} $$
-$$ f^\prime*{backward}(x*i) = \frac{ f(x*{x}) - f(x*{i-1}) }{h} $$
-$$ f^\prime*{center}(x*i) = \frac{ f(x*{i+1}) - f(x_{i-1}) }{2h} $$</p>
+<p>$$ f^\prime*{forward}(x_i) = \frac{ f(x*{i+1}) - f(x<em>i) }{h} $$
+$$ f^\prime</em>{backward}(x<em>i) = \frac{ f(x</em>{x}) - f(x*{i-1}) }{h} $$
+$$ f^\prime*{center}(x<em>i) = \frac{ f(x</em>{i+1}) - f(x_{i-1}) }{2h} $$</p>
 <p>It turns out the answer is the last one (called Center), but we can go one step further and prove that using the point before and after is the best using Taylor series!</p>
 <h4 id="determining-the-error-using-forward-backward-center-numerical-differentiation">Determining the error using Forward, Backward, Center Numerical Differentiation</h4>
 <p>We can actually prove that the center method has the least amount of error.</p>
-<p>Let&rsquo;s Taylor expand \( x*{i-1} \) and \(x*{i+1} \). So we&rsquo;re using f(x*i) as our base point and estimating \( x*{i-1} \) and \(x_{i+1} \).</p>
-<p>$$ f(x*{i-1}) = f(x*{i}) - h f^\prime(x*i) + \frac{h^2}{2}f^{\prime\prime}(x_i) - \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip; $$
-$$ f(x*{i+1}) = f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip; $$</p>
+<p>Let&rsquo;s Taylor expand \( x*{i-1} \) and \(x*{i+1} \). So we&rsquo;re using f(x<em>i) as our base point and estimating \( x</em>{i-1} \) and \(x_{i+1} \).</p>
+<p>$$ f(x*{i-1}) = f(x*{i}) - h f^\prime(x<em>i) + \frac{h^2}{2}f^{\prime\prime}(x_i) - \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip; $$
+$$ f(x</em>{i+1}) = f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip; $$</p>
 <p>With</p>
 <p>$$ h = x*{i+1} - x_i = x_i - x*{x-1} $$</p>
 <p>Now we can re-arrange some stuff from the \( f(x_{x-1}) \) equation to determine the error for the Forward Differentiation method:</p>
 <p>$$
 \begin{array}{llll} f^\prime_{forward}(x_i)
-&amp; = \frac{ f(x_{i+1}) - f(x_i) }{h} \<br>
-&amp; = \frac{ (f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip;) - f(x_i)}{h} \<br>
-&amp; = f^\prime(x_i) + \frac{h}{2}f^{\prime\prime}(x_i) + \frac{h^2}{6}f^{\prime\prime\prime}(x_i) + &hellip; \<br>
+&amp; = \frac{ f(x_{i+1}) - f(x_i) }{h} \\
+&amp; = \frac{ (f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip;) - f(x_i)}{h} \\
+&amp; = f^\prime(x_i) + \frac{h}{2}f^{\prime\prime}(x_i) + \frac{h^2}{6}f^{\prime\prime\prime}(x_i) + &hellip; \\
 &amp; \sim  f^\prime(x_i) + \mathcal{O}(h) \end{array}
 $$</p>
 <p>Doing the same for Center we get:</p>
 <p>$$
 \begin{array}{llll} f^\prime_{center}(x_i)
-&amp; = \frac{ f(x_{i+1}) - f(x_{i-1}) }{2h} \<br>
-&amp; = \frac{ (f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip;) - (f(x_{i}) - h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) - \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip;) }{2h} \<br>
-&amp; = f^\prime(x_i) - \frac{h^2}{6}f^{\prime\prime\prime}(x_i) + &hellip; \<br>
+&amp; = \frac{ f(x_{i+1}) - f(x_{i-1}) }{2h} \\
+&amp; = \frac{ (f(x_{i}) + h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) + \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip;) - (f(x_{i}) - h f^\prime(x_i) + \frac{h^2}{2}f^{\prime\prime}(x_i) - \frac{h^3}{6}f^{\prime\prime\prime}(x_i) + &hellip;) }{2h} \\
+&amp; = f^\prime(x_i) - \frac{h^2}{6}f^{\prime\prime\prime}(x_i) + &hellip; \\
 &amp; \sim  f^\prime(x_i) + \mathcal{O}(h^2) \end{array}
 $$</p>
 <table>
@@ -249,8 +260,11 @@ $$</p>
 <p>Whereas for the center method, if we want a 100x improvement, we only need to split our \( h \) buckets by 10. 10*10 = 100.</p>
 <p>Let&rsquo;s see this in practice!</p>
 <h3 id="forward-backward-center-using-different-h-sizes">Forward Backward Center using different H sizes</h3>
-<p><a href="https://github.com/c0nrad/csim/blob/master/examples/diff_modes/multiple_h.png?raw=true"><img src="/multiple_h.png" alt="diff_modes"></a>
-(<a href="https://github.com/c0nrad/csim/blob/master/examples/diff_modes/multiple_h.png">Image</a> | <a href="https://github.com/c0nrad/csim/blob/master/examples/diff_modes/diff_modes.go">Code</a>)</p>
+<p>
+<a href="https://github.com/c0nrad/csim/blob/master/examples/diff_modes/multiple_h.png?raw=true" target="_blank" rel="noopener"><img src="/multiple_h.png" alt="diff_modes"></a>
+(
+<a href="https://github.com/c0nrad/csim/blob/master/examples/diff_modes/multiple_h.png" target="_blank" rel="noopener">Image</a> | 
+<a href="https://github.com/c0nrad/csim/blob/master/examples/diff_modes/diff_modes.go" target="_blank" rel="noopener">Code</a>)</p>
 <p>Here I take the derivative of \( sin(x) \) using the forward, backward and center methods using different buckets of h. You can see that the Center method is significantly better.</p>
 <h2 id="random-derivative-examples">Random Derivative Examples</h2>
 <p>The numeric differentiator is just plain cool how simple it is!</p>
@@ -259,36 +273,44 @@ $$</p>
 $$ f_2(x) = 5x -3 $$
 $$ f_3(x) = e^x $$
 $$ f_4(x) = cos(2x) + e^{-\frac{x^2}{2}} sin(10x) $$</p>
-<p><a href="https://github.com/c0nrad/csim/blob/master/examples/diff_examples/diff_examples.png?raw=true"><img src="https://raw.githubusercontent.com/c0nrad/csim/master/examples/diff_examples/diff_examples.png" alt="diff_examples"></a>
-(<a href="https://github.com/c0nrad/csim/blob/master/examples/diff_modes/multiple_h.png">Image</a> | <a href="https://github.com/c0nrad/csim/blob/master/examples/diff_examples/diff_examples.go">Code</a>)</p>
+<p>
+<a href="https://github.com/c0nrad/csim/blob/master/examples/diff_examples/diff_examples.png?raw=true" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/c0nrad/csim/master/examples/diff_examples/diff_examples.png" alt="diff_examples"></a>
+(
+<a href="https://github.com/c0nrad/csim/blob/master/examples/diff_modes/multiple_h.png" target="_blank" rel="noopener">Image</a> | 
+<a href="https://github.com/c0nrad/csim/blob/master/examples/diff_examples/diff_examples.go" target="_blank" rel="noopener">Code</a>)</p>
 <h2 id="legendre-polynomials">Legendre Polynomials</h2>
-<p>In my <a href="https://blog.c0nrad.io/posts/hydrogen-pt1/">electron orbitals simulator</a> I had to calculate the Legendre Polynomials (using Rodrigues' Formula):</p>
+<p>In my 
+<a href="https://blog.c0nrad.io/posts/hydrogen-pt1/" target="_blank" rel="noopener">electron orbitals simulator</a> I had to calculate the Legendre Polynomials (using Rodrigues&rsquo; Formula):</p>
 <p>$$ P_l(x) = \frac{1}{2^l l!} \left(\frac{d}{dx}\right)^l (x^2 - 1)^l $$</p>
-<p>Knowing that I&rsquo;d have to calculate the derivative of this function was one of the reasons I decided to <a href="https://blog.c0nrad.io/posts/ginac-on-macos/">check out GiNaCs</a> in the first place. (GiNaCs has a symbolic differentiator).</p>
+<p>Knowing that I&rsquo;d have to calculate the derivative of this function was one of the reasons I decided to 
+<a href="https://blog.c0nrad.io/posts/ginac-on-macos/" target="_blank" rel="noopener">check out GiNaCs</a> in the first place. (GiNaCs has a symbolic differentiator).</p>
 <p>But now with a Numeric Differentiator, I have no need for the symbolic executioner! (Obviously not fully true, it&rsquo;s still <em>extremely</em> nice to have the symbols).</p>
 <p>But, damn, it is so satisfying generating the polynomials like this in Go. I&rsquo;m in shock that it even works to be honest. I heavily abuse function closure&rsquo;s to store state. (It&rsquo;s function closure&rsquo;s all the way down):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Go" data-lang="Go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">LegendrePoly</span>(<span style="color:#a6e22e">l</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">Func</span> {
-	<span style="color:#a6e22e">prefix</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> (<span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Pow</span>(<span style="color:#ae81ff">2</span>, float64(<span style="color:#a6e22e">l</span>)) <span style="color:#f92672">*</span> <span style="color:#a6e22e">Factorial</span>(<span style="color:#a6e22e">l</span>))
-
-	<span style="color:#a6e22e">inner</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">float64</span> {
-		<span style="color:#a6e22e">out</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1.0</span>
-		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">l</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-			<span style="color:#a6e22e">out</span> <span style="color:#f92672">*=</span> <span style="color:#a6e22e">x</span><span style="color:#f92672">*</span><span style="color:#a6e22e">x</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
-		}
-		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>
-	}
-
-	<span style="color:#a6e22e">out</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">inner</span>
-	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">l</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-		<span style="color:#a6e22e">out</span> = <span style="color:#a6e22e">D</span>(<span style="color:#a6e22e">out</span>)
-	}
-	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">float64</span> {
-		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">prefix</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">out</span>(<span style="color:#a6e22e">x</span>)
-	}
-}
-</code></pre></div><p>But with some plotting, we can verify it works!</p>
-<p><a href="https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.png?raw=true"><img src="https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.png?raw=true" alt="Legendre"></a>
-( <a href="https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.png?raw=true">Image</a> | <a href="https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.go">Code</a> )</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">LegendrePoly</span>(<span style="color:#a6e22e">l</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">Func</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">prefix</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> (<span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Pow</span>(<span style="color:#ae81ff">2</span>, float64(<span style="color:#a6e22e">l</span>)) <span style="color:#f92672">*</span> <span style="color:#a6e22e">Factorial</span>(<span style="color:#a6e22e">l</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">inner</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">float64</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">out</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1.0</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">l</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">out</span> <span style="color:#f92672">*=</span> <span style="color:#a6e22e">x</span><span style="color:#f92672">*</span><span style="color:#a6e22e">x</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">out</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">inner</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">l</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">out</span> = <span style="color:#a6e22e">D</span>(<span style="color:#a6e22e">out</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">float64</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">prefix</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">out</span>(<span style="color:#a6e22e">x</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>But with some plotting, we can verify it works!</p>
+<p>
+<a href="https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.png?raw=true" target="_blank" rel="noopener"><img src="https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.png?raw=true" alt="Legendre"></a>
+( 
+<a href="https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.png?raw=true" target="_blank" rel="noopener">Image</a> | 
+<a href="https://github.com/c0nrad/csim/blob/master/examples/legendre/legendre.go" target="_blank" rel="noopener">Code</a> )</p>
 <p>How cool is that!</p>
 <h3 id="conclusion">Conclusion</h3>
 <p>Numeric differentiation ended up being way cooler than I thought it would be.</p>
@@ -316,8 +338,8 @@ $$ f_4(x) = cos(2x) + e^{-\frac{x^2}{2}} sin(10x) $$</p>
       <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/numerical-integration/" title="Numerical Integration">Numerical Integration</a>
     
   </p>
-  
 </footer>
+
 
       </article>
     </div>
@@ -327,150 +349,103 @@ $$ f_4(x) = cos(2x) + e^{-\frac{x^2}{2}} sin(10x) $$</p>
   <section class="first odd">
 
     
-    <h1>Who am I?</h1>
+      <h1>Who am I?</h1>
     
 
     <p>
       
-      <img src="/me.png" style="width: 100%"> 
-I am Stuart. In a previous life I was a programmer, electrical engineer, and a security engineer. Now I spend my free time tinkering with physics.
-</br></br>
-My goal is to understand why the universe exists. I have a lot of learning to do.
-<br/><br/>
-I write about physics, life, and learning.
-</br>
+        <img src="/me.png" style="width: 100%"> 
+CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pirates</a>). Founder (<a href="https://csper.io">csper.io</a>). Enjoyer of security/software/physics.
       
     </p>
   </section>
 
   
-
-  
-  <ul class="sidebar-nav">
-    <li class="sidebar-nav-item">
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/c0nrad/" title="https://github.com/c0nrad/"><i
-          class="fa fa-github fa-3x"></i></a>
-      
-      
-      <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/xc0nradx/" title="https://twitter.com/xc0nradx/"><i
-          class="fa fa-twitter fa-3x"></i></a>
-      
-      
-      
-      
-      <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/c0nrad" title="https://www.linkedin.com/in/c0nrad"><i
-          class="fa fa-linkedin fa-3x"></i></a>
-      
-      
-      
-      
-      
-      
-
-      
-      
-    </li>
-  </ul>
-
-
   
 
-  
-  
-  <section class="odd">
-    
-    <h1>Collections</h1>
+
+
+<ul class="sidebar-nav">
+  <li class="sidebar-nav-item">
     
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
-    </li>
     
-  </section>
-  
-  
+    
+    
+    
+    
+    
+    
 
   
   
+  </li>
+</ul>
+
   
 
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/ctfs" title="CTFs" >CTFs</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
 
   
-<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-    #mc_embed_signup {
-        background: #fff;
-        clear: left;
-        font: 14px Helvetica, Arial, sans-serif;
-        border: 1px solid;
-        margin-top: 20px;
-    }
-
-
-
-
-     
-</style>
-<div id="mc_embed_signup">
-    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
-        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
-        novalidate>
-        <div id="mc_embed_signup_scroll">
-            <label for="mce-EMAIL">Subscribe for new posts:</label>
-            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-            
-            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
-                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
-            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
-                    class="button"></div>
-        </div>
-    </form>
-</div>
-
-
-
+  
+  
 </aside>
+
   </div>
 </div>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
 
+
+
+
     <footer role="contentinfo">
-      <p>Copyright &copy; 2022 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+      <p>Copyright &copy; 2025 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>
 
     
     
-      <script type="text/javascript">
-        var _paq = _paq || [];
-         
-        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-          var u="//c0nrad.matomo.cloud/";
-          _paq.push(['setTrackerUrl', u+'piwik.php']);
-          _paq.push(['setSiteId',  1 ]);
-          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-        })();
-      </script>
+
+
+
+    
     
     
 

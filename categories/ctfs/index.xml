@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CTFs on c0nrad&#39;s c0rner</title>
+    <link>https://blog.c0nrad.io/categories/ctfs/</link>
+    <description>Recent content in CTFs on c0nrad&#39;s c0rner</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 31 Dec 2024 16:04:30 -0500</lastBuildDate>
+    <atom:link href="https://blog.c0nrad.io/categories/ctfs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reasons to Not Be Hard on Yourself (CTFs)</title>
+      <link>https://blog.c0nrad.io/posts/be-kind-to-self/</link>
+      <pubDate>Tue, 31 Dec 2024 16:04:30 -0500</pubDate>
+      <guid>https://blog.c0nrad.io/posts/be-kind-to-self/</guid>
+      <description>&lt;p&gt;Every once in a while I either get a Discord message or see a post about someone who is feeling down about not doing well on CTFs. To be honest, I also sometimes make the mistake of feeling down when I compare myself to others.&lt;/p&gt;&#xA;&lt;p&gt;As we go into 2025, here are my opinions on why we both shouldn&amp;rsquo;t be too hard on ourselves.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;1. CTFs are not &amp;ldquo;Real World&amp;rdquo; Security&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

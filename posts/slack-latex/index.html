@@ -30,20 +30,19 @@
   
 
   
-  <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
+    <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
 
   
   
 
   <meta name="description" content="Building a new product" />
-  <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
   <meta name="author" content="Stuart Larsen">
 
   
-  <meta name="generator" content="Hugo 0.79.1" />
-
-  
-  
+  <meta name="generator" content="Hugo 0.140.2">
 
   
   
@@ -60,6 +59,12 @@
   <meta name="twitter:creator" content="@CryptoGangsta"/>
 
   
+
+  
+  
+
+
+
 </head>
 <body>
 
@@ -84,7 +89,9 @@
       
         <option value="https://github.com/c0nrad/">» Github</option>
       
-        <option value="https://twitter.com/xc0nradx">» Twitter</option>
+        <option value="https://twitter.com/c0nrad_jr">» Twitter</option>
+      
+        <option value="https://c0nradsc0rner.com">» Other Blog</option>
       
   </select>
 </fieldset>
@@ -106,7 +113,11 @@
     
   
     
-      <li><a href="https://twitter.com/xc0nradx" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+      <li><a href="https://twitter.com/c0nrad_jr" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+    
+      <li><a href="https://c0nradsc0rner.com" title="Other Blog"  rel="noopener noreferrer">Other Blog</a></li>
     
   
 </ul>
@@ -134,7 +145,6 @@
 <header>
   <p class="meta">Oct 11, 2021
      - 4 minute read 
-    
 
     
     
@@ -165,7 +175,8 @@
   </ul>
 </nav>
           
-          <p>I had fun building a new product with my partner called <a href="https://slacklatex.com">Slack LaTeX</a>. It&rsquo;s a slack app for embedding formatted equations (through LaTeX). This post covers some of the motivation and some of the fun technical architecture design decisions.</p>
+          <p>I had fun building a new product with my partner called 
+<a href="https://slacklatex.com" target="_blank" rel="noopener">Slack LaTeX</a>. It&rsquo;s a slack app for embedding formatted equations (through LaTeX). This post covers some of the motivation and some of the fun technical architecture design decisions.</p>
 <p><img src="https://slacklatex.com/static/media/demo_img.e6305cbf.png" alt="slack latex demo"></p>
 <h2 id="motivation">Motivation</h2>
 <p>I find myself without a job again, and &ldquo;idle hands are the devil&rsquo;s workshop&rdquo;. It&rsquo;s also been awhile since I built anything fun. My partner (a frontend developer) and I have talked about building a product together for awhile, and now the stars aligned so we decided to give it a go.</p>
@@ -176,7 +187,8 @@
 <p>Here&rsquo;s the architecture we ended up building:</p>
 <h3 id="backend">Backend</h3>
 <p><img src="/slack-latex-backend.png" alt="backend"></p>
-<p>The ec2 servers have a nodejs server installed with express that services the latex rendering. They internally run phantomjs (headless chrome) and render the LaTeX using <a href="https://katex.org/">KaTeX</a>.</p>
+<p>The ec2 servers have a nodejs server installed with express that services the latex rendering. They internally run phantomjs (headless chrome) and render the LaTeX using 
+<a href="https://katex.org/" target="_blank" rel="noopener">KaTeX</a>.</p>
 <p>At first I tried to build this infrastructure using Lambda. I really want to like Lambda, but it&rsquo;s just a pain to develop with. The logging is confusing, the infrastructure is confusing. The iteration speed is slow. I don&rsquo;t feel like I&rsquo;m in control. I actually got it all setup on Lambda (using Applications and Cloudformation), but I didn&rsquo;t like it. (There was some hacky stuff with bundling chrome so that it&rsquo;d hit the allowed size
 limit). Making changes is a pain, and when I return to this project in 6 months to make a fix, I&rsquo;m going to hate myself for using lambda.</p>
 <p>But I&rsquo;m pretty happy with the setup. It&rsquo;s not in an ec2-autoscaling group, but it&rsquo;s ready to be when we get heavier traffic. And I wrote a playbook on how to setup the ec2s for when we get there.</p>
@@ -189,7 +201,9 @@ limit). Making changes is a pain, and when I return to this project in 6 months 
 <p>Overall it looks very snazzy.</p>
 <h2 id="what-went-well">What went well</h2>
 <ul>
-<li><a href="https://stripe.com/payments/checkout">Stripe Checkout</a> and <a href="https://stripe.com/docs/billing/subscriptions/customer-portal">Stripe Customer Portal</a> are amazing.
+<li>
+<a href="https://stripe.com/payments/checkout" target="_blank" rel="noopener">Stripe Checkout</a> and 
+<a href="https://stripe.com/docs/billing/subscriptions/customer-portal" target="_blank" rel="noopener">Stripe Customer Portal</a> are amazing.
 <ul>
 <li>I don&rsquo;t ever have to see or think about a credit card. Customers can swap out their own credit card, cancel subscriptions, update billing addresses, etc, all without contacting support</li>
 <li>I didn&rsquo;t mention it in this article, but it involves setting up a webhook to listen to stripe events (there&rsquo;s one nasty thing with nodejs middleware parsing the response body before stripe has a chance to validate with a signature, but it&rsquo;s easy to work around)</li>
@@ -201,7 +215,8 @@ limit). Making changes is a pain, and when I return to this project in 6 months 
 <p>But overall I just can&rsquo;t believe how easy it is these days to launch a new product. Everything is taken care of for you. Just a little bit of glue and you can solve real problems.</p>
 <h2 id="what-didnt-go-well">What didn&rsquo;t go well</h2>
 <p>As mentioned earlier, I wish Lambda was smoother. I really want to like it, and I feel like the apps I build should be good usecases for lambda.</p>
-<p>There was some annoying issue related to the AWS region and using a route53 top level ALIAS with cloudfront. I think you can only use them if your bucket is in us-east-1 or something? I didn&rsquo;t quite understand. Also handling redirects from <a href="http://www.slacklatex.com">www.slacklatex.com</a> to slacklatex.com was a little awkward. You have to use the custom URL in the CDN settings (the s3 website), not the default.</p>
+<p>There was some annoying issue related to the AWS region and using a route53 top level ALIAS with cloudfront. I think you can only use them if your bucket is in us-east-1 or something? I didn&rsquo;t quite understand. Also handling redirects from 
+<a href="https://www.slacklatex.com" target="_blank" rel="noopener">www.slacklatex.com</a> to slacklatex.com was a little awkward. You have to use the custom URL in the CDN settings (the s3 website), not the default.</p>
 <p>But otherwise everything went well! We&rsquo;re excited to see how this product grows. We have many ideas for V2.</p>
         </div>
         
@@ -226,8 +241,8 @@ limit). Making changes is a pain, and when I return to this project in 6 months 
       <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/sim-1-two-body-central-force/" title="Sim 1: Two Body Central Force">Sim 1: Two Body Central Force</a>
     
   </p>
-  
 </footer>
+
 
       </article>
     </div>
@@ -237,150 +252,103 @@ limit). Making changes is a pain, and when I return to this project in 6 months 
   <section class="first odd">
 
     
-    <h1>Who am I?</h1>
+      <h1>Who am I?</h1>
     
 
     <p>
       
-      <img src="/me.png" style="width: 100%"> 
-I am Stuart. In a previous life I was a programmer, electrical engineer, and a security engineer. Now I spend my free time tinkering with physics.
-</br></br>
-My goal is to understand why the universe exists. I have a lot of learning to do.
-<br/><br/>
-I write about physics, life, and learning.
-</br>
+        <img src="/me.png" style="width: 100%"> 
+CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pirates</a>). Founder (<a href="https://csper.io">csper.io</a>). Enjoyer of security/software/physics.
       
     </p>
   </section>
 
   
-
-  
-  <ul class="sidebar-nav">
-    <li class="sidebar-nav-item">
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/c0nrad/" title="https://github.com/c0nrad/"><i
-          class="fa fa-github fa-3x"></i></a>
-      
-      
-      <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/xc0nradx/" title="https://twitter.com/xc0nradx/"><i
-          class="fa fa-twitter fa-3x"></i></a>
-      
-      
-      
-      
-      <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/c0nrad" title="https://www.linkedin.com/in/c0nrad"><i
-          class="fa fa-linkedin fa-3x"></i></a>
-      
-      
-      
-      
-      
-      
-
-      
-      
-    </li>
-  </ul>
-
-
   
 
-  
-  
-  <section class="odd">
-    
-    <h1>Collections</h1>
+
+
+<ul class="sidebar-nav">
+  <li class="sidebar-nav-item">
     
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
-    </li>
     
-  </section>
-  
-  
+    
+    
+    
+    
+    
+    
 
   
   
+  </li>
+</ul>
+
   
 
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/ctfs" title="CTFs" >CTFs</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
 
   
-<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-    #mc_embed_signup {
-        background: #fff;
-        clear: left;
-        font: 14px Helvetica, Arial, sans-serif;
-        border: 1px solid;
-        margin-top: 20px;
-    }
-
-
-
-
-     
-</style>
-<div id="mc_embed_signup">
-    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
-        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
-        novalidate>
-        <div id="mc_embed_signup_scroll">
-            <label for="mce-EMAIL">Subscribe for new posts:</label>
-            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-            
-            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
-                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
-            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
-                    class="button"></div>
-        </div>
-    </form>
-</div>
-
-
-
+  
+  
 </aside>
+
   </div>
 </div>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
 
+
+
+
     <footer role="contentinfo">
-      <p>Copyright &copy; 2022 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+      <p>Copyright &copy; 2025 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>
 
     
     
-      <script type="text/javascript">
-        var _paq = _paq || [];
-         
-        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-          var u="//c0nrad.matomo.cloud/";
-          _paq.push(['setTrackerUrl', u+'piwik.php']);
-          _paq.push(['setSiteId',  1 ]);
-          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-        })();
-      </script>
+
+
+
+    
     
     
 

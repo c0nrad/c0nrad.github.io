@@ -1,38 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>personal on c0nrad&#39;s c0rner</title>
+    <title>Personal on c0nrad&#39;s c0rner</title>
     <link>https://blog.c0nrad.io/categories/personal/</link>
-    <description>Recent content in personal on c0nrad&#39;s c0rner</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Personal on c0nrad&#39;s c0rner</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 15 Oct 2020 10:24:08 -0400</lastBuildDate><atom:link href="https://blog.c0nrad.io/categories/personal/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Oct 2020 10:24:08 -0400</lastBuildDate>
+    <atom:link href="https://blog.c0nrad.io/categories/personal/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Independent Study</title>
       <link>https://blog.c0nrad.io/posts/independent-study/</link>
       <pubDate>Thu, 15 Oct 2020 10:24:08 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/independent-study/</guid>
       <description>&lt;p&gt;Thinking out loud about my future.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Florida</title>
       <link>https://blog.c0nrad.io/posts/florida/</link>
       <pubDate>Mon, 29 Jun 2020 12:06:58 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/florida/</guid>
       <description>&lt;p&gt;We moved to Florida! Made a little video.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reflections on 6 months solo SaaS startup</title>
       <link>https://blog.c0nrad.io/posts/reflections-6months/</link>
       <pubDate>Tue, 16 Jun 2020 07:59:02 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/reflections-6months/</guid>
       <description>&lt;p&gt;It&amp;rsquo;s crazy to think my startup is already over 6 months old. This post is some informal reflections on that period.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

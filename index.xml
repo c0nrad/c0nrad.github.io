@@ -4,494 +4,352 @@
     <title>c0nrad&#39;s c0rner</title>
     <link>https://blog.c0nrad.io/</link>
     <description>Recent content on c0nrad&#39;s c0rner</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Sep 2022 12:14:28 -0400</lastBuildDate><atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 Dec 2024 16:04:30 -0500</lastBuildDate>
+    <atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Sim 11: Ray Tracing Telescope</title>
-      <link>https://blog.c0nrad.io/posts/sims-teleray/</link>
-      <pubDate>Thu, 22 Sep 2022 12:14:28 -0400</pubDate>
-      
-      <guid>https://blog.c0nrad.io/posts/sims-teleray/</guid>
-      <description>&lt;p&gt;Today&amp;rsquo;s project was building a little ray tracing telescope with a fake CCD. You can play with it here:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://blog.c0nrad.io/sims/teleray/&#34;&gt;https://blog.c0nrad.io/sims/teleray/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://blog.c0nrad.io/sims/teleray/&#34;&gt;&lt;img src=&#34;https://blog.c0nrad.io/teleray.png&#34; alt=&#34;/teleray.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;(&lt;a href=&#34;https://github.com/c0nrad/sims/blob/master/teleray/src/app/app.component.ts&#34;&gt;code&lt;/a&gt;)&lt;/p&gt;</description>
+      <title>Reasons to Not Be Hard on Yourself (CTFs)</title>
+      <link>https://blog.c0nrad.io/posts/be-kind-to-self/</link>
+      <pubDate>Tue, 31 Dec 2024 16:04:30 -0500</pubDate>
+      <guid>https://blog.c0nrad.io/posts/be-kind-to-self/</guid>
+      <description>&lt;p&gt;Every once in a while I either get a Discord message or see a post about someone who is feeling down about not doing well on CTFs. To be honest, I also sometimes make the mistake of feeling down when I compare myself to others.&lt;/p&gt;&#xA;&lt;p&gt;As we go into 2025, here are my opinions on why we both shouldn&amp;rsquo;t be too hard on ourselves.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;1. CTFs are not &amp;ldquo;Real World&amp;rdquo; Security&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
-    
-    <item>
-      <title>Simple Lorentz Boost Script</title>
-      <link>https://blog.c0nrad.io/posts/simple-lorentz-boost-script/</link>
-      <pubDate>Wed, 07 Sep 2022 19:55:11 -0400</pubDate>
-      
-      <guid>https://blog.c0nrad.io/posts/simple-lorentz-boost-script/</guid>
-      <description>Like every human being, I have a hard time visualizing Lorentz boosts. (Lorentz boosts being the change in velocity that respects special relativity.
-I&amp;rsquo;m considering doing some sort of animations that will show how different events would look depending on your boosted velocity.
-But, before that I wrote a little script to try to gain some more intuition behind the boosts:
-import numpy as np import matplotlib.pyplot as plot events = [np.</description>
-    </item>
-    
-    <item>
-      <title>More Fun With Ising</title>
-      <link>https://blog.c0nrad.io/posts/more-fun-with-ising/</link>
-      <pubDate>Sun, 28 Aug 2022 16:31:22 -0400</pubDate>
-      
-      <guid>https://blog.c0nrad.io/posts/more-fun-with-ising/</guid>
-      <description>It&amp;rsquo;s been awhile since I&amp;rsquo;ve posted, so I figured I&amp;rsquo;d talk about what I&amp;rsquo;ve been working on for the last few months. Specifically some new attempts for solving the Ising models.
- Puzzle Piece Representation of the Ising model The &amp;ldquo;puzzle piece&amp;rdquo; representation of the ising model is my attempt to find a simpler solution for 2D (and hopefully one that extends to 3D).
-To be honest, it&amp;rsquo;s not that well motivated.</description>
-    </item>
-    
-    <item>
-      <title>Sim 10: Numerically solving Schrodinger via Crank-Nicolson in C&#43;&#43;</title>
-      <link>https://blog.c0nrad.io/posts/sim-10-crank-that-nicolson/</link>
-      <pubDate>Wed, 13 Apr 2022 13:59:20 -0700</pubDate>
-      
-      <guid>https://blog.c0nrad.io/posts/sim-10-crank-that-nicolson/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sim 9 Double Slit Simulation - Schrodinger FDTD</title>
-      <link>https://blog.c0nrad.io/posts/sim-9-double-slit-schrodinger-fdtd/</link>
-      <pubDate>Sat, 09 Apr 2022 07:50:35 -0700</pubDate>
-      
-      <guid>https://blog.c0nrad.io/posts/sim-9-double-slit-schrodinger-fdtd/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sim 8 Quantum Step Potential Simulation - Schrodinger FDTD</title>
-      <link>https://blog.c0nrad.io/posts/sim-8-quantum-fdtd-1d/</link>
-      <pubDate>Fri, 08 Apr 2022 08:33:55 -0700</pubDate>
-      
-      <guid>https://blog.c0nrad.io/posts/sim-8-quantum-fdtd-1d/</guid>
-      <description></description>
-    </item>
-    
     <item>
       <title>Sim 7: A failed attempt at an exact critical temperature for 3D Ising</title>
       <link>https://blog.c0nrad.io/posts/sim-7-ising-2/</link>
       <pubDate>Wed, 16 Mar 2022 08:22:04 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/sim-7-ising-2/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Sim 6: Ising Model Pt. 1</title>
       <link>https://blog.c0nrad.io/posts/ising-1/</link>
       <pubDate>Tue, 25 Jan 2022 15:50:49 -0800</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/ising-1/</guid>
       <description>&lt;p&gt;We build out a simple Ising model simulator for future expansion.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Sim 5: Wien&#39;s Law from Plank&#39;s Blackbody Radiation Formula using Sympy</title>
       <link>https://blog.c0nrad.io/posts/wien-plank-sympy/</link>
       <pubDate>Mon, 17 Jan 2022 13:40:45 -0800</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/wien-plank-sympy/</guid>
       <description>&lt;p&gt;We derive wien&amp;rsquo;s constant using plank&amp;rsquo;s blackbody radiation formula.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Sim 4: Clebsch-Gordan Coefficients</title>
       <link>https://blog.c0nrad.io/posts/clebsch-gordan/</link>
       <pubDate>Wed, 29 Dec 2021 11:05:11 -0800</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/clebsch-gordan/</guid>
       <description>&lt;p&gt;This post covers a script I wrote for generating the clebsch-gordan coefficients by scratch.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Sim 3: Kepler Problems</title>
       <link>https://blog.c0nrad.io/posts/sim-3-kepler-problems/</link>
       <pubDate>Wed, 22 Dec 2021 10:07:03 -0800</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/sim-3-kepler-problems/</guid>
-      <description>&lt;p&gt;We solve for the different types of orbits of the &lt;a href=&#34;https://en.wikipedia.org/wiki/Kepler_problem&#34;&gt;Kepler Problem&lt;/a&gt; (two body central force problems).&lt;/p&gt;</description>
+      <description>&lt;p&gt;We solve for the different types of orbits of the &#xA;&lt;a href=&#34;https://en.wikipedia.org/wiki/Kepler_problem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kepler Problem&lt;/a&gt; (two body central force problems).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Sim 2: Effective Potential</title>
       <link>https://blog.c0nrad.io/posts/sim-2-effective-potential/</link>
       <pubDate>Sun, 19 Dec 2021 11:00:24 -0800</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/sim-2-effective-potential/</guid>
       <description>&lt;p&gt;Plot the effective potential for the two body force simulation.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Sim 1: Two Body Central Force</title>
       <link>https://blog.c0nrad.io/posts/sim-1-two-body-central-force/</link>
       <pubDate>Sun, 19 Dec 2021 05:24:02 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/sim-1-two-body-central-force/</guid>
       <description>&lt;p&gt;Day one of building 99 simulations. We&amp;rsquo;ll reduce a problem that at first requires 6 parameters with coupling, to a problem with just 3 (or 2, depending on how you look at it) by exploiting the symmetry. &amp;ldquo;Nature does not care how we describe her&amp;rdquo;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Slack LaTeX</title>
       <link>https://blog.c0nrad.io/posts/slack-latex/</link>
       <pubDate>Mon, 11 Oct 2021 17:44:54 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/slack-latex/</guid>
-      <description>&lt;p&gt;I had fun building a new product with my partner called &lt;a href=&#34;https://slacklatex.com&#34;&gt;Slack LaTeX&lt;/a&gt;. It&amp;rsquo;s a slack app for embedding formatted equations (through LaTeX). This post covers some of the motivation and some of the fun technical architecture design decisions.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I had fun building a new product with my partner called &#xA;&lt;a href=&#34;https://slacklatex.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Slack LaTeX&lt;/a&gt;. It&amp;rsquo;s a slack app for embedding formatted equations (through LaTeX). This post covers some of the motivation and some of the fun technical architecture design decisions.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Quantum Circuit Editor Pt. 1</title>
       <link>https://blog.c0nrad.io/posts/quantum-circuit-editor/</link>
       <pubDate>Tue, 10 Aug 2021 09:31:09 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/quantum-circuit-editor/</guid>
       <description>&lt;p&gt;Initial version of a quantum circuit editor.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Randomized Benchmarking of a noisy quantum simulator Pt. 2</title>
       <link>https://blog.c0nrad.io/posts/randomized-benchmarking-2/</link>
       <pubDate>Tue, 27 Jul 2021 15:09:55 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/randomized-benchmarking-2/</guid>
       <description>&lt;p&gt;The randomized benchmarking simulator is released!&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Prime Walker</title>
       <link>https://blog.c0nrad.io/posts/prime-walker/</link>
       <pubDate>Sat, 24 Jul 2021 22:23:16 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/prime-walker/</guid>
       <description>&lt;p&gt;Another attempt at a factoring algorithm.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Randomized Benchmarking of a noisy quantum simulator Pt. 1</title>
       <link>https://blog.c0nrad.io/posts/randomized-benchmarking/</link>
       <pubDate>Thu, 22 Jul 2021 22:18:37 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/randomized-benchmarking/</guid>
       <description>&lt;p&gt;This post covers the simplest of error models and some simulated randomized benchmarking results.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Density Operators</title>
       <link>https://blog.c0nrad.io/posts/density-operators/</link>
       <pubDate>Tue, 20 Jul 2021 21:24:02 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/density-operators/</guid>
       <description>&lt;p&gt;This post covers my transition from using pure states to mixed states in my quantum simulator.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Mulbrute</title>
       <link>https://blog.c0nrad.io/posts/mulbrute/</link>
       <pubDate>Sun, 28 Feb 2021 11:04:32 -0500</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/mulbrute/</guid>
       <description>&lt;p&gt;QHack 2021 submission project, a tool for brute forcing quantum multiplication circuits.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Plasma Leak</title>
       <link>https://blog.c0nrad.io/posts/plasma-leak/</link>
       <pubDate>Mon, 18 Jan 2021 15:25:22 -0500</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/plasma-leak/</guid>
       <description>&lt;p&gt;Plasma leak the game.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Laplace&#39;s/Poisson&#39;s Equation via Method Of Relaxation</title>
       <link>https://blog.c0nrad.io/posts/relaxation/</link>
       <pubDate>Mon, 11 Jan 2021 11:10:40 -0500</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/relaxation/</guid>
       <description>&lt;p&gt;Solving Laplace&amp;rsquo;s/Poisson&amp;rsquo;s equation using the method of relaxation.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Thermoshat Pt. 3</title>
       <link>https://blog.c0nrad.io/posts/thermoshat-3/</link>
       <pubDate>Fri, 08 Jan 2021 16:29:21 -0500</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/thermoshat-3/</guid>
       <description>&lt;p&gt;Setting up a metrics endpoint for thermoshat.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Thermoshat Pt. 2</title>
       <link>https://blog.c0nrad.io/posts/thermoshat-2/</link>
       <pubDate>Thu, 07 Jan 2021 14:38:37 -0500</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/thermoshat-2/</guid>
       <description>&lt;p&gt;Updates and finalizing the thermoshat project.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Thermoshat Pt. 1</title>
       <link>https://blog.c0nrad.io/posts/thermoshat/</link>
       <pubDate>Tue, 05 Jan 2021 10:12:00 -0500</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/thermoshat/</guid>
       <description>&lt;p&gt;Introducing the thermoshat. A raspberry pi to adjust my manual thermostat with the added of thrill of increased fire danger.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Feynman Diagram Editor Pt 2</title>
       <link>https://blog.c0nrad.io/posts/feynman-diagrams2/</link>
       <pubDate>Tue, 20 Oct 2020 20:37:28 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/feynman-diagrams2/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s alive! &lt;a href=&#34;https://blog.c0nrad.io/feynman&#34;&gt;https://blog.c0nrad.io/feynman&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;It&amp;rsquo;s alive! &#xA;&lt;a href=&#34;https://blog.c0nrad.io/feynman&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://blog.c0nrad.io/feynman&lt;/a&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Feynman Diagram Editor Pt. 1</title>
       <link>https://blog.c0nrad.io/posts/feynman-diagrams/</link>
       <pubDate>Sat, 17 Oct 2020 12:29:59 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/feynman-diagrams/</guid>
       <description>&lt;p&gt;Starting a new project for validating Feynman diagrams.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Independent Study</title>
       <link>https://blog.c0nrad.io/posts/independent-study/</link>
       <pubDate>Thu, 15 Oct 2020 10:24:08 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/independent-study/</guid>
       <description>&lt;p&gt;Thinking out loud about my future.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Effective Nuclear Charge Calculations</title>
       <link>https://blog.c0nrad.io/posts/enc/</link>
       <pubDate>Mon, 12 Oct 2020 21:43:23 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/enc/</guid>
       <description>&lt;p&gt;A smaller project involving plotting ionization energy for different effective nuclear charge models.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>SO(3) Lie Group Generators via Brute Force</title>
       <link>https://blog.c0nrad.io/posts/so3-exploration/</link>
       <pubDate>Sat, 03 Oct 2020 19:39:08 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/so3-exploration/</guid>
       <description>&lt;p&gt;Brute forcing the generators for SO(3).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>EM Particle Motion</title>
       <link>https://blog.c0nrad.io/posts/em-particle-motion/</link>
       <pubDate>Wed, 30 Sep 2020 17:26:11 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/em-particle-motion/</guid>
       <description>&lt;p&gt;Simulating a particle under the influence. (Of electric and magnetic fields).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Klein Gordon Eqn via Connected Springs</title>
       <link>https://blog.c0nrad.io/posts/connect-springs/</link>
       <pubDate>Sat, 12 Sep 2020 14:35:23 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/connect-springs/</guid>
       <description>&lt;p&gt;Simulations Klein Gordon Eqn as a set of connected springs.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Spherical Bug</title>
       <link>https://blog.c0nrad.io/posts/spherical-bug/</link>
       <pubDate>Wed, 09 Sep 2020 09:16:42 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/spherical-bug/</guid>
       <description>&lt;p&gt;Discussion of one of my longest living software bugs.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Scattering Angles</title>
       <link>https://blog.c0nrad.io/posts/scattering-angles/</link>
       <pubDate>Sun, 30 Aug 2020 12:14:51 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/scattering-angles/</guid>
       <description>&lt;p&gt;Calculating scattering angles from fully elastic spherical collision.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Hydrogen Spectral Diagram</title>
       <link>https://blog.c0nrad.io/posts/spectral/</link>
       <pubDate>Sat, 29 Aug 2020 10:59:09 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/spectral/</guid>
       <description>&lt;p&gt;Terminal application showing the spectral lines for electron transitions in hydrogen.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Interference</title>
       <link>https://blog.c0nrad.io/posts/interference/</link>
       <pubDate>Tue, 18 Aug 2020 18:53:54 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/interference/</guid>
       <description>&lt;p&gt;Double Slit Interference Pattern demo.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Matrix Inversion</title>
       <link>https://blog.c0nrad.io/posts/mat-inv/</link>
       <pubDate>Fri, 07 Aug 2020 18:37:01 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/mat-inv/</guid>
       <description>&lt;p&gt;Some fun inverting matrixes.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Vector Calculus Part 3: Electric Dipole</title>
       <link>https://blog.c0nrad.io/posts/vector-3-dipole/</link>
       <pubDate>Tue, 21 Jul 2020 18:37:01 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/vector-3-dipole/</guid>
       <description>&lt;p&gt;More fun with vector calc/electromagnetism.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Vector Calculus Part 2: Visualization</title>
       <link>https://blog.c0nrad.io/posts/vector-2-viz/</link>
       <pubDate>Mon, 20 Jul 2020 21:04:09 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/vector-2-viz/</guid>
       <description>&lt;p&gt;Playing with three.js to do some vector visualizations.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Vector Calculus</title>
       <link>https://blog.c0nrad.io/posts/vector-calculus/</link>
       <pubDate>Sun, 19 Jul 2020 10:10:01 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/vector-calculus/</guid>
       <description>&lt;p&gt;Progress on a vector calculus library in javascript.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Numerical Integration</title>
       <link>https://blog.c0nrad.io/posts/numerical-integration/</link>
       <pubDate>Sat, 11 Jul 2020 23:12:13 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/numerical-integration/</guid>
       <description>&lt;p&gt;Some exploration into numerical integration.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Numerical Differentiation</title>
       <link>https://blog.c0nrad.io/posts/numerical-differentiation/</link>
       <pubDate>Fri, 10 Jul 2020 20:01:46 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/numerical-differentiation/</guid>
       <description>&lt;p&gt;Some exploration into numerical differentiation.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Shor&#39;s Algorithm</title>
       <link>https://blog.c0nrad.io/posts/shors/</link>
       <pubDate>Fri, 10 Jul 2020 09:26:38 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/shors/</guid>
       <description>&lt;p&gt;Shor&amp;rsquo;s algorithm is probably the most well known quantum algorithm. But it turns out I didn&amp;rsquo;t understand it as well as I thought.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Simulating Quantum Fourier Transform</title>
       <link>https://blog.c0nrad.io/posts/qft/</link>
       <pubDate>Tue, 07 Jul 2020 11:01:25 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/qft/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m pretty excited. I&amp;rsquo;m somewhat in disbelief that it even works. But I was able to implement Quantum Fourier Transform on my little &lt;a href=&#34;https://github.com/c0nrad/qrad&#34;&gt;quantum computation simulator&lt;/a&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I&amp;rsquo;m pretty excited. I&amp;rsquo;m somewhat in disbelief that it even works. But I was able to implement Quantum Fourier Transform on my little &#xA;&lt;a href=&#34;https://github.com/c0nrad/qrad&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;quantum computation simulator&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Quantum Teleportation Algorithm</title>
       <link>https://blog.c0nrad.io/posts/quantum-teleportation/</link>
       <pubDate>Fri, 03 Jul 2020 13:24:22 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/quantum-teleportation/</guid>
       <description>&lt;p&gt;This post is split into two parts. The first section is my motivation, and some background on the upgrades I made to my quantum simulator. The second part is implementing the Quantum Teleportation algorithm.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Florida</title>
       <link>https://blog.c0nrad.io/posts/florida/</link>
       <pubDate>Mon, 29 Jun 2020 12:06:58 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/florida/</guid>
       <description>&lt;p&gt;We moved to Florida! Made a little video.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Electron Wavefunctions for Hydrogen Part 2</title>
       <link>https://blog.c0nrad.io/posts/hydrogen-pt2/</link>
       <pubDate>Sat, 20 Jun 2020 14:37:31 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/hydrogen-pt2/</guid>
-      <description>&lt;p&gt;Part 2 of calculating the electron wavefunctions for hydrogen.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://blog.c0nrad.io/hydrogen/&#34;&gt;View Visualization&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Part 2 of calculating the electron wavefunctions for hydrogen.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;&lt;a href=&#34;https://blog.c0nrad.io/hydrogen/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View Visualization&lt;/a&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reflections on 6 months solo SaaS startup</title>
       <link>https://blog.c0nrad.io/posts/reflections-6months/</link>
       <pubDate>Tue, 16 Jun 2020 07:59:02 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/reflections-6months/</guid>
       <description>&lt;p&gt;It&amp;rsquo;s crazy to think my startup is already over 6 months old. This post is some informal reflections on that period.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Electron Wavefunctions for Hydrogen Part 1</title>
       <link>https://blog.c0nrad.io/posts/hydrogen-pt1/</link>
       <pubDate>Thu, 28 May 2020 10:22:30 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/hydrogen-pt1/</guid>
       <description>&lt;p&gt;The code/math behind calculating the electron wavefunctions for hydrogen.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>GiNaC on Macos</title>
       <link>https://blog.c0nrad.io/posts/ginac-on-macos/</link>
       <pubDate>Wed, 27 May 2020 18:43:40 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/ginac-on-macos/</guid>
       <description>&lt;p&gt;A quick guide on getting started with GiNaC on macos.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Quantum Infinite Well</title>
       <link>https://blog.c0nrad.io/posts/quantum-infinite-well/</link>
       <pubDate>Fri, 22 May 2020 12:30:26 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/quantum-infinite-well/</guid>
       <description>&lt;p&gt;Calculating the stationary states of an electron in a quantum infinite well.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Calculating Collisions Pt. 2</title>
       <link>https://blog.c0nrad.io/posts/calculating-collisions-2/</link>
       <pubDate>Mon, 18 May 2020 12:30:26 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/calculating-collisions-2/</guid>
-      <description>&lt;p&gt;Programming the equation we derived in the &lt;a href=&#34;https://blog.c0nrad.io/posts/calculating-collisions/&#34;&gt;last post&lt;/a&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Programming the equation we derived in the &#xA;&lt;a href=&#34;https://blog.c0nrad.io/posts/calculating-collisions/&#34;&gt;last post&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Calculating Collisions</title>
       <link>https://blog.c0nrad.io/posts/calculating-collisions/</link>
       <pubDate>Fri, 17 May 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/calculating-collisions/</guid>
       <description>&lt;p&gt;My attempt at calculating the resulting velocities of two spheres colliding in 3D.&lt;/p&gt;</description>
     </item>
-    
+    <item>
+      <title></title>
+      <link>https://blog.c0nrad.io/posts/getting-better-at-ctfs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://blog.c0nrad.io/posts/getting-better-at-ctfs/</guid>
+      <description>&lt;!-- ---&#xA;title: &#34;How to win more CTFs&#34;&#xA;date: 2024-10-06T10:20:23-07:00&#xA;draft: true&#xA;categories: [&#34;CTFs&#34;]&#xA;---&#xA;&#xA;These are my thoughts/plan on how to win more CTFs. I&#39;d love your feedback!&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;## Introduction&#xA;&#xA;After a CTF ends I like to ask myself: &#34;why didn&#39;t I win this CTF?&#34;, or &#34;why didn&#39;t I do better?&#34;. &#xA;&#xA;I&#39;m not particularliy dissapointed in myself. On the contrary, I can&#39;t believe at how much I&#39;ve learned in the last few years! &#xA;&#xA;But, to state the obvious, if I want to win, I need to not lose.&#xA;&#xA;So, why am I losing, and what can I do to fix it?&#xA;&#xA;### Thoughs on why I lose&#xA;&#xA;* Mental Stamina&#xA;    * During an average day, I can only focus hard for about 5-6 hours.&#xA;    * During a competition, I can only focus for about 12-16 hours (but it&#39;s not sustainable for multiple days).&#xA;    * If I could focus more, I could solve more challenges.&#xA;* Lack of knowledge&#xA;    * I think this is the most obvious, and the easiest to grow. No one knows everything. And I personally believe a &#34;good&#34; ctf player is just someone who has seen the tricks before. Sometimes it&#39;s an extension/combination of the tricks, but you have to know the tricks.&#xA;    * So, figuring out what skills/tricks I was missing during the CTF, and then rapidly learing those techniques. As an example, on a recent CTF I left points on the table becuse I&#39;m slow at browser-pwn, and I&#39;m also not good at constructing custom lattices for LLL. So those are two things I&#39;m working on. Maybe you don&#39;t know that &#34;fl&#34; can be one unicode character to bypass pyjails. Etc.&#xA;* Guessy Chals&#xA;    * Since I play solo, time/mental-energy are my most key resource. &#xA;    * Sourceless web, certain misc, forensics, etc, can be huge time sinks with less reliable points&#xA;* Incorrect tooling&#xA;    * On a recent CTF I left points on the table because I used Ghidra instead of Ida. I love Ghidra, but I&#39;m beginning to see the short comings when reversing more complex binaires. Certain critical memcpys didn&#39;t show up in the disassembly, the function databases aren&#39;t as good, etc. Sadly I think I&#39;ll need to buy an Ida license.&#xA;    * I&#39;m not good at windows tooling either. When doing windows forensics, I have to manually reverse everything instead of running malware in a sandbox/debugger.&#xA;* Motivation/burnout&#xA;    * Sometimes I quit a CTF early because I don&#39;t think I can solve a challenge and I&#39;m tired, but I find out while reading the writeups I had the skills to solve it.&#xA;    * There are some weekends where I question why I&#39;m playing CTFs, or I just don&#39;t have the moitivation. It&#39;s rare, but it needs to be managed.&#xA;* CTF event selection&#xA;    * Not all CTFs are well suited for solo players. &#xA;    * Specifically any team-based guessy/reverse heavy CTFs without source&#xA;* Wrist issues&#xA;    * This is a personal point, but for years I&#39;ve had issues with my wrists. Probably spending 12+ hours every day on the computer since I was 10 doesn&#39;t help. Sometimes I quit because my wrist flare up.&#xA;* Life&#xA;    * This is a very individual bucket, and ad-hoc. But sometimes life gets in the way. We&#39;re not robots, and I have a wife and extended family/friends and a job (csper.io). These things are all more important than CTFs. But, effort and forthought can be done to make sure that they succeed in harmony. &#xA;&#xA;### What am I doing to improve at the above issues?&#xA;&#xA;* Mental Stamina&#xA;    * General Health&#xA;        * As part of a push for longevity/wellbeing, but also to be able to focus for longer, I&#39;ve encorporated a number of health habits over the last 12 months:&#xA;            * Tracking my sleep with WHOOP, and trying to get a 100% average. (currently at 89%. Life gets in the way, but I want to keep working at it, I&#39;ve learned a lot about my sleep over the last year). I think if we ever stop doing monthly AirBnB travel I can perfect a setup that allows me to get 100%. &#xA;            * Tracking my micro/macro nutrients with cronometer. I found a diet that works for me that hits all the micro/macro. Lots of veggies, legumes, nuts, etc.&#xA;            * Exercise program. Supposidly there&#39;s a link between weigh lifting and learning/memory, so I workout a 3-4 times a week. On off days I jog or walk. And rarely I&#39;ll do some HIT/sprints. But that&#39;s more for longevity, not CTFs.&#xA;            * Limiting alchohol. Sadly I know that for myself alchohol is terrible for performance and memory. So I try to have no more than one drink a month. But I do partake in edibles. If I was perfect I probably wouldn&#39;t. But it&#39;s nice to relax here and there and just veg out on a movie/show while buzzed. &#xA;        * To be honest, I don&#39;t know how much (if any) these health changes have an impact on my CTF playing. But I think at least mentally being happy with your body is one less thing to worry about so you can focus more on CTFs. &#xA;    * Context Switching&#xA;        * I think a lot of mental energy is spent switching between different tasks and thought patterns. To combat this:&#xA;            * I have a CTF script for ctfd and a few other platforms that automatically downloads and organizes all the challenges directories. This allows me to efficnetly leave notes and switch between tasks in a clean way. I think having a structured place to leave notes is useful so I don&#39;t have to keep it in my brain.&#xA;            * Sort life before the CTF starts. If I have a work email looming over me, or a bunch of chores that need to be done, get those done before the CTF so I can clear my brain of all reminders.&#xA;            * I have a notepad where I sometimes write down a list of everything that is bothering me at that moment. I think writing it down helps get it out so it doesn&#39;t randomly pop up while playing CTFs.&#xA;    * During the CTF&#xA;        * I&#39;m working on this one. But an idea I want to test is taking a walk during the CTF, depending on the length of the CTF. &#xA;        * Drinking water during the event&#xA;        * If anything is bothering me, write it down for later&#xA;    * Other mental hacks&#xA;        * Meditation? A quick google doesn&#39;t leave me to convinced though.&#xA;&#xA;* Lack of Knowledge&#xA;    * I have about 4-6 hours a day I can grind to learn as much stuff as possible for CTFs. What is the most effective way to spend this time?&#xA;    * Writeups&#xA;        * The most obvious, but reading the writeups for all CTF challenges I missed! I find this is pretty much irresistable. I would guess/hope everyone does this. &#xA;    * Learning strategies&#xA;        * Books, tutorials, read old writeups, grind wargames/live challenges, VR, bug bounty...&#xA;        * I think grinding challenges that have writeups/help is best strategy for me &#xA;            * I don&#39;t think struggling over a hard or no-writeup challenge over multiple days is the most efficient use of time. &#xA;                * If you&#39;re unable to solve the chal, you&#39;ve gain nothing&#xA;                * Maybe when I was younger, it was useful to spin my wheels, but I don&#39;t think so anymore&#xA;                * When I&#39;m stuck for awhile, I read the writeup, I have the &#34;aha!&#34; moment, and I continue&#xA;            * I think it&#39;s super important that I try the challenge first though. I find that blindly reading writeups is not that useful for me. I need to try the challenge first&#xA;            * I use pwn.college, HTB retired chals, cryptohack. They either have writeups, or friendly staff to help when you get stuck&#xA;        * Previously I used to watch YT videos of writeups from CryptoCat/LiveOverflow/AlmondForce/JohnHamond. But, I don&#39;t learn from that content anymore. But they can be great to level up at the start. I hear SloppyJoePirates is also really good.&#xA;    * &#xA;        &#xA;    &#xA;&#xA;&#xA;### Other considations&#xA;&#xA;* Burnout&#xA;* Shift in priorities --&gt;</description>
+    </item>
   </channel>
 </rss>

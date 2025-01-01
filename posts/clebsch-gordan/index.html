@@ -30,20 +30,19 @@
   
 
   
-  <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
+    <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
 
   
   
 
   <meta name="description" content="Generating the clebsch gordan coefficients" />
-  <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
   <meta name="author" content="Stuart Larsen">
 
   
-  <meta name="generator" content="Hugo 0.79.1" />
-
-  
-  
+  <meta name="generator" content="Hugo 0.140.2">
 
   
   
@@ -60,6 +59,12 @@
   <meta name="twitter:creator" content="@CryptoGangsta"/>
 
   
+
+  
+  
+
+
+
 </head>
 <body>
 
@@ -84,7 +89,9 @@
       
         <option value="https://github.com/c0nrad/">» Github</option>
       
-        <option value="https://twitter.com/xc0nradx">» Twitter</option>
+        <option value="https://twitter.com/c0nrad_jr">» Twitter</option>
+      
+        <option value="https://c0nradsc0rner.com">» Other Blog</option>
       
   </select>
 </fieldset>
@@ -106,7 +113,11 @@
     
   
     
-      <li><a href="https://twitter.com/xc0nradx" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+      <li><a href="https://twitter.com/c0nrad_jr" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+    
+      <li><a href="https://c0nradsc0rner.com" title="Other Blog"  rel="noopener noreferrer">Other Blog</a></li>
     
   
 </ul>
@@ -134,7 +145,6 @@
 <header>
   <p class="meta">Dec 29, 2021
      - 6 minute read 
-    
 
     
   </p>
@@ -173,7 +183,8 @@
 <p>We know from classical mechanics that it&rsquo;s pretty easy to find the composite angular momentum of a system. You just add up all the angular momentum vectors.</p>
 <p>Does the same strategy work at the scale of quantum mechanics?</p>
 <p>Turns out&hellip; not exactly. When adding two particles with different angular momentum, you get a combination of different possible spin/angular momentum results.</p>
-<p>Calculating the probabilities of different angular momentums isn&rsquo;t difficult, but a little tedious, so most people use a special table, commonly referred to as the <a href="https://en.wikipedia.org/wiki/Clebsch%E2%80%93Gordan_coefficients">Clebsch-Gordan</a> coefficients.</p>
+<p>Calculating the probabilities of different angular momentums isn&rsquo;t difficult, but a little tedious, so most people use a special table, commonly referred to as the 
+<a href="https://en.wikipedia.org/wiki/Clebsch%E2%80%93Gordan_coefficients" target="_blank" rel="noopener">Clebsch-Gordan</a> coefficients.</p>
 <p>As an example, if you had two spin-1 particles and put them in a box and you know the first one has \( m_l = 1 \) and the second has \( m_l == -1 \), we can look up and see that:</p>
 <p>$$ \Ket{1\ 1\ 1\ -1} = \sqrt{\frac{1}{6}}\Ket{2\ 0} + \sqrt{\frac{1}{2}} \Ket{1\ 0} + \sqrt{\frac{1}{3}}\Ket{0\ 0}$$</p>
 <p>Where the first ket is the two particles \( \Ket{l_1\ l_2\ m_1\ m_2} \), and the following kets are the composite angular momentums \( \Ket{l\ m} \).</p>
@@ -190,24 +201,29 @@ $$</p>
 <h2 id="operators">Operators</h2>
 <p>There&rsquo;s a couple of questions we can ask of our system. Ideally we&rsquo;d like to know the angular momentum vector, but sadly that&rsquo;s not possible as seen by the commutation relation for angular momentum \( [L_x, L_y] = i \hbar L_z \), where \( L_x \) is the operator that tells us the angular momentum in the z direction \( L_z \Ket{l\ m_l}_z = \hbar m \Ket{l\ m_l}_z \).</p>
 <p>(It&rsquo;s also a very curious fact that both angular momentum and spin are described by the same algebra. \( [S_x, S_y] = i \hbar S_z \).)</p>
-<p>But getting back on track, we can only know one component of the angular momentum vector. But thankfully there is something else that commutes with the individual operators&hellip; \( L^2 \). (In group theory this is called the Casmir operator, more info in a <a href="/posts/so3-exploration/">previous blog post</a>). The eigenvalue of the \( L^2 \) operator gives us a scalar with the total angular momentum of the particle.</p>
+<p>But getting back on track, we can only know one component of the angular momentum vector. But thankfully there is something else that commutes with the individual operators&hellip; \( L^2 \). (In group theory this is called the Casmir operator, more info in a 
+<a href="/posts/so3-exploration/">previous blog post</a>). The eigenvalue of the \( L^2 \) operator gives us a scalar with the total angular momentum of the particle.</p>
 <p>So in total we can know the angular momentum in one direction (z) and the total angular momentum. These are the \( l \) and \( m_l \) values from earlier.</p>
 <p>There&rsquo;s two other operators that will be essential later, the ladder operators for angular momentun. \( L_{+}, L_{-} \). These ladder operators are similar to the ladder operators from the harmonic oscillator. Using them we can go up and down in angular momentum values ( \( m_l \)).</p>
 <p>$$
 L_{-} \Ket{l\ m} = \hbar \sqrt{s(s+1) - m(m-1)} \Ket{l\ m-1}
 $$</p>
 <h2 id="plan-of-attack">Plan of attack</h2>
-<p>Just a reminder, the goal is to find the total angular momentum of a system composed of two particles. Each pair of angular momentums is its own <a href="https://epjc.epj.org/articles/epjc/abs/2000/13/10052_2007_Article_BF02683427/10052_2007_Article_BF02683427.html?mb=0">table</a>.</p>
+<p>Just a reminder, the goal is to find the total angular momentum of a system composed of two particles. Each pair of angular momentums is its own 
+<a href="https://epjc.epj.org/articles/epjc/abs/2000/13/10052_2007_Article_BF02683427/10052_2007_Article_BF02683427.html?mb=0" target="_blank" rel="noopener">table</a>.</p>
 <p>Very similar to how we found the energy levels of the quantum harmonic oscillator, we&rsquo;re going to start with the highest possible energy level and then repeatedly apply the lowering operator \( L_{-} \) until we fall off.</p>
 <p>Given two particles, the highest possible composite angular momentum is the direct sum. \( m = m_1+m_2 \) and \( l_{max} = l_1 + l_2 \).</p>
 <p>So we start there.</p>
 <p>$$ \Ket{l_1\ l_2\ m_1\ m_2} = \Ket{l_{max}\ m} $$</p>
 <h3 id="tools-well-need">Tools we&rsquo;ll need</h3>
 <h4 id="a-matrix-library-that-can-build-tensor-product-states">A matrix library that can build tensor product states</h4>
-<p>We need to build tensor states with the two particles. Thankfully I already built a <a href="https://github.com/c0nrad/qc.js/blob/master/src/matrix.ts">library</a> to do this for my <a href="/posts/quantum-circuit-editor/">quantum computing simulations</a>.</p>
+<p>We need to build tensor states with the two particles. Thankfully I already built a 
+<a href="https://github.com/c0nrad/qc.js/blob/master/src/matrix.ts" target="_blank" rel="noopener">library</a> to do this for my 
+<a href="/posts/quantum-circuit-editor/">quantum computing simulations</a>.</p>
 <p>We also need something that can decompose the tensor states into a human readable form.</p>
 <h4 id="generate--l--matrixes-for-different-representations">Generate \( L \) matrixes for different representations</h4>
-<p>We need a way to generate the \( L \) matrixes in different representations, i.e. different matrix sizes for the different sizes of \( l_1 \) and \( l_2 \). You can see them for a few of the representations <a href="https://easyspin.org/easyspin/documentation/spinoperators.html">here</a>.</p>
+<p>We need a way to generate the \( L \) matrixes in different representations, i.e. different matrix sizes for the different sizes of \( l_1 \) and \( l_2 \). You can see them for a few of the representations 
+<a href="https://easyspin.org/easyspin/documentation/spinoperators.html" target="_blank" rel="noopener">here</a>.</p>
 <p>This isn&rsquo;t too hard if we&rsquo;re smart about it.</p>
 <p>We already know \( L_z \) since we work in the z-basis. So the diagonal elements are the eigenvalues of \( m_l \).</p>
 <p>The ladder operators are also easy, we know what the eigenvalues are \( L_{-} \Ket{l\ m} = \hbar \sqrt{s(s+1) - m(m-1)} \Ket{l\ m-1} \), so we just put those in the correct spots in the matrix (upper right corner such that m -&gt; m+1 or bottom left corner such that m -&gt; m-1).</p>
@@ -215,30 +231,31 @@ $$</p>
 <h4 id="gram-schmidt">Gram-Schmidt</h4>
 <p>But there&rsquo;s a slight wrinkle in our ladder plan. Applying the ladder operator will only give us one of the vectors in the lower subspace (the highest spin state). So at each level we actually need to find the other orthogonal states. Thankfully Gram-Schmidt comes to the rescue.</p>
 <p>There&rsquo;s one other minor wrinkle with using Gram-Schmidt. Our basis states are in the full tensor space of the two particles, but we need to make sure that we Gram-Schmidt in only the subspace. We can kind of cheat in code and &ldquo;highlight&rdquo; the specific entries we are interested in, and the rest of the states will be ignored by the algorithm.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#75715e">// Gram-Schmidt
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">find_orthogonal_vector_in_subspace</span>(<span style="color:#a6e22e">vectors</span>: <span style="color:#66d9ef">Matrix</span>[])<span style="color:#f92672">:</span> <span style="color:#a6e22e">Matrix</span> {
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">out</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Matrix</span>.<span style="color:#a6e22e">zero</span>(<span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">vectors</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">height</span>());
-  <span style="color:#75715e">// Highlight the related orthogonal states
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">vectors</span>) {
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">height</span>(); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
-      <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">at</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">i</span>).<span style="color:#a6e22e">equals</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Complex</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>))) {
-        <span style="color:#a6e22e">out</span>.<span style="color:#66d9ef">set</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">i</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Complex</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>));
-      }
-    }
-  }
-
-  <span style="color:#75715e">// Perform Gram-Schmidt
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">vectors</span>) {
-    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">proj</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">mulScalar</span>(<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">adjoint</span>().<span style="color:#a6e22e">mulMatrix</span>(<span style="color:#a6e22e">a</span>).<span style="color:#a6e22e">at</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>));
-    <span style="color:#a6e22e">out</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">sub</span>(<span style="color:#a6e22e">proj</span>).<span style="color:#a6e22e">normalize</span>();
-  }
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>;
-}
-</code></pre></div><h2 id="results">Results</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#75715e">// Gram-Schmidt
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">find_orthogonal_vector_in_subspace</span>(<span style="color:#a6e22e">vectors</span>: <span style="color:#66d9ef">Matrix</span>[])<span style="color:#f92672">:</span> <span style="color:#a6e22e">Matrix</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">out</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Matrix</span>.<span style="color:#a6e22e">zero</span>(<span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">vectors</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">height</span>());
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Highlight the related orthogonal states
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">vectors</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">height</span>(); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">at</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">i</span>).<span style="color:#a6e22e">equals</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Complex</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>))) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">out</span>.<span style="color:#66d9ef">set</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">i</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Complex</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Perform Gram-Schmidt
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">vectors</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">proj</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">mulScalar</span>(<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">adjoint</span>().<span style="color:#a6e22e">mulMatrix</span>(<span style="color:#a6e22e">a</span>).<span style="color:#a6e22e">at</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">out</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">sub</span>(<span style="color:#a6e22e">proj</span>).<span style="color:#a6e22e">normalize</span>();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="results">Results</h2>
 <p>It works! Here&rsquo;s the results for 3/2 x 1:</p>
 <p><img src="/cb.png" alt="cb.png"></p>
 <p>The code is a little sloppy, but can be found here:
-<a href="https://github.com/c0nrad/sims/blob/master/clebsch-gordan/src/spin.ts">https://github.com/c0nrad/sims/blob/master/clebsch-gordan/src/spin.ts</a></p>
+
+<a href="https://github.com/c0nrad/sims/blob/master/clebsch-gordan/src/spin.ts" target="_blank" rel="noopener">https://github.com/c0nrad/sims/blob/master/clebsch-gordan/src/spin.ts</a></p>
 <h3 id="what-went-well">What went well</h3>
 <ul>
 <li>I learned a lot, and I&rsquo;m much more comfortable with quantum angular momentum</li>
@@ -275,8 +292,8 @@ $$</p>
       <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/wien-plank-sympy/" title="Sim 5: Wien&#39;s Law from Plank&#39;s Blackbody Radiation Formula using Sympy">Sim 5: Wien&#39;s Law from Plank&#39;s Blackbody Radiation Formula using Sympy</a>
     
   </p>
-  
 </footer>
+
 
       </article>
     </div>
@@ -286,150 +303,103 @@ $$</p>
   <section class="first odd">
 
     
-    <h1>Who am I?</h1>
+      <h1>Who am I?</h1>
     
 
     <p>
       
-      <img src="/me.png" style="width: 100%"> 
-I am Stuart. In a previous life I was a programmer, electrical engineer, and a security engineer. Now I spend my free time tinkering with physics.
-</br></br>
-My goal is to understand why the universe exists. I have a lot of learning to do.
-<br/><br/>
-I write about physics, life, and learning.
-</br>
+        <img src="/me.png" style="width: 100%"> 
+CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pirates</a>). Founder (<a href="https://csper.io">csper.io</a>). Enjoyer of security/software/physics.
       
     </p>
   </section>
 
   
-
-  
-  <ul class="sidebar-nav">
-    <li class="sidebar-nav-item">
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/c0nrad/" title="https://github.com/c0nrad/"><i
-          class="fa fa-github fa-3x"></i></a>
-      
-      
-      <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/xc0nradx/" title="https://twitter.com/xc0nradx/"><i
-          class="fa fa-twitter fa-3x"></i></a>
-      
-      
-      
-      
-      <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/c0nrad" title="https://www.linkedin.com/in/c0nrad"><i
-          class="fa fa-linkedin fa-3x"></i></a>
-      
-      
-      
-      
-      
-      
-
-      
-      
-    </li>
-  </ul>
-
-
   
 
-  
-  
-  <section class="odd">
-    
-    <h1>Collections</h1>
+
+
+<ul class="sidebar-nav">
+  <li class="sidebar-nav-item">
     
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
-    </li>
     
-  </section>
-  
-  
+    
+    
+    
+    
+    
+    
 
   
   
+  </li>
+</ul>
+
   
 
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/ctfs" title="CTFs" >CTFs</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
 
   
-<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-    #mc_embed_signup {
-        background: #fff;
-        clear: left;
-        font: 14px Helvetica, Arial, sans-serif;
-        border: 1px solid;
-        margin-top: 20px;
-    }
-
-
-
-
-     
-</style>
-<div id="mc_embed_signup">
-    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
-        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
-        novalidate>
-        <div id="mc_embed_signup_scroll">
-            <label for="mce-EMAIL">Subscribe for new posts:</label>
-            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-            
-            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
-                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
-            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
-                    class="button"></div>
-        </div>
-    </form>
-</div>
-
-
-
+  
+  
 </aside>
+
   </div>
 </div>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
 
+
+
+
     <footer role="contentinfo">
-      <p>Copyright &copy; 2022 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+      <p>Copyright &copy; 2025 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>
 
     
     
-      <script type="text/javascript">
-        var _paq = _paq || [];
-         
-        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-          var u="//c0nrad.matomo.cloud/";
-          _paq.push(['setTrackerUrl', u+'piwik.php']);
-          _paq.push(['setSiteId',  1 ]);
-          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-        })();
-      </script>
+
+
+
+    
     
     
 

@@ -1,389 +1,222 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://blog.c0nrad.io/</loc>
-    <lastmod>2022-09-22T12:14:28-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/posts/</loc>
-    <lastmod>2022-09-22T12:14:28-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/posts/sims-teleray/</loc>
-    <lastmod>2022-09-22T12:14:28-04:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2024-12-31T16:04:30-05:00</lastmod>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/</loc>
-    <lastmod>2022-09-07T19:55:11-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/categories/physics/</loc>
-    <lastmod>2022-09-07T19:55:11-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/posts/simple-lorentz-boost-script/</loc>
-    <lastmod>2022-09-07T19:55:11-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/posts/more-fun-with-ising/</loc>
-    <lastmod>2022-08-28T16:31:22-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/categories/quantum/</loc>
-    <lastmod>2022-04-13T13:59:20-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/posts/sim-10-crank-that-nicolson/</loc>
-    <lastmod>2022-04-13T13:59:20-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/categories/simulation/</loc>
-    <lastmod>2022-04-13T13:59:20-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/posts/sim-9-double-slit-schrodinger-fdtd/</loc>
-    <lastmod>2022-04-09T07:50:35-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.c0nrad.io/posts/sim-8-quantum-fdtd-1d/</loc>
-    <lastmod>2022-04-08T08:33:55-07:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2024-12-31T16:04:30-05:00</lastmod>
+  </url><url>
+    <loc>https://blog.c0nrad.io/categories/ctfs/</loc>
+    <lastmod>2024-12-31T16:04:30-05:00</lastmod>
+  </url><url>
+    <loc>https://blog.c0nrad.io/posts/</loc>
+    <lastmod>2024-12-31T16:04:30-05:00</lastmod>
+  </url><url>
+    <loc>https://blog.c0nrad.io/posts/be-kind-to-self/</loc>
+    <lastmod>2024-12-31T16:04:30-05:00</lastmod>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/sim-7-ising-2/</loc>
     <lastmod>2022-03-16T08:22:04-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>https://blog.c0nrad.io/categories/simulation/</loc>
+    <lastmod>2022-03-16T08:22:04-07:00</lastmod>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/stat-mech/</loc>
     <lastmod>2022-03-16T08:22:04-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/ising-1/</loc>
     <lastmod>2022-01-25T15:50:49-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/wien-plank-sympy/</loc>
     <lastmod>2022-01-17T13:40:45-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/clebsch-gordan/</loc>
     <lastmod>2021-12-29T11:05:11-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/classical-mechanics/</loc>
     <lastmod>2021-12-22T10:07:03-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/sim-3-kepler-problems/</loc>
     <lastmod>2021-12-22T10:07:03-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/sim-2-effective-potential/</loc>
     <lastmod>2021-12-19T11:00:24-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/sim-1-two-body-central-force/</loc>
     <lastmod>2021-12-19T05:24:02-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/programming/</loc>
     <lastmod>2021-10-11T17:44:54-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/slack-latex/</loc>
     <lastmod>2021-10-11T17:44:54-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/quantum-circuit-editor/</loc>
     <lastmod>2021-08-10T09:31:09-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/quantum-computation/</loc>
     <lastmod>2021-08-10T09:31:09-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/randomized-benchmarking-2/</loc>
     <lastmod>2021-07-27T15:09:55-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/prime/</loc>
     <lastmod>2021-07-24T22:23:16-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/prime-walker/</loc>
     <lastmod>2021-07-24T22:23:16-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/randomized-benchmarking/</loc>
     <lastmod>2021-07-22T22:18:37-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/density-operators/</loc>
     <lastmod>2021-07-20T21:24:02-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/mulbrute/</loc>
     <lastmod>2021-02-28T11:04:32-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/game/</loc>
     <lastmod>2021-01-18T15:25:22-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>https://blog.c0nrad.io/categories/physics/</loc>
+    <lastmod>2021-01-18T15:25:22-05:00</lastmod>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/plasma-leak/</loc>
     <lastmod>2021-01-18T15:25:22-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/relaxation/</loc>
     <lastmod>2021-01-11T11:10:40-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/electronics/</loc>
     <lastmod>2021-01-08T16:29:21-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/thermoshat-3/</loc>
     <lastmod>2021-01-08T16:29:21-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/thermoshat-2/</loc>
     <lastmod>2021-01-07T14:38:37-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/thermoshat/</loc>
     <lastmod>2021-01-05T10:12:00-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/feynman-diagrams2/</loc>
     <lastmod>2020-10-20T20:37:28-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/feynman-diagrams/</loc>
     <lastmod>2020-10-17T12:29:59-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/independent-study/</loc>
     <lastmod>2020-10-15T10:24:08-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/personal/</loc>
     <lastmod>2020-10-15T10:24:08-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/enc/</loc>
     <lastmod>2020-10-12T21:43:23-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/so3-exploration/</loc>
     <lastmod>2020-10-03T19:39:08-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/em-particle-motion/</loc>
     <lastmod>2020-09-30T17:26:11-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/connect-springs/</loc>
     <lastmod>2020-09-12T14:35:23-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/spherical-bug/</loc>
     <lastmod>2020-09-09T09:16:42-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/scattering-angles/</loc>
     <lastmod>2020-08-30T12:14:51-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/spectral/</loc>
     <lastmod>2020-08-29T10:59:09-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/interference/</loc>
     <lastmod>2020-08-18T18:53:54-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/matrix/</loc>
     <lastmod>2020-08-07T18:37:01-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/mat-inv/</loc>
     <lastmod>2020-08-07T18:37:01-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/numerical/</loc>
     <lastmod>2020-08-07T18:37:01-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/em/</loc>
     <lastmod>2020-07-21T18:37:01-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/vector/</loc>
     <lastmod>2020-07-21T18:37:01-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/vector-3-dipole/</loc>
     <lastmod>2020-07-21T18:37:01-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/vector-2-viz/</loc>
     <lastmod>2020-07-20T21:04:09-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/vector-calculus/</loc>
     <lastmod>2020-07-19T10:10:01-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/computational-physics/</loc>
     <lastmod>2020-07-11T23:12:13-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/numerical-integration/</loc>
     <lastmod>2020-07-11T23:12:13-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/numerical-differentiation/</loc>
     <lastmod>2020-07-10T20:01:46-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/shors/</loc>
     <lastmod>2020-07-10T09:26:38-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/qft/</loc>
     <lastmod>2020-07-07T11:01:25-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/quantum-teleportation/</loc>
     <lastmod>2020-07-03T13:24:22-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/florida/</loc>
     <lastmod>2020-06-29T12:06:58-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/hydrogen-pt2/</loc>
     <lastmod>2020-06-20T14:37:31-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/quantum-mechanics/</loc>
     <lastmod>2020-06-20T14:37:31-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/reflections-6months/</loc>
     <lastmod>2020-06-16T07:59:02-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/startup/</loc>
     <lastmod>2020-06-16T07:59:02-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/hydrogen-pt1/</loc>
     <lastmod>2020-05-28T10:22:30-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/ginac-on-macos/</loc>
     <lastmod>2020-05-27T18:43:40-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/ginacs/</loc>
     <lastmod>2020-05-27T18:43:40-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/quantum-infinite-well/</loc>
     <lastmod>2020-05-22T12:30:26-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/calculating-collisions-2/</loc>
     <lastmod>2020-05-18T12:30:26-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/categories/newtonian/</loc>
     <lastmod>2020-05-18T12:30:26-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.c0nrad.io/posts/calculating-collisions/</loc>
     <lastmod>2019-05-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>https://blog.c0nrad.io/posts/getting-better-at-ctfs/</loc>
+  </url><url>
     <loc>https://blog.c0nrad.io/tags/</loc>
   </url>
-  
 </urlset>

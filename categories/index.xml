@@ -4,188 +4,149 @@
     <title>Categories on c0nrad&#39;s c0rner</title>
     <link>https://blog.c0nrad.io/categories/</link>
     <description>Recent content in Categories on c0nrad&#39;s c0rner</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Sep 2022 19:55:11 -0400</lastBuildDate><atom:link href="https://blog.c0nrad.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 Dec 2024 16:04:30 -0500</lastBuildDate>
+    <atom:link href="https://blog.c0nrad.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>physics</title>
-      <link>https://blog.c0nrad.io/categories/physics/</link>
-      <pubDate>Wed, 07 Sep 2022 19:55:11 -0400</pubDate>
-      
-      <guid>https://blog.c0nrad.io/categories/physics/</guid>
+      <title>CTFs</title>
+      <link>https://blog.c0nrad.io/categories/ctfs/</link>
+      <pubDate>Tue, 31 Dec 2024 16:04:30 -0500</pubDate>
+      <guid>https://blog.c0nrad.io/categories/ctfs/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>quantum</title>
-      <link>https://blog.c0nrad.io/categories/quantum/</link>
-      <pubDate>Wed, 13 Apr 2022 13:59:20 -0700</pubDate>
-      
-      <guid>https://blog.c0nrad.io/categories/quantum/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>simulation</title>
+      <title>Simulation</title>
       <link>https://blog.c0nrad.io/categories/simulation/</link>
-      <pubDate>Wed, 13 Apr 2022 13:59:20 -0700</pubDate>
-      
+      <pubDate>Wed, 16 Mar 2022 08:22:04 -0700</pubDate>
       <guid>https://blog.c0nrad.io/categories/simulation/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>stat mech</title>
+      <title>Stat Mech</title>
       <link>https://blog.c0nrad.io/categories/stat-mech/</link>
       <pubDate>Wed, 16 Mar 2022 08:22:04 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/stat-mech/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>classical mechanics</title>
+      <title>Classical Mechanics</title>
       <link>https://blog.c0nrad.io/categories/classical-mechanics/</link>
       <pubDate>Wed, 22 Dec 2021 10:07:03 -0800</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/classical-mechanics/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>programming</title>
+      <title>Programming</title>
       <link>https://blog.c0nrad.io/categories/programming/</link>
       <pubDate>Mon, 11 Oct 2021 17:44:54 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/programming/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>quantum computation</title>
+      <title>Quantum Computation</title>
       <link>https://blog.c0nrad.io/categories/quantum-computation/</link>
       <pubDate>Tue, 10 Aug 2021 09:31:09 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/quantum-computation/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>prime</title>
+      <title>Prime</title>
       <link>https://blog.c0nrad.io/categories/prime/</link>
       <pubDate>Sat, 24 Jul 2021 22:23:16 -0700</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/prime/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>game</title>
+      <title>Game</title>
       <link>https://blog.c0nrad.io/categories/game/</link>
       <pubDate>Mon, 18 Jan 2021 15:25:22 -0500</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/game/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>electronics</title>
+      <title>Physics</title>
+      <link>https://blog.c0nrad.io/categories/physics/</link>
+      <pubDate>Mon, 18 Jan 2021 15:25:22 -0500</pubDate>
+      <guid>https://blog.c0nrad.io/categories/physics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Electronics</title>
       <link>https://blog.c0nrad.io/categories/electronics/</link>
       <pubDate>Fri, 08 Jan 2021 16:29:21 -0500</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/electronics/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>personal</title>
+      <title>Personal</title>
       <link>https://blog.c0nrad.io/categories/personal/</link>
       <pubDate>Thu, 15 Oct 2020 10:24:08 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/personal/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>matrix</title>
+      <title>Matrix</title>
       <link>https://blog.c0nrad.io/categories/matrix/</link>
       <pubDate>Fri, 07 Aug 2020 18:37:01 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/matrix/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>numerical</title>
+      <title>Numerical</title>
       <link>https://blog.c0nrad.io/categories/numerical/</link>
       <pubDate>Fri, 07 Aug 2020 18:37:01 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/numerical/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>EM</title>
       <link>https://blog.c0nrad.io/categories/em/</link>
       <pubDate>Tue, 21 Jul 2020 18:37:01 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/em/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>vector</title>
+      <title>Vector</title>
       <link>https://blog.c0nrad.io/categories/vector/</link>
       <pubDate>Tue, 21 Jul 2020 18:37:01 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/vector/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>computational physics</title>
+      <title>Computational Physics</title>
       <link>https://blog.c0nrad.io/categories/computational-physics/</link>
       <pubDate>Sat, 11 Jul 2020 23:12:13 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/computational-physics/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>quantum mechanics</title>
+      <title>Quantum Mechanics</title>
       <link>https://blog.c0nrad.io/categories/quantum-mechanics/</link>
       <pubDate>Sat, 20 Jun 2020 14:37:31 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/quantum-mechanics/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>startup</title>
+      <title>Startup</title>
       <link>https://blog.c0nrad.io/categories/startup/</link>
       <pubDate>Tue, 16 Jun 2020 07:59:02 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/startup/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>ginacs</title>
+      <title>Ginacs</title>
       <link>https://blog.c0nrad.io/categories/ginacs/</link>
       <pubDate>Wed, 27 May 2020 18:43:40 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/ginacs/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>newtonian</title>
+      <title>Newtonian</title>
       <link>https://blog.c0nrad.io/categories/newtonian/</link>
       <pubDate>Mon, 18 May 2020 12:30:26 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/categories/newtonian/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

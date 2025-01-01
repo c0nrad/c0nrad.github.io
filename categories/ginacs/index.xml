@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ginacs on c0nrad&#39;s c0rner</title>
+    <title>Ginacs on c0nrad&#39;s c0rner</title>
     <link>https://blog.c0nrad.io/categories/ginacs/</link>
-    <description>Recent content in ginacs on c0nrad&#39;s c0rner</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Ginacs on c0nrad&#39;s c0rner</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 May 2020 18:43:40 -0400</lastBuildDate><atom:link href="https://blog.c0nrad.io/categories/ginacs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 May 2020 18:43:40 -0400</lastBuildDate>
+    <atom:link href="https://blog.c0nrad.io/categories/ginacs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GiNaC on Macos</title>
       <link>https://blog.c0nrad.io/posts/ginac-on-macos/</link>
       <pubDate>Wed, 27 May 2020 18:43:40 -0400</pubDate>
-      
       <guid>https://blog.c0nrad.io/posts/ginac-on-macos/</guid>
       <description>&lt;p&gt;A quick guide on getting started with GiNaC on macos.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

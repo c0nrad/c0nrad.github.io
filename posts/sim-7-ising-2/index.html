@@ -30,20 +30,19 @@
   
 
   
-  <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
+    <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
 
   
   
 
   <meta name="description" content="" />
-  <meta name="keywords" content="[Stuart Larsen c0nrad physics]">
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
   <meta name="author" content="Stuart Larsen">
 
   
-  <meta name="generator" content="Hugo 0.79.1" />
-
-  
-  
+  <meta name="generator" content="Hugo 0.140.2">
 
   
   
@@ -60,6 +59,12 @@
   <meta name="twitter:creator" content="@CryptoGangsta"/>
 
   
+
+  
+  
+
+
+
 </head>
 <body>
 
@@ -84,7 +89,9 @@
       
         <option value="https://github.com/c0nrad/">» Github</option>
       
-        <option value="https://twitter.com/xc0nradx">» Twitter</option>
+        <option value="https://twitter.com/c0nrad_jr">» Twitter</option>
+      
+        <option value="https://c0nradsc0rner.com">» Other Blog</option>
       
   </select>
 </fieldset>
@@ -106,7 +113,11 @@
     
   
     
-      <li><a href="https://twitter.com/xc0nradx" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+      <li><a href="https://twitter.com/c0nrad_jr" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+    
+      <li><a href="https://c0nradsc0rner.com" title="Other Blog"  rel="noopener noreferrer">Other Blog</a></li>
     
   
 </ul>
@@ -134,7 +145,6 @@
 <header>
   <p class="meta">Mar 16, 2022
      - 4 minute read 
-    
 
     
     
@@ -165,27 +175,30 @@
 </nav>
           
           <h1 id="introduction">Introduction</h1>
-<p>The Ising model is a pretty nifty little model. From just some simple nearest neighbor interactions and binary spin states, we can get non-trivial behavior. I attempted to solve for the critical temperature, but it will be that non-trivial behavior that will be the reason I was unable to solve for the critical temperature.</p>
+<p>The Ising model is a pretty nifty little model. From just some simple nearest neighbor interactions and binary spin states, we can get non-trivial behaviour. It will be that non-trivial behaviour that will be the reason I was unable to solve for the critical temperature.</p>
 <h2 id="critical-temperature">Critical Temperature</h2>
-<p>One thing that is neat about the Ising model is that when the temperature drops below the &ldquo;critical temperature&rdquo;, the model will break symmetry and randomly magnetize in one direction.</p>
-<p>The calculation of that critical temperature has been done for the 2D Ising Model \( \frac{2}{\ln{(1 + \sqrt{2})}} \), but not the 3D model. There was some <a href="https://arxiv.org/abs/1203.6064">recent research</a> in the area, but as far as I know, no exact solution.</p>
+<p>One thing that is neat about the ising model is that the temperature drops below the &ldquo;critical temperature&rdquo;, the model will break symmetry and randomly magnetize in one direction.</p>
+<p>The calculation of that critical temperature has been done for the 2D Ising Model \( \frac{2}{\ln{(1 + \sqrt{2})}} \), but not the 3D model. There was some 
+<a href="https://arxiv.org/abs/1203.6064" target="_blank" rel="noopener">recent research</a> in the area, but as far as I know, no exact solution.</p>
 <p>What a fun challenge to attempt!</p>
 <h2 id="my-failed-attempt">My failed attempt</h2>
-<p>The big picture of my attempt: For a specific magnetization and temperature, why not calculate the probability that we move towards &ldquo;conforming magnetization&rdquo; or away from it. We do this by counting states and then multiplying a lot of probabilities together (basically following a single step of the metropolis algorithm, multiple steps if nothing happens).</p>
-<p>I started with the 2D model since this method should easily extend to 3D, and we can verify it works in 2D.</p>
-<p>The code can be found <a href="https://github.com/c0nrad/sims/blob/master/ising/scripts/ising_towards_black.py">here</a>.</p>
+<p>The big picture of my attempt: For a specific magnetization and temperature, why not calculate the probability that we move towards &ldquo;conforming magnetization&rdquo; or away from it. We do this by counting states and multiplying a lot of probabilities together (basically following a single step of the metropolis algorithm).</p>
+<p>I started with the 2D model since this method should easily extend to 3D, and we can verify it works.</p>
+<p>The code can be found 
+<a href="https://github.com/c0nrad/sims/blob/master/ising/scripts/ising_towards_black.py" target="_blank" rel="noopener">here</a>.</p>
 <p>It produces images like this:</p>
-<p><a href="/towards_black.png"><img src="/towards_black.png" alt="/towards_black.png"></a></p>
+<p>
+<a href="/towards_black.png"><img src="/towards_black.png" alt="/towards_black.png"></a></p>
 <p>We can see that for different temperatures, the simulation will tend towards
 &ldquo;conforming magnetization&rdquo; or away to randomness.</p>
 <p>I already knew it didn&rsquo;t seem right, but I plugged it into sympy and took some derivatives and plots of this 2D function:</p>
 <p><img src="/2d_plot.png" alt="/2d_plot.png"></p>
 <p>The exact critical temperature we&rsquo;re looking for is around 2.269. And we&rsquo;re looking for the temperature that just kisses the X axis, which on the plot is around 2.1.</p>
 <h3 id="what-went-wrong">What went wrong</h3>
-<p>For this algorithm to work, I calculate the probability of each local spot occurring (example: a spin up in the middle, with 3 spin down neighbors). Since we&rsquo;re looking at 5 different spots at once (middle, plus 4 neighbors), there&rsquo;s 2^5 (32) different types of spots. So we just calculate the probability that each state will switch or not towards chaos (using metropolisis), and multiply it by the probability of that specific spot occurring.</p>
-<p>To calculate the probability of a spot occurring, I use the overall magnetization \( M \) and just make a naive \( M^4 \) sort of calculation to get the probability that all the neighbors are spin up (and continue for the other 31 states).</p>
-<p>This would work fine if there wasn&rsquo;t non-trivial behavior.</p>
-<p>The problem is that Ising is non-trivial! There are domains of similar spins, so I can&rsquo;t just say the probability of all spin ups is \( M^4 \), it&rsquo;s slightly more likely since they like to group up compared to just have one spot of off color.</p>
+<p>For this algorithm to work, I calculate the probability of each local spot occuring (example: a spin up in the middle, with 3 spin down neighbors). Since we&rsquo;re looking at 5 different spots at once (middle, plus 4 neighbors), there&rsquo;s 2^5 (32) different types of spots. So we just calculate the probability that each state will switch or not towards chaos (using metropolisis), and multiply it by the probability of that specific spot occuring.</p>
+<p>To calculate the probability of a spot occuring, I use overall magnetization \( M \) and just make a naive \( M^4 \) sort of calculation to get the probability that all the neighbors are spin up (and continue for the other 31 states).</p>
+<p>This would work fine if there wasn&rsquo;t non-trivial behaviour.</p>
+<p>The problem is that ising is non-trivial! There are domains of similar spins, so I can&rsquo;t just say the probability of all spin ups is \( M^4 \), it&rsquo;s slightly more likely since they like to group up.</p>
 <p><img src="/big_ising.png" alt="/big_ising.png">.</p>
 <p>You can see above that even with an equal probability of purple or yellow at the critical temperature, it&rsquo;s not evenly spread around, it&rsquo;s clumpy.</p>
 <h3 id="a-bandaid-attempt">A bandaid attempt</h3>
@@ -193,11 +206,11 @@
 <p>I again naively thought we could just find some \( s(M, T) \) (what is the probability that a neighbor is the same color given a magnetization and temperature) function that would give us the correct number, (spoiler that also won&rsquo;t work, for reasons later).</p>
 <p>So, I tried to fit a function to \( s(M, T) \) (data taken from long running simulations):</p>
 <p><img src="/s_fit.png" alt="/s_fit.png"></p>
-<p>But I was unable to find a function that fit exactly. (I was reading an older book that says it hasn&rsquo;t been solved for the 2D case, which makes sense)</p>
-<p>And recently I realized this idea was also flawed from the start. For example, there are two different states that have three white cells (with one in the middle). You could have the three white cells in a line, or the three white cells in the corner. Both would be the same probability according to \( s(M,T) \) but due to the non-trivial grouping, they should not have the same probability.</p>
+<p>But I was unable to find a function that fit exactly.</p>
+<p>And recently I realized the idea was flawed from the start. For example, there are two different states that have three white cells (with one in the middle). You could have the three white cells in a line, or the three white cells in the corner. Both would be the same probability according to \( s(M,T) \) but due to the non-trivial grouping, they should not have the same probability.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>I was a little disappointed that the method didn&rsquo;t end up working out. It was an exciting few days getting everything working, and finding the flaw was a little but heartbreaking, but I ended up learning a lot. And my calculations were surprisingly close to the exact solution!</p>
-<p>Not sure what is next, maybe I&rsquo;ll finally do the QFT electron magnetic moment calculation.</p>
+<p>I was a little disappointed that the method didn&rsquo;t end up working out. It was an exciting few days getting everything working, and finding the flaw was a little but heartbreaking, but I ended up learning a lot.</p>
+<p>Not sure what is next, maybe I&rsquo;ll finally do the electron magnetic moment calculation.</p>
         </div>
         
 
@@ -218,11 +231,11 @@
     
 
     
-      <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/sim-8-quantum-fdtd-1d/" title="Sim 8 Quantum Step Potential Simulation - Schrodinger FDTD">Sim 8 Quantum Step Potential Simulation - Schrodinger FDTD</a>
+      <a class="basic-alignment right" href="https://blog.c0nrad.io/posts/be-kind-to-self/" title="Reasons to Not Be Hard on Yourself (CTFs)">Reasons to Not Be Hard on Yourself (CTFs)</a>
     
   </p>
-  
 </footer>
+
 
       </article>
     </div>
@@ -232,150 +245,103 @@
   <section class="first odd">
 
     
-    <h1>Who am I?</h1>
+      <h1>Who am I?</h1>
     
 
     <p>
       
-      <img src="/me.png" style="width: 100%"> 
-I am Stuart. In a previous life I was a programmer, electrical engineer, and a security engineer. Now I spend my free time tinkering with physics.
-</br></br>
-My goal is to understand why the universe exists. I have a lot of learning to do.
-<br/><br/>
-I write about physics, life, and learning.
-</br>
+        <img src="/me.png" style="width: 100%"> 
+CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pirates</a>). Founder (<a href="https://csper.io">csper.io</a>). Enjoyer of security/software/physics.
       
     </p>
   </section>
 
   
-
-  
-  <ul class="sidebar-nav">
-    <li class="sidebar-nav-item">
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/c0nrad/" title="https://github.com/c0nrad/"><i
-          class="fa fa-github fa-3x"></i></a>
-      
-      
-      <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/xc0nradx/" title="https://twitter.com/xc0nradx/"><i
-          class="fa fa-twitter fa-3x"></i></a>
-      
-      
-      
-      
-      <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/c0nrad" title="https://www.linkedin.com/in/c0nrad"><i
-          class="fa fa-linkedin fa-3x"></i></a>
-      
-      
-      
-      
-      
-      
-
-      
-      
-    </li>
-  </ul>
-
-
   
 
-  
-  
-  <section class="odd">
-    
-    <h1>Collections</h1>
+
+
+<ul class="sidebar-nav">
+  <li class="sidebar-nav-item">
     
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
-    </li>
     
-    <li>
-      <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
-    </li>
     
-  </section>
-  
-  
+    
+    
+    
+    
+    
+    
 
   
   
+  </li>
+</ul>
+
   
 
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/ctfs" title="CTFs" >CTFs</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
 
   
-<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-    #mc_embed_signup {
-        background: #fff;
-        clear: left;
-        font: 14px Helvetica, Arial, sans-serif;
-        border: 1px solid;
-        margin-top: 20px;
-    }
-
-
-
-
-     
-</style>
-<div id="mc_embed_signup">
-    <form action="https://c0nrad.us18.list-manage.com/subscribe/post?u=0bdbd19644a1ba1fcca633b7b&amp;id=09f2143da6"
-        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
-        novalidate>
-        <div id="mc_embed_signup_scroll">
-            <label for="mce-EMAIL">Subscribe for new posts:</label>
-            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-            
-            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
-                    name="b_0bdbd19644a1ba1fcca633b7b_09f2143da6" tabindex="-1" value=""></div>
-            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
-                    class="button"></div>
-        </div>
-    </form>
-</div>
-
-
-
+  
+  
 </aside>
+
   </div>
 </div>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
 
+
+
+
     <footer role="contentinfo">
-      <p>Copyright &copy; 2022 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+      <p>Copyright &copy; 2025 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>
 
     
     
-      <script type="text/javascript">
-        var _paq = _paq || [];
-         
-        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-          var u="//c0nrad.matomo.cloud/";
-          _paq.push(['setTrackerUrl', u+'piwik.php']);
-          _paq.push(['setSiteId',  1 ]);
-          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-        })();
-      </script>
+
+
+
+    
     
     
 
