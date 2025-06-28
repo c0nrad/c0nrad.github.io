@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>SWU Health Counter</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+    <link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  
+    <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
+  <meta name="author" content="Stuart Larsen">
+
+  
+  <meta name="generator" content="Hugo 0.147.9">
+
+  
+  
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+  
+  
+  <meta name="twitter:title" content="SWU Health Counter"/>
+  <meta name="twitter:description" content="A new electronics project! It&rsquo;s a simple circuit that just keeps track of base health for Star Wars Unlimited (SWU) trading card game. This was my first time making/ordering a PCB, and I learned a lot along the way.
+
+Problem Statement
+To keep track of your base health in SWU, people usually use little damage tokens (in increments of 1/3/5/10), or dice. But I don&rsquo;t like these."/>
+  
+  <meta name="twitter:domain" content="blog.c0nrad.io"/>
+  <meta name="twitter:creator" content="@CryptoGangsta"/>
+
+  
+
+  
+  
+
+
+
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="https://blog.c0nrad.io/">c0nrad&#39;s c0rner</a></h1>
+    <h2>Learning and learning</h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+        <option value="https://blog.c0nrad.io/">» Home</option>
+      
+        <option value="https://c0nrad.io">» Website</option>
+      
+        <option value="https://github.com/c0nrad/">» Github</option>
+      
+        <option value="https://twitter.com/c0nrad_jr">» Twitter</option>
+      
+        <option value="https://c0nradsc0rner.com">» Other Blog</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="https://blog.c0nrad.io/" title="Home">Home</a></li>
+    
+  
+    
+      <li><a href="https://c0nrad.io" title="Website"  rel="noopener noreferrer">Website</a></li>
+    
+  
+    
+      <li><a href="https://github.com/c0nrad/" title="Github"  rel="noopener noreferrer">Github</a></li>
+    
+  
+    
+      <li><a href="https://twitter.com/c0nrad_jr" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+    
+      <li><a href="https://c0nradsc0rner.com" title="Other Blog"  rel="noopener noreferrer">Other Blog</a></li>
+    
+  
+</ul>
+
+<ul class="subscription">
+  
+    
+        <a href="https://blog.c0nrad.io/index.xml" target="_blank" type="application/rss+xml" title="RSS" rel="noopener noreferrer"><i class="fa fa-rss-square fa-lg"></i></a>
+    
+  
+</ul>
+
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+  <p class="meta">Jun 28, 2025
+     - 4 minute read 
+
+    
+    
+      - <a class="label" href="https://blog.c0nrad.io/categories/eletronics/">eletronics </a>
+    
+  </p>
+  <h1 class="entry-title">
+     SWU Health Counter 
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#problem-statement">Problem Statement</a></li>
+    <li><a href="#version-1-arduino--16x2-lcd">Version 1 (Arduino + 16x2 LCD)</a></li>
+    <li><a href="#version-2-ics">Version 2 (ICs)</a></li>
+    <li><a href="#version-3-pi-pico--breadboard">Version 3 (PI Pico + Breadboard)</a></li>
+    <li><a href="#version-4-pi-pico--pcb">Version 4 (PI Pico + PCB)</a></li>
+    <li><a href="#future">Future</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+          
+          <p>A new electronics project! It&rsquo;s a simple circuit that just keeps track of base health for Star Wars Unlimited (SWU) trading card game. This was my first time making/ordering a PCB, and I learned a lot along the way.</p>
+<!-- more -->
+<h2 id="problem-statement">Problem Statement</h2>
+<p>To keep track of your base health in SWU, people usually use little damage tokens (in increments of 1/3/5/10), or dice. But I don&rsquo;t like these.</p>
+<p>I don&rsquo;t like looking through a pile of tokens for the correct damage token, and dice never seem to cooperate with me. So instead of dealing with that, I decided it could be fun to build a little circuit that displays the current health. All the circuit needs to do is display the health and count up and down.</p>
+<p>There&rsquo;s already existing mobile apps, and there&rsquo;s a little hockey puck like object you can buy that keeps track of base health, but I figured this project would also be a good chance for me to build and order my first PCB (printed circuit board).</p>
+<h2 id="version-1-arduino--16x2-lcd">Version 1 (Arduino + 16x2 LCD)</h2>
+<p>The simplest version, and the ugliest. I had one of those Arduino starter kits that had some buttons and the 16x2 LCD. So I wired them together and glued them onto some piece of wood I found downstairs.</p>
+<p>Ugly but I just wanted to get the quickest version out to see if there was any value to this idea. I brought it to the local store I play at, used it once, and then put it back into my backpack. It was way too bulky to use, but the idea seemed reasonable.</p>
+<p><img src="/swu-health-counter/swu-counter-v1" alt="swu-counter-v1"></p>
+<h2 id="version-2-ics">Version 2 (ICs)</h2>
+<p>It seemed a little overkill to use a Arduino kit just to count up and down. I did some googling, and it turns out there&rsquo;s ICs that pretty much do everything I need. Maybe I could get the power consuption to be trivial too and power off a coin battery.</p>
+<p>Specifically:</p>
+<ul>
+<li>74LS48: 7seg display driver from BCD</li>
+<li>74LS192: Up/Down Counter</li>
+<li>74LS14: Hex Schmitt Triggers for debouncing</li>
+</ul>
+<p><img src="/swu-health-counter/v2-kicad.png" alt="v2-kicad"></p>
+<p><img src="/swu-health-counter/swu-counter-v2.png" alt="swu-counter-v2"></p>
+<p>But, this circuit was kind of complex! All those ICs take up a lot of space, the 7-segs are kind of ugly. It would never be that small.</p>
+<p>It&rsquo;s also annoying to debug the circuit and hard to expand.</p>
+<h2 id="version-3-pi-pico--breadboard">Version 3 (PI Pico + Breadboard)</h2>
+<p>The first usable version! I decided to try out the Pi Pico Microcontrollers. They&rsquo;re made by the Raspberry Pi people, but instead of being a microprocessor it&rsquo;s just a microcontroller.</p>
+<p>They&rsquo;re pretty neat, and you can program them in MicroPython using Thonny, which is super simple.</p>
+<p>Around this time I also bought a 3d Printer (Bambu Labs P1S) to print a case and some other SWU accessories.</p>
+<p>So I learned OpenSCAD and made a little shell for the breadboard and battery pack. I used this version for a few weeks.</p>
+<p><img src="/swu-health-counter/v3-openscad.png" alt="swu-counter-v3-scad">
+<img src="/swu-health-counter/swu-counter-v3.png" alt="swu-counter-v3"></p>
+<h2 id="version-4-pi-pico--pcb">Version 4 (PI Pico + PCB)</h2>
+<p>The goal was to make things smaller. So I swapped out the 
+<a href="https://www.amazon.com/dp/B09C5K91H7?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_1" target="_blank" rel="noopener">display</a> to something smaller, found a smaller 
+<a href="https://www.amazon.com/dp/B08FD39Y5R?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_1&amp;th=1" target="_blank" rel="noopener">LiPo battery</a>, and printed my first PCB!</p>
+<p>The 
+<a href="https://github.com/makerportal/rpi-pico-ssd1306" target="_blank" rel="noopener">library</a> I used for the display didn&rsquo;t have a way to increase text size, so I used 
+<a href="https://github.com/peterhinch/micropython-font-to-py" target="_blank" rel="noopener">font-to-py</a> to generate 48px text. 
+<a href="https://gist.github.com/c0nrad/ad15086d213dd5e1d04d42016d883f62" target="_blank" rel="noopener">Full code</a>.</p>
+<p>I again used OpenSCAD to make a little holder for the circuit (
+<a href="https://gist.github.com/c0nrad/75333c5a1dd867883a01ded12bbefef3" target="_blank" rel="noopener">code</a>).</p>
+<p><img src="/swu-health-counter/pcb.jpg" alt="swu-counter-pcb">
+<img src="/swu-health-counter/swu-counter-v4.jpg" alt="swu-counter-v4">
+<img src="/swu-health-counter/v4-kicad.png" alt="swu-counter-v4-kicad">
+<img src="/swu-health-counter/v4-openscad.png" alt="swu-counter-v4-scad"></p>
+<p>I used PCBWay for the PCB, it was very simple, I just went with all the defaults and it arrived 5 days later. You have to buy 5 and it ended up costing $60 in total, but overall very happy with the results.</p>
+<p>I just finished it today, and haven&rsquo;t used it for anything.</p>
+<h2 id="future">Future</h2>
+<p>I&rsquo;m not too sure if I&rsquo;ll do another iteration, but if I do, I&rsquo;ll probably do the following.</p>
+<ul>
+<li>Size
+<ul>
+<li>The Pico takes up a lot of room. But you can actually extract the Pico circuitry and place it directly on your own board. I think the total board size could be just the buttons and the screen.</li>
+</ul>
+</li>
+<li>On/Off Switch
+<ul>
+<li>I think it&rsquo;d be cool if the on/off switch was hanging off the side.</li>
+</ul>
+</li>
+<li>Charge Controller
+<ul>
+<li>LiPo batteries are rechargable, so it&rsquo;d be cool if I could charge the device via USB.</li>
+</ul>
+</li>
+<li>eInk display
+<ul>
+<li>I want to test it, but maybe it&rsquo;d be cool to have an e-ink display for lower power usage</li>
+</ul>
+</li>
+<li>Trigger/Interrupts
+<ul>
+<li>The code is currently using a while loop to check for inputs, instead I should register interrupts and keep the decide in lower power mode</li>
+</ul>
+</li>
+<li>Wifi/History
+<ul>
+<li>It&rsquo;s common to sometimes want to see what the health was previous. So maybe having a way to teather your phone and see the health values over time?</li>
+</ul>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;m very happy with the results of the project! I always use the device now when I play SWU. I also feel very powerful now that I can order my own PCB circuits and do my own 3d-Print modeling for whatever my heart desires.</p>
+<p>Off to the next project!</p>
+
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
+    
+    <time>Jun 28, 2025</time>
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/be-kind-to-self/" title="Reasons to Not Be Hard on Yourself (CTFs)">Reasons to Not Be Hard on Yourself (CTFs)</a>
+    
+
+    
+  </p>
+</footer>
+
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>Who am I?</h1>
+    
+
+    <p>
+      
+        <img src="/me.png" style="width: 100%"> 
+CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pirates</a>). Founder (<a href="https://csper.io">csper.io</a>). Enjoyer of security/software/physics.
+      
+    </p>
+  </section>
+
+  
+  
+
+
+
+<ul class="sidebar-nav">
+  <li class="sidebar-nav-item">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  
+  
+  </li>
+</ul>
+
+  
+
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/ctfs" title="CTFs" >CTFs</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
+
+  
+  
+  
+</aside>
+
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2025 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+
+
+
+    
+    
+    
+
+    
+  </body>
+</html>
+

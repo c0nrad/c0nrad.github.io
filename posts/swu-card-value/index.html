@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>SWU Card Value</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+    <link rel="stylesheet" href="http://localhost:1313/css/my.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  
+    <link href="http://localhost:1313/favicon.png" rel="icon">
+  
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
+  <meta name="author" content="Stuart Larsen">
+
+  
+  <meta name="generator" content="Hugo 0.147.9">
+
+  
+  
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+  
+  
+  <meta name="twitter:title" content="SWU Card Value"/>
+  <meta name="twitter:description" content="I&rsquo;m very impressed with how balance Star Wars Unlimited is. A large variety of different cards accross different aspects can be used to win P.Qs. To achieve this, I&rsquo;m wondering if FFG uses an equation to value cards to ensure that cards remain roughly equal in value.
+So inspired by 
+https://garbagerollers.com/2024/11/13/understanding-the-cost-curve-twilight-edition/, I&rsquo;m trying to see if I can reverse engineer a point system that FFG potentially uses to ensure cards have the correct value."/>
+  
+  <meta name="twitter:domain" content="blog.c0nrad.io"/>
+  <meta name="twitter:creator" content="@CryptoGangsta"/>
+
+  
+
+  
+  
+
+
+
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="http://localhost:1313/">c0nrad&#39;s c0rner</a></h1>
+    <h2>Learning and learning</h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+        <option value="http://localhost:1313/">» Home</option>
+      
+        <option value="https://c0nrad.io">» Website</option>
+      
+        <option value="https://github.com/c0nrad/">» Github</option>
+      
+        <option value="https://twitter.com/c0nrad_jr">» Twitter</option>
+      
+        <option value="https://c0nradsc0rner.com">» Other Blog</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="http://localhost:1313/" title="Home">Home</a></li>
+    
+  
+    
+      <li><a href="https://c0nrad.io" title="Website"  rel="noopener noreferrer">Website</a></li>
+    
+  
+    
+      <li><a href="https://github.com/c0nrad/" title="Github"  rel="noopener noreferrer">Github</a></li>
+    
+  
+    
+      <li><a href="https://twitter.com/c0nrad_jr" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+    
+      <li><a href="https://c0nradsc0rner.com" title="Other Blog"  rel="noopener noreferrer">Other Blog</a></li>
+    
+  
+</ul>
+
+<ul class="subscription">
+  
+    
+        <a href="http://localhost:1313/index.xml" target="_blank" type="application/rss+xml" title="RSS" rel="noopener noreferrer"><i class="fa fa-rss-square fa-lg"></i></a>
+    
+  
+</ul>
+
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+  <p class="meta">Jun 25, 2025
+     - 8 minute read 
+
+    
+  </p>
+  <h1 class="entry-title">
+     SWU Card Value 
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#hp-and-power">HP and Power</a></li>
+    <li><a href="#space">Space</a></li>
+    <li><a href="#shielded-point-value">Shielded point value</a></li>
+    <li><a href="#sentinel-point-value">Sentinel point value</a></li>
+    <li><a href="#ambush">Ambush</a></li>
+    <li><a href="#grit">Grit</a></li>
+    <li><a href="#value-calculator">Value Calculator</a></li>
+    <li><a href="#future">Future</a></li>
+  </ul>
+</nav>
+          
+          <p>I&rsquo;m very impressed with how balance Star Wars Unlimited is. A large variety of different cards accross different aspects can be used to win P.Qs. To achieve this, I&rsquo;m wondering if FFG uses an equation to value cards to ensure that cards remain roughly equal in value.</p>
+<p>So inspired by 
+<a href="https://garbagerollers.com/2024/11/13/understanding-the-cost-curve-twilight-edition/" target="_blank" rel="noopener">https://garbagerollers.com/2024/11/13/understanding-the-cost-curve-twilight-edition/</a>, I&rsquo;m trying to see if I can reverse engineer a point system that FFG potentially uses to ensure cards have the correct value.</p>
+<p>Then with this equation, we could use it to search across the card database to see which cards are above curve and if any aspects have a surplus of above value cards.</p>
+<h2 id="hp-and-power">HP and Power</h2>
+<p>We can look at some vanilla cards for an idea of where to start the cost curve.</p>
+<p>Take Battlefield Marine, a 3Power/3HP for 2cost. To start the calculating points, lets say the Power and HP are each worth a point.</p>
+<p>So we can start by saying a 2 cost card should have 6 points. One resource is worth 2 points.</p>
+<p>So for a first pass to make sure our script works lets see if there are any cards that are above curve.</p>
+<p>These are the results. It includes a bunch that have bounties or harm themselves on deploy.</p>
+<p>Above Curve
+Card: R2-D2, Power: 1, HP: 4, Cost: 1 
+<a href="https://swudb.com/card/SOR/236/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/236/fake</a>
+Card: Warrior Drone, Power: 1, HP: 4, Cost: 1 
+<a href="https://swudb.com/card/TWI/057/fake" target="_blank" rel="noopener">https://swudb.com/card/TWI/057/fake</a>
+Card: Kintan Intimidator, Power: 1, HP: 4, Cost: 1 
+<a href="https://swudb.com/card/SHD/183/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/183/fake</a>
+Card: BB-8, Power: 1, HP: 4, Cost: 1 
+<a href="https://swudb.com/card/JTL/145/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/145/fake</a>
+Card: R2-D2, Power: 1, HP: 4, Cost: 1 
+<a href="https://swudb.com/card/JTL/245/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/245/fake</a></p>
+<p>Bounty
+Card: Hylobon Enforcer, Power: 1, HP: 4, Cost: 1 
+<a href="https://swudb.com/card/SHD/027/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/027/fake</a>
+Card: Clone Deserter, Power: 2, HP: 3, Cost: 1 
+<a href="https://swudb.com/card/SHD/095/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/095/fake</a>
+Card: Guavian Antagonizer, Power: 2, HP: 3, Cost: 1 
+<a href="https://swudb.com/card/SHD/134/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/134/fake</a>
+Card: Cartel Turncoat, Power: 2, HP: 3, Cost: 1 
+<a href="https://swudb.com/card/SHD/195/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/195/fake</a>
+Card: Stolen AT-Hauler, Power: 4, HP: 5, Cost: 3 
+<a href="https://swudb.com/card/JTL/221/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/221/fake</a></p>
+<p>Self Harming
+Card: Royal Guard Attaché, Power: 2, HP: 5, Cost: 2 
+<a href="https://swudb.com/card/TWI/059/fake" target="_blank" rel="noopener">https://swudb.com/card/TWI/059/fake</a>
+Card: Dilapidated Ski Speeder, Power: 3, HP: 7, Cost: 3 
+<a href="https://swudb.com/card/JTL/248/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/248/fake</a></p>
+<p>Other
+Card: Stolen Landspeeder, Power: 3, HP: 2, Cost: 1 
+<a href="https://swudb.com/card/SHD/161/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/161/fake</a>
+Card: D&rsquo;Qar Cargo Frigate, Power: 6, HP: 7, Cost: 5 
+<a href="https://swudb.com/card/JTL/052/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/052/fake</a>
+Card: Corporate Defense Shuttle, Power: 3, HP: 5, Cost: 2 
+<a href="https://swudb.com/card/JTL/059/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/059/fake</a>
+Card: Savage Opress, Power: 9, HP: 9, Cost: 6 
+<a href="https://swudb.com/card/LOF/137/fake" target="_blank" rel="noopener">https://swudb.com/card/LOF/137/fake</a></p>
+<p>If you include cards that are &ldquo;on&rdquo; curve, there&rsquo;s 78 in total.</p>
+<h2 id="space">Space</h2>
+<p>Just by inspection, it would appear space units lose one point compared to ground.
+TIE/LN Fighter 
+<a href="https://www.swudb.com/card/SOR/225" target="_blank" rel="noopener">https://www.swudb.com/card/SOR/225</a>
+Prototype TIE Advanced 
+<a href="https://www.swudb.com/card/JTL/136" target="_blank" rel="noopener">https://www.swudb.com/card/JTL/136</a></p>
+<h2 id="shielded-point-value">Shielded point value</h2>
+<p>How much is a shield worth? Let&rsquo;s find some cards that only have a shield (not many).</p>
+<p>Card: Crafty Smuggler, Power: 2, HP: 2, Cost: 2 
+<a href="https://swudb.com/card/SOR/207/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/207/fake</a>
+Card: Outer Rim Outlaws, Power: 3, HP: 3, Cost: 3 
+<a href="https://swudb.com/card/JTL/065/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/065/fake</a>
+Card: Techno Union Transport, Power: 4, HP: 6, Cost: 5 
+<a href="https://swudb.com/card/JTL/190/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/190/fake</a></p>
+<p>Crafty Smuggler says a shield is worth 2 points. Outer Rim Outlaws says 2. Techno Union Transport says 2.</p>
+<h2 id="sentinel-point-value">Sentinel point value</h2>
+<p>Card: B1 Security Team, Cost: 2, Arena: Ground, Power: 3, HP: 1, Sentinel Value: 2, 
+<a href="https://swudb.com/card/TWI/207/fake" target="_blank" rel="noopener">https://swudb.com/card/TWI/207/fake</a>
+Card: Pyke Sentinel, Cost: 2, Arena: Ground, Power: 2, HP: 3, Sentinel Value: 1, 
+<a href="https://swudb.com/card/SHD/029/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/029/fake</a>
+Card: Scouting Headhunter, Cost: 2, Arena: Space, Power: 2, HP: 1, Sentinel Value: 4, 
+<a href="https://swudb.com/card/JTL/110/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/110/fake</a>
+Card: Cloud City Wing Guard, Cost: 3, Arena: Ground, Power: 2, HP: 4, Sentinel Value: 2, 
+<a href="https://swudb.com/card/SOR/063/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/063/fake</a>
+Card: Echo Base Defender, Cost: 3, Arena: Ground, Power: 4, HP: 3, Sentinel Value: 1, 
+<a href="https://swudb.com/card/SOR/098/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/098/fake</a>
+Card: Cell Block Guard, Cost: 3, Arena: Ground, Power: 3, HP: 3, Sentinel Value: 2, 
+<a href="https://swudb.com/card/SOR/229/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/229/fake</a>
+Card: Black Sun Starfighter, Cost: 3, Arena: Space, Power: 3, HP: 2, Sentinel Value: 4, 
+<a href="https://swudb.com/card/SHD/237/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/237/fake</a>
+Card: Cell Block Guard, Cost: 3, Arena: Ground, Power: 3, HP: 3, Sentinel Value: 2, 
+<a href="https://swudb.com/card/SHD/238/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/238/fake</a>
+Card: Omicron Strike Craft, Cost: 3, Arena: Space, Power: 2, HP: 3, Sentinel Value: 4, 
+<a href="https://swudb.com/card/JTL/064/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/064/fake</a>
+Card: Contracted Jumpmaster, Cost: 3, Arena: Space, Power: 2, HP: 4, Sentinel Value: 3, 
+<a href="https://swudb.com/card/JTL/184/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/184/fake</a>
+Card: System Patrol Craft, Cost: 4, Arena: Space, Power: 3, HP: 4, Sentinel Value: 4, 
+<a href="https://swudb.com/card/SOR/066/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/066/fake</a>
+Card: Niima Outpost Constables, Cost: 4, Arena: Ground, Power: 2, HP: 6, Sentinel Value: 2, 
+<a href="https://swudb.com/card/SHD/062/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/062/fake</a>
+Card: System Patrol Craft, Cost: 4, Arena: Space, Power: 3, HP: 4, Sentinel Value: 4, 
+<a href="https://swudb.com/card/SHD/063/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/063/fake</a>
+Card: Perimeter AT-RT, Cost: 4, Arena: Ground, Power: 3, HP: 5, Sentinel Value: 2, 
+<a href="https://swudb.com/card/JTL/068/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/068/fake</a>
+Card: Shadowed Hover Tank, Cost: 4, Arena: Ground, Power: 5, HP: 3, Sentinel Value: 2, 
+<a href="https://swudb.com/card/JTL/224/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/224/fake</a>
+Card: Rogue-class Starfighter, Cost: 4, Arena: Space, Power: 4, HP: 3, Sentinel Value: 4, 
+<a href="https://swudb.com/card/JTL/241/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/241/fake</a>
+Card: Corellian Freighter, Cost: 5, Arena: Space, Power: 4, HP: 4, Sentinel Value: 5, 
+<a href="https://swudb.com/card/SOR/250/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/250/fake</a>
+Card: Patrolling AAT, Cost: 5, Arena: Ground, Power: 4, HP: 5, Sentinel Value: 3, 
+<a href="https://swudb.com/card/TWI/232/fake" target="_blank" rel="noopener">https://swudb.com/card/TWI/232/fake</a>
+Card: Corellian Freighter, Cost: 5, Arena: Space, Power: 4, HP: 4, Sentinel Value: 5, 
+<a href="https://swudb.com/card/JTL/258/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/258/fake</a>
+Card: Falchion Ion Tank, Cost: 6, Arena: Ground, Power: 4, HP: 6, Sentinel Value: 4, 
+<a href="https://swudb.com/card/TWI/065/fake" target="_blank" rel="noopener">https://swudb.com/card/TWI/065/fake</a>
+Card: Armored Saber Tank, Cost: 6, Arena: Ground, Power: 5, HP: 5, Sentinel Value: 4, 
+<a href="https://swudb.com/card/TWI/245/fake" target="_blank" rel="noopener">https://swudb.com/card/TWI/245/fake</a></p>
+<p>Unsurprisingly we see that Pyke Sentinel and Echo Base Defender are high value.</p>
+<p>Somewhat surprisingly, it seems that we have to pay a premium for Space Sentinels are expensive!</p>
+<p>At a first stab, we could say Space Sentinel is worth 4 points (2 resources). And ground is worth 2 points.</p>
+<h2 id="ambush">Ambush</h2>
+<p>Card: Cloud-Rider, Cost: 2, Arena: Ground, Power: 3, HP: 1, Ambush Value: 2, 
+<a href="https://swudb.com/card/SHD/210/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/210/fake</a>
+Card: X-34 Landspeeder, Cost: 2, Arena: Ground, Power: 2, HP: 3, Ambush Value: 1, 
+<a href="https://swudb.com/card/JTL/214/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/214/fake</a>
+Card: Phase II Clone Trooper, Cost: 3, Arena: Ground, Power: 3, HP: 2, Ambush Value: 3, 
+<a href="https://swudb.com/card/TWI/242/fake" target="_blank" rel="noopener">https://swudb.com/card/TWI/242/fake</a>
+Card: Eager Escort Fighter, Cost: 3, Arena: Space, Power: 4, HP: 1, Ambush Value: 3, 
+<a href="https://swudb.com/card/JTL/112/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/112/fake</a>
+Card: Hidden Sharpshooter, Cost: 4, Arena: Ground, Power: 4, HP: 3, Ambush Value: 3, 
+<a href="https://swudb.com/card/TWI/214/fake" target="_blank" rel="noopener">https://swudb.com/card/TWI/214/fake</a>
+Card: Auzituck Liberator Gunship, Cost: 4, Arena: Space, Power: 3, HP: 4, Ambush Value: 3, 
+<a href="https://swudb.com/card/SOR/195/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/195/fake</a>
+Card: Syndicate Lackeys, Cost: 5, Arena: Ground, Power: 5, HP: 4, Ambush Value: 3, 
+<a href="https://swudb.com/card/SOR/213/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/213/fake</a></p>
+<p>Roughly 3? But it would appear that X-34 landspeeder is a pretty good value.</p>
+<h2 id="grit">Grit</h2>
+<p>Card: Scout Bike Pursuer, Cost: 2, Arena: Ground, Power: 1, HP: 4, Grit Value: 1, 
+<a href="https://swudb.com/card/SOR/032/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/032/fake</a>
+Card: Occupier Siege Tank, Cost: 5, Arena: Ground, Power: 5, HP: 4, Grit Value: 3, 
+<a href="https://swudb.com/card/SOR/165/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/165/fake</a>
+Card: Dwarf Spider Droid, Cost: 4, Arena: Ground, Power: 3, HP: 4, Grit Value: 3, 
+<a href="https://swudb.com/card/TWI/231/fake" target="_blank" rel="noopener">https://swudb.com/card/TWI/231/fake</a>
+Card: Wroshyr Tree Tender, Cost: 3, Arena: Ground, Power: 2, HP: 4, Grit Value: 2, 
+<a href="https://swudb.com/card/SHD/061/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/061/fake</a>
+Card: Heroic Renegade, Cost: 2, Arena: Ground, Power: 2, HP: 3, Grit Value: 1, 
+<a href="https://swudb.com/card/SHD/146/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/146/fake</a>
+Card: Royal Security Fighter, Cost: 2, Arena: Space, Power: 2, HP: 2, Grit Value: 2, 
+<a href="https://swudb.com/card/JTL/061/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/061/fake</a>
+Card: Occupier Siege Tank, Cost: 5, Arena: Ground, Power: 5, HP: 4, Grit Value: 3, 
+<a href="https://swudb.com/card/JTL/167/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/167/fake</a></p>
+<p>Roughly 2?</p>
+<h2 id="value-calculator">Value Calculator</h2>
+<p>So for a first pass, let&rsquo;s say:</p>
+<p>value = HP + Power + 2<em>hasShield + 3</em>hasAmbush + 2<em>hasGrit + isSpace * (-1 + 4</em>hasSentinel) + isGround(2*hasSentinel)</p>
+<p>So the follow cards are &ldquo;above&rdquo; curve, unsurprisingly we see a lot of them in play.</p>
+<p>Card: Scout Bike Pursuer, Power: 1, HP: 4, Cost: 2 
+<a href="https://swudb.com/card/SOR/032/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/032/fake</a>
+Card: Devastator, Power: 10, HP: 10, Cost: 10 
+<a href="https://swudb.com/card/SOR/090/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/090/fake</a>
+Card: Echo Base Defender, Power: 4, HP: 3, Cost: 3 
+<a href="https://swudb.com/card/SOR/098/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/098/fake</a>
+Card: Bright Hope, Power: 2, HP: 6, Cost: 4 
+<a href="https://swudb.com/card/SOR/099/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/099/fake</a>
+Card: R2-D2, Power: 1, HP: 4, Cost: 1 
+<a href="https://swudb.com/card/SOR/236/fake" target="_blank" rel="noopener">https://swudb.com/card/SOR/236/fake</a>
+Card: Kashyyyk Defender, Power: 0, HP: 5, Cost: 2 
+<a href="https://swudb.com/card/TWI/044/fake" target="_blank" rel="noopener">https://swudb.com/card/TWI/044/fake</a>
+Card: Warrior Drone, Power: 1, HP: 4, Cost: 1 
+<a href="https://swudb.com/card/TWI/057/fake" target="_blank" rel="noopener">https://swudb.com/card/TWI/057/fake</a>
+Card: Royal Guard Attaché, Power: 2, HP: 5, Cost: 2 
+<a href="https://swudb.com/card/TWI/059/fake" target="_blank" rel="noopener">https://swudb.com/card/TWI/059/fake</a>
+Card: Coruscant Guard, Power: 3, HP: 2, Cost: 2 
+<a href="https://swudb.com/card/TWI/106/fake" target="_blank" rel="noopener">https://swudb.com/card/TWI/106/fake</a>
+Card: Hylobon Enforcer, Power: 1, HP: 4, Cost: 1 
+<a href="https://swudb.com/card/SHD/027/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/027/fake</a>
+Card: Pyke Sentinel, Power: 2, HP: 3, Cost: 2 
+<a href="https://swudb.com/card/SHD/029/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/029/fake</a>
+Card: The Client, Power: 2, HP: 5, Cost: 3 
+<a href="https://swudb.com/card/SHD/031/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/031/fake</a>
+Card: Synara San, Power: 3, HP: 6, Cost: 4 
+<a href="https://swudb.com/card/SHD/033/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/033/fake</a>
+Card: Clone Deserter, Power: 2, HP: 3, Cost: 1 
+<a href="https://swudb.com/card/SHD/095/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/095/fake</a>
+Card: Guavian Antagonizer, Power: 2, HP: 3, Cost: 1 
+<a href="https://swudb.com/card/SHD/134/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/134/fake</a>
+Card: Heroic Renegade, Power: 2, HP: 3, Cost: 2 
+<a href="https://swudb.com/card/SHD/146/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/146/fake</a>
+Card: Stolen Landspeeder, Power: 3, HP: 2, Cost: 1 
+<a href="https://swudb.com/card/SHD/161/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/161/fake</a>
+Card: Kintan Intimidator, Power: 1, HP: 4, Cost: 1 
+<a href="https://swudb.com/card/SHD/183/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/183/fake</a>
+Card: Doctor Evazan, Power: 3, HP: 3, Cost: 2 
+<a href="https://swudb.com/card/SHD/185/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/185/fake</a>
+Card: 4-LOM, Power: 4, HP: 4, Cost: 4 
+<a href="https://swudb.com/card/SHD/188/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/188/fake</a>
+Card: Cloud-Rider, Power: 3, HP: 1, Cost: 2 
+<a href="https://swudb.com/card/SHD/210/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/210/fake</a>
+Card: Protector of the Throne, Power: 3, HP: 4, Cost: 3 
+<a href="https://swudb.com/card/SHD/247/fake" target="_blank" rel="noopener">https://swudb.com/card/SHD/247/fake</a>
+Card: Corporate Defense Shuttle, Power: 3, HP: 5, Cost: 2 
+<a href="https://swudb.com/card/JTL/059/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/059/fake</a>
+Card: BB-8, Power: 1, HP: 4, Cost: 1 
+<a href="https://swudb.com/card/JTL/145/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/145/fake</a>
+Card: Contracted Jumpmaster, Power: 2, HP: 4, Cost: 3 
+<a href="https://swudb.com/card/JTL/184/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/184/fake</a>
+Card: Fireball, Power: 3, HP: 3, Cost: 2 
+<a href="https://swudb.com/card/JTL/198/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/198/fake</a>
+Card: X-34 Landspeeder, Power: 2, HP: 3, Cost: 2 
+<a href="https://swudb.com/card/JTL/214/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/214/fake</a>
+Card: Contracted Hunter, Power: 4, HP: 4, Cost: 3 
+<a href="https://swudb.com/card/JTL/216/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/216/fake</a>
+Card: R2-D2, Power: 1, HP: 4, Cost: 1 
+<a href="https://swudb.com/card/JTL/245/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/245/fake</a>
+Card: Dilapidated Ski Speeder, Power: 3, HP: 7, Cost: 3 
+<a href="https://swudb.com/card/JTL/248/fake" target="_blank" rel="noopener">https://swudb.com/card/JTL/248/fake</a>
+Card: Savage Opress, Power: 9, HP: 9, Cost: 6 
+<a href="https://swudb.com/card/LOF/137/fake" target="_blank" rel="noopener">https://swudb.com/card/LOF/137/fake</a></p>
+<p>From this list, I think I might add Kashyyyk Defender to a han2 blue deck.</p>
+<h2 id="future">Future</h2>
+<p>More refinement needs to be done to the value function. What is a bounty worth? What is minus health worth? What is card draw worth?</p>
+
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
+    
+    <time>Jun 25, 2025</time>
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="http://localhost:1313/posts/be-kind-to-self/" title="Reasons to Not Be Hard on Yourself (CTFs)">Reasons to Not Be Hard on Yourself (CTFs)</a>
+    
+
+    
+      <a class="basic-alignment right" href="http://localhost:1313/posts/swu-health-counter/" title="SWU Health Counter">SWU Health Counter</a>
+    
+  </p>
+</footer>
+
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>Who am I?</h1>
+    
+
+    <p>
+      
+        <img src="/me.png" style="width: 100%"> 
+CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pirates</a>). Founder (<a href="https://csper.io">csper.io</a>). Enjoyer of security/software/physics.
+      
+    </p>
+  </section>
+
+  
+  
+
+
+
+<ul class="sidebar-nav">
+  <li class="sidebar-nav-item">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  
+  
+  </li>
+</ul>
+
+  
+
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="http://localhost:1313/categories/ctfs" title="CTFs" >CTFs</a>
+          </li>
+        
+          <li>
+            <a href="http://localhost:1313/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="http://localhost:1313/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+          </li>
+        
+          <li>
+            <a href="http://localhost:1313/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="http://localhost:1313/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
+
+  
+  
+  
+</aside>
+
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2025 Stuart Larsen - <a href="http://localhost:1313/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+
+
+
+    
+    
+    
+
+    
+  </body>
+</html>
+

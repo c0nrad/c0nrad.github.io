@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Eletronics on c0nrad&#39;s c0rner</title>
+    <link>https://blog.c0nrad.io/categories/eletronics/</link>
+    <description>Recent content in Eletronics on c0nrad&#39;s c0rner</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 Jun 2025 15:30:24 -0400</lastBuildDate>
+    <atom:link href="https://blog.c0nrad.io/categories/eletronics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SWU Health Counter</title>
+      <link>https://blog.c0nrad.io/posts/swu-health-counter/</link>
+      <pubDate>Sat, 28 Jun 2025 15:30:24 -0400</pubDate>
+      <guid>https://blog.c0nrad.io/posts/swu-health-counter/</guid>
+      <description>&lt;p&gt;A new electronics project! It&amp;rsquo;s a simple circuit that just keeps track of base health for Star Wars Unlimited (SWU) trading card game. This was my first time making/ordering a PCB, and I learned a lot along the way.&lt;/p&gt;&#xA;&lt;!-- more --&gt;&#xA;&lt;h2 id=&#34;problem-statement&#34;&gt;Problem Statement&lt;/h2&gt;&#xA;&lt;p&gt;To keep track of your base health in SWU, people usually use little damage tokens (in increments of 1/3/5/10), or dice. But I don&amp;rsquo;t like these.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
