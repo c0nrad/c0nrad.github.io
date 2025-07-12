@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>SWU Card Neural Net P1</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+    <link rel="stylesheet" href="http://localhost:1313/css/my.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  
+    <link href="http://localhost:1313/favicon.png" rel="icon">
+  
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
+  <meta name="author" content="Stuart Larsen">
+
+  
+  <meta name="generator" content="Hugo 0.148.1">
+
+  
+  
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+  
+  
+  <meta name="twitter:title" content="SWU Card Neural Net P1"/>
+  <meta name="twitter:description" content="New project! Using AI to read SWU card aspects.
+I just finished a coursera course on 
+Deep Learning and Neural Networks so figured I&rsquo;d try to do something with my newfound knowledge!
+In this project I&rsquo;ll be building some NN (Neural Networks) manually that will take in a Star Wars Unlimited card image and determine if &ldquo;isHeroic&rdquo;, &ldquo;isVillainous&rdquo;, and &ldquo;isNeutral&rdquo; by reading the aspects on the top left.
+At this point I only know how to do binary classifiers&hellip; so yes or no questions. So this will be part 1, in the future I should be able to ask more interesting questions of the models like &ldquo;Who is the artist&rdquo;, &ldquo;How many resources does this card cost&rdquo;, &ldquo;what are the traits&rdquo;, etc."/>
+  
+  <meta name="twitter:domain" content="blog.c0nrad.io"/>
+  <meta name="twitter:creator" content="@CryptoGangsta"/>
+
+  
+
+  
+  
+
+
+
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="http://localhost:1313/">c0nrad&#39;s c0rner</a></h1>
+    <h2>Learning and learning</h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+        <option value="http://localhost:1313/">» Home</option>
+      
+        <option value="https://c0nrad.io">» Website</option>
+      
+        <option value="https://github.com/c0nrad/">» Github</option>
+      
+        <option value="https://twitter.com/c0nrad_jr">» Twitter</option>
+      
+        <option value="https://c0nradsc0rner.com">» Other Blog</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="http://localhost:1313/" title="Home">Home</a></li>
+    
+  
+    
+      <li><a href="https://c0nrad.io" title="Website"  rel="noopener noreferrer">Website</a></li>
+    
+  
+    
+      <li><a href="https://github.com/c0nrad/" title="Github"  rel="noopener noreferrer">Github</a></li>
+    
+  
+    
+      <li><a href="https://twitter.com/c0nrad_jr" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+    
+      <li><a href="https://c0nradsc0rner.com" title="Other Blog"  rel="noopener noreferrer">Other Blog</a></li>
+    
+  
+</ul>
+
+<ul class="subscription">
+  
+    
+        <a href="http://localhost:1313/index.xml" target="_blank" type="application/rss+xml" title="RSS" rel="noopener noreferrer"><i class="fa fa-rss-square fa-lg"></i></a>
+    
+  
+</ul>
+
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+  <p class="meta">Jul 9, 2025
+     - 5 minute read 
+
+    
+  </p>
+  <h1 class="entry-title">
+     SWU Card Neural Net P1 
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#background-theory">Background Theory</a>
+      <ul>
+        <li><a href="#swu-cards">SWU Cards</a></li>
+        <li><a href="#neural-nets">Neural Nets</a></li>
+        <li><a href="#training">Training</a></li>
+      </ul>
+    </li>
+    <li><a href="#implementation">Implementation</a></li>
+    <li><a href="#next-steps">Next Steps</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+          
+          <p>New project! Using AI to read SWU card aspects.</p>
+<p>I just finished a coursera course on 
+<a href="https://www.coursera.org/learn/neural-networks-deep-learning#modules" target="_blank" rel="noopener">Deep Learning and Neural Networks</a> so figured I&rsquo;d try to do something with my newfound knowledge!</p>
+<p>In this project I&rsquo;ll be building some NN (Neural Networks) manually that will take in a Star Wars Unlimited card image and determine if &ldquo;isHeroic&rdquo;, &ldquo;isVillainous&rdquo;, and &ldquo;isNeutral&rdquo; by reading the aspects on the top left.</p>
+<p>At this point I only know how to do binary classifiers&hellip; so yes or no questions. So this will be part 1, in the future I should be able to ask more interesting questions of the models like &ldquo;Who is the artist&rdquo;, &ldquo;How many resources does this card cost&rdquo;, &ldquo;what are the traits&rdquo;, etc.</p>
+<h2 id="background-theory">Background Theory</h2>
+<h3 id="swu-cards">SWU Cards</h3>
+<p>First off, why use a Star Wars Unlimited card?</p>
+<p>Well, one, I like Star Wars Unlimited, but two, they are a pre-labeled dataset! I can easily scrape the cards and their information. For example, here&rsquo;s a recent 
+<a href="https://swudb.com/card/LOF/037" target="_blank" rel="noopener">vader card</a>. I need a labeled dataset so I can train the models. (swudb, sorry for scraping. I was very gentle. &gt;5s/req. Only downloaded the images, which I assume are CDN&rsquo;d from a bucket).</p>
+<p>For this starter project, I was specifically playing with &lsquo;Aspects&rsquo;, which are the blue and black hexagons near the top left. The model I wanted to build will take in a card image, and tell you if the card is villany or heroism or neutral.</p>
+<h3 id="neural-nets">Neural Nets</h3>
+<p>If you&rsquo;d like to learn more about Neural Nets in depth, I&rsquo;d highly recommend the coursera course 
+<a href="https://www.coursera.org/learn/neural-networks-deep-learning#modules" target="_blank" rel="noopener">Deep Learning and Neural Networks</a> by Andrew Ng. You&rsquo;ll learn how to craft neural nets by scratch (using numpy), and can do projects similar to this one, which is a pretty exciting tool to have in your toolbelt! If you&rsquo;re a confident programmer, you can have it wrapped up in ~24 hours. If you&rsquo;re not a confident programmer, the module can be a little difficult to debug sometimes, but gotta put in those reps somehow!</p>
+<p>The neural network implementation is basically a bunch of matrix mulitplication. It&rsquo;s composed of a few layers of activation nodes, and results in a single node that outputs &ldquo;is this card heroism&rdquo;.</p>
+<p>The model looks like following:</p>
+<p><img src="/swu-nn/isVillianNN.png" alt="villian_nn"></p>
+<p>The core unit is the little activation nodes. Each node does some matrix math of the form:</p>
+<p>$$ \vec{A}_{next} = activation(\vec{W}^T * \vec{A} + b) $$</p>
+<p>This basically says take the previous input values from all previous nodes, multiple each value by some weights, and then add a number.</p>
+<p>And then each node has an final activation function (we need something non-linear). For this project I used &ldquo;RELU&rdquo; which is just a flat line less than zero, and then a sloped line abve zero. Other common activations functions are tanh/sigmoid.</p>
+<p>In the end we get out a final value, 0 or 1, which tells us if the card was villianous or not.</p>
+<h3 id="training">Training</h3>
+<p>What&rsquo;s cool about neural nets is that we don&rsquo;t have to tell it anything. To train the neural net, I just show it cards and tell it if it is villainous or not, and through examples it will learn.</p>
+<p>It does this through a technique called back propogation. The model will run forward, and we will calculate something called the cost function. Since this is a binary classifier (the only thing I know how to do), we&rsquo;ll use a &ldquo;Binary Cross-Entropy&rdquo; cost function.</p>
+<p>$$ cost = - (1/n) ((\vec{Y} * \log(\vec{A_L})) + (1 - \vec{Y}) * \log(1 - \vec{A}_L)) $$</p>
+<p>The cost measures how far away we were from correct answers. \( A_L \) was the final results for each test case, and \( Y \) is the correct answer.</p>
+<p>Then with the cost function we can walk backwards through our neural network by upgrading the weights in such a way that&rsquo;d we be closer to the correct answer. This is called gradient descent since we are taking the partial derivative of the cost with respect to each input and see which way we need to scootch the weight.</p>
+<h2 id="implementation">Implementation</h2>
+<p>The code can be found 
+<a href="https://github.com/c0nrad/swu-card-reader-nn/blob/main/nn.py" target="_blank" rel="noopener">here</a>. It takes about 5 minutes to train, and is 99% accurate, which makes sense, it&rsquo;s really just doing two pixel color checks at exact spots. I could program this check in just a few lines, but it was exciting to see the neural net learn!</p>
+<p><img src="/swu-nn/finalRun.png" alt="villian_nn"></p>
+<p>At first the model was not correctly learning, and after some debugging I found out that my learning rate was set wayyy to high. Since the cases are all so similar, the gradient descent was jumping too far and the learning was too sporadic and not making progress.</p>
+<h2 id="next-steps">Next Steps</h2>
+<p>A bunch of stuff:</p>
+<ul>
+<li>The next chapter in the coursera course is on optimizations, so maybe I&rsquo;ll optimize this code a bit.</li>
+<li>Normally for image NN you use something called convolution (kind of like applying pattern matching as a first step), so learning about that (ch. 3)</li>
+<li>Upgrading to TensorFlow (this impelemtnation only uses the CPU, and is very slow, TensorFlow will also trivialize this problem).</li>
+<li>I think the next project will be two steps:
+<ul>
+<li>Read the artist names</li>
+<li>Based on the art, guess the artist</li>
+</ul>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Super fun project! I shot out of bed at 6am the last two days to work on it. Excited to continue!</p>
+
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
+    
+    <time>Jul 9, 2025</time>
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="http://localhost:1313/posts/swu-health-counter/" title="SWU Health Counter">SWU Health Counter</a>
+    
+
+    
+  </p>
+</footer>
+
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>Who am I?</h1>
+    
+
+    <p>
+      
+        <img src="/me.png" style="width: 100%"> 
+CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pirates</a>). Founder (<a href="https://csper.io">csper.io</a>). Enjoyer of security/software/physics.
+      
+    </p>
+  </section>
+
+  
+  
+
+
+
+<ul class="sidebar-nav">
+  <li class="sidebar-nav-item">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  
+  
+  </li>
+</ul>
+
+  
+
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="http://localhost:1313/categories/ctfs" title="CTFs" >CTFs</a>
+          </li>
+        
+          <li>
+            <a href="http://localhost:1313/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="http://localhost:1313/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+          </li>
+        
+          <li>
+            <a href="http://localhost:1313/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="http://localhost:1313/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
+
+  
+  
+  
+</aside>
+
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2025 Stuart Larsen - <a href="http://localhost:1313/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+
+
+
+    
+    
+    
+
+    
+  </body>
+</html>
+
