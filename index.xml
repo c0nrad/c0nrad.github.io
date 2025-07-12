@@ -6,8 +6,15 @@
     <description>Recent content on c0nrad&#39;s c0rner</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Jun 2025 15:30:24 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 09 Jul 2025 18:08:34 -0400</lastBuildDate>
     <atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SWU Card Neural Net P1</title>
+      <link>https://blog.c0nrad.io/posts/swu-card-nn-p1/</link>
+      <pubDate>Wed, 09 Jul 2025 18:08:34 -0400</pubDate>
+      <guid>https://blog.c0nrad.io/posts/swu-card-nn-p1/</guid>
+      <description>&lt;p&gt;New project! Using AI to read SWU card aspects.&lt;/p&gt;&#xA;&lt;p&gt;I just finished a coursera course on &#xA;&lt;a href=&#34;https://www.coursera.org/learn/neural-networks-deep-learning#modules&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Deep Learning and Neural Networks&lt;/a&gt; so figured I&amp;rsquo;d try to do something with my newfound knowledge!&lt;/p&gt;&#xA;&lt;p&gt;In this project I&amp;rsquo;ll be building some NN (Neural Networks) manually that will take in a Star Wars Unlimited card image and determine if &amp;ldquo;isHeroic&amp;rdquo;, &amp;ldquo;isVillainous&amp;rdquo;, and &amp;ldquo;isNeutral&amp;rdquo; by reading the aspects on the top left.&lt;/p&gt;&#xA;&lt;p&gt;At this point I only know how to do binary classifiers&amp;hellip; so yes or no questions. So this will be part 1, in the future I should be able to ask more interesting questions of the models like &amp;ldquo;Who is the artist&amp;rdquo;, &amp;ldquo;How many resources does this card cost&amp;rdquo;, &amp;ldquo;what are the traits&amp;rdquo;, etc.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>SWU Health Counter</title>
       <link>https://blog.c0nrad.io/posts/swu-health-counter/</link>
