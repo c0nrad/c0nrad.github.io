@@ -42,7 +42,7 @@
   <meta name="author" content="Stuart Larsen">
 
   
-  <meta name="generator" content="Hugo 0.152.2">
+  <meta name="generator" content="Hugo 0.157.0">
 
   
   
@@ -258,10 +258,10 @@ $$ \implies tr(J) = 0 $$</p>
 <p>That&rsquo;s enough to start brute forcing!</p>
 <h2 id="brute-forcing-generators">Brute Forcing Generators</h2>
 <p>So we specifically want something of the following:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">random3</span>();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">random3</span>();
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">transpose</span>().<span style="color:#a6e22e">add</span>(<span style="color:#a6e22e">a</span>).<span style="color:#a6e22e">equals</span>(<span style="color:#a6e22e">Zero3</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">trace</span>() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// do something
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>(full code can be found 
 <a href="https://github.com/c0nrad/group_brute" target="_blank" rel="noopener">here</a>)</p>
 <p>Random3() randomly adds either 1, 0, -1 to each spot in a 3x3 matrix.</p>
@@ -678,7 +678,7 @@ CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pira
 
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2025 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+      <p>Copyright &copy; 2026 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>

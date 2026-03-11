@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>DNS Stub Resolver</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+    <link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  
+    <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
+  <meta name="author" content="Stuart Larsen">
+
+  
+  <meta name="generator" content="Hugo 0.157.0">
+
+  
+  
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+  
+  
+  <meta name="twitter:title" content="DNS Stub Resolver"/>
+  <meta name="twitter:description" content="I realized I haven&rsquo;t done much learning in a while (
+https://dmarcdefender.io is my current project, but it&rsquo;s just standard SaaS work). So I figured I might try to spend an hour or two each day learning something new.
+Today&rsquo;s project was building a super simple DNS resolver. The goal was just to resolve the A record for c0nrad.io into an IP address."/>
+  
+  <meta name="twitter:domain" content="blog.c0nrad.io"/>
+  <meta name="twitter:creator" content="@CryptoGangsta"/>
+
+  
+
+  
+  
+
+
+
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="https://blog.c0nrad.io/">c0nrad&#39;s c0rner</a></h1>
+    <h2>Learning and learning</h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+        <option value="https://blog.c0nrad.io/">» Home</option>
+      
+        <option value="https://c0nrad.io">» Website</option>
+      
+        <option value="https://github.com/c0nrad/">» Github</option>
+      
+        <option value="https://twitter.com/c0nrad_jr">» Twitter</option>
+      
+        <option value="https://c0nradsc0rner.com">» Other Blog</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="https://blog.c0nrad.io/" title="Home">Home</a></li>
+    
+  
+    
+      <li><a href="https://c0nrad.io" title="Website"  rel="noopener noreferrer">Website</a></li>
+    
+  
+    
+      <li><a href="https://github.com/c0nrad/" title="Github"  rel="noopener noreferrer">Github</a></li>
+    
+  
+    
+      <li><a href="https://twitter.com/c0nrad_jr" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+    
+      <li><a href="https://c0nradsc0rner.com" title="Other Blog"  rel="noopener noreferrer">Other Blog</a></li>
+    
+  
+</ul>
+
+<ul class="subscription">
+  
+    
+        <a href="https://blog.c0nrad.io/index.xml" target="_blank" type="application/rss+xml" title="RSS" rel="noopener noreferrer"><i class="fa fa-rss-square fa-lg"></i></a>
+    
+  
+</ul>
+
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+  <p class="meta">Mar 11, 2026
+     - 2 minute read 
+
+    
+    
+      - <a class="label" href="https://blog.c0nrad.io/categories/programming/">programming </a><a class="label" href="https://blog.c0nrad.io/categories/dns/">dns </a>
+    
+  </p>
+  <h1 class="entry-title">
+     DNS Stub Resolver 
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#result">Result</a></li>
+    <li><a href="#learnings--refreshers">Learnings / Refreshers</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+          
+          <p>I realized I haven&rsquo;t done much learning in a while (
+<a href="https://dmarcdefender.io" target="_blank" rel="noopener">https://dmarcdefender.io</a> is my current project, but it&rsquo;s just standard SaaS work). So I figured I might try to spend an hour or two each day learning something new.</p>
+<p>Today&rsquo;s project was building a super simple DNS resolver. The goal was just to resolve the <code>A</code> record for <code>c0nrad.io</code> into an IP address.</p>
+<h2 id="result">Result</h2>
+<p>
+<a href="https://gist.github.com/c0nrad/d464cbb70b1923b6f36723148926e350" target="_blank" rel="noopener">https://gist.github.com/c0nrad/d464cbb70b1923b6f36723148926e350</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; tsx stub-resolve.ts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Received <span style="color:#ae81ff">59</span> bytes from 8.8.8.8:53
+</span></span><span style="display:flex;"><span>&lt;Buffer <span style="color:#ae81ff">05</span> <span style="color:#ae81ff">39</span> <span style="color:#ae81ff">81</span> <span style="color:#ae81ff">80</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">01</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">02</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">06</span> <span style="color:#ae81ff">63</span> <span style="color:#ae81ff">30</span> 6e <span style="color:#ae81ff">72</span> <span style="color:#ae81ff">61</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">02</span> <span style="color:#ae81ff">69</span> 6f <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">01</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">01</span> c0 0c <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">01</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">01</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> 3c <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">04</span> <span style="color:#ae81ff">03</span> <span style="color:#ae81ff">84</span> ba d3 c0 0c <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">01</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">01</span> <span style="color:#ae81ff">00</span> ... <span style="color:#ae81ff">9</span> more bytes&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  id: 1337,
+</span></span><span style="display:flex;"><span>  flags: 33152,
+</span></span><span style="display:flex;"><span>  qdcount: 1,
+</span></span><span style="display:flex;"><span>  ancount: 2,
+</span></span><span style="display:flex;"><span>  nscount: 0,
+</span></span><span style="display:flex;"><span>  arcount: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span> name: <span style="color:#e6db74">&#39;c0nrad.io&#39;</span>, qtype: 1, qclass: <span style="color:#ae81ff">1</span> <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  name: <span style="color:#e6db74">&#39;c0nrad.io&#39;</span>,
+</span></span><span style="display:flex;"><span>  type: 1,
+</span></span><span style="display:flex;"><span>  class_: 1,
+</span></span><span style="display:flex;"><span>  ttl: 60,
+</span></span><span style="display:flex;"><span>  rdata: &lt;Buffer <span style="color:#ae81ff">03</span> <span style="color:#ae81ff">84</span> ba d3&gt;,
+</span></span><span style="display:flex;"><span>  ipAddress: <span style="color:#e6db74">&#39;3.132.186.211&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  name: <span style="color:#e6db74">&#39;c0nrad.io&#39;</span>,
+</span></span><span style="display:flex;"><span>  type: 1,
+</span></span><span style="display:flex;"><span>  class_: 1,
+</span></span><span style="display:flex;"><span>  ttl: 60,
+</span></span><span style="display:flex;"><span>  rdata: &lt;Buffer <span style="color:#ae81ff">03</span> <span style="color:#ae81ff">17</span> f0 88&gt;,
+</span></span><span style="display:flex;"><span>  ipAddress: <span style="color:#e6db74">&#39;3.23.240.136&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="learnings--refreshers">Learnings / Refreshers</h2>
+<ul>
+<li>If you&rsquo;re doing iterative resolution, each query will usually return either an answer or a referral.</li>
+<li>A stub resolver is the simple client that asks a recursive resolver to fetch the query result.</li>
+<li>The actual recursive lookup is often performed by your ISP or by a public resolver.</li>
+<li>We could run a recursive resolver locally, but it&rsquo;s usually more time-efficient to use your ISP&rsquo;s resolver or hard-code 8.8.8.8 (Google) / 1.1.1.1 (Cloudflare).</li>
+<li>The authoritative server contains the &ldquo;zone file.&rdquo;</li>
+<li>The DNS Class field is pretty much unused.
+<ul>
+<li>Everything is &ldquo;Internet&rdquo;. Historically &ldquo;Chaos&rdquo; and &ldquo;Hesiod&rdquo;, but unused.</li>
+</ul>
+</li>
+<li>Cloudflare has one.one.one.one/help, which creates a custom DNS request on load to understand your DNS connection.</li>
+<li><code>Buffer</code> is Node.js&rsquo;s binary data type; I used a Node.js <code>Buffer</code>, but I could instead use something like <code>new DataView(new ArrayBuffer(12))</code>.</li>
+<li>To save space, resulting records don&rsquo;t repeat the DNS name. They use &ldquo;message compression&rdquo; by pointing to existing DNS names in the response message.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Pretty neat. Maybe a future project will be to make it recursive.</p>
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
+    
+    <time>Mar 11, 2026</time>
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/pathfinding/" title="Brainstorming Pathfinding Algorithms: QuadTree &amp; RelaxPath">Brainstorming Pathfinding Algorithms: QuadTree &amp; RelaxPath</a>
+    
+
+    
+  </p>
+</footer>
+
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>Who am I?</h1>
+    
+
+    <p>
+      
+        <img src="/me.png" style="width: 100%"> 
+CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pirates</a>). Founder (<a href="https://csper.io">csper.io</a> and <a href="https://dmarcdefender.io">dmarcdefender.io</a>). Enjoyer of security/software/physics.
+      
+    </p>
+  </section>
+
+  
+  
+
+
+
+<ul class="sidebar-nav">
+  <li class="sidebar-nav-item">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  
+  
+  </li>
+</ul>
+
+  
+
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/ctfs" title="CTFs" >CTFs</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
+
+  
+  
+  
+</aside>
+
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2026 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+
+
+
+    
+    
+    
+
+    
+  </body>
+</html>
+

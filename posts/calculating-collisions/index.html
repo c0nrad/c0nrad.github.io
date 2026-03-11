@@ -42,7 +42,7 @@
   <meta name="author" content="Stuart Larsen">
 
   
-  <meta name="generator" content="Hugo 0.152.2">
+  <meta name="generator" content="Hugo 0.157.0">
 
   
   
@@ -178,7 +178,7 @@
 <h2 id="background">Background</h2>
 <p>I&rsquo;m currently working on a physics simulator (called <code>simp</code>). While build the simulator I&rsquo;m learning that calculating the physics is easy, but detecting and handling collisions is hard!</p>
 <p>As an example, the following is code I wrote last week for determining if a sphere and box are touching in 3D (and then attempting to handle the collision if they are). It&rsquo;s complex and not even fully correct! It doesn&rsquo;t handle the case of a sphere touching the corner of the box. And it still took me the better part of an entire day (I spent many hours trying to be clever instead of just handling all 6 faces of the box).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">e1</span>.<span style="color:#a6e22e">shape</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">Shape</span>.<span style="color:#a6e22e">Sphere</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">e2</span>.<span style="color:#a6e22e">shape</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">Shape</span>.<span style="color:#a6e22e">Box</span>) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">e1</span>.<span style="color:#a6e22e">shape</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">Shape</span>.<span style="color:#a6e22e">Sphere</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">e2</span>.<span style="color:#a6e22e">shape</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">Shape</span>.<span style="color:#a6e22e">Box</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">radius</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">e1</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">SphereEntity</span>).<span style="color:#a6e22e">radius</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">dimensions</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">e2</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">BoxEntity</span>).<span style="color:#a6e22e">dimensions</span>
 </span></span><span style="display:flex;"><span>
@@ -550,7 +550,7 @@ CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pira
 
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2025 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+      <p>Copyright &copy; 2026 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>

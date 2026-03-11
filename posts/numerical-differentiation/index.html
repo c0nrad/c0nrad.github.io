@@ -42,7 +42,7 @@
   <meta name="author" content="Stuart Larsen">
 
   
-  <meta name="generator" content="Hugo 0.152.2">
+  <meta name="generator" content="Hugo 0.157.0">
 
   
   
@@ -286,7 +286,7 @@ $$ f_4(x) = cos(2x) + e^{-\frac{x^2}{2}} sin(10x) $$</p>
 <a href="https://blog.c0nrad.io/posts/ginac-on-macos/" target="_blank" rel="noopener">check out GiNaCs</a> in the first place. (GiNaCs has a symbolic differentiator).</p>
 <p>But now with a Numeric Differentiator, I have no need for the symbolic executioner! (Obviously not fully true, it&rsquo;s still <em>extremely</em> nice to have the symbols).</p>
 <p>But, damn, it is so satisfying generating the polynomials like this in Go. I&rsquo;m in shock that it even works to be honest. I heavily abuse function closure&rsquo;s to store state. (It&rsquo;s function closure&rsquo;s all the way down):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">LegendrePoly</span>(<span style="color:#a6e22e">l</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">Func</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">LegendrePoly</span>(<span style="color:#a6e22e">l</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">Func</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">prefix</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> (<span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Pow</span>(<span style="color:#ae81ff">2</span>, float64(<span style="color:#a6e22e">l</span>)) <span style="color:#f92672">*</span> <span style="color:#a6e22e">Factorial</span>(<span style="color:#a6e22e">l</span>))
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">inner</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">float64</span> {
@@ -435,7 +435,7 @@ CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pira
 
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2025 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+      <p>Copyright &copy; 2026 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>

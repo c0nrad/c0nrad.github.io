@@ -42,7 +42,7 @@
   <meta name="author" content="Stuart Larsen">
 
   
-  <meta name="generator" content="Hugo 0.152.2">
+  <meta name="generator" content="Hugo 0.157.0">
 
   
   
@@ -228,7 +228,7 @@
 <p>Wow. Applying a NOT gate to the \( |0\rangle \) gets us \( |1\rangle \). Cutting edge stuff.</p>
 <h2 id="code">Code</h2>
 <p>While it&rsquo;s not much, I can now support the very basics of this new density operator approach.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">d1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">DensityMatrix</span>.<span style="color:#a6e22e">fromInitialState</span>([<span style="color:#ae81ff">0</span>]);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">d1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">DensityMatrix</span>.<span style="color:#a6e22e">fromInitialState</span>([<span style="color:#ae81ff">0</span>]);
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">d1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">d1</span>.<span style="color:#a6e22e">evolve</span>(<span style="color:#a6e22e">XGate</span>.<span style="color:#a6e22e">matrix</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">d1</span>.<span style="color:#a6e22e">measure</span>(<span style="color:#a6e22e">MZ1</span>);
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">equals</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Complex</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>))).<span style="color:#66d9ef">true</span>;
@@ -361,7 +361,7 @@ CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pira
 
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2025 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+      <p>Copyright &copy; 2026 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>

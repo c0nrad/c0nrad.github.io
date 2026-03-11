@@ -42,7 +42,7 @@
   <meta name="author" content="Stuart Larsen">
 
   
-  <meta name="generator" content="Hugo 0.152.2">
+  <meta name="generator" content="Hugo 0.157.0">
 
   
   
@@ -259,7 +259,7 @@ $$</p>
 <p>The equation is saying something so obvious that it&rsquo;s almost non-sensical. If there&rsquo;s a change of volume of stuff on the inside, it must either have came from through the surface border.</p>
 <p>You can imagine if you cut out a cube in the ocean and measured how much &ldquo;ocean&rdquo; was in the cube at any point. If there&rsquo;s more &ldquo;ocean&rdquo; in the cube, you know that it must have come into our imaginary cube from one of the cube sides.</p>
 <p>To implement this with my new nifty library:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">A</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">VectorField</span>(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">A</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">VectorField</span>(
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Func</span>(<span style="color:#e6db74">&#34;y^2&#34;</span>),
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Func</span>(<span style="color:#e6db74">&#34;2*x*y + z^2&#34;</span>),
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Func</span>(<span style="color:#e6db74">&#34;2 * y * z&#34;</span>)
@@ -281,7 +281,7 @@ $$</p>
 <p>So, the right is almost a shortcut to the left side. (It kind of reminds me of the fundamental theorem of calculus (or fundamental theorem of gradients)).</p>
 <p>Basically instead of measuring the &ldquo;curl&rdquo; at every point, you can just trace the outside perimeter and call it good enough.</p>
 <p>In code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">A</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">VectorField</span>(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">A</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">VectorField</span>(
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Func</span>(<span style="color:#e6db74">&#34;0&#34;</span>),
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Func</span>(<span style="color:#e6db74">&#34;2*x*z + 3 * y^2&#34;</span>),
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Func</span>(<span style="color:#e6db74">&#34;4 y z^2&#34;</span>)
@@ -427,7 +427,7 @@ CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pira
 
 
     <footer role="contentinfo">
-      <p>Copyright &copy; 2025 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+      <p>Copyright &copy; 2026 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
         <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
       </p>
     </footer>
