@@ -6,8 +6,15 @@
     <description>Recent content in Programming on c0nrad&#39;s c0rner</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 11 Mar 2026 09:46:29 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 12 Mar 2026 12:55:59 -0400</lastBuildDate>
     <atom:link href="https://blog.c0nrad.io/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Recursive Dns Resolver</title>
+      <link>https://blog.c0nrad.io/posts/recursive-dns-resolver/</link>
+      <pubDate>Thu, 12 Mar 2026 12:55:59 -0400</pubDate>
+      <guid>https://blog.c0nrad.io/posts/recursive-dns-resolver/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;Today&amp;rsquo;s project is to make yesterday&amp;rsquo;s stub resolver a recursive resolver. Specifically I want to start with the root.hints and go down the chain till I get the A record for c0nrad.io.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;&lt;a href=&#34;https://gist.github.com/c0nrad/8497352c18d27b93c67a530663335a55&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://gist.github.com/c0nrad/8497352c18d27b93c67a530663335a55&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;steps&#34;&gt;Steps&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Ask D.ROOT-SERVERS.NET (NASA) for the NS record of .io&lt;/li&gt;&#xA;&lt;li&gt;Ask a0.nic.io for the NS of c0nrad.io&lt;/li&gt;&#xA;&lt;li&gt;Ask ns-1089.awsdns-08.org for the A record of c0nrad.io&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;learnings--refreshers&#34;&gt;Learnings / Refreshers&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;13 DNS Root servers&#xA;&lt;ul&gt;&#xA;&lt;li&gt;On ubuntu, you can view the seed &lt;code&gt;/usr/share/dns/root.hints&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;By default, no additional data when getting the .com gtld-servers.net servers because the message size is greater than 512 bytes.&#xA;&lt;ul&gt;&#xA;&lt;li&gt;I used the EDNS(0) OPT additional record to get 4092 bytes&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;In-Bailiwick vs. Out-of-Bailiwick&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&amp;ldquo;Bail&amp;rdquo; owner, &amp;ldquo;wick&amp;rdquo; city? In-zone response&lt;/li&gt;&#xA;&lt;li&gt;When querying a0.nic.io for NS of c0nrad.io, it returns ns-1089.awsdns-08.org, but no additional data with the A record of the NS. So you have to start a subquery.&lt;/li&gt;&#xA;&lt;li&gt;When querying D.ROOT-SERVERS.NET for the NS, it&amp;rsquo;ll staple the A records in the additional data.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;When working with an API that has you register callbacks (client.onmessage(callbck)), and you want a send(message) -&amp;gt; response API, you can wrap the api in a new Promise&lt;Buffer&gt;(resolve, reject)&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
     <item>
       <title>DNS Stub Resolver</title>
       <link>https://blog.c0nrad.io/posts/dns-client/</link>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>Recursive Dns Resolver</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+    <link rel="stylesheet" href="https://blog.c0nrad.io/css/my.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  
+    <link href="https://blog.c0nrad.io/favicon.png" rel="icon">
+  
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
+  <meta name="author" content="Stuart Larsen">
+
+  
+  <meta name="generator" content="Hugo 0.157.0">
+
+  
+  
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+  
+  
+  <meta name="twitter:title" content="Recursive Dns Resolver"/>
+  <meta name="twitter:description" content="Overview
+Today&rsquo;s project is to make yesterday&rsquo;s stub resolver a recursive resolver. Specifically I want to start with the root.hints and go down the chain till I get the A record for c0nrad.io.
+
+https://gist.github.com/c0nrad/8497352c18d27b93c67a530663335a55
+Steps
+
+Ask D.ROOT-SERVERS.NET (NASA) for the NS record of .io
+Ask a0.nic.io for the NS of c0nrad.io
+Ask ns-1089.awsdns-08.org for the A record of c0nrad.io
+
+Learnings / Refreshers
+
+13 DNS Root servers
+
+On ubuntu, you can view the seed /usr/share/dns/root.hints
+
+
+By default, no additional data when getting the .com gtld-servers.net servers because the message size is greater than 512 bytes.
+
+I used the EDNS(0) OPT additional record to get 4092 bytes
+
+
+In-Bailiwick vs. Out-of-Bailiwick
+
+&ldquo;Bail&rdquo; owner, &ldquo;wick&rdquo; city? In-zone response
+When querying a0.nic.io for NS of c0nrad.io, it returns ns-1089.awsdns-08.org, but no additional data with the A record of the NS. So you have to start a subquery.
+When querying D.ROOT-SERVERS.NET for the NS, it&rsquo;ll staple the A records in the additional data.
+
+
+When working with an API that has you register callbacks (client.onmessage(callbck)), and you want a send(message) -&gt; response API, you can wrap the api in a new Promise(resolve, reject)
+"/>
+  
+  <meta name="twitter:domain" content="blog.c0nrad.io"/>
+  <meta name="twitter:creator" content="@CryptoGangsta"/>
+
+  
+
+  
+  
+
+
+
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="https://blog.c0nrad.io/">c0nrad&#39;s c0rner</a></h1>
+    <h2>Learning and learning</h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+        <option value="https://blog.c0nrad.io/">» Home</option>
+      
+        <option value="https://c0nrad.io">» Website</option>
+      
+        <option value="https://github.com/c0nrad/">» Github</option>
+      
+        <option value="https://twitter.com/c0nrad_jr">» Twitter</option>
+      
+        <option value="https://c0nradsc0rner.com">» Other Blog</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="https://blog.c0nrad.io/" title="Home">Home</a></li>
+    
+  
+    
+      <li><a href="https://c0nrad.io" title="Website"  rel="noopener noreferrer">Website</a></li>
+    
+  
+    
+      <li><a href="https://github.com/c0nrad/" title="Github"  rel="noopener noreferrer">Github</a></li>
+    
+  
+    
+      <li><a href="https://twitter.com/c0nrad_jr" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+    
+      <li><a href="https://c0nradsc0rner.com" title="Other Blog"  rel="noopener noreferrer">Other Blog</a></li>
+    
+  
+</ul>
+
+<ul class="subscription">
+  
+    
+        <a href="https://blog.c0nrad.io/index.xml" target="_blank" type="application/rss+xml" title="RSS" rel="noopener noreferrer"><i class="fa fa-rss-square fa-lg"></i></a>
+    
+  
+</ul>
+
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+  <p class="meta">Mar 12, 2026
+     - 1 minute read 
+
+    
+    
+      - <a class="label" href="https://blog.c0nrad.io/categories/programming/">programming </a><a class="label" href="https://blog.c0nrad.io/categories/dns/">dns </a>
+    
+  </p>
+  <h1 class="entry-title">
+     Recursive Dns Resolver 
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#steps">Steps</a></li>
+    <li><a href="#learnings--refreshers">Learnings / Refreshers</a></li>
+  </ul>
+</nav>
+          
+          <h2 id="overview">Overview</h2>
+<p>Today&rsquo;s project is to make yesterday&rsquo;s stub resolver a recursive resolver. Specifically I want to start with the root.hints and go down the chain till I get the A record for c0nrad.io.</p>
+<p>
+<a href="https://gist.github.com/c0nrad/8497352c18d27b93c67a530663335a55" target="_blank" rel="noopener">https://gist.github.com/c0nrad/8497352c18d27b93c67a530663335a55</a></p>
+<h2 id="steps">Steps</h2>
+<ol>
+<li>Ask D.ROOT-SERVERS.NET (NASA) for the NS record of .io</li>
+<li>Ask a0.nic.io for the NS of c0nrad.io</li>
+<li>Ask ns-1089.awsdns-08.org for the A record of c0nrad.io</li>
+</ol>
+<h2 id="learnings--refreshers">Learnings / Refreshers</h2>
+<ul>
+<li>13 DNS Root servers
+<ul>
+<li>On ubuntu, you can view the seed <code>/usr/share/dns/root.hints</code></li>
+</ul>
+</li>
+<li>By default, no additional data when getting the .com gtld-servers.net servers because the message size is greater than 512 bytes.
+<ul>
+<li>I used the EDNS(0) OPT additional record to get 4092 bytes</li>
+</ul>
+</li>
+<li>In-Bailiwick vs. Out-of-Bailiwick
+<ul>
+<li>&ldquo;Bail&rdquo; owner, &ldquo;wick&rdquo; city? In-zone response</li>
+<li>When querying a0.nic.io for NS of c0nrad.io, it returns ns-1089.awsdns-08.org, but no additional data with the A record of the NS. So you have to start a subquery.</li>
+<li>When querying D.ROOT-SERVERS.NET for the NS, it&rsquo;ll staple the A records in the additional data.</li>
+</ul>
+</li>
+<li>When working with an API that has you register callbacks (client.onmessage(callbck)), and you want a send(message) -&gt; response API, you can wrap the api in a new Promise<Buffer>(resolve, reject)</li>
+</ul>
+
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
+    
+    <time>Mar 12, 2026</time>
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://blog.c0nrad.io/posts/dns-client/" title="DNS Stub Resolver">DNS Stub Resolver</a>
+    
+
+    
+  </p>
+</footer>
+
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>Who am I?</h1>
+    
+
+    <p>
+      
+        <img src="/me.png" style="width: 100%"> 
+CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pirates</a>). Founder (<a href="https://csper.io">csper.io</a> and <a href="https://dmarcdefender.io">dmarcdefender.io</a>). Enjoyer of security/software/physics.
+      
+    </p>
+  </section>
+
+  
+  
+
+
+
+<ul class="sidebar-nav">
+  <li class="sidebar-nav-item">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  
+  
+  </li>
+</ul>
+
+  
+
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/ctfs" title="CTFs" >CTFs</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="https://blog.c0nrad.io/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
+
+  
+  
+  
+</aside>
+
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2026 Stuart Larsen - <a href="https://blog.c0nrad.io/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+
+
+
+    
+    
+    
+
+    
+  </body>
+</html>
+
