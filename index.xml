@@ -6,8 +6,15 @@
     <description>Recent content on c0nrad&#39;s c0rner</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 12 Mar 2026 12:55:59 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 13 Mar 2026 13:21:55 -0400</lastBuildDate>
     <atom:link href="https://blog.c0nrad.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RSC Flight Protocol</title>
+      <link>https://blog.c0nrad.io/posts/rsc-flight-protocol/</link>
+      <pubDate>Fri, 13 Mar 2026 13:21:55 -0400</pubDate>
+      <guid>https://blog.c0nrad.io/posts/rsc-flight-protocol/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m currently building an app using Next.js (&#xA;&lt;a href=&#34;https://dmarcdefender.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;dmarcdefender.io&lt;/a&gt;). I&amp;rsquo;m not sure how I feel about it. It&amp;rsquo;s both amazing and terrifying, seamlessly jumping between client-side/server-side code. I don&amp;rsquo;t really like magic, but it is nice having one single environment, one set of types, complete DRY on both the client/server side, and SSR/SSG for free.&lt;/p&gt;&#xA;&lt;p&gt;Part of the magic is the Flight Protocol. If you&amp;rsquo;ve ever inspected the network tab of a Next.js app, you&amp;rsquo;ve probably seen some goobilie goop:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Recursive Dns Resolver</title>
       <link>https://blog.c0nrad.io/posts/recursive-dns-resolver/</link>

@@ -3,18 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.c0nrad.io/</loc>
-    <lastmod>2026-03-12T12:55:59-04:00</lastmod>
+    <lastmod>2026-03-13T13:21:55-04:00</lastmod>
   </url><url>
     <loc>https://blog.c0nrad.io/categories/</loc>
-    <lastmod>2026-03-12T12:55:59-04:00</lastmod>
-  </url><url>
-    <loc>https://blog.c0nrad.io/categories/dns/</loc>
-    <lastmod>2026-03-12T12:55:59-04:00</lastmod>
+    <lastmod>2026-03-13T13:21:55-04:00</lastmod>
   </url><url>
     <loc>https://blog.c0nrad.io/posts/</loc>
-    <lastmod>2026-03-12T12:55:59-04:00</lastmod>
+    <lastmod>2026-03-13T13:21:55-04:00</lastmod>
   </url><url>
     <loc>https://blog.c0nrad.io/categories/programming/</loc>
+    <lastmod>2026-03-13T13:21:55-04:00</lastmod>
+  </url><url>
+    <loc>https://blog.c0nrad.io/posts/rsc-flight-protocol/</loc>
+    <lastmod>2026-03-13T13:21:55-04:00</lastmod>
+  </url><url>
+    <loc>https://blog.c0nrad.io/categories/security/</loc>
+    <lastmod>2026-03-13T13:21:55-04:00</lastmod>
+  </url><url>
+    <loc>https://blog.c0nrad.io/categories/dns/</loc>
     <lastmod>2026-03-12T12:55:59-04:00</lastmod>
   </url><url>
     <loc>https://blog.c0nrad.io/posts/recursive-dns-resolver/</loc>
