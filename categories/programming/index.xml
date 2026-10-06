@@ -1,75 +1,80 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Programming on c0nrad&#39;s c0rner</title>
-    <link>https://blog.c0nrad.io/categories/programming/</link>
-    <description>Recent content in Programming on c0nrad&#39;s c0rner</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 13 Mar 2026 13:21:55 -0400</lastBuildDate>
-    <atom:link href="https://blog.c0nrad.io/categories/programming/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>RSC Flight Protocol</title>
-      <link>https://blog.c0nrad.io/posts/rsc-flight-protocol/</link>
-      <pubDate>Fri, 13 Mar 2026 13:21:55 -0400</pubDate>
-      <guid>https://blog.c0nrad.io/posts/rsc-flight-protocol/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m currently building an app using Next.js (&#xA;&lt;a href=&#34;https://dmarcdefender.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;dmarcdefender.io&lt;/a&gt;). I&amp;rsquo;m not sure how I feel about it (it being Next.JS, dmarcdefender is amazing). It&amp;rsquo;s both amazing and terrifying, seamlessly jumping between client-side and server-side code. I don&amp;rsquo;t really like magic, but it is nice having one single environment, one set of types, complete DRY across the client and server, and SSR/SSG for free.&lt;/p&gt;&#xA;&lt;p&gt;Part of the magic is the Flight protocol. If you&amp;rsquo;ve ever inspected the network tab of a Next.js app, you&amp;rsquo;ve probably seen some gobbledygook:&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Recursive Dns Resolver</title>
-      <link>https://blog.c0nrad.io/posts/recursive-dns-resolver/</link>
-      <pubDate>Thu, 12 Mar 2026 12:55:59 -0400</pubDate>
-      <guid>https://blog.c0nrad.io/posts/recursive-dns-resolver/</guid>
-      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;Today&amp;rsquo;s project is to make yesterday&amp;rsquo;s stub resolver a recursive resolver. Specifically I want to start with the root.hints and go down the chain till I get the A record for c0nrad.io.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;&lt;a href=&#34;https://gist.github.com/c0nrad/8497352c18d27b93c67a530663335a55&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://gist.github.com/c0nrad/8497352c18d27b93c67a530663335a55&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;steps&#34;&gt;Steps&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Ask D.ROOT-SERVERS.NET (NASA) for the NS record of .io&lt;/li&gt;&#xA;&lt;li&gt;Ask a0.nic.io for the NS of c0nrad.io&lt;/li&gt;&#xA;&lt;li&gt;Ask ns-1089.awsdns-08.org for the A record of c0nrad.io&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;learnings--refreshers&#34;&gt;Learnings / Refreshers&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;13 DNS Root servers&#xA;&lt;ul&gt;&#xA;&lt;li&gt;On ubuntu, you can view the seed &lt;code&gt;/usr/share/dns/root.hints&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;By default, no additional data when getting the .com gtld-servers.net servers because the message size is greater than 512 bytes.&#xA;&lt;ul&gt;&#xA;&lt;li&gt;I used the EDNS(0) OPT additional record to get 4092 bytes&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;In-Bailiwick vs. Out-of-Bailiwick&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&amp;ldquo;Bail&amp;rdquo; owner, &amp;ldquo;wick&amp;rdquo; city? In-zone response&lt;/li&gt;&#xA;&lt;li&gt;When querying a0.nic.io for NS of c0nrad.io, it returns ns-1089.awsdns-08.org, but no additional data with the A record of the NS. So you have to start a subquery.&lt;/li&gt;&#xA;&lt;li&gt;When querying D.ROOT-SERVERS.NET for the NS, it&amp;rsquo;ll staple the A records in the additional data.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;When working with an API that has you register callbacks (client.onmessage(callbck)), and you want a send(message) -&amp;gt; response API, you can wrap the api in a new Promise&lt;Buffer&gt;(resolve, reject)&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
-    </item>
-    <item>
-      <title>DNS Stub Resolver</title>
-      <link>https://blog.c0nrad.io/posts/dns-client/</link>
-      <pubDate>Wed, 11 Mar 2026 09:46:29 -0400</pubDate>
-      <guid>https://blog.c0nrad.io/posts/dns-client/</guid>
-      <description>&lt;p&gt;I realized I haven&amp;rsquo;t done much learning in a while (&#xA;&lt;a href=&#34;https://dmarcdefender.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://dmarcdefender.io&lt;/a&gt; is my current project, but it&amp;rsquo;s just standard SaaS work). So I figured I might try to spend an hour or two each day learning something new.&lt;/p&gt;&#xA;&lt;p&gt;Today&amp;rsquo;s project was building a super simple DNS resolver. The goal was just to resolve the &lt;code&gt;A&lt;/code&gt; record for &lt;code&gt;c0nrad.io&lt;/code&gt; into an IP address.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Brainstorming Pathfinding Algorithms: QuadTree &amp; RelaxPath</title>
-      <link>https://blog.c0nrad.io/posts/pathfinding/</link>
-      <pubDate>Tue, 02 Dec 2025 02:44:54 -0700</pubDate>
-      <guid>https://blog.c0nrad.io/posts/pathfinding/</guid>
-      <description>&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/5lV-CBd1grE?si=-9uxATJ1SKYaD018&#34; title=&#34;YouTube video player&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; allowfullscreen&gt;&lt;/iframe&gt;&#xA;&lt;p&gt;I had an idea for a fun &amp;ldquo;grid search&amp;rdquo; pathfinding algorithm for MIT battlecode, so decided to write a little playground in JS. This article covers the results.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Slack LaTeX</title>
-      <link>https://blog.c0nrad.io/posts/slack-latex/</link>
-      <pubDate>Mon, 11 Oct 2021 17:44:54 -0700</pubDate>
-      <guid>https://blog.c0nrad.io/posts/slack-latex/</guid>
-      <description>&lt;p&gt;I had fun building a new product with my partner called &#xA;&lt;a href=&#34;https://slacklatex.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Slack LaTeX&lt;/a&gt;. It&amp;rsquo;s a slack app for embedding formatted equations (through LaTeX). This post covers some of the motivation and some of the fun technical architecture design decisions.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Matrix Inversion</title>
-      <link>https://blog.c0nrad.io/posts/mat-inv/</link>
-      <pubDate>Fri, 07 Aug 2020 18:37:01 -0400</pubDate>
-      <guid>https://blog.c0nrad.io/posts/mat-inv/</guid>
-      <description>&lt;p&gt;Some fun inverting matrixes.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Vector Calculus Part 3: Electric Dipole</title>
-      <link>https://blog.c0nrad.io/posts/vector-3-dipole/</link>
-      <pubDate>Tue, 21 Jul 2020 18:37:01 -0400</pubDate>
-      <guid>https://blog.c0nrad.io/posts/vector-3-dipole/</guid>
-      <description>&lt;p&gt;More fun with vector calc/electromagnetism.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Vector Calculus Part 2: Visualization</title>
-      <link>https://blog.c0nrad.io/posts/vector-2-viz/</link>
-      <pubDate>Mon, 20 Jul 2020 21:04:09 -0400</pubDate>
-      <guid>https://blog.c0nrad.io/posts/vector-2-viz/</guid>
-      <description>&lt;p&gt;Playing with three.js to do some vector visualizations.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Vector Calculus</title>
-      <link>https://blog.c0nrad.io/posts/vector-calculus/</link>
-      <pubDate>Sun, 19 Jul 2020 10:10:01 -0400</pubDate>
-      <guid>https://blog.c0nrad.io/posts/vector-calculus/</guid>
-      <description>&lt;p&gt;Progress on a vector calculus library in javascript.&lt;/p&gt;</description>
-    </item>
-  </channel>
+	<channel>
+		<title>Programming on c0nrad&#39;s c0rner</title>
+		<link>https://blog.c0nrad.io/categories/programming/</link>
+		<description>Recent content in Programming on c0nrad&#39;s c0rner</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 13 Mar 2026 13:21:55 -0400</lastBuildDate>
+		
+			<atom:link href="https://blog.c0nrad.io/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>RSC Flight Protocol</title>
+				<link>https://blog.c0nrad.io/posts/rsc-flight-protocol/</link>
+				<pubDate>Fri, 13 Mar 2026 13:21:55 -0400</pubDate>
+				<guid>https://blog.c0nrad.io/posts/rsc-flight-protocol/</guid>
+				<description>&lt;p&gt;I&amp;rsquo;m currently building an app using Next.js (&#xA;&lt;a href=&#34;https://dmarcdefender.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;dmarcdefender.io&lt;/a&gt;). I&amp;rsquo;m not sure how I feel about it (it being Next.JS, dmarcdefender is amazing). It&amp;rsquo;s both amazing and terrifying, seamlessly jumping between client-side and server-side code. I don&amp;rsquo;t really like magic, but it is nice having one single environment, one set of types, complete DRY across the client and server, and SSR/SSG for free.&lt;/p&gt;&#xA;&lt;p&gt;Part of the magic is the Flight protocol. If you&amp;rsquo;ve ever inspected the network tab of a Next.js app, you&amp;rsquo;ve probably seen some gobbledygook:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Recursive Dns Resolver</title>
+				<link>https://blog.c0nrad.io/posts/recursive-dns-resolver/</link>
+				<pubDate>Thu, 12 Mar 2026 12:55:59 -0400</pubDate>
+				<guid>https://blog.c0nrad.io/posts/recursive-dns-resolver/</guid>
+				<description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;Today&amp;rsquo;s project is to make yesterday&amp;rsquo;s stub resolver a recursive resolver. Specifically I want to start with the root.hints and go down the chain till I get the A record for c0nrad.io.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;&lt;a href=&#34;https://gist.github.com/c0nrad/8497352c18d27b93c67a530663335a55&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://gist.github.com/c0nrad/8497352c18d27b93c67a530663335a55&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;steps&#34;&gt;Steps&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Ask D.ROOT-SERVERS.NET (NASA) for the NS record of .io&lt;/li&gt;&#xA;&lt;li&gt;Ask a0.nic.io for the NS of c0nrad.io&lt;/li&gt;&#xA;&lt;li&gt;Ask ns-1089.awsdns-08.org for the A record of c0nrad.io&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;learnings--refreshers&#34;&gt;Learnings / Refreshers&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;13 DNS Root servers&#xA;&lt;ul&gt;&#xA;&lt;li&gt;On ubuntu, you can view the seed &lt;code&gt;/usr/share/dns/root.hints&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;By default, no additional data when getting the .com gtld-servers.net servers because the message size is greater than 512 bytes.&#xA;&lt;ul&gt;&#xA;&lt;li&gt;I used the EDNS(0) OPT additional record to get 4092 bytes&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;In-Bailiwick vs. Out-of-Bailiwick&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&amp;ldquo;Bail&amp;rdquo; owner, &amp;ldquo;wick&amp;rdquo; city? In-zone response&lt;/li&gt;&#xA;&lt;li&gt;When querying a0.nic.io for NS of c0nrad.io, it returns ns-1089.awsdns-08.org, but no additional data with the A record of the NS. So you have to start a subquery.&lt;/li&gt;&#xA;&lt;li&gt;When querying D.ROOT-SERVERS.NET for the NS, it&amp;rsquo;ll staple the A records in the additional data.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;When working with an API that has you register callbacks (client.onmessage(callbck)), and you want a send(message) -&amp;gt; response API, you can wrap the api in a new Promise&lt;Buffer&gt;(resolve, reject)&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+			</item>
+			<item>
+				<title>DNS Stub Resolver</title>
+				<link>https://blog.c0nrad.io/posts/dns-client/</link>
+				<pubDate>Wed, 11 Mar 2026 09:46:29 -0400</pubDate>
+				<guid>https://blog.c0nrad.io/posts/dns-client/</guid>
+				<description>&lt;p&gt;I realized I haven&amp;rsquo;t done much learning in a while (&#xA;&lt;a href=&#34;https://dmarcdefender.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://dmarcdefender.io&lt;/a&gt; is my current project, but it&amp;rsquo;s just standard SaaS work). So I figured I might try to spend an hour or two each day learning something new.&lt;/p&gt;&#xA;&lt;p&gt;Today&amp;rsquo;s project was building a super simple DNS resolver. The goal was just to resolve the &lt;code&gt;A&lt;/code&gt; record for &lt;code&gt;c0nrad.io&lt;/code&gt; into an IP address.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Brainstorming Pathfinding Algorithms: QuadTree &amp; RelaxPath</title>
+				<link>https://blog.c0nrad.io/posts/pathfinding/</link>
+				<pubDate>Tue, 02 Dec 2025 02:44:54 -0700</pubDate>
+				<guid>https://blog.c0nrad.io/posts/pathfinding/</guid>
+				<description>&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/5lV-CBd1grE?si=-9uxATJ1SKYaD018&#34; title=&#34;YouTube video player&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; allowfullscreen&gt;&lt;/iframe&gt;&#xA;&lt;p&gt;I had an idea for a fun &amp;ldquo;grid search&amp;rdquo; pathfinding algorithm for MIT battlecode, so decided to write a little playground in JS. This article covers the results.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Slack LaTeX</title>
+				<link>https://blog.c0nrad.io/posts/slack-latex/</link>
+				<pubDate>Mon, 11 Oct 2021 17:44:54 -0700</pubDate>
+				<guid>https://blog.c0nrad.io/posts/slack-latex/</guid>
+				<description>&lt;p&gt;I had fun building a new product with my partner called &#xA;&lt;a href=&#34;https://slacklatex.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Slack LaTeX&lt;/a&gt;. It&amp;rsquo;s a slack app for embedding formatted equations (through LaTeX). This post covers some of the motivation and some of the fun technical architecture design decisions.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Matrix Inversion</title>
+				<link>https://blog.c0nrad.io/posts/mat-inv/</link>
+				<pubDate>Fri, 07 Aug 2020 18:37:01 -0400</pubDate>
+				<guid>https://blog.c0nrad.io/posts/mat-inv/</guid>
+				<description>&lt;p&gt;Some fun inverting matrixes.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Vector Calculus Part 3: Electric Dipole</title>
+				<link>https://blog.c0nrad.io/posts/vector-3-dipole/</link>
+				<pubDate>Tue, 21 Jul 2020 18:37:01 -0400</pubDate>
+				<guid>https://blog.c0nrad.io/posts/vector-3-dipole/</guid>
+				<description>&lt;p&gt;More fun with vector calc/electromagnetism.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Vector Calculus Part 2: Visualization</title>
+				<link>https://blog.c0nrad.io/posts/vector-2-viz/</link>
+				<pubDate>Mon, 20 Jul 2020 21:04:09 -0400</pubDate>
+				<guid>https://blog.c0nrad.io/posts/vector-2-viz/</guid>
+				<description>&lt;p&gt;Playing with three.js to do some vector visualizations.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Vector Calculus</title>
+				<link>https://blog.c0nrad.io/posts/vector-calculus/</link>
+				<pubDate>Sun, 19 Jul 2020 10:10:01 -0400</pubDate>
+				<guid>https://blog.c0nrad.io/posts/vector-calculus/</guid>
+				<description>&lt;p&gt;Progress on a vector calculus library in javascript.&lt;/p&gt;</description>
+			</item>
+	</channel>
 </rss>

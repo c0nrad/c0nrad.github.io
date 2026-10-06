@@ -14,7 +14,7 @@
   
 
   
-  <title>Randomized Benchmarking of a noisy quantum simulator Pt. 2</title>
+  <title>Microgpt Review</title>
 
   
   
@@ -37,7 +37,7 @@
   
   
 
-  <meta name="description" content="Finishing the RB simulator" />
+  <meta name="description" content="" />
   <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
   <meta name="author" content="Stuart Larsen">
 
@@ -52,8 +52,23 @@
     <meta name="twitter:card" content="summary"/>
   
   
-  <meta name="twitter:title" content="Randomized Benchmarking of a noisy quantum simulator Pt. 2"/>
-  <meta name="twitter:description" content="Finishing the RB simulator"/>
+  <meta name="twitter:title" content="Microgpt Review"/>
+  <meta name="twitter:description" content="Recently this article popped up on the orange website: 
+https://karpathy.github.io/2026/02/12/microgpt/. Today&rsquo;s goal is comprehend the article well enough to explain any concept comfortably. A few months ago I did the first few courses of 
+https://www.deeplearning.ai/, so most of the terms seem vaguely familiar already.
+Learnings / Refreshers
+
+
+Components: documents, tokenizer, autograd engine, neural net, adam optimizer, training loop, inference loop
+
+
+Documents
+
+In this case we&rsquo;re just going to use a list of ~32000 names, each name is a &ldquo;document&rdquo;
+
+
+
+Tokenizer"/>
   
   <meta name="twitter:domain" content="blog.c0nrad.io"/>
   <meta name="twitter:creator" content="@CryptoGangsta"/>
@@ -143,16 +158,13 @@
         
 
 <header>
-  <p class="meta">Jul 27, 2021
+  <p class="meta">Mar 14, 2026
      - 2 minute read 
 
     
-    
-      - <a class="label" href="http://localhost:1313/categories/quantum-computation/">quantum computation </a>
-    
   </p>
   <h1 class="entry-title">
-     Randomized Benchmarking of a noisy quantum simulator Pt. 2 
+     Microgpt Review 
   </h1>
 </header>
 
@@ -163,41 +175,72 @@
           
             <nav id="TableOfContents">
   <ul>
-    <li><a href="#overview">Overview</a></li>
-    <li><a href="#what-went-well">What went well</a></li>
-    <li><a href="#what-didnt-go-well">What didn&rsquo;t go well</a></li>
-    <li><a href="#future">Future</a></li>
-    <li><a href="#conclusion">Conclusion</a></li>
+    <li>
+      <ul>
+        <li><a href="#learnings--refreshers">Learnings / Refreshers</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
           
-          <p>The randomized benchmarking simulator is released!</p>
-<h2 id="overview">Overview</h2>
-<p>You can check it out here:</p>
-<p>
-<a href="https://blog.c0nrad.io/qc.js/rb/" target="_blank" rel="noopener">https://blog.c0nrad.io/qc.js/rb/</a></p>
-<h2 id="what-went-well">What went well</h2>
-<p>I don&rsquo;t think he&rsquo;ll read this, but thank you Daniel for your help fixing the noise model! I was following some paper, but their noise model wasn&rsquo;t preserving trace.</p>
+          <p>Recently this article popped up on the orange website: 
+<a href="https://karpathy.github.io/2026/02/12/microgpt/" target="_blank" rel="noopener">https://karpathy.github.io/2026/02/12/microgpt/</a>. Today&rsquo;s goal is comprehend the article well enough to explain any concept comfortably. A few months ago I did the first few courses of 
+<a href="https://www.deeplearning.ai/" target="_blank" rel="noopener">https://www.deeplearning.ai/</a>, so most of the terms seem vaguely familiar already.</p>
+<h3 id="learnings--refreshers">Learnings / Refreshers</h3>
 <ul>
-<li>From a code test-ability standpoint, I like that representing the state as a density operator means I don&rsquo;t need to have a vector class. When using the state vector, I found myself implementing a lot of similar functions for both vector and matrix (or I could subclass, but I never really liked that either)</li>
-<li>ng-katex is a very handy package for putting latex in html pages</li>
-<li>the progress bar took a little bit of effort, but it&rsquo;s neat. (I added a little bit of tech debt, the callback method is&hellip; questionable. I needed to use setTimeout so that the angular thread would update the UI, but getting rxjs to work correctly was being annoying, so I just have a progress callback and that checks if it&rsquo;s the last result&hellip;)</li>
-</ul>
-<h2 id="what-didnt-go-well">What didn&rsquo;t go well</h2>
+<li>
+<p>Components: documents, tokenizer, autograd engine, neural net, adam optimizer, training loop, inference loop</p>
+</li>
+<li>
+<p>Documents</p>
 <ul>
-<li>The trace on the density matrix wasn&rsquo;t adding up for some gates, and I eventually found out I was using the transpose instead of dagger operator on some state evolution function.</li>
-<li>The fitting method is really bad. I wonder if there&rsquo;s a way to pin the fitting function to always use one point as the origin.</li>
+<li>In this case we&rsquo;re just going to use a list of ~32000 names, each name is a &ldquo;document&rdquo;</li>
 </ul>
-<h2 id="future">Future</h2>
-<p>I probably won&rsquo;t, but if I do come back to this model, I should do the following:</p>
+</li>
+<li>
+<p>Tokenizer</p>
 <ul>
-<li>Fix the plotting so that it plots &ldquo;survivability&rdquo; (although I&rsquo;m not sure how to calculate that. A random circuit is still correct half the time.)</li>
-<li>Fix the fitting function</li>
-<li>&ldquo;Fidelity&rdquo; of the circuit</li>
+<li>Split text into chunks, and assign a number value to those chunks of characters</li>
+<li>
+<a href="https://tiktokenizer.vercel.app/" target="_blank" rel="noopener">https://tiktokenizer.vercel.app/</a>
+<ul>
+<li>It looks like spaces are not their own token, instead included at the start of tokens?</li>
+<li>Stuart is two tokens, &ldquo;stu&rdquo; and &ldquo;art&rdquo;</li>
 </ul>
-<h2 id="conclusion">Conclusion</h2>
-<p>Overall a fun project and I learned a lot.</p>
-<p>I think next will be creating an online circuit editor with noise that will allow &ldquo;classical&rdquo; processing to be interspersed so that I can test out some error correction schemes.</p>
+</li>
+<li>BOS Beginning of sequence, used at start and end</li>
+<li>Vocab size of 27 (26 characters + BOS)</li>
+</ul>
+</li>
+<li>
+<p>Autograd</p>
+<ul>
+<li>The author presents an interesting <code>Value</code> class, which records it&rsquo;s history
+<ul>
+<li>So if you did Value(2) + Value(3), the resulting value would remember it&rsquo;s children (2,3)</li>
+</ul>
+</li>
+<li>Relies on the chain rule $$ \frac{d}{dx}[f(g(x))] = f\prime(g(x))g\prime(x) $$</li>
+<li>So you can take the final value from the computation network, and then ask for the derivative with respect to inputs</li>
+</ul>
+</li>
+<li>
+<p>Parameters</p>
+<ul>
+<li>The weights of the model, start at random (guassigan), and are tuned</li>
+<li>wte = token embeddings</li>
+<li>wpe = position embeddings</li>
+</ul>
+</li>
+<li>
+<p>Embeddings</p>
+<ul>
+<li>We need to convert the vocab number into a vector</li>
+<li>We also need a &ldquo;position&rdquo; embedding so the model knows if we&rsquo;re in the middle of a word or not</li>
+</ul>
+</li>
+</ul>
+
         </div>
         
 
@@ -205,7 +248,7 @@
   <p class="meta">
     <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
     
-    <time>Jul 27, 2021</time>
+    <time>Mar 14, 2026</time>
     
     </span>
   </p>
@@ -214,11 +257,11 @@
 
   <p class="meta">
     
-        <a class="basic-alignment left" href="http://localhost:1313/posts/prime-walker/" title="Prime Walker">Prime Walker</a>
+        <a class="basic-alignment left" href="http://localhost:1313/posts/rsc-flight-protocol/" title="RSC Flight Protocol">RSC Flight Protocol</a>
     
 
     
-      <a class="basic-alignment right" href="http://localhost:1313/posts/quantum-circuit-editor/" title="Quantum Circuit Editor Pt. 1">Quantum Circuit Editor Pt. 1</a>
+      <a class="basic-alignment right" href="http://localhost:1313/posts/rl-tsp-vrp-1/" title="RL&#39;ing a TSP/VRP (Part 1)">RL&#39;ing a TSP/VRP (Part 1)</a>
     
   </p>
 </footer>

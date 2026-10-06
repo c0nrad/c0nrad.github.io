@@ -3,12 +3,15 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.c0nrad.io/</loc>
-    <lastmod>2026-03-13T13:21:55-04:00</lastmod>
-  </url><url>
-    <loc>https://blog.c0nrad.io/categories/</loc>
-    <lastmod>2026-03-13T13:21:55-04:00</lastmod>
+    <lastmod>2026-10-06T12:26:21-04:00</lastmod>
   </url><url>
     <loc>https://blog.c0nrad.io/posts/</loc>
+    <lastmod>2026-10-06T12:26:21-04:00</lastmod>
+  </url><url>
+    <loc>https://blog.c0nrad.io/posts/rl-tsp-vrp-1/</loc>
+    <lastmod>2026-10-06T12:26:21-04:00</lastmod>
+  </url><url>
+    <loc>https://blog.c0nrad.io/categories/</loc>
     <lastmod>2026-03-13T13:21:55-04:00</lastmod>
   </url><url>
     <loc>https://blog.c0nrad.io/categories/programming/</loc>
