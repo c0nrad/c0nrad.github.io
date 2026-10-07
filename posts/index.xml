@@ -10,9 +10,16 @@
 		
 		
 		
-			<lastBuildDate>Tue, 06 Oct 2026 12:26:21 -0400</lastBuildDate>
+			<lastBuildDate>Wed, 07 Oct 2026 11:27:13 -0400</lastBuildDate>
 		
 			<atom:link href="https://blog.c0nrad.io/posts/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>RL&#39;ing a TSP/VRP (Part 2)</title>
+				<link>https://blog.c0nrad.io/posts/rl-tsp-vrp-2/</link>
+				<pubDate>Wed, 07 Oct 2026 11:27:13 -0400</pubDate>
+				<guid>https://blog.c0nrad.io/posts/rl-tsp-vrp-2/</guid>
+				<description>&lt;p&gt;Just a set of experiments/improvements on the TSP model.&lt;/p&gt;&#xA;&lt;h3 id=&#34;vectorize-training-make_vec_env&#34;&gt;Vectorize Training (make_vec_env)&lt;/h3&gt;&#xA;&lt;p&gt;The first goal was to speed up training. The simplest way to do this is to use multiple environments at the same time. This will batch the policy inference. Since the game is so simple, that is probably(?) the bottleneck. It also helps with training by reducing correlation. With 16 games occurring at the same time, we&amp;rsquo;ll get a wider range of varying game states to train on each training step, so we don&amp;rsquo;t rabbit hole.&lt;/p&gt;</description>
+			</item>
 			<item>
 				<title>RL&#39;ing a TSP/VRP (Part 1)</title>
 				<link>https://blog.c0nrad.io/posts/rl-tsp-vrp-1/</link>

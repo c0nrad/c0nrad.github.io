@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>RL&#39;ing a TSP/VRP (Part 2)</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+    <link rel="stylesheet" href="http://localhost:1313/css/my.css">
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  
+    <link href="http://localhost:1313/favicon.png" rel="icon">
+  
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="[Stuart Larsen c0nrad physics ctfs]">
+  <meta name="author" content="Stuart Larsen">
+
+  
+  <meta name="generator" content="Hugo 0.165.0">
+
+  
+  
+    
+
+  
+    <meta name="twitter:card" content="summary"/>
+  
+  
+  <meta name="twitter:title" content="RL&#39;ing a TSP/VRP (Part 2)"/>
+  <meta name="twitter:description" content="Just a set of experiments/improvements on the TSP model.
+Vectorize Training (make_vec_env)
+The first goal was to speed up training. The simplest way to do this is to use multiple environments at the same time. This will batch the policy inference. Since the game is so simple, that is probably(?) the bottleneck. It also helps with training by reducing correlation. With 16 games occuring at the same time, we&rsquo;ll get a wider range of varying game states to train on each training step, so we don&rsquo;t rabbit hole."/>
+  
+  <meta name="twitter:domain" content="blog.c0nrad.io"/>
+  <meta name="twitter:creator" content="@CryptoGangsta"/>
+
+  
+
+  
+  
+
+
+
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="http://localhost:1313/">c0nrad&#39;s c0rner</a></h1>
+    <h2>Learning and learning</h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+        <option value="http://localhost:1313/">» Home</option>
+      
+        <option value="https://c0nrad.io">» Website</option>
+      
+        <option value="https://github.com/c0nrad/">» Github</option>
+      
+        <option value="https://twitter.com/c0nrad_jr">» Twitter</option>
+      
+        <option value="https://c0nradsc0rner.com">» Other Blog</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="http://localhost:1313/" title="Home">Home</a></li>
+    
+  
+    
+      <li><a href="https://c0nrad.io" title="Website"  rel="noopener noreferrer">Website</a></li>
+    
+  
+    
+      <li><a href="https://github.com/c0nrad/" title="Github"  rel="noopener noreferrer">Github</a></li>
+    
+  
+    
+      <li><a href="https://twitter.com/c0nrad_jr" title="Twitter"  rel="noopener noreferrer">Twitter</a></li>
+    
+  
+    
+      <li><a href="https://c0nradsc0rner.com" title="Other Blog"  rel="noopener noreferrer">Other Blog</a></li>
+    
+  
+</ul>
+
+<ul class="subscription">
+  
+    
+        <a href="http://localhost:1313/index.xml" target="_blank" type="application/rss+xml" title="RSS" rel="noopener noreferrer"><i class="fa fa-rss-square fa-lg"></i></a>
+    
+  
+</ul>
+
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+  <p class="meta">Oct 7, 2026
+     - 4 minute read 
+
+    
+  </p>
+  <h1 class="entry-title">
+     RL&#39;ing a TSP/VRP (Part 2) 
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#vectorize-training-make_vec_env">Vectorize Training (make_vec_env)</a></li>
+        <li><a href="#hours-discrete25---boxfloat-1">hours: Discrete(25) -&gt; Box(float, (1,))</a></li>
+        <li><a href="#n_steps-2048---256">n_steps 2048 -&gt; 256</a></li>
+        <li><a href="#maskableppo">MaskablePPO</a></li>
+        <li><a href="#torchset_num_threads">torch.set_num_threads</a></li>
+        <li><a href="#agent_position-as-one-hot-instead-of-position-tuple">agent_position as one-hot instead of position tuple</a></li>
+        <li><a href="#cnn">CNN</a></li>
+        <li><a href="#large-grids-with-density-2">Large Grids with density (.2)</a></li>
+      </ul>
+    </li>
+    <li><a href="#next-steps">Next Steps</a></li>
+  </ul>
+</nav>
+          
+          <p>Just a set of experiments/improvements on the TSP model.</p>
+<h3 id="vectorize-training-make_vec_env">Vectorize Training (make_vec_env)</h3>
+<p>The first goal was to speed up training. The simplest way to do this is to use multiple environments at the same time. This will batch the policy inference. Since the game is so simple, that is probably(?) the bottleneck. It also helps with training by reducing correlation. With 16 games occuring at the same time, we&rsquo;ll get a wider range of varying game states to train on each training step, so we don&rsquo;t rabbit hole.</p>
+<pre tabindex="0"><code>env = make_vec_env(VRPEnv, n_envs=16, seed=config.SEED, env_kwargs={&#34;size&#34;: config.SIZE})
+</code></pre><h3 id="hours-discrete25---boxfloat-1">hours: Discrete(25) -&gt; Box(float, (1,))</h3>
+<p>Modeling hours as a Discrete(25) actually models the input as 25 one-hot inputs (25 binary inputs, but they&rsquo;re actually floats afaik). So instead we can model hours as a single float (hour/24).</p>
+<p>This didn&rsquo;t end up making an different in final scores, but I left it in.</p>
+<h3 id="n_steps-2048---256">n_steps 2048 -&gt; 256</h3>
+<p>The finals scores after vectorizing the training was much worse. It looks like it was due to less training updates. Training doesn&rsquo;t happen after each step, but is instead batched after a set of runs. But due to the vectorization of n=16, we had 16x less total training update batches in the training runs. So by decreasing the number of steps inbetween training, we can improve faster (when n=16).</p>
+<h3 id="maskableppo">MaskablePPO</h3>
+<p>The model spends a lot of time learning about impossible/invalid actions such as DO_TASK on tiles that have no tasks, or trying to move off the map.</p>
+<p>So instead we can mask those actions to prevent the model from selecting those. This doesn&rsquo;t actually &ldquo;teach&rdquo; the model that they&rsquo;re bad actions, it just prevents them from being selected so we can spend more time exploring valid states.</p>
+<p>Implementing was pretty simple, just a <code>list[np.bool_]</code> for each of the actions.</p>
+<h3 id="torchset_num_threads">torch.set_num_threads</h3>
+<p>Training was again slow, and it seems that creating a separate process for each env is slower than just keeping all the env&rsquo;s in one process. Again simple, just <code>torch_set_num_threads(1)</code>.</p>
+<h3 id="agent_position-as-one-hot-instead-of-position-tuple">agent_position as one-hot instead of position tuple</h3>
+<p>Before trying CNNs, I figured I&rsquo;d try to instead represent position as a one-hot grid. It didn&rsquo;t improve much. But useful before implementing the CNN.</p>
+<h3 id="cnn">CNN</h3>
+<p>When using the flattened grids, the model has to learn how they are spatially connected. The idea with using CNNs is to hopefully preserve that spatial awareness. Implementing CNN in the existing architecture involved implementing a BaseFeaturesExtractor.</p>
+<p>I have no intuition when it comes to building models, so the LLM recommended:</p>
+<pre tabindex="0"><code>self.cnn = nn.Sequential(
+    nn.Conv2d(2, 16, kernel_size=3, padding=1),
+    nn.ReLU(),
+    nn.Conv2d(16, 32, kernel_size=3, padding=1),
+    nn.ReLU(), 
+    nn.Flatten(),
+)
+
+self.projection = nn.Sequential(
+    nn.Linear(32 * size * size + 1, features_dim),
+    nn.ReLU(),
+)
+</code></pre><p>Tomorrow I hope to learn more about why these parameters were chosen.</p>
+<p>The CNN didn&rsquo;t show much of an improvement on small grids.</p>
+<h3 id="large-grids-with-density-2">Large Grids with density (.2)</h3>
+<p>The grid has a task density of roughly .5, which means that pathing isn&rsquo;t quite as important. You can just go in some direction and pick up a task. By reducing the density of tasks I&rsquo;d hope that the model would have to learn more intelligent pathing.</p>
+<p>Results:</p>
+<pre tabindex="0"><code>Density = .5
+(CNN)
+[+] Average scores over 100 games: PPO=9.87, Greedy + 2-opt=10.87
+(MLP)
+[+] Average scores over 100 games: PPO=7.82, Greedy + 2-opt=10.84
+
+Density = .2 
+(MLP)
+[+] Average scores over 100 games: PPO=4.92, Greedy + 2-opt=8.00
+(CNN) 
+[+] Average scores over 100 games: PPO=6.77, Greedy + 2-opt=7.57
+
+Density = .05
+(MLP)
+[+] Average scores over 100 games: PPO=1.79, Greedy + 2-opt=3.76
+(CNN)
+[+] Average scores over 100 games: PPO=3.62, Greedy + 2-opt=4.05
+</code></pre><p>So CNN seems to do better in all cases, and does very well with low density. It is cool to see it is pathing pretty well:</p>
+<p>CNN, Density=.05, Rounds=5000_000 Size=10
+<img src="/tsp-rl-2/500000_10_CNN_5.0_vrp_model_ep_rew_mean.png" alt="CNN density=.05"></p>
+<p>MLP, Density=.05, Rounds=5000_000 Size=10
+<img src="/tsp-rl-2/500000_10_MLP_5.0_vrp_model_ep_rew_mean.png" alt="MLP density=.05"></p>
+<p>CNN
+<img src="/tsp-rl-2/500000_10_CNN_5.0_vrp_model.gif" alt="CNN density=.05"></p>
+<h2 id="next-steps">Next Steps</h2>
+<p>Next I want to learn more about CNN. Then I think I&rsquo;ll finish the Hugging Face section on Multi-Agent models, and start converting the environment to a multi-agent vehicle routing problem.</p>
+
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">Stuart Larsen</span></span>
+    
+    <time>Oct 7, 2026</time>
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="http://localhost:1313/posts/rl-tsp-vrp-1/" title="RL&#39;ing a TSP/VRP (Part 1)">RL&#39;ing a TSP/VRP (Part 1)</a>
+    
+
+    
+  </p>
+</footer>
+
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+      <h1>Who am I?</h1>
+    
+
+    <p>
+      
+        <img src="/me.png" style="width: 100%"> 
+CTFs (<a href="https://www.youtube.com/@SloppyJoePirates/videos">Sloppy Joe Pirates</a>). Founder (<a href="https://csper.io">csper.io</a> and <a href="https://dmarcdefender.io">dmarcdefender.io</a>). Enjoyer of security/software/physics.
+      
+    </p>
+  </section>
+
+  
+  
+
+
+
+<ul class="sidebar-nav">
+  <li class="sidebar-nav-item">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  
+  
+  </li>
+</ul>
+
+  
+
+  
+    
+      <section class="odd">
+        
+          <h1>Collections</h1>
+        
+        
+          <li>
+            <a href="http://localhost:1313/categories/ctfs" title="CTFs" >CTFs</a>
+          </li>
+        
+          <li>
+            <a href="http://localhost:1313/categories/physics" title="physics" >physics</a>
+          </li>
+        
+          <li>
+            <a href="http://localhost:1313/categories/quantum-computation" title="quantum computing" >quantum computing</a>
+          </li>
+        
+          <li>
+            <a href="http://localhost:1313/categories/electronics" title="electronics" >electronics</a>
+          </li>
+        
+          <li>
+            <a href="http://localhost:1313/categories/personal" title="personal" >personal</a>
+          </li>
+        
+      </section>
+    
+  
+
+  
+  
+  
+</aside>
+
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2026 Stuart Larsen - <a href="http://localhost:1313/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+
+
+
+    
+    
+    
+
+    
+  </body>
+</html>
+
